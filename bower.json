@@ -1,5 +1,5 @@
 {
-  "name": "jfs",
+  "name": "JFS_Admin",
   "version": "0.0.0",
   "dependencies": {
     "angular": "^1.4.0",
@@ -14,7 +14,7 @@
     "angular-mocks": "^1.4.0"
   },
   "appPath": "app",
-  "moduleName": "jfsApp",
+  "moduleName": "JFS_Admin",
   "overrides": {
     "bootstrap": {
       "main": [

@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the jfsApp
  */
-angular.module('jfsApp')
+angular.module('JFS_Admin')
   .controller('MainCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

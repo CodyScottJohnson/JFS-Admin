@@ -3,7 +3,7 @@
 describe('Controller: RecruitingCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('jfsApp'));
+  beforeEach(module('JFS_Admin'));
 
   var RecruitingCtrl,
     scope;

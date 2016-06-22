@@ -9,15 +9,15 @@
  * Main module of the application.
  */
 angular
-  .module('jfsApp', [
+  .module('JFS_Admin', [
     'ngAnimate',
     'ngCookies',
     'ngSanitize',
     'ui.router'
   ]);
-angular.module('jfsApp').config(function($stateProvider, $urlRouterProvider) {
-  
-  
+angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider) {
+
+
   $urlRouterProvider.otherwise("/");
 
 	$stateProvider
@@ -25,5 +25,5 @@ angular.module('jfsApp').config(function($stateProvider, $urlRouterProvider) {
 			url: "/Recruiting",
 			templateUrl: "views/Recruiting/index.html",
 			controller: 'RecruitingCtrl'
-		})
+		});
 });
