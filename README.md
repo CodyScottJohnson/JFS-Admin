@@ -2,8 +2,8 @@
 
 This is the management portal for the Johnson Financial Service Website
 ## Built With
-<img style="height:50px;width:50px" src='http://devicon.fr/devicon.git/icons/nodejs/nodejs-original.svg'>
-<img style="height:50px;width:50px" src='http://devicon.fr/devicon.git/icons/bower/bower-line.svg'>
+<img style="height:50px;width:50px; display:inline-block" src='http://devicon.fr/devicon.git/icons/nodejs/nodejs-original.svg'>
+<img style="height:50px;width:50px; display:inline-block" src='http://devicon.fr/devicon.git/icons/bower/bower-line.svg'>
 <img style="height:50px;width:50px" src='http://devicon.fr/devicon.git/icons/grunt/grunt-line.svg'>
 <img style="height:50px;width:50px" src='http://devicon.fr/devicon.git/icons/html5/html5-plain.svg'>
 <img style="height:50px;width:50px" src='http://devicon.fr/devicon.git/icons/css3/css3-plain.svg'>
