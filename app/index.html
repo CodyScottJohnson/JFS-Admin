@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Agent Portal</title>
+		<link href="https://jfsapp.com/Images/Icons/Chart1.png" rel="shortcut icon" />
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+		<link rel="stylesheet" href="styles/app.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="jfsApp">
+
+		<div ng-controller="MainCtrl">
+			<div ng-include="'views/header.html'"></div>
+			<div ui-view resize style="width:100%;height:{{windowHeight}}px;padding-left:240px;padding-top:60px" ng-style="SideBarVis.isvis!='one' && {'padding-left':'240px'}">
+				
+			</div>
+		<!--<div ng-view style="display:inline-block;position:relative;top:60px;left:250px;min-width:90%" ng-class="{reposition: (SideBarVis == one)}"></div>-->
+		</div>
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/recruiting.js"></script>
+        <script src="scripts/directives/resize.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
