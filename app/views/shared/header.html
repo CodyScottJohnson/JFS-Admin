@@ -1,19 +1,17 @@
-<div>
-	cody2
-</div>
+
 		<!--Start Navigation Bar-->
 		<div class="hidden-print">
 			<div class="navbar" role="navigation">
 
 				<div class="container-fluid">
-					<ul class="nav navbar-nav navbar-actions navbar-left" ng-click="SideBarVis.isvis={ 'one': 'two', 'two':'one'}[SideBarVis.isvis]" style="left:0px; display:block;position:relative" ng-style="SideBarVis.isvis=='one' && {'left':'10px'}||{'left':'-240px'}">
+					<ul class="nav navbar-nav navbar-actions navbar-left" ng-click="Visibility.sidebar=!Visibility.sidebar" style="left:0px; display:block;position:relative" ng-style="Visibility.sidebar && {'left':'10px'}||{'left':'-240px'}">
 						<li class="visible-md visible-lg"><a id="main-menu-toggle"><i class="fa fa-th-large"></i></a></li>
 						<li class="visible-xs visible-sm"><a id="sidebar-menu"><i class="fa fa-navicon"></i></a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown visible-md visible-lg" uib-dropdown is-open="status.isopen" auto-close="outsideClick">
-							
+
 							<a uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-envelope-o"></i><span class="badge">{{Emails.Unread}}</span></a>
 							<ul class="dropdown-menu" style="max-height:400px;width:400px;overflow-y: scroll;overflow-x: hidden;margin-right:-100px">
 								<li class="dropdown-menu-header">
@@ -22,7 +20,7 @@
 								<li class="avatar" ng-repeat="email in Emails.AllEmails" style="width:400px;border-bottom:5px;border-color:black;overflow-x: hidden;">
 									<a style="width:400px">
 										<div ng-click="showPopup(email,'myModalContent.html');" style="width:400px;">
-											<img class="avatar" src="../assets/img/avatar1.jpg">
+											<img class="avatar" src="">
 											<div style="width:250px;overflow:hidden">{{email.subject}}</div>
 											<small>{{email.date}}</small>
 										</div>
@@ -67,14 +65,14 @@
 							<ul class="dropdown-menu" style="width:300px;overflow-x: hidden;">
 								<li class="dropdown-menu-header">
 									<strong>Notifications</strong>
-									
+
 								</li>
-								
+
 								<div class="scroll4" style="max-height:500px;overflow-y: auto">
-									
+
 								<li class="clearfix" ng-click="$event.stopPropagation();" ng-style="notifications.flagedrecruits.show && {'background-color':'rgba(215,228,236,.9)'}">
 									<a style="width:50px;display:inline-block;margin-right:5px;background:none!important;"><i style="background:none!important;" class="fa fa-users"></i><span style="background-color:grey;border-radius:100%;font-size:10px" class="badge">{{Assigned.length}}</span></a>
-									<span  ng-click="notifications.flagedrecruits.show=!notifications.flagedrecruits.show" style="display:inline-block" class="notification-action">  New Recruits Have Been Flagged for You </span>						
+									<span  ng-click="notifications.flagedrecruits.show=!notifications.flagedrecruits.show" style="display:inline-block" class="notification-action">  New Recruits Have Been Flagged for You </span>
 								</li>
 								<li ng-click="notifications.flagedrecruits.show=!notifications.flagedrecruits.show;$event.stopPropagation();" ui-sref="RecruitingLiscence({user:notification.RecruitID,UserInfoID:notification.UserID})" class="subMenu" ng-show="notifications.flagedrecruits.show" ng-repeat="notification in Assigned" style="padding-left:60px">
 									<a href="page-activity.html" class="notification-user"> {{notification.RecruitName}} </a>
@@ -86,12 +84,12 @@
 								</li>
 								<li class="avatar repeated-item" ng-click="notifications.UnreadTextMessages.show=!notifications.UnreadTextMessages.show;$event.stopPropagation();"  ng-show="notifications.UnreadTextMessages.show" ng-repeat="text in UnreadTextMessages" style="padding-left:40px">
 									<a><i class="fa fa-check" ng-click="markText(text);$event.stopPropagation()" style="position:absolute;color:green;right:5px"></i>
-								<img class="avatar" src="/Images/Recruits/57301dcee5fc5-57301dcee603a.jpg">
+								<img class="avatar" src="">
 								<div>{{text.RecruitName}}</div>
 								<small>{{text.message}}</small>
-										
+
 							</a>
-								
+
 						</li>
 								<li class="clearfix" ng-click="badges={total:{'show':true}}">
 									<i class="fa fa-trash-o"></i>
@@ -103,7 +101,7 @@
 								</li>
 								</div>
 							</ul>
-						
+
 						</li>
 						<li class="dropdown visible-md visible-lg" uib-dropdown is-open="setting.isopen" auto-close="outsideClick">
 							<a uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-gears"></i></a>
@@ -131,7 +129,7 @@
 							</ul>
 						</li>
 						<li class="dropdown visible-md visible-lg" uib-dropdown is-open="usersetting.isopen" auto-close="outsideClick">
-							<a uib-dropdown-toggle ng-disabled="disabled"><img class="user-avatar" style="border-radius:20px;" src="" alt="user-mail">Cody</a>
+							<a uib-dropdown-toggle ng-disabled="disabled"><img class="user-avatar" style="border-radius:20px;" ng-src="{{'https://jfsapp.com/Images/ProfilePhotos/' +currentUser.Info.display_photo}}" alt="user-mail">Cody</a>
 							<ul class="dropdown-menu">
 								<li class="dropdown-menu-header">
 									<strong>Account</strong>
@@ -141,10 +139,10 @@
 								<li><a href="page-invoice.html"><i class="fa fa-usd"></i> Payments <span class="label label-default">10</span></a></li>
 								<li><a href="gallery.html"><i class="fa fa-file"></i> File <span class="label label-primary">27</span></a></li>
 								<li class="divider"></li>
-								<li><a href="../../../Users/logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
+								<li><a ng-click="User.logout()"><i class="fa fa-sign-out"></i> Logout</a></li>
 							</ul>
 						</li>
-						<li><a href="../../../Users/logout.php"><i class="fa fa-power-off"></i></a></li>
+						<li><a ng-click="User.logout()"><i class="fa fa-power-off"></i></a></li>
 					</ul>
 
 				</div>
@@ -155,18 +153,18 @@
 			<!--End Navigation Bar-->
 
 			<!--Start Side Bar-->
-			<div ng-show="SideBarVis.isvis=='one'">
+			<div ng-show="Visibility.sidebar">
 
 				<div class="sidebar shadow-5" style="z-index:30" style="heigth:100%">
 
 					<div class="sidebar-collapse" style="overflow-y:auto;height:100%;overflow-x:hidden">
 						<div class="sidebar-header t-center">
-							<span><img class="text-logo" style="width:80%;diplay:block;margin-top:10px;position:relative" src="../../../Images/Logos/logosimp3.png"></span>
+							<span><img class="text-logo" style="width:80%;diplay:block;margin-top:10px;position:relative" src="https://jfsapp.com/Images/Logos/logosimp3.png"></span>
 						</div>
 						<div class="sidebar-menu" style="margin-top:30px">
 							<ul class="nav nav-sidebar">
 								<li><a href="#Home"><i class="fa fa-laptop"></i><span class="text"> Dashboard</span></a></li>
-								<li><a href="" ng-model="collapsed1" ng-click="collapsed1=!collapsed1"><i class="fa fa-user"></i><span class="text"> <?php echo $Username->displayname; ?></span><span class="fa fa-angle-down pull-right"></span></a></li>
+								<li><a href="" ng-model="collapsed1" ng-click="collapsed1=!collapsed1"><i class="fa fa-user"></i><span class="text">Cody Johnson</span><span class="fa fa-angle-down pull-right"></span></a></li>
 								<ul class="subMenu" ng-show="collapsed1">
 									<li><a ui-sref="MessageCenter"><i class="fa fa-envelope"></i><span class="text">Message Center</span></a></li>
 									<li><a ui-sref="Tasks"><i class="fa fa-tasks" aria-hidden="true"></i><span class="text">Tasks</span></a></li>
@@ -221,5 +219,3 @@
 					</div>
 				</div>
 			</div>
-
-			

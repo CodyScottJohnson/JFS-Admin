@@ -26,6 +26,9 @@ module.exports = function(config) {
       'bower_components/angular-cookies/angular-cookies.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/ng-idle/angular-idle.js',
+      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'bower_components/moment/moment.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

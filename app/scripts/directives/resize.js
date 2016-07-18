@@ -9,7 +9,7 @@ angular.module('JFS_Admin').directive('resize', function ($window) {
                 'w': window.innerWidth
             };
         }, function (newValue, oldValue) {
-            console.log(newValue, oldValue);
+            //console.log(newValue, oldValue);
             scope.windowHeight = newValue.h;
             scope.windowWidth = newValue.w;
 

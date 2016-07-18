@@ -1,0 +1,34 @@
+<div class="view login">
+  <div class="center both">
+    <div class="container" style="text-align:center">
+      <img src="images/JohnsonFinanceMain.png"/>
+      <form ng-submit="login(_email, _password)">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+          <input type="text" class="form-control" ng-model="_email" placeholder="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon2"><i class="fa fa-lock"></i></span>
+          <input type="password" class="form-control" ng-model="_password" placeholder="password" aria-describedby="basic-addon2">
+        </div>
+
+        <button class="btn btn-primary submit">Sign In</button>
+      </form>
+      <div class="jumbotron" ng-hide="true">
+
+        <form ng-submit="login(_email, _password)">
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1"><i class="fa fa-user"></i></span>
+            <input type="text" class="form-control" ng-model="_email" placeholder="Username" aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon2"><i class="fa fa-lock"></i></span>
+            <input type="password" class="form-control" ng-model="_password" placeholder="password" aria-describedby="basic-addon2">
+          </div>
+
+          <button class="btn btn-primary submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

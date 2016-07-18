@@ -8,69 +8,39 @@
  * Factory in the jfsApp.
  */
 angular.module('JFS_Admin')
-  .factory('User', function ($q,$http,$cookies,$rootScope) {
+  .factory('User', function ($q,$http,$cookies,$rootScope,$state) {
     var currentUser = {};
     var loggedin;
     var Token;
     var UserInfo;
     var AllUsers;
-    var ColumnsToShow = {
-        fname: {
-            displayName: "First Name",
-            Show: true
-        },
-        lname: {
-            displayName: "Last Name",
-            Show: true
-        },
-        email: {
-            displayName: "Email",
-            Show: true
-        },
-        colortest: {
-            displayName: "Color Test",
-            Show: true
-        },
-        photo: {
-            displayName: "Profile Pic",
-            Show: false
-        },
-        pop: {
-            displayName: "POP",
-            Show: true
-        },
-        type: {
-            displayName: "Type",
-            Show: true
-        },
-        phone: {
-            displayName: "Phone",
-            Show: true
-        },
-        address: {
-            displayName: "Address",
-            Show: true
-        },
-        city: {
-            displayName: "City",
-            Show: true
-        },
-        state: {
-            displayName: "State",
-            Show: true
-        },
-        zip: {
-            displayName: "Zip",
-            Show: true
-        },
-        nextstep: {
-            displayName: "Next Step",
-            Show: true
-        },
-        AdvancedSearch: {
-            Show: true
-        },
-        OpenInNewTab: false
+    $rootScope.$on('IdleStart', function() {
+      console.log('start');
+    });
+
+    $rootScope.$on('IdleWarn', function(e, countdown) {
+      console.log(countdown);
+        // follows after the IdleStart event, but includes a countdown until the user is considered timed out
+        // the countdown arg is the number of seconds remaining until then.
+        // you can change the title or display a warning dialog from here.
+        // you can let them resume their session by calling Idle.watch()
+    });
+
+    $rootScope.$on('IdleTimeout', function() {
+      console.log('timeout');
+      currentUser.logout();
+        // the user has timed out (meaning idleDuration + timeout has passed without any activity)
+        // this is where you'd log them
+    });
+
+    $rootScope.$on('IdleEnd', function() {
+      console.log('end');
+        // the user has come back from AFK and is doing stuff. if you are warning them, you can use this to hide the dialog
+    });
+    currentUser.logout = function(){
+      $rootScope.User = null;
+      $cookies.remove('user');
+      $state.go('login');
     };
     currentUser.getToken = function() {
         var deferred = $q.defer();
@@ -98,173 +68,6 @@ angular.module('JFS_Admin')
                 });
             });
         }
-        return deferred.promise;
-    };
-    currentUser.getColumnsToShow = function() {
-        var Settings = $cookies.getObject('JFSColumnSettings');
-        if (Settings === null) {
-            return ColumnsToShow;
-        } else {
-            return Settings;
-        }
-    };
-    currentUser.setColumnsToShow = function(data) {
-        $cookies.putObject('JFSColumnSettings', data);
-
-    };
-    currentUser.restoreColumnsToShow = function() {
-        $cookies.putObject('JFSColumnSettings', ColumnsToShow);
-
-    };
-    currentUser.getAssigned = function(detail) {
-      	detail = typeof detail !== 'undefined' ? detail : false;
-        var deferred = $q.defer();
-        currentUser.getToken().then(function() {
-            $http({
-                method: 'GET',
-                url: 'https://jfsapp.com/Secure/API/User/Assigned/',
-                params: {
-                    'access_token': Token.access_token,
-                    client_id: 'testclient',
-                    client_secret: 'testpass',
-                    detail: detail
-                },
-            }).then(function(data) {
-                //console.log(data.data);
-                deferred.resolve(data.data);
-            }, function(error) {
-                deferred.reject(error);
-            });
-        });
-        return deferred.promise;
-    };
-    currentUser.getNotes = function() {
-        var deferred = $q.defer();
-        currentUser.getToken().then(function() {
-            $http({
-                method: 'GET',
-                url: 'https://jfsapp.com/Secure/API/User/Notes/',
-                params: {
-                    'access_token': Token.access_token,
-                    client_id: 'testclient',
-                    client_secret: 'testpass'
-
-                },
-            }).then(function(data) {
-                //console.log(data.data);
-                deferred.resolve(data.data);
-            }, function(error) {
-                deferred.reject(error);
-            });
-        });
-        return deferred.promise;
-    };
-    currentUser.setNotes = function(notes) {
-        var deferred = $q.defer();
-        currentUser.getToken().then(function() {
-            $http({
-                method: 'post',
-                url: 'https://jfsapp.com/Secure/API/User/Notes/',
-                params: {
-                    'access_token': Token.access_token,
-                    client_id: 'testclient',
-                    client_secret: 'testpass'
-
-                },
-                data: {
-                    notes: notes,
-                    User_ID: loggedin.user_id
-                }
-            }).then(function(data) {
-                //console.log(data.data);
-                deferred.resolve(data.data);
-            }, function(error) {
-                deferred.reject(error);
-            });
-        });
-        return deferred.promise;
-    };
-    currentUser.AssignColorQuizNotes = function(data) {
-        var deferred = $q.defer();
-        currentUser.getToken().then(function() {
-            $http({
-                method: 'post',
-                url: 'https://jfsapp.com/Secure/API/assignColorQuiz/',
-                params: {
-                    'access_token': Token.access_token,
-                    client_id: 'testclient',
-                    client_secret: 'testpass'
-
-                },
-                data: data
-            }).then(function(data) {
-                //console.log(data.data);
-                deferred.resolve(data.data);
-            }, function(error) {
-                deferred.reject(error);
-            });
-        });
-        return deferred.promise;
-    };
-    currentUser.getUserList = function() {
-        var deferred = $q.defer();
-        if (angular.isDefined(AllUsers)) {
-            deferred.resolve(AllUsers);
-        } else {
-            $http({
-                method: 'GET',
-                url: 'https://jfsapp.com/Secure/API/Users/',
-                params: {
-                    'access_token': 'e07a6ebeb934d3d60410713ef5809405ac0723c3',
-                    client_id: 'testclient',
-                    client_secret: 'testpass'
-                },
-            }).then(function(data) {
-                deferred.resolve(data.data);
-                AllUsers = data.data;
-            }, function(error) {
-                deferred.reject(error);
-            });
-        }
-        return deferred.promise;
-    };
-    currentUser.getCurrent = function() {
-        var deferred = $q.defer();
-        if (angular.isDefined(loggedin)) {
-            deferred.resolve(loggedin);
-        } else {
-            $http.get('/phpscripts/getSessionData.php').success(function(data) {
-                // Store your data or what ever....
-                // Then resolve
-                loggedin = data;
-                deferred.resolve(data);
-            }).error(function(data, status, headers, config) {
-                deferred.reject("Error: request returned status " + status);
-            });
-            $rootScope.JFSCurrentUser = $cookies.getObject('JFSCurrentUser');
-        }
-        return deferred.promise;
-    };
-    currentUser.updateCurrent = function(data) {
-        var deferred = $q.defer();
-        currentUser.getToken().then(function() {
-            $http({
-                method: 'patch',
-                url: 'https://jfsapp.com/Secure/API/User/',
-                params: {
-                    'access_token': Token.access_token,
-                    client_id: 'testclient',
-                    client_secret: 'testpass'
-
-                },
-                data: data
-            }).then(function(data) {
-                //console.log(data.data);
-                deferred.resolve(data.data);
-            }, function(error) {
-                deferred.reject(error);
-            });
-        });
         return deferred.promise;
     };
     //currentUser.getColumns = function(){return ColumnsToShow}
