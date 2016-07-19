@@ -8,10 +8,24 @@
  * Controller of the jfsApp
  */
 angular.module('JFS_Admin')
-  .controller('RecruitingCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('RecruitingCtrl', function ($scope,Recruits) {
+    $scope.Recruits = Recruits.data;
+    $scope.recruitListOptions = [
+    	['email', function ($itemScope) {
+        console.log($itemScope);
+    	},[['Favorites'],null,['All Emails', function ($itemScope) {
+        console.log($itemScope.user);
+    	}]]],['Archive', function ($itemScope) {
+        console.log($itemScope);
+    	},[
+				['Mailing List', function($itemScope){$scope.UpdateRecruit($itemScope.user.ID,{RecruitStatus_ID:2});$itemScope.user.RecruitStatus_ID =2;}],
+				['Not Interested', function($itemScope){$scope.UpdateRecruit($itemScope.user.ID,{RecruitStatus_ID:4});$itemScope.user.RecruitStatus_ID =4;}],
+				['No Response', function($itemScope){$scope.UpdateRecruit($itemScope.user.ID,{RecruitStatus_ID:5});$itemScope.user.RecruitStatus_ID =5;}]
+			]
+					 ],
+   		 null, // Dividier
+    ['Remove', function ($itemScope) {
+        $scope.items.splice($itemScope.$index, 1);
+    }]
+		];
   });

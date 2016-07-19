@@ -10,6 +10,25 @@
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown visible-md visible-lg" uib-dropdown is-open="messages.isopen" auto-close="outsideClick">
+							<a uib-dropdown-toggle><i class="fa fa-bell-o"></i><span class="badge shake">{{UserData.TextMessages.length}}</span></a>
+							<ul class="dropdown-menu" style="width:300px;overflow-x: hidden;">
+								<li class="dropdown-menu-header">
+									<strong>Notifications</strong>
+								</li>
+								<div class="scrollbar" style="max-height:500px;overflow-x: hidden">
+									<li class="avatar repeated-item" ng-repeat="text in UserData.TextMessages" style="padding-left:40px">
+										<a>
+											<div>{{text.RecruitName}}</div>
+											<small>{{text.message}}</small>
+										</a>
+									</li>
+								</div>
+								<li class="dropdown-menu-header text-center" style="background-color:grey;height:50px">
+									<a>View all notification</a>
+								</li>
+							</ul>
+						</li>
 						<li class="dropdown visible-md visible-lg" uib-dropdown is-open="status.isopen" auto-close="outsideClick">
 
 							<a uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-envelope-o"></i><span class="badge">{{Emails.Unread}}</span></a>
@@ -60,49 +79,45 @@
 							</script>
 
 						</li>
-						<li class="dropdown visible-md visible-lg" uib-dropdown is-open="notification.isopen" auto-close="outsideClick" >
-							<a uib-dropdown-toggle><i class="fa fa-bell-o"></i><span class="badge shake" ng-show="badges.total.show">{{Assigned.length + UnreadTextMessages.length}}</span></a>
-							<ul class="dropdown-menu" style="width:300px;overflow-x: hidden;">
-								<li class="dropdown-menu-header">
-									<strong>Notifications</strong>
+					<li class="dropdown visible-md visible-lg" uib-dropdown is-open="notification.isopen" auto-close="outsideClick">
+						<a uib-dropdown-toggle><i class="fa fa-bell-o"></i><span class="badge shake">{{UserData.TextMessages.length}}</span></a>
+						<ul class="dropdown-menu" style="width:300px;overflow-x: hidden;">
+							<li class="dropdown-menu-header">
+								<strong>Notifications</strong>
 
-								</li>
-
-								<div class="scroll4" style="max-height:500px;overflow-y: auto">
-
+							</li>
+							<div class="scroll4" style="max-height:500px;overflow-y: auto">
 								<li class="clearfix" ng-click="$event.stopPropagation();" ng-style="notifications.flagedrecruits.show && {'background-color':'rgba(215,228,236,.9)'}">
 									<a style="width:50px;display:inline-block;margin-right:5px;background:none!important;"><i style="background:none!important;" class="fa fa-users"></i><span style="background-color:grey;border-radius:100%;font-size:10px" class="badge">{{Assigned.length}}</span></a>
-									<span  ng-click="notifications.flagedrecruits.show=!notifications.flagedrecruits.show" style="display:inline-block" class="notification-action">  New Recruits Have Been Flagged for You </span>
+									<span ng-click="notifications.flagedrecruits.show=!notifications.flagedrecruits.show" style="display:inline-block" class="notification-action">  New Recruits Have Been Flagged for You </span>
 								</li>
-								<li ng-click="notifications.flagedrecruits.show=!notifications.flagedrecruits.show;$event.stopPropagation();" ui-sref="RecruitingLiscence({user:notification.RecruitID,UserInfoID:notification.UserID})" class="subMenu" ng-show="notifications.flagedrecruits.show" ng-repeat="notification in Assigned" style="padding-left:60px">
+								<li ng-click="notifications.flagedrecruits.show=!notifications.flagedrecruits.show;$event.stopPropagation();" ui-sref="RecruitingLiscence({user:notification.RecruitID,UserInfoID:notification.UserID})" class="subMenu" ng-show="notifications.flagedrecruits.show"
+									ng-repeat="notification in Assigned" style="padding-left:60px">
 									<a href="page-activity.html" class="notification-user"> {{notification.RecruitName}} </a>
 									<span class="notification-action"> {{notification.Reason}} </span>
 								</li>
-								<li class="clearfix" ng-show="UnreadTextMessages.length>0" ng-click="notifications.UnreadTextMessages.show=!notifications.UnreadTextMessages.show;$event.stopPropagation();"ng-style="notifications.UnreadTextMessages.show && {'background-color':'rgba(215,228,236,.9)'}">
+								<li class="clearfix" ng-show="UnreadTextMessages.length>0" ng-click="notifications.UnreadTextMessages.show=!notifications.UnreadTextMessages.show;$event.stopPropagation();" ng-style="notifications.UnreadTextMessages.show && {'background-color':'rgba(215,228,236,.9)'}">
 									<a style="width:50px;display:inline-block;margin-right:5px;background:none!important;"><i style="background:none!important;;" class="fa fa-comments"></i><span style="background-color:grey;border-radius:100%;font-size:10px" class="badge">{{UnreadTextMessages.length}}</span></a>
 									<span class="notification-action">New Messages</span>
 								</li>
-								<li class="avatar repeated-item" ng-click="notifications.UnreadTextMessages.show=!notifications.UnreadTextMessages.show;$event.stopPropagation();"  ng-show="notifications.UnreadTextMessages.show" ng-repeat="text in UnreadTextMessages" style="padding-left:40px">
+								<li class="avatar repeated-item" ng-click="notifications.UnreadTextMessages.show=!notifications.UnreadTextMessages.show;$event.stopPropagation();" ng-show="notifications.UnreadTextMessages.show" ng-repeat="text in UnreadTextMessages" style="padding-left:40px">
 									<a><i class="fa fa-check" ng-click="markText(text);$event.stopPropagation()" style="position:absolute;color:green;right:5px"></i>
-								<img class="avatar" src="">
-								<div>{{text.RecruitName}}</div>
-								<small>{{text.message}}</small>
-
-							</a>
-
-						</li>
+										<img class="avatar" src="">
+										<div>{{text.RecruitName}}</div>
+										<small>{{text.message}}</small>
+									</a>
+								</li>
 								<li class="clearfix" ng-click="badges={total:{'show':true}}">
 									<i class="fa fa-trash-o"></i>
-									<a  class="notification-user"> Lorenzo </a>
+									<a class="notification-user"> Lorenzo </a>
 									<span class="notification-action"> just remove <a  class="notification-link"> 12 files</a></span>
 								</li>
 								<li class="dropdown-menu-footer text-center">
 									<a href="page-activity.html">View all notification</a>
 								</li>
-								</div>
-							</ul>
-
-						</li>
+							</div>
+						</ul>
+					</li>
 						<li class="dropdown visible-md visible-lg" uib-dropdown is-open="setting.isopen" auto-close="outsideClick">
 							<a uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-gears"></i></a>
 							<ul class="dropdown-menu update-menu" role="menu">
@@ -192,7 +207,7 @@
 								<li><a href="/owncloud"><i class="fa fa-cloud"></i><span class="text">Drive</span></a></li>
 								<li><a href="" ng-model="collapsed4" ng-click="collapsed4=!collapsed4"><i class="fa fa-group"></i><span class="text"> Manage Agents</span> <span class="fa fa-angle-down pull-right"></span></a></li>
 								<ul class="subMenu" ng-show="collapsed4">
-									<li><a href="#AgentList"><i class="fa fa-align-left"></i><span class="text"> Agent List</span></a></li>
+									<li><a ui-sref="app.Agents.Dashboard"><i class="fa fa-align-left"></i><span class="text"> Agent List</span></a></li>
 									<li><a href="ui-nestable-list.html"><i class="fa fa-outdent"></i><span class="text"> Add Agent</span></a></li>
 									<li><a href="ui-elements.html"><i class="fa fa-list"></i><span class="text"> Reports</span></a></li>
 								</ul>
@@ -202,7 +217,7 @@
 									<li><a href="#MyRecruits"><i class="fa fa-child"></i><span class="text"> Assigned To Me</span></a></li>
 									<li><a href="#RecruitingList"><i style="color:#8DCC62" class="fa fa-users"></i><span class="text"> Recruits</span></a></li>
 									<li><a href="#ProspectList"><i style="color:#FAC559" class="fa fa-users"></i><span class="text"> Prospects</span></a></li>
-									<li><a ui-sref="LiscencedAgents({ search: {} })"><i style="color:#FAC559" class="fa fa-users"></i><span class="text"> Recruiting Pool</span><span ng-model="collapsed6" ng-click="collapsed6=!collapsed6;$event.stopPropagation()" class="fa fa-angle-down pull-right"></span></a></li>
+									<li><a ui-sref="app.Recruiting.Dashboard"><i style="color:#FAC559" class="fa fa-users"></i><span class="text"> Recruiting Pool</span><span ng-model="collapsed6" ng-click="collapsed6=!collapsed6;$event.stopPropagation()" class="fa fa-angle-down pull-right"></span></a></li>
 									<ul class="subMenu" ng-show="collapsed6">
 										<li><a ui-sref="LiscencedAgents({ search: {Source:'Referal'} })"><i style="font-size:15px" class="fa fa-user"></i><span class="text"> Referal</span></a></li>
 										<li><a ui-sref="LiscencedAgents({ search: {Source:'PO'} })"><i style="" class="fa fa-user"></i><span class="text"> PO</span></a></li>

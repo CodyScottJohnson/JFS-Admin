@@ -29,6 +29,9 @@ module.exports = function(config) {
       'bower_components/ng-idle/angular-idle.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/moment/moment.js',
+      'bower_components/lodash/lodash.js',
+      'bower_components/angular-bootstrap-contextmenu/contextMenu.js',
+      'bower_components/angular-filter/dist/angular-filter.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

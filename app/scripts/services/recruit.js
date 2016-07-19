@@ -9,7 +9,7 @@
  */
 angular.module('JFS_Admin')
   .factory('recruit', function ($rootScope,$http) {
-    var currentRecruit = {};
+    var currentRecruit = {data:{}};
     currentRecruit.setRecruit = function(id){
       $http({
           method: 'GET',
@@ -21,11 +21,12 @@ angular.module('JFS_Admin')
           },
       }).then(function(data) {
           //console.log(data.data);
-          currentRecruit.info = data.data
+          currentRecruit.data.info = data.data;
+          console.log(data.data);
       }, function(error) {
           console.log(error);
       });
-    }
+    };
 
     return currentRecruit;
   });

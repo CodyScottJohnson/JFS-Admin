@@ -15,11 +15,15 @@ angular
     'ngSanitize',
     'ui.bootstrap',
     'ui.router',
-    'ngIdle'
+    'ngIdle',
+    'ui.bootstrap.contextMenu'
   ]);
 angular.module('JFS_Admin').run(function($rootScope, $state, $cookies, Idle) {
   Idle.watch();
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
+    if($state.current.name != "login"){
+    $rootScope.state = $state.current;
+  }
     var requireLogin = toState.data.requireLogin;
     if (typeof $rootScope.currentUser === 'undefined') {
       $rootScope.currentUser = $cookies.getObject('user');
@@ -32,13 +36,12 @@ angular.module('JFS_Admin').run(function($rootScope, $state, $cookies, Idle) {
 
 });
 angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, KeepaliveProvider, IdleProvider) {
-
   // configure Idle settings
   IdleProvider.idle(10000); // in seconds
   IdleProvider.timeout(10000); // in seconds
   KeepaliveProvider.interval(2); // in seconds
 
-  $urlRouterProvider.otherwise("/Challenge/Dashboard");
+  $urlRouterProvider.otherwise("/");
   $stateProvider
     .state('login', {
       url: '/login',
@@ -58,8 +61,30 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
 
     })
     .state('app.Home', {
-      url: '/Home',
+      url: '/',
       templateUrl: 'views/Recruiting/index.html',
 
     })
+    .state('app.Recruiting', {
+      url: '',
+      templateUrl: 'views/Recruiting/index.html',
+      controller: 'RecruitingCtrl',
+
+    })
+    .state('app.Recruiting.Dashboard', {
+      url: '/Recruting',
+      templateUrl: 'views/Recruiting/dashboard.html',
+
+    })
+    .state('app.Agents', {
+      url: '',
+      templateUrl: 'views/Agents/index.html',
+      controller: 'AgentsCtrl',
+
+    })
+    .state('app.Agents.Dashboard', {
+      url: '/Agents',
+      templateUrl: 'views/Agents/dashboard.html',
+
+    });
 });
