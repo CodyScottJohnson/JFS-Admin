@@ -17,11 +17,11 @@
 									<strong>Messages</strong>
 								</li>
 								<div class="scrollbar" style="max-height:500px;overflow-x: hidden">
-									<li style="display:block;position:relative" class="avatar" ng-repeat="(key, value) in UserData.TextMessages|filter:{'type':'0'}|orderBy:['status','-date_recieved']| groupBy:'[id_number]'" >
+									<li style="display:block;position:relative" class="avatar" ng-click="ViewMessage(value[0].id_number)" ng-repeat="(key, value) in UserData.TextMessages|filter:{'type':'0','status':'0'}|orderBy:['status','-date_recieved']| groupBy:'[id_number]'" >
 
 										<a style="margin-top:0;top:0;display:inline-block;position:relative" ng-repeat="text in value|orderBy:'-date_recieved'|limitTo:1">
 											<img  style="height:50px;width:50px;border-radius:100%;display:inline-block;top:5px;position:absolute" ng-src="https://jfsapp.com/Images/Recruits/{{text.ProfilePic || 'blank.jpg'}}">
-											<span class="badge shake">{{(value|filter:{'status':'0'}).length}}</span>
+											<span  class="badge shake">{{(value|filter:{'status':'0'}).length}}</span>
 											<div style="display:inline-block:height:100%;width:300px;position:absolute;padding-left:60px">
 											<div style="color:black">{{text.RecruitName||text.id_number|phone}}</div>
 											<small>{{text.message|truncate:80}}...</small>
@@ -188,7 +188,7 @@
 								<li><a href="#Home"><i class="fa fa-laptop"></i><span class="text"> Dashboard</span></a></li>
 								<li><a href="" ng-model="collapsed1" ng-click="collapsed1=!collapsed1"><i class="fa fa-user"></i><span class="text">Cody Johnson</span><span class="fa fa-angle-down pull-right"></span></a></li>
 								<ul class="subMenu" ng-show="collapsed1">
-									<li><a ui-sref="MessageCenter"><i class="fa fa-envelope"></i><span class="text">Message Center</span></a></li>
+									<li><a ui-sref="app.Messages"><i class="fa fa-envelope"></i><span class="text">Message Center</span></a></li>
 									<li><a ui-sref="Tasks"><i class="fa fa-tasks" aria-hidden="true"></i><span class="text">Tasks</span></a></li>
 									<li><a ui-sref="Notes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="text">Notes</span></a></li>
 									<li><a href="../../../Users/account.php"><i class="fa fa-gear"></i><span class="text"> Settings</span></a></li>

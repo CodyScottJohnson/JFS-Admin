@@ -36,10 +36,9 @@ angular.module('JFS_Admin')
                 },
             }).then(function(data) {
                   var state = $rootScope.state || 'app.Home';
-                  if(state.name==""){
+                  if(state.name===""){
                     state = 'app.Home';
                   }
-                  console.log(state)
                   $scope.User.Info= data.data;
                   $scope.User.Token= Token;
                   $rootScope.currentUser =$scope.User;

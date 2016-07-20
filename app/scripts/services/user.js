@@ -9,7 +9,7 @@
  */
 angular.module('JFS_Admin')
   .factory('User', function ($q,$http,$cookies,$rootScope,$state) {
-    var currentUser = {data:{}};
+    var currentUser = {data:{currentTextConversation:-1}};
     var loggedin;
     var Token;
     var UserInfo;
@@ -74,24 +74,60 @@ angular.module('JFS_Admin')
       {
           currentUser.data.TextMessages.push(data.data);
       }
+    };
+    currentUser.setCurrentConversation = function(ConversationID){
+      currentUser.data.currentTextConversation = ConversationID;
+      $http({
+        method:'PATCH',
+        url: 'https://jfsapp.com/Secure/API/Messages/MarkConversation/'+ConversationID+'/',
+        params: {
+            access_token:  $rootScope.currentUser.Token.access_token,
+            client_id: 'testclient',
+            client_secret: 'testpass'
+        },
+      }).then(function(){
+      currentUser.getTexts();
+    });
     }
-    currentUser.addText = function(text){}
+    currentUser.addText = function(text){};
     currentUser.getTexts = function(){
       $http({
         method: 'GET',
         url: 'https://jfsapp.com/Secure/API/Texts/',
         params: {
-            access_token: 'e07a6ebeb934d3d60410713ef5809405ac0723c3',
+            access_token:  $rootScope.currentUser.Token.access_token,
             client_id: 'testclient',
             client_secret: 'testpass'
         },
     }).then(function(data) {
         currentUser.data.TextMessages = data.data;
     }, function(error) {});
+  };
+  currentUser.sendText = function(Message, To) {
+        var deferred = $q.defer();
+            var newMessage = {to:To,message:Message}
+            $http({
+                method: 'post',
+                url: 'https://jfsapp.com/Secure/API/Text/',
+                params: {
+                    'access_token': $rootScope.currentUser.Token.access_token,
+                    client_id: 'testclient',
+                    client_secret: 'testpass'
+
+                },
+                data: newMessage
+            }).then(function(data) {
+                //console.log(data.data);
+                currentUser.getTexts();
+                deferred.resolve(data.data)
+            }, function(error) {
+                deferred.reject(error);
+            });
+        return deferred.promise;
     }
     //currentUser.getColumns = function(){return ColumnsToShow}
     //Initialize
-    currentUser.getTexts()
+    currentUser.getTexts();
     return currentUser;
 
 

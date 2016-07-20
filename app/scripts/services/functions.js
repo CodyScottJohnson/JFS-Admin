@@ -12,16 +12,18 @@ angular.module('JFS_Admin')
     // Service logic
     // ...
     var Functions = {};
-    var notification = window.Notification || window.mozNotification || window.webkitNotification
+    var notification = window.Notification || window.mozNotification || window.webkitNotification;
     notification.requestPermission();
     Functions.browserNotify = function(title, body, icon) {
-      if ('undefined' === typeof notification)
+      if ('undefined' === typeof notification){
         return false;
-      if ('undefined' !== typeof notification)
+      }
+      if ('undefined' !== typeof notification){
         notification.requestPermission(function(permission) {});
+      }
       if (typeof(icon) === 'undefined') {
         //console.log('default');
-        var icon = 'https://jfsapp.com/Images/Logos/icon50.png';
+        icon = 'https://jfsapp.com/Images/Logos/icon50.png';
       }
       var trackNotification = new notification(
         title, {
@@ -34,7 +36,7 @@ angular.module('JFS_Admin')
       );
 
       return true;
-    }
+    };
     var conn = new WebSocket('wss://jfsapp.com/WebSocket');
     conn.onopen = function(e) {
       console.log("Connection established!");

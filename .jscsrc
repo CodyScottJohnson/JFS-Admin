@@ -1,5 +1,4 @@
 {
 
-  "requireCapitalizedConstructors": true,
   "requireParenthesesAroundIIFE": true
 }

@@ -8,7 +8,7 @@
  * Controller of the jfsApp
  */
 angular.module('JFS_Admin')
-  .controller('MainCtrl', function ($scope,User,recruit,Functions,$filter) {
+  .controller('MainCtrl', function ($scope,$state,User,recruit,Functions,$filter) {
     $scope.newestText = function(arr) {
       return $filter('min')
       ($filter('map')(arr, 'date_recieved'));
@@ -16,5 +16,9 @@ angular.module('JFS_Admin')
     $scope.Visibility= {sidebar:true};
     $scope.User= User;
     $scope.UserData = User.data;
+    $scope.ViewMessage = function(messageid){
+      User.setCurrentConversation(messageid);
+      $state.go('app.Messages');
+    }
     recruit.setRecruit(10336);
   });

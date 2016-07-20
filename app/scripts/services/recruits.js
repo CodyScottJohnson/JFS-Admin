@@ -19,11 +19,11 @@ angular.module('JFS_Admin')
         });
         Recruits.data.List[index] = data.data;
         Recruits.updateRecruits();
-        if (recruit.data.info.INDV_ID = data.data.ID) {
+        if (recruit.data.info.INDV_ID == data.data.ID) {
           recruit.setRecruit(data.data.ID);
         }
       }
-    }
+    };
     Recruits.updateRecruits = function() {
       var deferred = $q.defer();
       $http({

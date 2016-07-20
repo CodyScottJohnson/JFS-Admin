@@ -21,14 +21,56 @@
 .view{
   height:100%;
   width:100%;
+  padding:0;
+  margin:0;
   background-color:@gray-light;
   display: block;
+
+}
+.mainBody{
+  height:100%;
+  margin:0;
+  padding:0;
+  z-index:2;
+  .scrollbar;
+}
+.sidenav{
+  height:100%;
+  background-color:@gray-lighter;
+  padding:0;
+  z-index:3;
+  .BoxShadowHelper(3);
+  .main{
+    height:100%;
+    padding:0;
+    padding-top:53px;
+    .scrollbar;
+  }
+  .search{
+    height:53px;
+    position:absolute;
+    top:0px;
+    input{
+      height:100%;
+      height:53px;
+      border-radius:0px;
+      border:none;
+      box-shadow:none;
+      border-bottom:1px solid #E0E0E0;
+      border-top:1px solid #E0E0E0
+    };
+    span{
+      border-radius:0px;
+      border:none;
+      border-bottom:1px solid #E0E0E0;
+      border-top:1px solid #E0E0E0;
+      background-color:@color-secondary-2-2;
+      color:@color-secondary-2-4;
+    };
+  }
 }
 html,body{
   padding:0;
   margin:0;
   background-color:@gray-darker;
-}
-.shadow-4{
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }

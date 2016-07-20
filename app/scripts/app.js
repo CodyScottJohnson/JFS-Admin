@@ -17,14 +17,16 @@ angular
     'ui.router',
     'ngIdle',
     'ui.bootstrap.contextMenu',
-    'angular.filter'
+    'angular.filter',
+    'luegg.directives'
   ]);
 angular.module('JFS_Admin').run(function($rootScope, $state, $cookies, Idle) {
   Idle.watch();
+
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
     if($state.current.name != "login"){
     $rootScope.state = $state.current;
-  }
+    }
     var requireLogin = toState.data.requireLogin;
     if (typeof $rootScope.currentUser === 'undefined') {
       $rootScope.currentUser = $cookies.getObject('user');
@@ -64,6 +66,12 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
     .state('app.Home', {
       url: '/',
       templateUrl: 'views/Recruiting/index.html',
+
+    })
+    .state('app.Messages', {
+      url: '/Messages',
+      templateUrl: 'views/MessageCenter/index.html',
+      controller: 'MessagesCtrl',
 
     })
     .state('app.Recruiting', {

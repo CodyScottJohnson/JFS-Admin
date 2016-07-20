@@ -32,6 +32,7 @@ module.exports = function(config) {
       'bower_components/lodash/lodash.js',
       'bower_components/angular-bootstrap-contextmenu/contextMenu.js',
       'bower_components/angular-filter/dist/angular-filter.js',
+      'bower_components/angular-scroll-glue/src/scrollglue.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
