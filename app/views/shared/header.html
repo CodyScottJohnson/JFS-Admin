@@ -11,22 +11,29 @@
 
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown visible-md visible-lg" uib-dropdown is-open="messages.isopen" auto-close="outsideClick">
-							<a uib-dropdown-toggle><i class="fa fa-bell-o"></i><span class="badge shake">{{UserData.TextMessages.length}}</span></a>
-							<ul class="dropdown-menu" style="width:300px;overflow-x: hidden;">
+							<a uib-dropdown-toggle><i class="fa fa-comments"></i><span class="badge shake">{{(UserData.TextMessages|filter:{'status':'0','type':0}).length}}</span></a>
+							<ul class="dropdown-menu shadow-5" style="width:300px;overflow-x: hidden;">
 								<li class="dropdown-menu-header">
-									<strong>Notifications</strong>
+									<strong>Messages</strong>
 								</li>
 								<div class="scrollbar" style="max-height:500px;overflow-x: hidden">
-									<li class="avatar repeated-item" ng-repeat="text in UserData.TextMessages" style="padding-left:40px">
-										<a>
-											<div>{{text.RecruitName}}</div>
-											<small>{{text.message}}</small>
+									<li style="display:block;position:relative" class="avatar" ng-repeat="(key, value) in UserData.TextMessages|filter:{'type':'0'}|orderBy:['status','-date_recieved']| groupBy:'[id_number]'" >
+
+										<a style="margin-top:0;top:0;display:inline-block;position:relative" ng-repeat="text in value|orderBy:'-date_recieved'|limitTo:1">
+											<img  style="height:50px;width:50px;border-radius:100%;display:inline-block;top:5px;position:absolute" ng-src="https://jfsapp.com/Images/Recruits/{{text.ProfilePic || 'blank.jpg'}}">
+											<span class="badge shake">{{(value|filter:{'status':'0'}).length}}</span>
+											<div style="display:inline-block:height:100%;width:300px;position:absolute;padding-left:60px">
+											<div style="color:black">{{text.RecruitName||text.id_number|phone}}</div>
+											<small>{{text.message|truncate:80}}...</small>
+											</div>
 										</a>
 									</li>
 								</div>
-								<li class="dropdown-menu-header text-center" style="background-color:grey;height:50px">
-									<a>View all notification</a>
+								<div>
+								<li class="dropdown-menu-footer text-center">
+									<strong>View all notification</strong>
 								</li>
+							</div>
 							</ul>
 						</li>
 						<li class="dropdown visible-md visible-lg" uib-dropdown is-open="status.isopen" auto-close="outsideClick">

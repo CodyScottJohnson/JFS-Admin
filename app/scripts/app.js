@@ -16,7 +16,8 @@ angular
     'ui.bootstrap',
     'ui.router',
     'ngIdle',
-    'ui.bootstrap.contextMenu'
+    'ui.bootstrap.contextMenu',
+    'angular.filter'
   ]);
 angular.module('JFS_Admin').run(function($rootScope, $state, $cookies, Idle) {
   Idle.watch();
