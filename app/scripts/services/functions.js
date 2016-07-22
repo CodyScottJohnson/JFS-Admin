@@ -8,7 +8,7 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('Functions', function(Recruits,User) {
+  .factory('Functions', function(toastr) {
     // Service logic
     // ...
     var Functions = {};
@@ -37,30 +37,13 @@ angular.module('JFS_Admin')
 
       return true;
     };
-    var conn = new WebSocket('wss://jfsapp.com/WebSocket');
-    conn.onopen = function(e) {
-      console.log("Connection established!");
+    Functions.Toast = function(type,title,message){
+      toastr.info(message);
     };
-    conn.onmessage = function(event) {
 
-      var temp = angular.fromJson(event.data);
-      if (angular.isDefined(temp.browsernotification)) {
-        Functions.browserNotify(temp.browsernotification.Title, temp.browsernotification.Body, temp.browsernotification.Icon);
-      }
-      if (temp.type == 'recruit') {
-        Recruits.Socket(temp);
-      }
-      if (temp.type == 'user') {
-        User.Socket(temp);
-      }
 
-    };
-    var meaningOfLife = 42;
+
 
     // Public API here
-    return {
-      someMethod: function() {
-        return meaningOfLife;
-      }
-    };
+    return Functions;
   });

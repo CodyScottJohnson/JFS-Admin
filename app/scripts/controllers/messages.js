@@ -13,9 +13,9 @@ angular.module('JFS_Admin')
     $scope.showConversation = function(ConversationID){
       //User.MarkConversation(ConversationID)
       User.setCurrentConversation(ConversationID);
-    }
+    };
     $scope.sendText=function(message,to){
       User.sendText(to,message);
       $scope.newTextMessage ='';
-    }
+    };
   });

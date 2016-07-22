@@ -87,8 +87,8 @@ angular.module('JFS_Admin')
         },
       }).then(function(){
       currentUser.getTexts();
-    });
-    }
+      });
+    };
     currentUser.addText = function(text){};
     currentUser.getTexts = function(){
       $http({
@@ -99,13 +99,13 @@ angular.module('JFS_Admin')
             client_id: 'testclient',
             client_secret: 'testpass'
         },
-    }).then(function(data) {
+      }).then(function(data) {
         currentUser.data.TextMessages = data.data;
-    }, function(error) {});
-  };
-  currentUser.sendText = function(Message, To) {
+      }, function(error) {});
+    };
+    currentUser.sendText = function(Message, To) {
         var deferred = $q.defer();
-            var newMessage = {to:To,message:Message}
+            var newMessage = {to:To,message:Message};
             $http({
                 method: 'post',
                 url: 'https://jfsapp.com/Secure/API/Text/',
@@ -119,15 +119,37 @@ angular.module('JFS_Admin')
             }).then(function(data) {
                 //console.log(data.data);
                 currentUser.getTexts();
-                deferred.resolve(data.data)
+                deferred.resolve(data.data);
             }, function(error) {
                 deferred.reject(error);
             });
         return deferred.promise;
-    }
+    };
+    currentUser.getAssigned = function(detail) {
+				detail = typeof detail !== 'undefined' ? detail : false;
+        var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: 'https://jfsapp.com/Secure/API/User/Assigned/',
+                params: {
+                    'access_token': $rootScope.currentUser.Token.access_token,
+                    client_id: 'testclient',
+                    client_secret: 'testpass',
+                    detail: detail
+                },
+            }).then(function(data) {
+                //console.log(data.data);
+                currentUser.data.Tasks = data.data;
+                deferred.resolve(data.data);
+            }, function(error) {
+                deferred.reject(error);
+            });
+        return deferred.promise;
+    };
     //currentUser.getColumns = function(){return ColumnsToShow}
     //Initialize
     currentUser.getTexts();
+    currentUser.getAssigned();
     return currentUser;
 
 

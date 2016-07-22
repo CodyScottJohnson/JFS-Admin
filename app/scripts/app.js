@@ -18,10 +18,16 @@ angular
     'ngIdle',
     'ui.bootstrap.contextMenu',
     'angular.filter',
-    'luegg.directives'
+    'luegg.directives',
+    'toastr',
+    'angularMoment'
   ]);
 angular.module('JFS_Admin').run(function($rootScope, $state, $cookies, Idle) {
   Idle.watch();
+  $rootScope.conn = new WebSocket('wss://jfsapp.com/WebSocket');
+  $rootScope.conn.onopen = function(e) {
+      console.log("Connection established!");
+    };
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
     if($state.current.name != "login"){

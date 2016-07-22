@@ -8,7 +8,7 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('Recruits', function($q, $http, $rootScope, recruit) {
+  .factory('Recruits', function($q, $http, $rootScope, recruit,Functions) {
     var Recruits = {
       data: {}
     };
@@ -17,8 +17,10 @@ angular.module('JFS_Admin')
         var index = _.findIndex(Recruits.data.List, {
           'INDV_ID': data.data.ID
         });
+
         Recruits.data.List[index] = data.data;
         Recruits.updateRecruits();
+        Functions.Toast('info',data.AlertTitle,data.AlertMessage);
         if (recruit.data.info.INDV_ID == data.data.ID) {
           recruit.setRecruit(data.data.ID);
         }
