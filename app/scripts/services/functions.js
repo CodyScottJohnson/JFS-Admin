@@ -8,7 +8,7 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('Functions', function(toastr) {
+  .factory('Functions', function(toastr,$uibModal) {
     // Service logic
     // ...
     var Functions = {};
@@ -39,6 +39,33 @@ angular.module('JFS_Admin')
     };
     Functions.Toast = function(type,title,message){
       toastr.info(message);
+    };
+    Functions.SQLDate = function(date){
+      if (date === null || date===''){
+        return null;
+      }
+      else{
+        return new Date(date+'z');
+      }
+    };
+    Functions.OpenModal = function(modalname,size,data){
+      var modalInstance = $uibModal.open({
+       animation: true,
+       templateUrl: modalname,
+       controller: 'ModalCtrl',
+       size: size,
+       resolve: {
+         items: function () {
+           return data;
+         }
+       }
+     });
+     modalInstance.result.then(function (selectedItem) {
+       console.log(selectedItem);
+     }, function () {
+       console.log('done');
+     });
+
     };
 
 

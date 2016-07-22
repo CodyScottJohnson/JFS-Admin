@@ -35,6 +35,9 @@ module.exports = function(config) {
       'bower_components/angular-scroll-glue/src/scrollglue.js',
       'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
       'bower_components/angular-moment/angular-moment.js',
+      'bower_components/summernote/dist/summernote.js',
+      'bower_components/angular-summernote/dist/angular-summernote.js',
+      'bower_components/angular-xeditable/dist/js/xeditable.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

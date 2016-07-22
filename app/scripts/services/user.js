@@ -8,7 +8,7 @@
  * Factory in the jfsApp.
  */
 angular.module('JFS_Admin')
-  .factory('User', function ($q,$http,$cookies,$rootScope,$state) {
+  .factory('User', function ($q,$http,$cookies,$rootScope,$state,$filter) {
     var currentUser = {data:{currentTextConversation:-1}};
     var loggedin;
     var Token;
@@ -125,31 +125,32 @@ angular.module('JFS_Admin')
             });
         return deferred.promise;
     };
-    currentUser.getAssigned = function(detail) {
-				detail = typeof detail !== 'undefined' ? detail : false;
-        var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: 'https://jfsapp.com/Secure/API/User/Assigned/',
-                params: {
-                    'access_token': $rootScope.currentUser.Token.access_token,
-                    client_id: 'testclient',
-                    client_secret: 'testpass',
-                    detail: detail
-                },
-            }).then(function(data) {
-                //console.log(data.data);
-                currentUser.data.Tasks = data.data;
-                deferred.resolve(data.data);
-            }, function(error) {
-                deferred.reject(error);
-            });
-        return deferred.promise;
-    };
+    currentUser.getUserList = function(){
+      var deferred = $q.defer();
+       if (angular.isDefined(AllUsers)) {
+           deferred.resolve(AllUsers);
+       } else {
+           $http({
+               method: 'GET',
+               url: 'https://jfsapp.com/Secure/API/Users/',
+               params: {
+                   'access_token': $rootScope.currentUser.Token.access_token,
+                   client_id: 'testclient',
+                   client_secret: 'testpass'
+               },
+           }).then(function(data) {
+               deferred.resolve(data.data);
+               currentUser.data.userList = data.data
+           }, function(error) {
+               deferred.reject(error);
+           });
+       }
+       return deferred.promise;
+    }
     //currentUser.getColumns = function(){return ColumnsToShow}
     //Initialize
     currentUser.getTexts();
-    currentUser.getAssigned();
+    currentUser.getUserList();
     return currentUser;
 
 

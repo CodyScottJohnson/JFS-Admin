@@ -1,6 +1,6 @@
 <!--Start Navigation Bar-->
 <div class="hidden-print">
-	<div class="navbar" role="navigation">
+	<div class="navbar" style="position:absolute" role="navigation">
 
 		<div class="container-fluid">
 			<ul class="nav navbar-nav navbar-actions navbar-left" ng-click="Visibility.sidebar=!Visibility.sidebar" style="left:0px; display:block;position:relative" ng-style="Visibility.sidebar && {'left':'10px'}||{'left':'-240px'}">
@@ -86,13 +86,13 @@
 
 				</li>
 				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="notification.isopen" auto-close="outsideClick">
-					<a uib-dropdown-toggle><i class="fa fa-bell"></i><span class="badge shake">{{(UserData.Tasks|filter:{'Status':'new'}).length}}</span></a>
+					<a uib-dropdown-toggle><i class="fa fa-bell"></i><span class="badge shake">{{(Task.currentUsersTasks|filter:{'Status':'new'}).length}}</span></a>
 					<ul class="dropdown-menu shadow-5" style="width:300px;overflow-x: hidden;">
 						<li class="dropdown-menu-header">
 							<strong>New Tasks</strong>
 						</li>
 						<div class="scrollbar" style="max-height:500px;overflow-x: hidden">
-							<div ng-repeat="(key, value) in UserData.Tasks|filter:{'Status':'new'}|orderBy:['Status']| groupBy:'[Recruit_ID]'">
+							<div ng-repeat="(key, value) in Task.currentUsersTasks|filter:{'Status':'new'}|orderBy:['Status']| groupBy:'[Recruit_ID]'">
 								<li style="display:block;position:relative" class="avatar" ng-click="showDetails = ! showDetails;$event.stopPropagation()">
 
 									<a style="margin-top:0;top:0;display:inline-block;position:relative">
@@ -103,11 +103,11 @@
 										</div>
 									</a>
 								</li>
-								<li style="padding:0;height:50px;line-height:50px" ng-show="showDetails" ng-repeat="task in value|orderBy:'-CreatedDate'">
-									<div style="height:50px;width:20px;margin:0;display:inline-block;position:absolute;border-bottom: 1px solid #E0E0E0" ng-style="task.Priority=='Low' &&{'background-color':'#EBEBEB'}||task.Priority=='Medium' &&{'background-color':'#FFE372'}||task.Priority=='High' &&{'background-color':'#FF7C72'}">
+								<li context-menu="TaskOptions" ng-click="ViewTask(task.Task_ID)" class="clickable" style="padding:0;height:50px;line-height:50px;background-color:#eee" ng-show="showDetails" ng-repeat="task in value|orderBy:'-CreatedDate'">
+									<div style="overflow:hidden;height:50px;width:20px;margin:0;display:inline-block;position:absolute;border-bottom: 1px solid #E0E0E0" ng-style="task.Priority=='Low' &&{'background-color':'#EBEBEB'}||task.Priority=='Medium' &&{'background-color':'#FFE372'}||task.Priority=='High' &&{'background-color':'#FF7C72'}">
 									</div>
 									<div style="display:inline-block;margin-left:25px">
-									{{task.Title}}
+									<small style="color:black!important;font-weight:bolder">{{task.Title|truncate:36}}</small>
 									<span ng-hide="task.Due_Date==null" style="background-color:#FF7C72;padding:2px;border-radius:2px;font-weight:normal;font-size:8pt;color:white;margin-left:5px;margin-right:5px">deadline</span><time class="time" am-time-ago="task.Due_Date"></time>
 									</div>
 								</li>
@@ -187,7 +187,7 @@
 						<li><a href="" ng-model="collapsed1" ng-click="collapsed1=!collapsed1"><i class="fa fa-user"></i><span class="text">Cody Johnson</span><span class="fa fa-angle-down pull-right"></span></a></li>
 						<ul class="subMenu" ng-show="collapsed1">
 							<li><a ui-sref="app.Messages"><i class="fa fa-envelope"></i><span class="text">Message Center</span></a></li>
-							<li><a ui-sref="Tasks"><i class="fa fa-tasks" aria-hidden="true"></i><span class="text">Tasks</span></a></li>
+							<li><a ui-sref="app.Tasks"><i class="fa fa-tasks" aria-hidden="true"></i><span class="text">Tasks</span></a></li>
 							<li><a ui-sref="Notes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="text">Notes</span></a></li>
 							<li><a href="../../../Users/account.php"><i class="fa fa-gear"></i><span class="text"> Settings</span></a></li>
 							<li><a href="#Test"><i class="fa fa-book"></i><span class="text"> Contact Info</span></a></li>

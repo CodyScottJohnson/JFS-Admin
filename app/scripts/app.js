@@ -10,28 +10,31 @@
  */
 angular
   .module('JFS_Admin', [
+    'angular.filter',
+    'angularMoment',
+    'luegg.directives',
     'ngAnimate',
     'ngCookies',
-    'ngSanitize',
-    'ui.bootstrap',
-    'ui.router',
     'ngIdle',
-    'ui.bootstrap.contextMenu',
-    'angular.filter',
-    'luegg.directives',
+    'ngSanitize',
+    'summernote',
     'toastr',
-    'angularMoment'
+    'ui.bootstrap',
+    'ui.bootstrap.contextMenu',
+    'ui.router',
+    'xeditable'
   ]);
-angular.module('JFS_Admin').run(function($rootScope, $state, $cookies, Idle) {
+angular.module('JFS_Admin').run(function($rootScope, $state, $cookies, Idle,editableOptions) {
   Idle.watch();
+  editableOptions.theme = 'bs3';
   $rootScope.conn = new WebSocket('wss://jfsapp.com/WebSocket');
   $rootScope.conn.onopen = function(e) {
-      console.log("Connection established!");
-    };
+    console.log("Connection established!");
+  };
 
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
-    if($state.current.name != "login"){
-    $rootScope.state = $state.current;
+    if ($state.current.name != "login") {
+      $rootScope.state = $state.current;
     }
     var requireLogin = toState.data.requireLogin;
     if (typeof $rootScope.currentUser === 'undefined') {
@@ -78,6 +81,12 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
       url: '/Messages',
       templateUrl: 'views/MessageCenter/index.html',
       controller: 'MessagesCtrl',
+
+    })
+    .state('app.Tasks', {
+      url: '/Tasks',
+      templateUrl: 'views/Task/index.html',
+      controller: 'TaskCtrl',
 
     })
     .state('app.Recruiting', {

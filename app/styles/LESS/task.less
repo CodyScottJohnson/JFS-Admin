@@ -1,0 +1,90 @@
+.task {
+    width: 50%;
+    height: 100%;
+    padding-top:140px;
+    font-family: roboto;
+    background-color: white;
+    position: absolute;
+    display: block;
+    top: 0px;
+    right: 0;
+    z-index: 5;
+
+  }
+
+  .task-modal-header {
+    height: 80px;
+    background-color: #FE5E52;
+    line-height: 60px;
+    vertical-align: middle;
+    color: white;
+    font-size: 20pt;
+    border-radius: 5px 5px 0 0;
+  };
+  .task_header {
+    width: 100%;
+    height: 80px;
+    top:-140px;
+    margin-top:60px;
+    background-color: #FE5E52;
+    line-height: 80px;
+    vertical-align: middle;
+    color: white;
+    display: block;
+    position: absolute;
+    padding: 0 20px;
+    font-size: 20pt;
+    i {
+      font-size: 20pt;
+    };
+    span.icons {
+      margin-top:10px;
+      float: right;
+      vertical-align: middle;
+      display: inline-block;
+    };
+  }
+  .task_body {
+    background-color: white;
+    height:100%;
+    padding:20px;
+    .scrollbar;
+    .description{
+      max-height:200px;
+      .scrollbar;
+    };
+    .comments{
+      max-height:300px;
+      .scrollbar;
+    };
+  }
+  .task_comments {
+    padding: 20px;
+    display: block;
+    position: relative;
+    width: 100%;
+  }
+  .task_image {
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+  }
+  .task_image_small {
+    height: 25px;
+    width: 25px;
+    border-radius: 100%;
+  }
+  .task_image_small:hover {
+    height: 50px;
+    width: 50px;
+    z-index: 99;
+    display: inline-block;
+    position: relative;
+  }
+  .task_body table {
+    border-collapse: collapse;
+  }
+  .time {
+    color: #9E9E9E;
+    font-size: 8pt;
+  }
