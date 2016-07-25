@@ -1,5 +1,6 @@
 .recruit {
   font-family: roboto;
+  background-color: #F9FCFE;
   .panel {
     width: 95%;
     margin-left: 2.5%;
@@ -33,6 +34,44 @@
     background-color: rgba(215,228,236,.9)!important;
     line-height: 40px;
     text-align: center;
+  }
+}
+.file-manager{
+  padding-top:90px;
+
+  display: block;
+  position: relative;
+  height:100%;
+  .header{
+    height:80px;
+    top:0;
+    width:100%;
+    position:absolute;
+    .BoxShadowHelper(1);
+    background-color: @color-secondary-2-0;
+    color:darken(@color-secondary-2-0,60%);
+    .inner-header{
+      height: 100%;
+      width:100%;
+      line-height: 60px;
+      padding:10px;
+      display: block;
+      position: relative;
+    }
+    span{
+      margin:0;
+      font-family: 'Roboto', sans-serif;
+      font-weight:900;
+      font-size:20pt;
+      vertical-align: middle;
+    }
+  }
+  .body{
+    height:100%;
+    display: block;
+    position: relative;
+    padding:10px;
+    .scrollbar;
   }
 }
 .notes{

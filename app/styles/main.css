@@ -3047,27 +3047,27 @@ i.fileIcon
 }
 i.page_white_excel
 {
-  background-image:url("/Images/Icons/FileExtension/xlsx.png");
+  background-image:url("../images/icons/FileExtension/xlsx.png");
 }
 i.page_white_acrobat
 {
-  background-image:url("/Images/Icons/FileExtension/pdf.png");
+  background-image:url("../images/icons/FileExtension/pdf.png");
 }
 i.page_white_word
 {
-  background-image:url("/Images/Icons/FileExtension/docx.png");
+  background-image:url("../images/icons/FileExtension/docx.png");
 }
 i.folder
 {
-  background-image:url("/Images/Icons/FileExtension/folder.png");
+  background-image:url("../images/icons/FileExtension/folder.png");
 }
 i.page_white_picture
 {
-  background-image:url("/Images/Icons/FileExtension/image.png");
+  background-image:url("../images/icons/FileExtension/image.png");
 }
 i.page_white_powerpoint
 {
-  background-image:url("/Images/Icons/FileExtension/ppt.png");
+  background-image:url("../images/icons/FileExtension/ppt.png");
 }
  @-webkit-keyframes shake {
             0% { -webkit-transform: translate(2px, 2px) rotate(20deg); }

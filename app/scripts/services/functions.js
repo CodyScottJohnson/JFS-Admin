@@ -61,7 +61,7 @@ angular.module('JFS_Admin')
        }
      });
      modalInstance.result.then(function (selectedItem) {
-       console.log(selectedItem);
+       //console.log(selectedItem);
      }, function () {
        console.log('done');
      });

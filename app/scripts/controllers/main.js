@@ -8,7 +8,7 @@
  * Controller of the jfsApp
  */
 angular.module('JFS_Admin')
-  .controller('MainCtrl', function($scope, $state, User, recruit, Functions, Task, $filter, Socket) {
+  .controller('MainCtrl', function($scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox) {
     $scope.Functions = Functions;
     $scope.newestText = function(arr) {
       return $filter('min')

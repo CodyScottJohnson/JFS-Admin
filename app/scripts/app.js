@@ -11,6 +11,7 @@
 angular
   .module('JFS_Admin', [
     'angular.filter',
+    'angularFileUpload',
     'angularMoment',
     'chart.js',
     'FBAngular',
