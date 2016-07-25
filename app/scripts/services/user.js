@@ -140,13 +140,13 @@ angular.module('JFS_Admin')
                },
            }).then(function(data) {
                deferred.resolve(data.data);
-               currentUser.data.userList = data.data
+               currentUser.data.userList = data.data;
            }, function(error) {
                deferred.reject(error);
            });
        }
        return deferred.promise;
-    }
+    };
     //currentUser.getColumns = function(){return ColumnsToShow}
     //Initialize
     currentUser.getTexts();

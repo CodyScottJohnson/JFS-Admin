@@ -1,0 +1,89 @@
+<style>
+  .myRecruit{
+    background-color:white;
+    height:400px;
+    width:300px;
+    float:left;
+    margin:10px;
+  }
+  .recruitName{
+
+font-size: 20px;
+color: white;
+letter-spacing: 0px;
+  padding-left:10px;
+		/*text-shadow: -1px 0 #a8c3d4, 0 1px #a8c3d4, 1px 0 #a8c3d4, 0 -1px #a8c3d4;*/
+
+  }
+</style>
+<div ng-hide="Task.currentUsersTasks.length > 0" class="panel shadow-4" style="width:70%;height:200px;margin-left:auto;margin-right:auto;margin-top:50px;padding:20px;text-align:center;line-height:50px;vertical-align:middle">
+	Hurray! No Recruits are Flagged for You.
+</div>
+<div class="view">
+
+	<div  class="shadow-2 myRecruit" ng-repeat="(key, value) in Task.currentUsersTasks |filter: {Status:'!'+'Completed'}|orderBy:['RecruitID']| groupBy:'[Recruit_ID]' "  class="fx-light-speed fx-speed-342">
+  <div class="shadow-1" style="width:100%;height:100px;background-color:#5C96BF;padding:10px;display:block;position:relative;overflow:">
+    <img  ui-sref="RecruitingLiscence({user:value[0].Recruit_ID,UserInfoID:value[0].User_ID})" class="shadow-1 clickable" ng-src="https://jfsapp.com/Images/Recruits/{{value[0].ProfilePic || 'blank.jpg'}}" style="height:80px;width:80px;border-radius:100%">
+    <span class="recruitName">{{value[0].FNAME + ' ' + value[0].LNAME}}</span>
+    <div popover-is-open="value[0].isOpen" uib-popover-template="myPopover.url" class="shadow-2 clickable" style="position:absolute;right:10px;background-color:#226493;border-radius:100%;height:40px;width:40px;color:white;display:block;bottom:-20px;text-align:center;line-height:40px">
+     <i class="fa fa-flag"></i>
+  </div>
+  </div>
+  <div style="width:100%;height:300px;display:block" class="scrollbar">
+  <div style="width:100%;padding:10px;border-bottom:2px solid rgba(29,29,38,.05);padding-top:30px;text-align:center;background-color:rgba(168,195,212,.1)">
+    <div style="float:right;border-radius:100%;background-color:#AE5962;color:white;height:20px;width:20px" class="shadow-1"><i class="fa fa-plus"></i></div>My Tasks
+  </div>
+  <div style="width:100%;padding:0;border-bottom:2px solid rgba(29,29,38,.05);text-align:left;min-height:40px;vertical-align:middle" class="slideRight" ng-repeat="task in value">
+		<div style="height:100%;display:inline-block">
+		<i ng-click="removeFlag(task)" ng-show="task.Status!='Check'" class="icon ion-ios-circle-outline clickable" style="margin-left:10px;font-size:29px; display:inline-block"></i><i style="margin-left:10px;font-size:29px;color:rgba(177,217,120,1)" ng-show="task.Status =='Check'" class="icon ion-ios-checkmark"></i>
+		</div>
+			<span style="margin-left:10px;width:230px; position:relative;margin-top:5px;display:inline-block;vertical-align:middle">{{task.Title}}</span>
+		</div>
+  <div ng-click="value[0].showProgress=!value[0].showProgress" style="width:100%;padding:10px;border-bottom:2px solid rgba(29,29,38,.05);text-align:center;background-color:rgba(168,195,212,.1)">
+		<div style="float:right;border-radius:100%;background-color:#AE5962;color:white;height:20px;width:20px" class="shadow-1"><i class="fa fa-plus"></i></div> Current Progress
+  </div>
+	<div ng-show="value[0].showProgress">
+  <div style="width:100%;padding:5px;border-bottom:2px solid rgba(29,29,38,.05);text-align:left">
+     <span style="background-color:#AE5962;height:100%;padding:5px;color:white;border-radius:5px">Next Step</span> {{value[0].NextStep}}
+    </div>
+		<div style="width:100%;padding:5px;border-bottom:2px solid rgba(29,29,38,.05);text-align:left">
+      <span style="background-color:#AE5962;height:100%;padding:5px;color:white;border-radius:5px">POP</span> {{value[0].POP}}
+    </div>
+		</div>
+   <div ng-click="value[0].showContact=!value[0].showContact" class="clickable" style="width:100%;padding:10px;border-bottom:2px solid rgba(29,29,38,.05);text-align:center;background-color:rgba(168,195,212,.1)">
+		 <div style="float:right;border-radius:100%;background-color:#AE5962;color:white;height:20px;width:20px" class="shadow-1"><i class="fa fa-plus"></i></div> Contact Info
+  </div>
+		<div ng-show="value[0].showContact">
+  <div style="width:100%;padding:5px;border-bottom:2px solid rgba(29,29,38,.05);text-align:left">
+		<i class="fa fa-envelope" style="color:#AE5962;margin-left:10px;font-size:20px"></i><span style="padding:10px">{{value[0].EMAIL}}</span>
+    </div>
+  <div style="width:100%;padding:5px;border-bottom:2px solid rgba(29,29,38,.05);text-align:left">
+		<i class="fa fa-phone" style="color:#AE5962;margin-left:10px;font-size:20px"></i><span style="padding:10px">{{value[0].BUS_PH_NBR}}</span>
+    </div>
+		<div style="width:100%;padding:5px;border-bottom:2px solid rgba(29,29,38,.05);text-align:left">
+			<i class="fa fa-map-marker" style="color:#AE5962;margin-left:10px;font-size:20px;height:100%"></i><span style="padding:10px">{{value[0].LINE_ONE_ADDR}}, {{value[0].CITY_NAME||'Unknown'}}</span>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<script type="text/ng-template" id="flagFor.html">
+
+        <div ng-init="display={dropdown:false}"style="width:300px;z-index:8;display:block;position:relative" class="form-group" ng-click="$event.stopPropagation()">
+          <label style="color:black;margin-right:5px">Flag For</label>
+					<div class="btn-group" uib-dropdown is-open="display.dropdown">
+					<button id="split-button" type="button" class="btn btn-default">{{flag.for.display_name}}</button>
+					<button type="button" class="btn btn-default" uib-dropdown-toggle>
+					<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+						<li ng-repeat="user in UserList" role="menuitem"><a ng-click="display.dropdown=false;flag.for=user">{{user.display_name}}</a></li>
+					</ul>
+					</div>
+					<br>
+					<label style="color:black;margin-right:5px">Reason</label>
+          <input style="color:black;z-index:10;display:block;margin-bottom:10px;width:250px" type="text" ng-model="flag.reason" class="form-control">
+        <button  ng-click="flagfor2(value[0],flag);value[0].isOpen=false" type="button" class="btn btn-success"><i class="fa fa-check"></i></button>
+				<button  ng-click="value[0].isOpen=false" type="button" class="btn btn-danger"><i class="fa fa-close"></i></button>
+				</div>
+    </script>

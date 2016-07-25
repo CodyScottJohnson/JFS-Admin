@@ -1,0 +1,40 @@
+<div class="dashboard">
+  <table>
+    <tr class="title">
+      <td colspan="12">
+        Recruits
+      </td>
+    </tr>
+    <tr>
+      <th></th>
+      <th>POP</th>
+      <th>Color</th>
+      <th>TODO</th>
+      <th>Email</th>
+      <th>Type</th>
+      <th>Source</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>Zip</th>
+      <th>State</th>
+    </tr>
+    <tr context-menu="recruitListOptions" ng-repeat="recruit in Recruits.List">
+      <td class="profile"><img ng-hide="true" ng-src="{{'https://jfsapp.com'+agent.profilepic}}" />
+        <div class="info">
+          <span><h3>{{recruit.FNAME + ' ' + recruit.LNAME}}</h3></span></div>
+      </td>
+      <td>{{recruit.POP}}</td>
+      <td>{{recruit.fa}}</td>
+      <td>{{recruit.NextStep}}</td>
+      <td>{{recruit.EMAIL}}</td>
+      <td>{{recruit.Type}}</td>
+      <td>{{recruit.Source}}</td>
+      <td>{{recruit.BUS+PH_NBR}}</td>
+      <td>{{recruit.LINE_ONE_ADDR}}</td>
+      <td>{{recruit.CITY_NAME}}</td>
+      <td>{{recruit.PSTL_CD}}</td>
+      <td>{{recruit.ST_CD}}</td>
+    </tr>
+  </table>
+</div>

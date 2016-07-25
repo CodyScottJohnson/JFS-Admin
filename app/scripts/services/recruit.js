@@ -21,7 +21,7 @@ angular.module('JFS_Admin')
           },
       }).then(function(data) {
           //console.log(data.data);
-          currentRecruit.data.info = data.data;
+          currentRecruit.data.currentRecruit = data.data;
       }, function(error) {
           console.log(error);
       });

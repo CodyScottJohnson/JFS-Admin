@@ -1,0 +1,56 @@
+<div class="container-fluid view messaging" >
+  <div class="row view">
+    <div class="col-md-3 sidenav">
+      <div class="input-group search">
+        <input ng-model="noteSearch" type="text" class="form-control" placeholder="Search..." aria-describedby="basic-addon2">
+        <span class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
+      </div>
+      <div class="main">
+        <div style="overflow-x: hidden">
+          <li class="summary" ng-repeat="(key, value) in User.TextMessages|orderBy:['-date_recieved']| groupBy:'[id_number]'" ng-click="showConversation(value[0].id_number)">
+            <a style="margin-top:0;top:0;display:inline-block;position:relative" ng-repeat="text in value|orderBy:'-date_recieved'|limitTo:1">
+              <img style="height:50px;width:50px;border-radius:100%;display:inline-block;top:5px;position:absolute" ng-src="https://jfsapp.com/Images/Recruits/{{text.ProfilePic || 'blank.jpg'}}">
+              <div style="display:inline-block;height:100%;width:300px;position:absolute;padding-left:60px">
+                <div style="color:black">{{text.RecruitName||text.id_number|phone}}</div>
+                <small>{{text.message|truncate:80}}...</small>
+              </div>
+              <div ng-show="(value|filter:{'status':'0','type':'0'}).length > 0" style="display:inline-block;position:absolute;right:5px;top:5px;">
+                <a><span style="background-color:#FF5454;border-radius:100%;" class="badge shake">{{(value|filter:{'status':'0','type':'0'}).length}}</span></a>
+              </div>
+            </a>
+
+          </li>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 mainBody">
+
+      <div class="chat" ng-repeat="(key, value) in User.TextMessages|filter:{id_number:User.currentTextConversation}|orderBy:['-date_recieved']| groupBy:'[id_number]'" style="height:100%;width:100%;background-color: #555;">
+        <div class="shadow-1" style="height:70px;width:100%;background-color:#555;padding:20px;display:block;color:white;position:absolute">
+          {{value[0].RecruitName||value[0].id_number|phone}}
+          <button type="button" class="close" aria-hidden="true" ng-click="sidemenu.vis=false" style="font-size:20pt;vertical-align:middle">&times;</button>
+
+        </div>
+        <div style="height:100%;padding-top:70px;padding-bottom:270px">
+
+          <div class="chatbody" scroll-glue>
+            <div class="chat-bubble" ng-class="{right: (text.type==0), left: (text.type==1)}" ng-repeat="text in value| orderBy:['date_recieved']">{{text.message}}</div>
+          </div>
+          <div>
+          </div>
+          <div class="chat-message clearfix">
+            <textarea ng-model="newTextMessage" placeholder="Type your message" rows="3"></textarea>
+
+
+
+            <button class="btn" ng-click="sendText(value[0].id_number,newTextMessage)">Send</button>
+
+          </div>
+          <!-- end chat-message -->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

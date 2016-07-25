@@ -12,9 +12,12 @@ angular
   .module('JFS_Admin', [
     'angular.filter',
     'angularMoment',
+    'chart.js',
+    'FBAngular',
     'luegg.directives',
     'ngAnimate',
     'ngCookies',
+    'ngFileSaver',
     'ngIdle',
     'ngSanitize',
     'summernote',
@@ -24,7 +27,7 @@ angular
     'ui.router',
     'xeditable'
   ]);
-angular.module('JFS_Admin').run(function($rootScope, $state, $cookies, Idle,editableOptions) {
+angular.module('JFS_Admin').run(function($rootScope, $state, $cookies, Idle, editableOptions) {
   Idle.watch();
   editableOptions.theme = 'bs3';
   $rootScope.conn = new WebSocket('wss://jfsapp.com/WebSocket');
@@ -96,8 +99,19 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
 
     })
     .state('app.Recruiting.Dashboard', {
-      url: '/Recruting',
+      url: '/Recruiting',
       templateUrl: 'views/Recruiting/dashboard.html',
+
+    })
+    .state('app.Recruiting.Assigned', {
+      url: '/Recruiting/Assigned',
+      templateUrl: 'views/Recruiting/assigned.html',
+
+    })
+    .state('app.Recruiting.Recruit', {
+      url: '/Recruiting/Recruit',
+      templateUrl: 'views/Recruiting/recruitportal.html',
+      controller: 'RecruitCtrl',
 
     })
     .state('app.Agents', {
@@ -110,5 +124,22 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
       url: '/Agents',
       templateUrl: 'views/Agents/dashboard.html',
 
+    })
+    .state('app.Reporting', {
+            url: "/Reporting",
+            templateUrl: 'views/Reporting/index.html',
+            controller: 'ReportCtrl'
+        })
+    .state('app.Reporting.Dashboard', {
+      url: "/Reporting/Dashboard",
+      templateUrl: 'views/Reporting/Dashboard.html'
+    })
+    .state('app.Reporting.ColorTest', {
+      url: "/Reporting/ColorTest",
+      templateUrl: 'views/Reporting/Color_Test.html'
+    })
+    .state('app.Reporting.PopTest', {
+      url: "/Reporting/PopTest",
+      templateUrl: 'views/Reporting/Pop_Test.html'
     });
 });

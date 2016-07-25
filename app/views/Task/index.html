@@ -51,15 +51,15 @@
           {{user_item.display_name}}
         </div>
       </div>
-      <div class="task_list fadeInUpBig" context-menu="menuOptions" ng-repeat="task in Tasks.allTasks|orderBy:sortKey:reverse|filter:taskFilter|filter:taskSearch|filter:{Status:'!'+'Completed'}" style="vertical-align:middle;background-color:white">
+      <div class="task_list fadeInUpBig" context-menu="TaskOptions" ng-repeat="task in Tasks.allTasks|orderBy:sortKey:reverse|filter:taskFilter|filter:taskSearch|filter:{Status:'!'+'Completed'}" style="vertical-align:middle;background-color:white">
         <div style="height:50px;width:20px;margin:0;display:inline-block;position:absolute;border-bottom: 1px solid #E0E0E0" ng-style="task.Priority=='Low' &&{'background-color':'#EBEBEB'}||task.Priority=='Medium' &&{'background-color':'#FFE372'}||task.Priority=='High' &&{'background-color':'#FF7C72'}">
 
         </div>
         <div style="display:inline-block;padding:5px;padding-left:20px">
           <div class="media">
             <div class="media-left media-middle">
-              <i ng-click="removeFlag(task)" ng-show="task.Status!='Check'" class="icon ion-android-checkbox-outline-blank clickable" style="margin-left:10px;font-size:29px; display:inline-block"></i><i style="margin-left:10px;font-size:29px;color:rgba(177,217,120,1)"
-                  ng-show="task.Status =='Check'" class="icon ion-ios-checkmark"></i>
+              <i ng-click="removeFlag(task)" ng-show="task.Status!='Completed'" class="icon ion-android-checkbox-outline-blank clickable" style="margin-left:10px;font-size:29px; display:inline-block"></i><i style="margin-left:10px;font-size:29px;color:rgba(177,217,120,1)"
+                  ng-show="task.Status =='Completed'" class="icon ion-ios-checkmark"></i>
             </div>
             <div class="media-body" style="vertical-align:middle">
               <h5 ng-click="showTask(task)" class="media-heading clickable">{{task.FNAME + ' '+ task.LNAME}} <span ng-hide="task.Due_Date==null" style="background-color:#FF7C72;padding:2px;border-radius:2px;font-weight:normal;font-size:8pt;color:white;margin-left:5px;margin-right:5px">deadline</span><time class="time" am-time-ago="task.Due_Date"></time></h5> {{task.Title}}

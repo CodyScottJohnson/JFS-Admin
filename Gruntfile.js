@@ -358,7 +358,7 @@ module.exports = function (grunt) {
     ngtemplates: {
       dist: {
         options: {
-          module: 'JFS_AgentPortal',
+          module: 'JFS_Admin',
           htmlmin: '<%= htmlmin.dist.options %>',
           usemin: 'scripts/scripts.js'
         },
@@ -400,7 +400,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '{,*/}*.html','*.php','{,*/}*.json',
             'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*','views/{,*/}*.*'
+            'styles/font/{,*/}*.*','views/{,*/}*.*'
           ]
         }, {
           expand: true,

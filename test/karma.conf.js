@@ -38,6 +38,12 @@ module.exports = function(config) {
       'bower_components/summernote/dist/summernote.js',
       'bower_components/angular-summernote/dist/angular-summernote.js',
       'bower_components/angular-xeditable/dist/js/xeditable.js',
+      'bower_components/blob-polyfill/Blob.js',
+      'bower_components/file-saver.js/FileSaver.js',
+      'bower_components/angular-file-saver/dist/angular-file-saver.bundle.js',
+      'bower_components/angular-fullscreen/src/angular-fullscreen.js',
+      'bower_components/Chart.js/Chart.js',
+      'bower_components/angular-chart.js/dist/angular-chart.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

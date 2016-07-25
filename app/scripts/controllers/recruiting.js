@@ -8,7 +8,13 @@
  * Controller of the jfsApp
  */
 angular.module('JFS_Admin')
-  .controller('RecruitingCtrl', function ($scope,Recruits) {
+  .controller('RecruitingCtrl', function ($scope,Recruits,Task) {
+    Task.getUsersTasks(true);
+    $scope.Task =Task.data;
+    $scope.removeFlag = function(task) {
+            task.Status = 'Completed';
+            Task.updateTask(task);
+        };
     $scope.Recruits = Recruits.data;
     $scope.recruitListOptions = [
     	['email', function ($itemScope) {

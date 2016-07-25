@@ -13,7 +13,7 @@ angular.module('JFS_Admin')
     $scope.sort = function(keyname) {
        $scope.sortKey = keyname; //set the sortKey to the param passed
        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
-     }
+     };
     $scope.User = User.data;
     $scope.Tasks = Task.data;
     $scope.comments=[];
@@ -26,10 +26,10 @@ angular.module('JFS_Admin')
             User_ID: $rootScope.currentUser.Info.user_id,
             photo: $rootScope.currentUser.Info.display_photo,
             User: $rootScope.currentUser.Info.display_name
-        }
+        };
         $scope.comments.push(comment);
         $scope.text='';
-    }
+    };
     Task.getAllTasks();
     $scope.updateTask = function(task){
       Task.updateTask(task);
@@ -40,5 +40,5 @@ angular.module('JFS_Admin')
     $scope.showTask = function(task) {
      $scope.ExpandedView.show = true;
      Task.getTask(task.Task_ID);
- }
+ };
   });
