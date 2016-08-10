@@ -80,7 +80,7 @@
                   </uib-bar>
                 </uib-progress>
                 <button type="button" class="btn btn-info" ng-click="sendColor()" style="display:inline:block;position:relative;z-index:1">send Color Test</button>
-                <button type="button" class="btn btn-info" ng-click="TestModal()" style="display:inline:block;position:relative;z-index:1">Don't Click</button>
+                <button type="button" class="btn btn-info" ng-click="openSidebar('notes.html')" style="display:inline:block;position:relative;z-index:1">Don't Click</button>
 
               </div>
             </div>
@@ -127,7 +127,7 @@
     </div>
   </div>
 </div>
-<div class="right-panel">
-  <div ng-include="'views/Recruiting/sidepanels/FileExplorer.html'">
-  </div>
+<div class="right-panel" ng-show="User.visibility.recruitSidebar">
+  <div ng-include="'views/Recruiting/sidepanels/notes.html'">
+</div>
 </div>

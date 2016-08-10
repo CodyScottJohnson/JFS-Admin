@@ -9,7 +9,7 @@
  */
 angular.module('JFS_Admin')
   .factory('User', function ($q,$http,$cookies,$rootScope,$state,$filter) {
-    var currentUser = {data:{currentTextConversation:-1}};
+    var currentUser = {data:{currentTextConversation:-1,visibility:{}}};
     var loggedin;
     var Token;
     var UserInfo;

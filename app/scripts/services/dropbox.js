@@ -141,9 +141,11 @@ angular.module('JFS_Admin')
            return GET(urls.preview + path, params);
          }
        };
+
     Dropbox.getAuth = function() {
       return oauth.access_token;
-    }
+    };
+  
     Dropbox.PreviewFile = function(document) {
       var deferred = $q.defer();
 

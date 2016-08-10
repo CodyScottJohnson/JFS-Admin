@@ -37,5 +37,5 @@ angular.module('JFS_Admin')
    };
 
     // Public API here
-    return File
+    return File;
   });
