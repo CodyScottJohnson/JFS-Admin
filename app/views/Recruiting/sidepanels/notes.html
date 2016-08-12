@@ -1,6 +1,7 @@
 <div class="view notes">
   <div class="header">
-    Cody
+
+      <button type="button" class="close" aria-hidden="true" ng-click="User.visibility.recruitSidebar=false" style="font-size:30pt;vertical-align:middle">&times;</button>
   </div>
   <div class="body">
     <div ng-repeat="note in Recruit.currentRecruit.Info.Notes track by $index" class="panel panel-primary" style="z-index:30px; border-radius:10px; min-width:200px;width:100%; margin-top:5px; margin-bottom:0;border-color:black">
@@ -12,5 +13,14 @@
         <div style="float:right;display:block;height:100%"><img style="height:30px; border-radius:30px;top:-7px;position:relative;display:block" src="https://jfsapp.com/Images/ProfilePhotos/{{note.userPhoto}}"></div>
       </div>
     </div>
+  </div>
+  <div class="footer">
+    <form id="todo-form" ng-submit="addNoteTemp()">
+      <div class="form-group">
+        <label for="exampleInputPassword1">Note</label>
+        <textarea class="form-control" rows="3" ng-model="newNote.Text" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-default">Add Note</button>
+    </form>
   </div>
 </div>

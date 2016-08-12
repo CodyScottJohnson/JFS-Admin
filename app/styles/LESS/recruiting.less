@@ -74,17 +74,27 @@
   }
 }
 .notes {
-  padding-top: 50px;
+  padding-top: 70px;
   padding-bottom: 200px;
   display: block;
   position: absolute;
-  //background-color: green;
+  z-index:999;
   height: 100%;
   .header {
-    height: 50px;
+    height: 70px;
+    padding:10px;
     top: 0;
     width: 100%;
+
     position: absolute;
+    background-color: @color-secondary-2-0;
+  }
+  .footer{
+    height:200px;
+    position:absolute;
+    bottom:0;
+    width:100%;
+    padding:20px;
     background-color: @color-secondary-2-0;
   }
   .body {

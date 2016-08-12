@@ -1,0 +1,61 @@
+@keyframes slideInRight {
+  from {
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+  }
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+@-webkit-keyframes slideOutRight {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+.animateEnter(@animation,@duration){
+  &.ng-hide-remove {
+    -webkit-animation-name: @animation;
+    animation-name: @animation;
+    animation-duration: @duration;
+  };
+  &.ng-enter {
+    -webkit-animation-name: @animation;
+    animation-name: @animation;
+    animation-duration: @duration;
+  }
+}
+.animateLeave(@animation,@duration){
+  &.ng-hide-add{
+    -webkit-animation-name: @animation;
+    animation-name: @animation;
+    animation-duration: @duration;
+  };
+  &.ng-leave {
+    -webkit-animation-name: @animation;
+    animation-name: @animation;
+    animation-duration: @duration;
+  }
+}
