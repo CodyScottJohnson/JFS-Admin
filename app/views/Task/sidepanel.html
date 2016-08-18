@@ -87,9 +87,9 @@
         <div style="display:block;text-decoration:underline">Regarding:</div>
 
 
-        <img class="task_image_small" ng-src="https://jfsapp.com/Images/Recruits/{{Tasks.currentTask.ProfilePic||'blank.jpg'}}" />
+        <img ng-click="viewRecruit(Tasks.currentTask.INDV_ID)" class="task_image_small" ng-src="https://jfsapp.com/Images/Recruits/{{Tasks.currentTask.ProfilePic||'blank.jpg'}}" />
 
-        <h5 style="display:inline-block;margin-right:10px">
+        <h5 ng-click="viewRecruit(Tasks.currentTask.INDV_ID)" style="display:inline-block;margin-right:10px">
             {{Tasks.currentTask.FNAME + ' ' +Tasks.currentTask.LNAME}}
           </h5>
       </div>

@@ -181,3 +181,20 @@ html,body{
   .animateLeave(slideOutRight,1s);
 
 }
+.fab{
+  border-radius: 100%;
+  background-color: @color-secondary-2-4;
+  position:absolute;
+  text-align:center;
+  vertical-align: middle;
+  padding:10px;
+  z-index:99;
+  bottom:10px;
+  right:10px;
+  .clickable;
+  .BoxShadowHelper(2);
+  .material-icons {
+    font-size: 40px;
+    color:white;
+  };
+}

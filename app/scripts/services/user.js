@@ -105,7 +105,7 @@ angular.module('JFS_Admin')
     };
     currentUser.sendText = function(Message, To) {
         var deferred = $q.defer();
-            var newMessage = {to:To,message:Message};
+            var newMessage = {to:To,text:Message};
             $http({
                 method: 'post',
                 url: 'https://jfsapp.com/Secure/API/Text/',

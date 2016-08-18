@@ -1,3 +1,6 @@
+<div class="fab hvr-float-shadow" ng-click="toolbar.vis=!toolbar.vis">
+    <i class="material-icons md-36">build</i>
+</div>
 <div class="toolbar" ng-show="toolbar.vis" ng-click="toolbar.vis=!toolbar.vis">
   <div class="icons" ng-show="toolbar.vis" ng-click="$event.stopPropagation()">
     <div class="center both scrollbar" style="height:100;max-width:100%;padding:0;white-space: nowrap;">
@@ -10,7 +13,7 @@
       <i class="material-icons md-36">folder</i>
       <span>Files</span>
     </div>
-    <div class="toolButton hvr-underline-reveal" ng-click="openSidebar('FileExplorer.html')">
+    <div class="toolButton hvr-underline-reveal" ng-click="openSidebar('conversation.html')">
       <i class="material-icons md-36">chat</i>
       <span>Texts</span>
     </div>
@@ -19,7 +22,7 @@
       <i class="material-icons md-36">mail</i>
       <span>Email</span>
     </div>
-    <div class="toolButton hvr-underline-reveal" ng-click="openSidebar('FileExplorer.html')">
+    <div class="toolButton hvr-underline-reveal" ng-click="openSidebar('progress.html')">
       <i class="material-icons md-36">assessment</i>
       <span>Progress</span>
     </div>
@@ -107,9 +110,6 @@
                   </uib-bar>
                 </uib-progress>
                 <button type="button" class="btn btn-info" ng-click="sendColor()" style="display:inline:block;position:relative;z-index:1">send Color Test</button>
-                <button type="button" class="btn btn-info" ng-click="openSidebar('notes.html')" style="display:inline:block;position:relative;z-index:1">Don't Click</button>
-                  <button type="button" class="btn btn-info" ng-click="toolbar.vis=!toolbar.vis" style="display:inline:block;position:relative;z-index:1">toolbar</button>
-
               </div>
             </div>
           </div>
@@ -156,6 +156,6 @@
   </div>
 </div>
 <div class="right-panel" ng-show="User.visibility.recruitSidebar">
-  <div ng-include="User.visibility.recruitSidebarType">
+  <div ng-include="User.visibility.recruitSidebarType" style="height:100%;width:100%">
   </div>
 </div>

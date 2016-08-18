@@ -20,7 +20,7 @@
       <th>State</th>
     </tr>
     <tr context-menu="recruitListOptions" ng-repeat="recruit in Recruits.List">
-      <td class="profile"><img ng-hide="true" ng-src="{{'https://jfsapp.com'+agent.profilepic}}" />
+      <td class="profile" ng-click="viewRecruit(recruit.INDV_ID)"><img ng-hide="true" ng-src="{{'https://jfsapp.com'+agent.profilepic}}" />
         <div class="info">
           <span><h3>{{recruit.FNAME + ' ' + recruit.LNAME}}</h3></span></div>
       </td>

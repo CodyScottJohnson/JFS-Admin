@@ -22,10 +22,24 @@ angular.module('JFS_Admin')
       }).then(function(data) {
           //console.log(data.data);
           currentRecruit.data.currentRecruit = data.data;
+          currentRecruit.getConversationHistory();
       }, function(error) {
           console.log(error);
       });
     };
+    currentRecruit.getConversationHistory =function(){
+      $http({
+        method: 'GET',
+        url: 'https://jfsapp.com/Secure/API/Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/sms/',
+        params: {
+            access_token:  $rootScope.currentUser.Token.access_token,
+            client_id: 'testclient',
+            client_secret: 'testpass'
+        },
+      }).then(function(data) {
+        currentRecruit.data.currentRecruit.texts =data.data;
+      }, function(error) {});
+    }
     currentRecruit.save = function(){
       $http({
           method: 'PATCH',
