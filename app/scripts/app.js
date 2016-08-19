@@ -13,6 +13,7 @@ angular
     'angular.filter',
     'angularFileUpload',
     'angularMoment',
+    'angular-sortable-view',
     'chart.js',
     'FBAngular',
     'luegg.directives',

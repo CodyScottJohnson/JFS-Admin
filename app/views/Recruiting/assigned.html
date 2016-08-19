@@ -37,7 +37,7 @@ letter-spacing: 0px;
 		<div style="height:100%;display:inline-block">
 		<i ng-click="removeFlag(task)" ng-show="task.Status!='Check'" class="icon ion-ios-circle-outline clickable" style="margin-left:10px;font-size:29px; display:inline-block"></i><i style="margin-left:10px;font-size:29px;color:rgba(177,217,120,1)" ng-show="task.Status =='Check'" class="icon ion-ios-checkmark"></i>
 		</div>
-			<span style="margin-left:10px;width:230px; position:relative;margin-top:5px;display:inline-block;vertical-align:middle">{{task.Title}}</span>
+			<span ng-click="ViewTask(task.Task_ID)" class="clickable" style="margin-left:10px;width:230px; position:relative;margin-top:5px;display:inline-block;vertical-align:middle">{{task.Title}}</span>
 		</div>
   <div ng-click="value[0].showProgress=!value[0].showProgress" style="width:100%;padding:10px;border-bottom:2px solid rgba(29,29,38,.05);text-align:center;background-color:rgba(168,195,212,.1)">
 		<div style="float:right;border-radius:100%;background-color:#AE5962;color:white;height:20px;width:20px" class="shadow-1"><i class="fa fa-plus"></i></div> Current Progress
