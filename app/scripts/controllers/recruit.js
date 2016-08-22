@@ -9,7 +9,7 @@
  */
 function ecopy(e) {
   var t = document.body.appendChild(document.createElement("textarea"));
-  t.style.position = "absolute", t.style.left = "-9999px", t.setAttribute("readonly", ""), t.value = e, t.select();
+  t.style.position = "absolute"; t.style.left = "-9999px"; t.setAttribute("readonly", ""); t.value = e; t.select();
   try {
     return document.execCommand("copy");
   } catch (o) {
@@ -79,7 +79,7 @@ angular.module('JFS_Admin')
     };
     $scope.popFollowUp = function(){
       Functions.OpenModal('views/Modals/EmailComposer.html', 'lg');
-    }
+    };
     $scope.openSidebar = function(type) {
       User.data.visibility.recruitSidebar = true;
       $scope.toolbar.vis = false;

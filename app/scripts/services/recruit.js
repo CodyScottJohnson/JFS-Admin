@@ -43,7 +43,7 @@ angular.module('JFS_Admin')
       }).then(function(data) {
         currentRecruit.data.currentRecruit.texts = data.data;
       }, function(error) {});
-    }
+    };
     currentRecruit.save = function() {
       $http({
         method: 'PATCH',
@@ -60,7 +60,7 @@ angular.module('JFS_Admin')
       }, function(error) {
         console.log(error);
       });
-    }
+    };
     currentRecruit.popSent = function() {
       if (!angular.isDefined(currentRecruit.data.currentRecruit.Info.PopStatus)) {
         currentRecruit.data.currentRecruit.Info.PopStatus = {
@@ -71,19 +71,19 @@ angular.module('JFS_Admin')
       currentRecruit.data.currentRecruit.Info.PopStatus.TotalSent++;
       currentRecruit.data.currentRecruit.Info.PopStatus.LastSent = moment.utc().format();
       currentRecruit.data.currentRecruit.POP_Status = 'Test Sent';
-      currentRecruit.save()
+      currentRecruit.save();
 
-    }
+    };
     currentRecruit.updateToDo = function() {
       var NextStep = $filter('filter')(currentRecruit.data.currentRecruit.Info.Task, {
         completed: 'false'
       })[0];
       console.log(NextStep);
-      var scheduled
+      var scheduled;
       if (angular.isUndefined(NextStep.scheduled)) {
-        scheduled = null
+        scheduled = null;
       } else {
-        scheduled = NextStep.scheduled
+        scheduled = NextStep.scheduled;
       }
       currentRecruit.data.currentRecruit.NextStep = NextStep.title;
       currentRecruit.data.currentRecruit.NextStepScheduled = scheduled;

@@ -86,7 +86,7 @@
 
 				</li>
 				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="notification.isopen" auto-close="outsideClick">
-					<a uib-dropdown-toggle><i class="fa fa-bell"></i><span class="badge shake">{{(Task.currentUsersTasks|filter:{'Status':'new'}).length}}</span></a>
+					<a uib-dropdown-toggle><i class="fa fa-bell"></i><span ng-hide="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0" class="badge shake">{{(Task.currentUsersTasks|filter:{'Status':'new'}).length}}</span></a>
 					<ul class="dropdown-menu shadow-5" style="width:300px;overflow-x: hidden;">
 						<li class="dropdown-menu-header">
 							<strong>New Tasks</strong>
@@ -149,7 +149,7 @@
 					</ul>
 				</li>
 				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="usersetting.isopen" auto-close="outsideClick">
-					<a uib-dropdown-toggle ng-disabled="disabled"><img class="user-avatar" style="border-radius:20px;" ng-src="{{'https://jfsapp.com/Images/ProfilePhotos/' +currentUser.Info.display_photo}}" alt="user-mail">Cody</a>
+					<a uib-dropdown-toggle ng-disabled="disabled"><img class="user-avatar" style="border-radius:20px;" ng-src="{{'https://jfsapp.com/Images/ProfilePhotos/' +currentUser.Info.display_photo}}" alt="user-mail">{{currentUser.Info.display_name}}</a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-menu-header">
 							<strong>Account</strong>
@@ -218,9 +218,8 @@
 						</ul>
 						<li><a href="" ng-model="collapsed5" ng-click="collapsed5=!collapsed5"><i class="fa fa-sitemap"></i><span class="text"> Recruiting</span><span class="fa fa-angle-down pull-right"></span></a></li>
 						<ul class="subMenu" ng-show="collapsed5">
-							<li><a href="#ToDoList"><i class="fa fa-align-left"></i><span class="text"> To Do List</span></a></li>
-							<li><a href="#MyRecruits"><i class="fa fa-child"></i><span class="text"> Assigned To Me</span></a></li>
-							<li><a href="#RecruitingList"><i style="color:#8DCC62" class="fa fa-users"></i><span class="text"> Recruits</span></a></li>
+							<li><a ui-sref="app.Recruiting.Recruit"><i class="fa fa-align-left"></i><span class="text"> To Do List</span></a></li>
+							<li><a ui-sref="app.Recruiting.Assigned"><i class="fa fa-child"></i><span class="text"> Assigned To Me</span></a></li>
 							<li><a ui-sref="app.Reporting.Dashboard"><i  class="fa fa-bar-chart"></i><span class="text"> Reports</span></a></li>
 							<li><a ui-sref="app.Recruiting.Dashboard"><i style="color:#FAC559" class="fa fa-users"></i><span class="text"> Recruiting Pool</span><span ng-model="collapsed6" ng-click="collapsed6=!collapsed6;$event.stopPropagation()" class="fa fa-angle-down pull-right"></span></a></li>
 							<ul class="subMenu" ng-show="collapsed6">

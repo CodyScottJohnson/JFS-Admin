@@ -1,7 +1,7 @@
 <div class="dashboard">
   <table>
     <tr class="title">
-      <td colspan="12">
+      <td colspan="13">
         Recruits
       </td>
     </tr>
@@ -18,23 +18,66 @@
       <th>City</th>
       <th>Zip</th>
       <th>State</th>
+      <th></th>
     </tr>
     <tr context-menu="recruitListOptions" ng-repeat="recruit in Recruits.List">
-      <td class="profile"><img ng-hide="true" ng-src="{{'https://jfsapp.com'+agent.profilepic}}" />
-        <div class="info">
-          <span><h3>{{recruit.FNAME + ' ' + recruit.LNAME}}</h3></span></div>
+      <td class="profile" >
+        <div ng-click="viewRecruit(recruit.INDV_ID)" class="img_container clickable" style="width:80px;height:80px;overflow:hidden;position:absolute;display:inline-block;background-color:#EBF4F3">
+        <img ng-src="https://jfsapp.com/Images/Recruits/{{recruit.ProfilePic || 'blank.jpg'}}" style="heigth:100%;box-shadow:none">
+        </div>
+
+        <div ng-dblclick="rowform.$show()" class="info" style="display:inline-block">
+          <span><h3 class="expand" style="font-size:20px"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.FNAME" e-name="FNAME" e-form="rowform">{{recruit.FNAME}}</span> <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.LNAME" e-name="LNAME" e-form="rowform">{{recruit.LNAME}}</span></h3></span>
+        </div>
       </td>
-      <td>{{recruit.POP}}</td>
-      <td>{{recruit.fa}}</td>
-      <td>{{recruit.NextStep}}</td>
-      <td>{{recruit.EMAIL}}</td>
-      <td>{{recruit.Type}}</td>
-      <td>{{recruit.Source}}</td>
-      <td>{{recruit.BUS+PH_NBR}}</td>
-      <td>{{recruit.LINE_ONE_ADDR}}</td>
-      <td>{{recruit.CITY_NAME}}</td>
-      <td>{{recruit.PSTL_CD}}</td>
-      <td>{{recruit.ST_CD}}</td>
+      <td ng-dblclick="rowform.$show()">
+        <span  e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.POP" e-name="POP" e-form="rowform">{{recruit.POP}}</span>
+      </td>
+      <td ng-dblclick="rowform.$show()">
+        <span  e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.POP" e-name="POP" e-form="rowform">{{recruit.fa}}</span>
+      </td>
+      <td class="expand" ng-dblclick="rowform.$show()">
+        <span  e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.NextStep" e-name="NextStep" e-form="rowform">{{recruit.NextStep}}</span>
+      </td>
+      <td class="expand" ng-dblclick="rowform.$show()">
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.EMAIL" e-name="EMAIL" e-form="rowform">{{recruit.EMAIL}}</span>
+      </td>
+      <td class="expand" ng-dblclick="rowform.$show()">
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.Type" e-name="Type" e-form="rowform">{{recruit.Type}}</span>
+      </td>
+      <td class="expand" ng-dblclick="rowform.$show()">
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.Source" e-name="Source" e-form="rowform">{{recruit.Source}}</span>
+      </td>
+      <td class="expand" ng-dblclick="rowform.$show()">
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.BUS_PH_NBR" e-name="BUS_PH_NBR" e-form="rowform">{{recruit.BUS_PH_NBR}}</span>
+      </td>
+      <td class="expand" ng-dblclick="rowform.$show()">
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.LINE_ONE_ADDR" e-name="LINE_ONE_ADDR" e-form="rowform">{{recruit.LINE_ONE_ADDR}}</span>
+      </td>
+      <td class="expand" ng-dblclick="rowform.$show()">
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.CITY_NAME" e-name="CITY_NAME" e-form="rowform">{{recruit.CITY_NAME}}</span>
+      </td>
+      <td class="expand" ng-dblclick="rowform.$show()">
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.PSTL_CD" e-name="PSTL_CD" e-form="rowform">{{recruit.PSTL_CD}}</span>
+      </td>
+      <td class="expand" ng-dblclick="rowform.$show()">
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.ST_CD" e-name="ST_CD" e-form="rowform">{{recruit.ST_CD}}</span>
+      </td>
+      <td style="white-space: nowrap;vertical-align:middle">
+					<!-- form -->
+					<form editable-form name="rowform" onbeforesave="saveRecruit($data, user.ID,user)" ng-show="rowform.$visible" class="form-buttons form-inline" >
+						<button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+            save
+          </button>
+						<button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+            cancel
+          </button>
+					</form>
+					<div class="buttons" ng-show="!rowform.$visible">
+						<button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+						<button class="btn btn-danger" ng-click="removeRecruit(user,user.ID)">del</button>
+					</div>
+				</td>
     </tr>
   </table>
 </div>
