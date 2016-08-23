@@ -21,8 +21,8 @@ angular.module('JFS_Admin')
         Recruits.data.List[index] = data.data;
         Recruits.updateRecruits();
         Functions.Toast('info',data.AlertTitle,data.AlertMessage);
-        if (recruit.data.info.INDV_ID == data.data.ID) {
-          recruit.setRecruit(data.data.ID);
+        if (angular.isDefined(recruit.data.currentRecruit) && recruit.data.currentRecruit.INDV_ID == data.data.INDV_ID) {
+          recruit.setRecruit(data.data.INDV_ID);
         }
       }
     };
@@ -45,6 +45,28 @@ angular.module('JFS_Admin')
         deferred.reject(error);
       });
       return deferred.promise;
+    };
+    Recruits.save = function(recruit) {
+      $http({
+        method: 'PATCH',
+        url: 'https://jfsapp.com/Secure/API/v2/Recruits/' + recruit.INDV_ID + '/',
+        params: {
+          'access_token': $rootScope.currentUser.Token.access_token,
+          client_id: 'testclient',
+          client_secret: 'testpass'
+        },
+        data: recruit
+      }).then(function(data) {
+        var message = {
+								type: 'recruit',
+                event: 'recruitupdated',
+                data: recruit,
+                AlertMessage: $rootScope.currentUser.Info.display_name + ' Edited ' + recruit.FNAME + ' ' + recruit.LNAME
+            };
+        Functions.SendSocket(angular.toJson(message));
+      }, function(error) {
+        console.log(error);
+      });
     };
     Recruits.updateRecruits();
 

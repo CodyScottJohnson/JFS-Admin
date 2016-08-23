@@ -65,7 +65,7 @@
       </td>
       <td style="white-space: nowrap;vertical-align:middle">
 					<!-- form -->
-					<form editable-form name="rowform" onbeforesave="saveRecruit($data, user.ID,user)" ng-show="rowform.$visible" class="form-buttons form-inline" >
+					<form editable-form name="rowform" onbeforesave="saveRecruit(recruit)" ng-show="rowform.$visible" class="form-buttons form-inline" >
 						<button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
             save
           </button>
@@ -75,7 +75,7 @@
 					</form>
 					<div class="buttons" ng-show="!rowform.$visible">
 						<button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
-						<button class="btn btn-danger" ng-click="removeRecruit(user,user.ID)">del</button>
+						<button class="btn btn-danger" ng-click="removeRecruit(recruit)">del</button>
 					</div>
 				</td>
     </tr>

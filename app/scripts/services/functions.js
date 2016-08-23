@@ -8,7 +8,7 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('Functions', function(toastr,$uibModal) {
+  .factory('Functions', function(toastr,$uibModal,$rootScope) {
     // Service logic
     // ...
     var Functions = {};
@@ -39,6 +39,9 @@ angular.module('JFS_Admin')
     };
     Functions.Toast = function(type,title,message){
       toastr.info(message);
+    };
+    Functions.SendSocket = function(data){
+        $rootScope.conn.send(data);
     };
     Functions.SQLDate = function(date){
       if (date === null || date===''){

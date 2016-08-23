@@ -184,7 +184,7 @@
 				<div class="sidebar-menu" style="margin-top:30px">
 					<ul class="nav nav-sidebar">
 						<li><a href="#Home"><i class="fa fa-laptop"></i><span class="text"> Dashboard</span></a></li>
-						<li><a href="" ng-model="collapsed1" ng-click="collapsed1=!collapsed1"><i class="fa fa-user"></i><span class="text">Cody Johnson</span><span class="fa fa-angle-down pull-right"></span></a></li>
+						<li><a href="" ng-model="collapsed1" ng-click="collapsed1=!collapsed1"><i class="fa fa-user"></i><span class="text">{{currentUser.Info.display_name}}</span><span class="fa fa-angle-down pull-right"></span></a></li>
 						<ul class="subMenu" ng-show="collapsed1">
 							<li><a ui-sref="app.Messages"><i class="fa fa-envelope"></i><span class="text">Message Center</span></a></li>
 							<li><a ui-sref="app.Tasks"><i class="fa fa-tasks" aria-hidden="true"></i><span class="text">Tasks</span></a></li>

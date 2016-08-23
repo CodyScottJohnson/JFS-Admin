@@ -14,6 +14,7 @@ angular.module('JFS_Admin')
     var Socket = {};
     $rootScope.conn.onmessage = function(event) {
       var temp = angular.fromJson(event.data);
+      console.log(temp);
       if (angular.isDefined(temp.browsernotification)) {
         Functions.browserNotify(temp.browsernotification.Title, temp.browsernotification.Body, temp.browsernotification.Icon);
       }

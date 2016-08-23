@@ -44,6 +44,11 @@ angular.module('JFS_Admin')
         Functions.OpenModal('views/Modals/FilePreview.html', 'lg', data);
       });
     };
+    $scope.getFile = function(file) {
+      Dropbox.getFile(file).then(function(data) {
+        console.log(data);
+      });
+    };
     $scope.uploadFile = function() {
       Functions.OpenModal('views/Modals/FileUpload.html', 'lg');
     };
