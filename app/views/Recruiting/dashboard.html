@@ -20,7 +20,7 @@
       <th>State</th>
       <th></th>
     </tr>
-    <tr context-menu="recruitListOptions" ng-repeat="recruit in Recruits.List.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+    <tr context-menu="recruitListOptions" ng-repeat="recruit in (Recruits.List|filter:{RecruitStatus_ID:1}).slice(((Recruits.currentPage-1)*itemsPerPage), ((Recruits.currentPage)*itemsPerPage))">
       <td class="profile" >
         <div ng-click="viewRecruit(recruit.INDV_ID)" class="img_container clickable" style="width:80px;height:80px;overflow:hidden;position:absolute;display:inline-block;background-color:#EBF4F3">
         <img ng-src="https://jfsapp.com/Images/Recruits/{{recruit.ProfilePic || 'blank.jpg'}}" style="heigth:100%;box-shadow:none">
@@ -81,4 +81,4 @@
     </tr>
   </table>
 </div>
- <ul style="margin-left:30px" uib-pagination total-items="Recruits.List.length" ng-model="currentPage" max-size="3" class="pagination-sm" boundary-link-numbers="true" rotate="true"></ul>
+ <ul style="margin-left:30px" uib-pagination total-items="Recruits.List.length" ng-model="Recruits.currentPage" max-size="3" class="pagination-sm" boundary-link-numbers="true" rotate="true"></ul>
