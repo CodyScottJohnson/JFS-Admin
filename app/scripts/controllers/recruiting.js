@@ -15,6 +15,8 @@ angular.module('JFS_Admin')
       task.Status = 'Completed';
       Task.updateTask(task);
     };
+    $scope.currentPage = 1;
+    $scope.itemsPerPage = 5;
     $scope.Recruits = Recruits.data;
     $scope.recruitListOptions = [
       ['email', function($itemScope) {
