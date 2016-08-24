@@ -46,6 +46,28 @@ angular.module('JFS_Admin')
       });
       return deferred.promise;
     };
+    Recruits.addRecruit = function() {
+      var deferred = $q.defer();
+      $http({
+        method: 'POST',
+        url: 'https://jfsapp.com/Secure/API/Recruits/',
+        params: {
+          'access_token': $rootScope.currentUser.Token.access_token,
+          client_id: 'testclient',
+          client_secret: 'testpass'
+        },
+        data:{}
+
+      }).then(function(data) {
+         Recruits.data.List.splice(0, 0, data.data);
+        //console.log(data.data);
+        //Recruits.data.List = data.data;
+        //deferred.resolve(data.data);
+      }, function(error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
     Recruits.save = function(recruit) {
       $http({
         method: 'PATCH',
