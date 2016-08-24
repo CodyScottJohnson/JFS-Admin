@@ -105,6 +105,18 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
       templateUrl: 'views/Recruiting/dashboard.html',
 
     })
+    .state('app.Recruiting.Archived', {
+            url: "/ArchivedRecruits",
+			 			params: {
+                search: {RecruitStatus_ID:2}
+            },
+            views: {
+                '': {
+                    templateUrl: 'views/Recruiting/ArchivedRecruits.html',
+                    controller: 'ArchivedRecruitsCtrl'
+                }
+            }
+        })
     .state('app.Recruiting.Assigned', {
       url: '/Recruiting/Assigned',
       templateUrl: 'views/Recruiting/assigned.html',
