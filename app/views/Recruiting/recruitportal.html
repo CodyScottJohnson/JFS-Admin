@@ -104,6 +104,11 @@
             <div class="row">
               <div class="col-md-12">
               <button type="button" class="btn btn-info" ng-click="getSocial(CurrentRecruitLiscence.Email)" style="display:inline:block;position:relative;z-index:1">get Social</button>
+                <button type="button" class="btn btn-info" ng-hide="isDefined(CurrentRecruitLiscence.POP_Status)" ng-click="sendPop()" style="display:inline:block;position:relative;z-index:1">send POP</button>
+                <uib-progress class="progress-striped active" style="margin-top:20px;height:35px; line-height:30px; width:100px;display:inline-block;position:relative;vertical-align:middle">
+                  <uib-bar value="100" type="warning"><span style="line-height:35px;font-weight:bolder" ng-hide="bar.value < 5">Waiting For Pop</span>
+                  </uib-bar>
+                </uib-progress>
                 <button type="button" class="btn btn-info" ng-click="sendColor()" style="display:inline:block;position:relative;z-index:1">send Color Test</button>
               </div>
             </div>

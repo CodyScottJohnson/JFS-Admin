@@ -74,11 +74,6 @@ angular.module('JFS_Admin')
       currentRecruit.save();
 
     };
-    currentRecruit.popRecieved = function() {
-      currentRecruit.data.currentRecruit.Info.PopStatus.TestCompleted = moment.utc().format();
-      currentRecruit.data.currentRecruit.POP_Status = 'Test Completed';
-      currentRecruit.save();
-    };
     currentRecruit.updateToDo = function() {
       var NextStep = $filter('filter')(currentRecruit.data.currentRecruit.Info.Task, {
         completed: 'false'

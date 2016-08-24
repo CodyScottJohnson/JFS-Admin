@@ -16,12 +16,9 @@ angular.module('JFS_Admin')
       Task.updateTask(task);
     };
 
-    $scope.itemsPerPage = 10;
+    $scope.itemsPerPage = 5;
     $scope.Recruits = Recruits.data;
     $scope.Recruits.currentPage = 1;
-    $scope.addRecruit =function(){
-      Recruits.addRecruit();
-    };
     $scope.recruitListOptions = [
       ['email', function($itemScope) {
           console.log($itemScope);

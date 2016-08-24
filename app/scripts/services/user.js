@@ -147,31 +147,10 @@ angular.module('JFS_Admin')
        }
        return deferred.promise;
     };
-    currentUser.getInfo = function(){
-      var deferred = $q.defer();
-      $http({
-          method: 'GET',
-          url: 'https://jfsapp.com/Secure/API/User/Info',
-          params: {
-              'access_token': $rootScope.currentUser.Token.access_token,
-              client_id: 'testclient',
-              client_secret: 'testpass'
-          },
-      }).then(function(data) {
-          deferred.resolve(data.data);
-          currentUser.data.Info = data.data;
-
-      }, function(error) {
-          deferred.reject(error);
-      });
-
-  return deferred.promise;
-};
     //currentUser.getColumns = function(){return ColumnsToShow}
     //Initialize
     currentUser.getTexts();
     currentUser.getUserList();
-    currentUser.getInfo();
     return currentUser;
 
 

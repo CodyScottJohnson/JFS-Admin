@@ -2,10 +2,8 @@
   <table>
     <tr class="title">
       <td colspan="13">
-        <button class="btn btn-info" ng-click="addRecruit();rowform[0].$show()">add</button>
         Recruits
       </td>
-
     </tr>
     <tr>
       <th></th>
@@ -83,4 +81,4 @@
     </tr>
   </table>
 </div>
- <ul style="margin-left:30px" uib-pagination total-items="(Recruits.List|filter:{RecruitStatus_ID:1}).length" items-per-page="itemsPerPage" ng-model="Recruits.currentPage" max-size="3" class="pagination-sm" boundary-link-numbers="true" rotate="true"></ul>
+ <ul style="margin-left:30px" uib-pagination total-items="Recruits.List.length" ng-model="Recruits.currentPage" max-size="3" class="pagination-sm" boundary-link-numbers="true" rotate="true"></ul>

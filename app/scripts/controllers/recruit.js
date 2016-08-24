@@ -85,9 +85,6 @@ angular.module('JFS_Admin')
     $scope.popFollowUp = function(){
       Functions.OpenModal('views/Modals/EmailComposer.html', 'lg');
     };
-    $scope.popRecieved = function(){
-      recruit.popRecieved();
-    };
     $scope.openSidebar = function(type) {
       User.data.visibility.recruitSidebar = true;
       $scope.toolbar.vis = false;
