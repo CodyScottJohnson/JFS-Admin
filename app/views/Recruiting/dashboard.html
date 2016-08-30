@@ -2,7 +2,11 @@
   <table>
     <tr class="title">
       <td colspan="13">
-        <button class="btn btn-info" ng-click="addRecruit();rowform[0].$show()">add</button>
+        <div class="btn-group pull-left" role="group" aria-label="...">
+          <button class="btn btn-info red hvr-float-shadow" ng-click="addRecruit();rowform[0].$show()"><i class="icon ion-person-add"></i></button>
+          <button class="btn btn-info red hvr-float-shadow" ng-click="addRecruit();rowform[0].$show()"><i class="icon ion-android-search"></i></button>
+          <button class="btn btn-info red hvr-float-shadow" ng-click="addRecruit();rowform[0].$show()"><i class="icon ion-loop"></i></button>
+        </div>
         Recruits
       </td>
 
@@ -23,23 +27,25 @@
       <th></th>
     </tr>
     <tr context-menu="recruitListOptions" ng-repeat="recruit in (Recruits.List|filter:{RecruitStatus_ID:1}).slice(((Recruits.currentPage-1)*itemsPerPage), ((Recruits.currentPage)*itemsPerPage))">
-      <td class="profile" >
+      <td class="profile">
         <div ng-click="viewRecruit(recruit.INDV_ID)" class="img_container clickable" style="width:80px;height:80px;overflow:hidden;position:absolute;display:inline-block;background-color:#EBF4F3">
-        <img ng-src="https://jfsapp.com/Images/Recruits/{{recruit.ProfilePic || 'blank.jpg'}}" style="heigth:100%;box-shadow:none">
+          <img ng-src="https://jfsapp.com/Images/Recruits/{{recruit.ProfilePic || 'blank.jpg'}}" style="heigth:100%;box-shadow:none">
         </div>
 
         <div ng-dblclick="rowform.$show()" class="info" style="display:inline-block">
-          <span><h3 class="expand" style="font-size:20px"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.FNAME" e-name="FNAME" e-form="rowform">{{recruit.FNAME}}</span> <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.LNAME" e-name="LNAME" e-form="rowform">{{recruit.LNAME}}</span></h3></span>
+          <span><h3 class="expand" style="font-size:20px"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.FNAME" e-name="FNAME" e-form="rowform">{{recruit.FNAME}}</span> <span e-style="width:30px;padding-left:10px;padding-right:10px"
+              editable-text="recruit.LNAME" e-name="LNAME" e-form="rowform">{{recruit.LNAME}}</span></h3>
+          </span>
         </div>
       </td>
       <td ng-dblclick="rowform.$show()">
-        <span  e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.POP" e-name="POP" e-form="rowform">{{recruit.POP}}</span>
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.POP" e-name="POP" e-form="rowform">{{recruit.POP}}</span>
       </td>
       <td ng-dblclick="rowform.$show()">
-        <span  e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.POP" e-name="POP" e-form="rowform">{{recruit.fa}}</span>
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.POP" e-name="POP" e-form="rowform">{{recruit.fa}}</span>
       </td>
       <td class="expand" ng-dblclick="rowform.$show()">
-        <span  e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.NextStep" e-name="NextStep" e-form="rowform">{{recruit.NextStep}}</span>
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.NextStep" e-name="NextStep" e-form="rowform">{{recruit.NextStep}}</span>
       </td>
       <td class="expand" ng-dblclick="rowform.$show()">
         <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.EMAIL" e-name="EMAIL" e-form="rowform">{{recruit.EMAIL}}</span>
@@ -66,21 +72,21 @@
         <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.ST_CD" e-name="ST_CD" e-form="rowform">{{recruit.ST_CD}}</span>
       </td>
       <td style="white-space: nowrap;vertical-align:middle">
-					<!-- form -->
-					<form editable-form name="rowform" onbeforesave="saveRecruit(recruit)" ng-show="rowform.$visible" class="form-buttons form-inline" >
-						<button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+        <!-- form -->
+        <form editable-form name="rowform" onbeforesave="saveRecruit(recruit)" ng-show="rowform.$visible" class="form-buttons form-inline">
+          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
             save
           </button>
-						<button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
             cancel
           </button>
-					</form>
-					<div class="buttons" ng-show="!rowform.$visible">
-						<button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
-						<button class="btn btn-danger" ng-click="removeRecruit(recruit)">del</button>
-					</div>
-				</td>
+        </form>
+        <div class="buttons" ng-show="!rowform.$visible">
+          <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+          <button class="btn btn-danger" ng-click="removeRecruit(recruit)">del</button>
+        </div>
+      </td>
     </tr>
   </table>
 </div>
- <ul style="margin-left:30px" uib-pagination total-items="(Recruits.List|filter:{RecruitStatus_ID:1}).length" items-per-page="itemsPerPage" ng-model="Recruits.currentPage" max-size="3" class="pagination-sm" boundary-link-numbers="true" rotate="true"></ul>
+<ul style="margin-left:30px" uib-pagination total-items="(Recruits.List|filter:{RecruitStatus_ID:1}).length" items-per-page="itemsPerPage" ng-model="Recruits.currentPage" max-size="3" class="pagination-sm" boundary-link-numbers="true" rotate="true"></ul>

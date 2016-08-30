@@ -91,3 +91,15 @@
     cursor: pointer;
   };
 }
+.red{
+  background-color: @color-secondary-2-4;
+  color:darken(@color-secondary-2-4,40%);
+  border-color:darken(@color-secondary-2-4,10%);
+  font-size:20pt;
+  .BoxShadowHelper(1);
+  &:hover{
+    background-color: @color-secondary-2-4;
+    color:darken(@color-secondary-2-4,40%);
+    border-color:darken(@color-secondary-2-4,10%);
+  }
+}
