@@ -90,6 +90,20 @@ angular.module('JFS_Admin')
         console.log(error);
       });
     };
+    Recruits.deleteRecruit = function(ID) {
+       var index =  _.findIndex(Recruits.data.List, function(o) { return o.INDV_ID == ID; });
+       $http({
+         method: 'DELETE',
+         url: 'https://jfsapp.com/Secure/API/v2/Recruits/' + ID + '/',
+         params: {
+           'access_token': $rootScope.currentUser.Token.access_token,
+           client_id: 'testclient',
+           client_secret: 'testpass'
+         }
+       }).then(function(data){
+         Recruits.data.List.splice(index,1);
+       });
+    };
     Recruits.updateRecruits();
 
     return Recruits;

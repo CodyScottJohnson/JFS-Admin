@@ -20,7 +20,7 @@
       <th>State</th>
       <th></th>
     </tr>
-    <tr context-menu="recruitListOptions" ng-repeat="recruit in (ArchivedRecruits).slice(((Recruits.currentPage-1)*itemsPerPage), ((Recruits.currentPage)*itemsPerPage))">
+    <tr context-menu="archivedRecruitOptions" ng-repeat="recruit in (ArchivedRecruits).slice(((Recruits.currentPage-1)*itemsPerPage), ((Recruits.currentPage)*itemsPerPage))">
       <td class="profile" >
         <div ng-click="viewRecruit(recruit.INDV_ID)" class="img_container clickable" style="width:80px;height:80px;overflow:hidden;position:absolute;display:inline-block;background-color:#EBF4F3">
         <img ng-src="https://jfsapp.com/Images/Recruits/{{recruit.ProfilePic || 'blank.jpg'}}" style="heigth:100%;box-shadow:none">
@@ -75,7 +75,7 @@
 					</form>
 					<div class="buttons" ng-show="!rowform.$visible">
 						<button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
-						<button class="btn btn-danger" ng-click="removeRecruit(recruit)">del</button>
+						<button class="btn btn-danger" ng-click="deleteRecruit(recruit)">del</button>
 					</div>
 				</td>
     </tr>

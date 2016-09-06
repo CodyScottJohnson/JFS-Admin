@@ -8,7 +8,7 @@
  * Controller of the JFS_Admin
  */
 angular.module('JFS_Admin')
-  .controller('ArchivedRecruitsCtrl', function($rootScope,$scope, $filter, $http, $state, $window, $stateParams) {
+  .controller('ArchivedRecruitsCtrl', function($rootScope,$scope, $filter, $http, $state, $window, $stateParams,Recruits) {
     $scope.search3 = $stateParams.search;
     $scope.ArchivedRecruits = [];
     $scope.archivedRecruitOptions = [
@@ -46,10 +46,11 @@ angular.module('JFS_Admin')
         ]
       ],
       ['Un-Archive', function($itemScope) {
-        $scope.UpdateRecruit($itemScope.user.INDV_ID, {
+        $scope.UpdateRecruit($itemScope.recruit.INDV_ID, {
           RecruitStatus_ID: 1
         });
-        $itemScope.user.RecruitStatus_ID = 1;
+        $itemScope.recruit.RecruitStatus_ID=1;
+        Recruits.updateRecruits();
       }],
       null, // Dividier
       ['Remove', function($itemScope) {
@@ -71,7 +72,19 @@ angular.module('JFS_Admin')
 
     };
     $scope.UpdateRecruit = function(id, recruit_data) {
-      
+      $http({
+                  method: 'PATCH',
+                  url:  'https://jfsapp.com/Secure/API/Recruits/'+id,
+                  data:recruit_data,
+                  params: {
+                      'access_token': $rootScope.currentUser.Token.access_token,
+                      client_id: 'testclient',
+                      client_secret: 'testpass'
+                  }
+              });
+    };
+    $scope.deleteRecruit = function(ID){
+      Recruits.deleteRecruit(ID);
     };
     $scope.GetArchivedRecruits($scope.search3.RecruitStatus_ID);
   });

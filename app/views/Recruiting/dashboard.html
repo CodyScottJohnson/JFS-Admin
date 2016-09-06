@@ -8,6 +8,10 @@
           <button class="btn btn-info red hvr-float-shadow" ng-click="addRecruit();rowform[0].$show()"><i class="icon ion-loop"></i></button>
         </div>
         Recruits
+        <div class="input-group pull-right">
+				<div class="input-group-addon" style="height:50px;"><i class="fa fa-search"></i></div>
+				<input type="text" class="form-control" placeholder="Search Prospects" ng-model="search" style="height:50px;width: 500px">
+			</div>
       </td>
 
     </tr>
@@ -83,7 +87,7 @@
         </form>
         <div class="buttons" ng-show="!rowform.$visible">
           <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
-          <button class="btn btn-danger" ng-click="removeRecruit(recruit)">del</button>
+          <button class="btn btn-danger" ng-click="deleteRecruit(recruit.INDV_ID)">del</button>
         </div>
       </td>
     </tr>

@@ -37,22 +37,16 @@ angular.module('JFS_Admin')
         },
         [
           ['Mailing List', function($itemScope) {
-            $scope.UpdateRecruit($itemScope.user.ID, {
-              RecruitStatus_ID: 2
-            });
-            $itemScope.user.RecruitStatus_ID = 2;
+            $itemScope.recruit.RecruitStatus_ID = '2';
+            Recruits.save($itemScope.recruit);
           }],
           ['Not Interested', function($itemScope) {
-            $scope.UpdateRecruit($itemScope.user.ID, {
-              RecruitStatus_ID: 4
-            });
-            $itemScope.user.RecruitStatus_ID = 4;
+            $itemScope.recruit.RecruitStatus_ID = '4';
+            Recruits.save($itemScope.recruit);
           }],
           ['No Response', function($itemScope) {
-            $scope.UpdateRecruit($itemScope.user.ID, {
-              RecruitStatus_ID: 5
-            });
-            $itemScope.user.RecruitStatus_ID = 5;
+            $itemScope.recruit.RecruitStatus_ID = '5';
+            Recruits.save($itemScope.recruit);
           }]
         ]
       ],
@@ -63,5 +57,8 @@ angular.module('JFS_Admin')
     ];
     $scope.saveRecruit = function(recruit){
       Recruits.save(recruit);
+    };
+    $scope.deleteRecruit = function(ID){
+      Recruits.deleteRecruit(ID);
     };
   });
