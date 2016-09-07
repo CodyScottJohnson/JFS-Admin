@@ -8,7 +8,7 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('recruit', function($rootScope, $http,$filter) {
+  .factory('recruit', function($rootScope, $http, $filter, UUID, Functions, User) {
     var currentRecruit = {
       data: {
         popInfo: {}
@@ -78,6 +78,62 @@ angular.module('JFS_Admin')
       currentRecruit.data.currentRecruit.Info.PopStatus.TestCompleted = moment.utc().format();
       currentRecruit.data.currentRecruit.POP_Status = 'Test Completed';
       currentRecruit.save();
+    };
+    currentRecruit.sendColor = function() {
+      console.log(_.omit(currentRecruit.data.currentRecruit,'Info'));
+      var testdata = {
+        Recruit_ID: currentRecruit.data.currentRecruit.INDV_ID,
+        Test_Token: UUID.newuuid(),
+        User_ID: $rootScope.currentUser.Info.id,
+        Date_Assigned: new Date()
+      };
+      var formData = {
+        to: {fname:currentRecruit.data.currentRecruit.FNAME,email:currentRecruit.data.currentRecruit.EMAIL},
+        from: $rootScope.currentUser.Info,
+        subject: 'Color Test',
+        Test_Token: testdata.Test_Token
+      };
+      var postData = 'datas=' + JSON.stringify(formData);
+      $http({
+        method: 'post',
+        url: 'https://jfsapp.com/Secure/API/assignColorQuiz/',
+        params: {
+          'access_token': $rootScope.currentUser.Token.access_token,
+          client_id: 'testclient',
+          client_secret: 'testpass'
+        },
+        data: testdata
+      }).then(function(data) {
+        $http({
+          method: 'post',
+          url: 'https://jfsapp.com/Secure/API/sendColorTestEmail/',
+          params: {
+            'access_token': $rootScope.currentUser.Token.access_token,
+            client_id: 'testclient',
+            client_secret: 'testpass'
+          },
+          data: formData
+        }).then(function(data) {
+          var message = currentRecruit.data.currentRecruit.FNAME + ",\n This is Scott Johnson it was great talking with you. I've emailed you the color test we talked about. If you don't see it please check your spam folder";
+          User.sendText(message, currentRecruit.data.currentRecruit.BUS_PH_NBR);
+          Functions.Toast('', '', 'Color Test Sent');
+          if (!angular.isDefined(currentRecruit.data.currentRecruit.Info.ColorStatus)) {
+            currentRecruit.data.currentRecruit.Info.ColorStatus = {
+              ColorTests: [],
+              TotalSent: 0
+            };
+          }
+          var newTest = {
+            DateSent:moment.utc().format(),
+            url:"https://www.JFSApp.com/ColorQuiz/dist/#/"+testdata.Test_Token
+          };
+          currentRecruit.data.currentRecruit.Info.ColorStatus.ColorTests.push(newTest);
+          currentRecruit.data.currentRecruit.Info.ColorStatus.TotalSent++;
+          currentRecruit.data.currentRecruit.Info.ColorStatus.LastSent = moment.utc().format();
+          currentRecruit.data.currentRecruit.Color_Status = 'Test Sent';
+          currentRecruit.save();
+        });
+      });
     };
     currentRecruit.updateToDo = function() {
       var NextStep = $filter('filter')(currentRecruit.data.currentRecruit.Info.Task, {

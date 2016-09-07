@@ -42,7 +42,7 @@ angular.module('JFS_Admin')
                   $scope.User.Info= data.data;
                   $scope.User.Token= Token;
                   $rootScope.currentUser =$scope.User;
-                  $cookies.putObject('user',$scope.User,{"expires":moment().add(1,'hours').format(),secure:false});
+                  $cookies.putObject('user',$scope.User,{"expires":moment().add(24,'hours').format(),secure:false});
                   $state.go(state);
             }, function(error) {
 

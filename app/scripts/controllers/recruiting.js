@@ -55,10 +55,20 @@ angular.module('JFS_Admin')
         $scope.items.splice($itemScope.$index, 1);
       }]
     ];
+    $scope.TableDefaults = {
+        type: ['Initial Contact', 'Liscencing', 'ACP', 'Contract'],
+        Source: ['Referal', 'PO', 'COI', 'ARS', 'ROD', 'Other']
+    };
+    $scope.advancedSearch ={'show':true};
     $scope.saveRecruit = function(recruit){
       Recruits.save(recruit);
     };
     $scope.deleteRecruit = function(ID){
       Recruits.deleteRecruit(ID);
+    };
+    $scope.reload = function() {
+      $scope.search =null;
+      $scope.search2 = null;
+      Recruits.updateRecruits();
     };
   });

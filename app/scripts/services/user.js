@@ -8,7 +8,7 @@
  * Factory in the jfsApp.
  */
 angular.module('JFS_Admin')
-  .factory('User', function ($q,$http,$cookies,$rootScope,$state,$filter) {
+  .factory('User', function ($q,$http,$cookies,$rootScope,$state,$filter,Functions) {
     var currentUser = {data:{currentTextConversation:-1,visibility:{}}};
     var loggedin;
     var Token;
@@ -105,24 +105,36 @@ angular.module('JFS_Admin')
     };
     currentUser.sendText = function(Message, To) {
         var deferred = $q.defer();
-            var newMessage = {to:To,text:Message};
-            $http({
-                method: 'post',
-                url: 'https://jfsapp.com/Secure/API/Text/',
-                params: {
-                    'access_token': $rootScope.currentUser.Token.access_token,
-                    client_id: 'testclient',
-                    client_secret: 'testpass'
+        var phone = To.replace(/\D/g, '');
+        if (phone.length >= 10 && phone.length <= 11) {
 
-                },
-                data: newMessage
-            }).then(function(data) {
-                //console.log(data.data);
-                currentUser.getTexts();
-                deferred.resolve(data.data);
-            }, function(error) {
-                deferred.reject(error);
-            });
+          if (phone.length == 10) {
+            phone = '1' + phone;
+          }
+          var newMessage = {to:phone,text:Message};
+          $http({
+              method: 'post',
+              url: 'https://jfsapp.com/Secure/API/Text/',
+              params: {
+                  'access_token': $rootScope.currentUser.Token.access_token,
+                  client_id: 'testclient',
+                  client_secret: 'testpass'
+
+              },
+              data: newMessage
+          }).then(function(data) {
+              //console.log(data.data);
+              currentUser.getTexts();
+              deferred.resolve(data.data);
+          }, function(error) {
+              deferred.reject(error);
+          });
+        }
+        else {
+          Functions.Toast('toast', 'toast', To + ' Is not a valid number');
+          deferred.reject('Invalid Number');
+        }
+
         return deferred.promise;
     };
     currentUser.getUserList = function(){
