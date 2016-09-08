@@ -155,5 +155,14 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
     .state('app.Reporting.PopTest', {
       url: "/Reporting/PopTest",
       templateUrl: 'views/Reporting/Pop_Test.html'
-    });
+    })
+    .state('app.Style', {
+            url: "/Style",
+            templateUrl: 'views/Style/index.html',
+            controller: 'StyleCtrl'
+        })
+    .state('app.Style.Guide', {
+                url: "/Style/Guide",
+                templateUrl: 'views/Style/guide.html'
+            });
 });
