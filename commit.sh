@@ -7,6 +7,7 @@ git add -u && \
 git commit -m "$desc" && \
 git push origin dev_branch
 elif [ "$action" = "pull" ]; then
+git reset --hard origin/dev_branch
 git pull origin dev_branch
 else
 echo invalid input
