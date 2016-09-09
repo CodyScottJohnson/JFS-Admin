@@ -12,7 +12,7 @@ angular.module('JFS_Admin')
     $scope.Functions = Functions;
     $scope.viewRecruit =function(ID){
       recruit.setRecruit(ID);
-      $state.go('app.Recruiting.Recruit');
+      $state.go('app.Recruiting.Recruit', {RecruitID:ID});
     };
     $scope.newestText = function(arr) {
       return $filter('min')

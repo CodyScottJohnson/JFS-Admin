@@ -10,7 +10,7 @@
 
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="messages.isopen" auto-close="outsideClick">
-					<a uib-dropdown-toggle><i class="fa fa-comments"></i><span class="badge shake">{{(UserData.TextMessages|filter:{'status':'0','type':0}).length}}</span></a>
+					<a uib-dropdown-toggle><i class="fa fa-comments"></i><span ng-hide="(UserData.TextMessages|filter:{'status':'0','type':0}).length<=0" class="badge shake">{{(UserData.TextMessages|filter:{'status':'0','type':0}).length}}</span></a>
 					<ul class="dropdown-menu shadow-5" style="width:300px;overflow-x: hidden;">
 						<li class="dropdown-menu-header">
 							<strong>Messages</strong>

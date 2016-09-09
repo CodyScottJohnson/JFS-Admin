@@ -19,7 +19,11 @@ function ecopy(e) {
   }
 }
 angular.module('JFS_Admin')
-  .controller('RecruitCtrl', function($scope, $rootScope, Task, Recruits, recruit, Dropbox, Functions, FileUploader, File, User, $sce) {
+  .controller('RecruitCtrl', function($scope, $rootScope, Task, Recruits, recruit, Dropbox, Functions, FileUploader, File, User, $sce,$location) {
+    if(angular.isDefined($location.search().RecruitID))
+    {
+      recruit.setRecruit($location.search().RecruitID);
+    }
     $scope.newTextMessage="";
     $scope.clipboard = function(string) {
       ecopy(string);
@@ -68,6 +72,14 @@ angular.module('JFS_Admin')
           Functions.OpenModal('views/Modals/popStatus.html', 'lg');
       }
     };
+    $scope.colorStatus = function(){
+      if($scope.Recruit.currentRecruit.Color_Status!=='Test Sent' && $scope.Recruit.currentRecruit.POP_Status!=='Test Completed'){
+        recruit.sendColor();
+      }
+      else{
+          Functions.OpenModal('views/Modals/colorStatus.html', 'lg');
+      }
+    };
     $scope.sendColor = function(){
       recruit.sendColor();
     };
@@ -90,6 +102,9 @@ angular.module('JFS_Admin')
     };
     $scope.popRecieved = function(){
       recruit.popRecieved();
+    };
+    $scope.colorRecieved = function(){
+      recruit.colorRecieved();
     };
     $scope.openSidebar = function(type) {
       User.data.visibility.recruitSidebar = true;

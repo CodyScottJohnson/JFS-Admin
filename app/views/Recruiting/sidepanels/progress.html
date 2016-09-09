@@ -81,7 +81,7 @@
           <div class="col-md-4 key_header">
             Color Test
           </div>
-          <div class="col-md-8 key_status" ng-class="{'danger':Recruit.currentRecruit.Color_Status=='Not Sent','warning':Recruit.currentRecruit.Color_Status=='Test Sent','success':Recruit.currentRecruit.Color_Status=='Test Completed'}">
+          <div class="col-md-8 key_status clickable" ng-click="colorStatus()" ng-class="{'danger':Recruit.currentRecruit.Color_Status=='Not Sent','warning':Recruit.currentRecruit.Color_Status=='Test Sent','success':Recruit.currentRecruit.Color_Status=='Test Completed'}">
             {{Recruit.currentRecruit.Color_Status}}
           </div>
       </div>

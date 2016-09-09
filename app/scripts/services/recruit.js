@@ -25,6 +25,52 @@ angular.module('JFS_Admin')
         },
       }).then(function(data) {
         //console.log(data.data);
+        if (data.data.Info === null) {
+            data.data.Info = {
+                Notes: [],
+                Documents: []
+            };
+        }
+        if (angular.isUndefined(data.data.Info.Task)) {
+            data.data.Info.Task = [{
+                'title': 'Initial Call',
+                'completed': false
+            }, {
+                'title': 'Send Pop Test',
+                'completed': false
+            }, {
+                'title': 'Waiting for Pop Test',
+                'completed': false
+            }, {
+                'title': 'First Interview',
+                'completed': false
+            }, {
+                'title': 'Give Color Test',
+                'completed': false
+            }, {
+                'title': 'Take Color Test',
+                'completed': false
+            }, {
+                'title': 'Second Interview',
+                'completed': false
+            }, {
+                'title': 'Review POP/Color Test',
+                'completed': false
+            }, {
+                'title': 'Complete 7120',
+                'completed': false
+            }, {
+                'title': 'Assign Job Sampling',
+                'completed': false
+            }, {
+                'title': 'Commitment Interview',
+                'completed': false
+            }, {
+                'title': 'Start ACP',
+                'completed': false
+            }];
+        }
+
         currentRecruit.data.currentRecruit = data.data;
         currentRecruit.getConversationHistory();
       }, function(error) {
@@ -79,6 +125,11 @@ angular.module('JFS_Admin')
       currentRecruit.data.currentRecruit.POP_Status = 'Test Completed';
       currentRecruit.save();
     };
+    currentRecruit.colorRecieved = function() {
+      currentRecruit.data.currentRecruit.Info.colorStatus.TestCompleted = moment.utc().format();
+      currentRecruit.data.currentRecruit.Color_Status = 'Test Completed';
+      currentRecruit.save();
+    };
     currentRecruit.sendColor = function() {
       console.log(_.omit(currentRecruit.data.currentRecruit,'Info'));
       var testdata = {
@@ -115,7 +166,7 @@ angular.module('JFS_Admin')
           data: formData
         }).then(function(data) {
           var message = currentRecruit.data.currentRecruit.FNAME + ",\n This is Scott Johnson it was great talking with you. I've emailed you the color test we talked about. If you don't see it please check your spam folder";
-          User.sendText(message, currentRecruit.data.currentRecruit.BUS_PH_NBR);
+          User.sendText(message, currentRecruit.data.currentRecruit.BUS_PH_NBR ||'');
           Functions.Toast('', '', 'Color Test Sent');
           if (!angular.isDefined(currentRecruit.data.currentRecruit.Info.ColorStatus)) {
             currentRecruit.data.currentRecruit.Info.ColorStatus = {

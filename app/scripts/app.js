@@ -123,7 +123,7 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
 
     })
     .state('app.Recruiting.Recruit', {
-      url: '/Recruiting/Recruit',
+      url: '/Recruiting/Recruit?RecruitID',
       templateUrl: 'views/Recruiting/recruitportal.html',
       controller: 'RecruitCtrl',
 
