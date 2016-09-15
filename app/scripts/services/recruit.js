@@ -126,7 +126,7 @@ angular.module('JFS_Admin')
       currentRecruit.save();
     };
     currentRecruit.colorRecieved = function() {
-      currentRecruit.data.currentRecruit.Info.colorStatus.TestCompleted = moment.utc().format();
+      currentRecruit.data.currentRecruit.Info.ColorStatus.TestCompleted = moment.utc().format();
       currentRecruit.data.currentRecruit.Color_Status = 'Test Completed';
       currentRecruit.save();
     };

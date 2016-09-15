@@ -8,10 +8,8 @@
  * Controller of the JFS_Admin
  */
 angular.module('JFS_Admin')
-  .controller('StyleCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('StyleCtrl', function ($scope) {
+    $scope.log=function(a){
+      console.log(a);
+    };
   });
