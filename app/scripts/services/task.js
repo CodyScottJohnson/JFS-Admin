@@ -90,6 +90,23 @@ angular.module('JFS_Admin')
         Task.getAllTasks(task.Task_ID);
       });
     };
+    Task.newTask = function(task) {
+      task.AssignedBy_ID = $rootScope.currentUser.Info.id;
+      $http({
+        method: 'POST',
+        url: 'https://jfsapp.com/Secure/API/Task/',
+        params: {
+          'access_token': $rootScope.currentUser.Token.access_token,
+          client_id: 'testclient',
+          client_secret: 'testpass'
+        },
+        data: task
+      }).then(function(data){
+        console.log(data);
+        Task.getTask(data.data.Task_ID);
+
+      });
+    };
     Task.init = function(){
       Task.getUsersTasks();
     };
