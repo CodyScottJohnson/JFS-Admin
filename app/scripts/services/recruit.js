@@ -8,7 +8,7 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('recruit', function($rootScope, $http, $filter, UUID, Functions, User) {
+  .factory('recruit', function($rootScope, $http, $filter, UUID, Functions, User,Task) {
     var currentRecruit = {
       data: {
         popInfo: {}
@@ -73,6 +73,7 @@ angular.module('JFS_Admin')
 
         currentRecruit.data.currentRecruit = data.data;
         currentRecruit.getConversationHistory();
+        currentRecruit.getTaskList();
       }, function(error) {
         console.log(error);
       });
@@ -200,6 +201,11 @@ angular.module('JFS_Admin')
       currentRecruit.data.currentRecruit.NextStep = NextStep.title;
       currentRecruit.data.currentRecruit.NextStepScheduled = scheduled;
       currentRecruit.save();
+    };
+    currentRecruit.getTaskList = function(){
+      Task.getRecruitTasks(currentRecruit.data.currentRecruit.INDV_ID).then(function(data){
+        currentRecruit.data.Task ={List:data};
+      });
     };
     return currentRecruit;
   });

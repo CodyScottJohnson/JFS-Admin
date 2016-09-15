@@ -61,11 +61,11 @@
     </section>
        <section style="display:block;margin-top:20px;padding-left:20px">
         <div class="row">
-          <div  class="col-md-6" style="height:50px;text-align:left;">
+          <div  class="col-md-6" style="min-height:50px;text-align:left;">
             <div style="display:block;text-decoration:underline" class="scrollbar">Assigned To:</div>
 
 
-            <img class="task_image_small" ng-src="https://jfsapp.com/Images/ProfilePhotos/{{Tasks.currentTask.Assigned_DisplayPhoto ||blank.jpg}}" />
+            <img class="task_image_small" ng-src="https://jfsapp.com/Images/ProfilePhotos/{{Tasks.currentTask.Assigned_DisplayPhoto ||'null.png'}}" />
 
             <h5 style="display:inline-block;margin-right:10px"  onaftersave="updateTask(Tasks.currentTask)" editable-select="Tasks.currentTask.User_ID" e-ng-options="s.id as s.display_name for s in User.userList">
                 {{Tasks.currentTask.Assigned_DisplayName|| 'No One'}}

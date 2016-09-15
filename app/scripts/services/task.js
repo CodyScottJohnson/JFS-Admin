@@ -52,6 +52,23 @@ angular.module('JFS_Admin')
             });
         return deferred.promise;
     };
+    Task.getRecruitTasks = function(RecruitID) {
+        var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: 'https://jfsapp.com/Secure/API/Task/Recruit/'+RecruitID+'/',
+                params: {
+                    'access_token': $rootScope.currentUser.Token.access_token,
+                    client_id: 'testclient',
+                    client_secret: 'testpass'
+                },
+            }).then(function(data) {
+                deferred.resolve(data.data);
+            }, function(error) {
+                deferred.reject(error);
+            });
+        return deferred.promise;
+    };
     Task.getTask = function(taskID){
       var deferred = $q.defer();
           $http({
@@ -91,7 +108,9 @@ angular.module('JFS_Admin')
       });
     };
     Task.newTask = function(task) {
+      var deferred = $q.defer();
       task.AssignedBy_ID = $rootScope.currentUser.Info.id;
+
       $http({
         method: 'POST',
         url: 'https://jfsapp.com/Secure/API/Task/',
@@ -102,10 +121,10 @@ angular.module('JFS_Admin')
         },
         data: task
       }).then(function(data){
-        console.log(data);
         Task.getTask(data.data.Task_ID);
-
+        deferred.resolve(data.data[0]);
       });
+      return deferred.promise;
     };
     Task.init = function(){
       Task.getUsersTasks();

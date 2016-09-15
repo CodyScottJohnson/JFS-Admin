@@ -1,0 +1,71 @@
+<div class="view tasks">
+  <div class="header" ng-init="progress_tab='Steps'">
+    <div class="inner_header">
+      <div class="row">
+        <div class="col-md-4">
+          <span><i class="material-icons md-36">format_list_bulleted</i></span>
+          <span>Tasks</span>
+        </div>
+        <div class="col-md-8">
+          <ul class="nav nav-tabs">
+            <li role="presentation" ng-class="{'active':progress_tab=='Steps'}"><a ng-click="progress_tab='Steps'">Tasks</a></li>
+            <li role="presentation" ng-class="{'active':progress_tab=='CompletedSteps'}"><a ng-click="progress_tab='CompletedSteps'">Completed Task</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="close" aria-hidden="true" ng-click="User.visibility.recruitSidebar=false" style="font-size:30pt;vertical-align:middle;position:absolute;right:5px;top:5px">&times;</button>
+  </div>
+  <div class="body">
+    <div ng-show="progress_tab=='Steps'" style="height:100%;width:100%">
+      <div class="todo_list">
+
+        <div ng-repeat="task in Recruit.Task.List|filter:{Status:'!'+'Completed'}" class="task" ng-click="ViewTask(task.Task_ID)">
+          <div style="height:50px;width:20px;margin:0;display:inline-block;position:absolute;border-bottom: 1px solid #E0E0E0" ng-style="task.Priority=='Low' &&{'background-color':'#EBEBEB'}||task.Priority=='Medium' &&{'background-color':'#FFE372'}||task.Priority=='High' &&{'background-color':'#FF7C72'}">
+
+          </div>
+          <div style="display:inline-block;padding:5px;padding-left:20px">
+            <div class="media">
+              <div class="media-left media-middle">
+                <i ng-click="removeFlag(task)" ng-show="task.Status!='Completed'" class="icon ion-android-checkbox-outline-blank clickable" style="margin-left:10px;font-size:29px; display:inline-block"></i><i style="margin-left:10px;font-size:29px;color:rgba(177,217,120,1)"
+                    ng-show="task.Status =='Completed'" class="icon ion-ios-checkmark"></i>
+              </div>
+              <div class="media-body" style="vertical-align:middle">
+                <h5 ng-click="showTask(task)" class="media-heading clickable">{{task.FNAME + ' '+ task.LNAME}} <span ng-hide="task.Due_Date==null" style="background-color:#FF7C72;padding:2px;border-radius:2px;font-weight:normal;font-size:8pt;color:white;margin-left:5px;margin-right:5px">deadline</span><time class="time" am-time-ago="task.Due_Date"></time></h5> {{task.Title}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div ng-show="progress_tab=='CompletedSteps'" style="height:100%;width:100%">
+      <div class="todo_list">
+        <div class="task_list fadeInUpBig" style="height:100%;width:100%">
+          <div ng-repeat="task in Recruit.Task.List|filter:{Status:'Completed'}" class="task" ng-click="ViewTask(task.Task_ID)">
+            <div style="height:50px;width:20px;margin:0;display:inline-block;position:absolute;border-bottom: 1px solid #E0E0E0" ng-style="task.Priority=='Low' &&{'background-color':'#EBEBEB'}||task.Priority=='Medium' &&{'background-color':'#FFE372'}||task.Priority=='High' &&{'background-color':'#FF7C72'}">
+
+            </div>
+            <div style="display:inline-block;padding:5px;padding-left:20px">
+              <div class="media">
+                <div class="media-left media-middle">
+                  <i ng-click="removeFlag(task)" ng-show="task.Status!='Completed'" class="icon ion-android-checkbox-outline-blank clickable" style="margin-left:10px;font-size:29px; display:inline-block"></i><i style="margin-left:10px;font-size:29px;color:rgba(177,217,120,1)"
+                      ng-show="task.Status =='Completed'" class="icon ion-ios-checkmark"></i>
+                </div>
+                <div class="media-body" style="vertical-align:middle">
+                  <h5 ng-click="showTask(task)" class="media-heading clickable">{{task.FNAME + ' '+ task.LNAME}} <span ng-hide="task.Due_Date==null" style="background-color:#FF7C72;padding:2px;border-radius:2px;font-weight:normal;font-size:8pt;color:white;margin-left:5px;margin-right:5px">deadline</span><time class="time" am-time-ago="task.Due_Date"></time></h5> {{task.Title}}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div ng-hide="progress_tab=='Overview'" style="width:100%;padding:10px;text-align:middle;position:absolute;width:100%;color:white;height:40px;bottom:0px">
+        <span ng-click="todo.status=false">Remaining  <span class="badge" style="background-color:red"> {{(Recruit.currentRecruit.Info.Task|filter:{'completed':false}).length}}</span> </span><span ng-click="todo.status=true">Completed  <span class="badge"  style="background-color:green"> {{(Recruit.currentRecruit.Info.Task|filter:{'completed':true}).length}}</span></span>
+      </div>
+    </div>
+  </div>

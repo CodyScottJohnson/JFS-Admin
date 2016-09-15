@@ -8,7 +8,7 @@
  * Controller of the jfsApp
  */
 angular.module('JFS_Admin')
-  .controller('RecruitingCtrl', function($scope, Recruits, Task) {
+  .controller('RecruitingCtrl', function($scope, Recruits, Task,Functions) {
     Task.getUsersTasks(true);
     $scope.Task = Task.data;
     $scope.removeFlag = function(task) {
@@ -23,7 +23,12 @@ angular.module('JFS_Admin')
       Recruits.addRecruit();
     };
     $scope.recruitListOptions = [
-      ['email', function($itemScope) {
+      ['New Task', function($itemScope){
+        //console.log($itemScope.recruit.INDV_ID);
+        Task.newTask({Recruit_ID:$itemScope.recruit.INDV_ID});
+        Functions.OpenModal('views/Modals/TaskModal.html', 'md');
+      }],
+      ['Email', function($itemScope) {
           console.log($itemScope);
         },
         [
@@ -50,6 +55,7 @@ angular.module('JFS_Admin')
           }]
         ]
       ],
+
       null, // Dividier
       ['Remove', function($itemScope) {
         $scope.items.splice($itemScope.$index, 1);
