@@ -80,10 +80,14 @@ angular.module('JFS_Admin')
                   client_secret: 'testpass'
               },
           }).then(function(data) {
-              //console.log(data.data);
+              console.log(data.data[0]);
               data.data[0].Due_Date = Functions.SQLDate(data.data[0].Due_Date);
               data.data[0].Created_Date = Functions.SQLDate(data.data[0].Created_Date);
               data.data[0].Reminder_Date = Functions.SQLDate(data.data[0].Reminder_Date);
+              if(!angular.isDefined(data.data[0].More_Detail)){
+                data.data[0].More_Detail = {Comments:[]};
+              }
+              console.log(data.data[0]);
               Task.data.currentTask = data.data[0];
               deferred.resolve(data.data[0]);
           }, function(error) {
