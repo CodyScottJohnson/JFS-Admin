@@ -1,0 +1,160 @@
+<div class="fab hvr-float-shadow" ng-click="toolbar.vis=!toolbar.vis">
+    <i class="material-icons md-36">build</i>
+</div>
+<div class="toolbar" ng-show="toolbar.vis" ng-click="toolbar.vis=!toolbar.vis">
+  <div class="icons" ng-show="toolbar.vis" ng-click="$event.stopPropagation()">
+    <div class="center both scrollbar" style="height:100;max-width:100%;padding:0;white-space: nowrap;">
+
+    <div class="toolButton hvr-underline-reveal" ng-click="openSidebar('notes.html')">
+      <i class="material-icons md-36">assignment</i>
+      <span>Notes</span>
+    </div>
+    <div class="toolButton hvr-underline-reveal" ng-click="openSidebar('FileExplorer.html')">
+      <i class="material-icons md-36">folder</i>
+      <span>Files</span>
+    </div>
+    <div class="toolButton hvr-underline-reveal" ng-click="openSidebar('conversation.html')">
+      <i class="material-icons md-36">chat</i>
+      <span>Texts</span>
+    </div>
+
+    <div class="toolButton hvr-underline-reveal" ng-click="openSidebar('email.html')">
+      <i class="material-icons md-36">mail</i>
+      <span>Email</span>
+    </div>
+    <div class="toolButton hvr-underline-reveal" ng-click="openSidebar('tasks.html')">
+      <i class="material-icons md-36">format_list_bulleted</i>
+      <span>Tasks</span>
+    </div>
+    <div class="toolButton hvr-underline-reveal" ng-click="openSidebar('progress.html')">
+      <i class="material-icons md-36">assessment</i>
+      <span>Progress</span>
+    </div>
+
+  </div>
+</div>
+
+</div>
+<div class="container-fluid view recruit">
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <span>{{Recruit.currentRecruit.FNAME}}</span> <span>{{Recruit.currentRecruit.LNAME}}</span>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-2" style="min-width:160px">
+            <div class="image_holder">
+              <img ng-click="newTask()" ng-src="https://jfsapp.com/Images/Recruits/{{Recruit.currentRecruit.ProfilePic || 'blank.jpg'}}" />
+            </div>
+            <div class="row" style="padding-top:20px">
+              <div class="col-md-6" style="text-align:center">
+                <div style="position:relative;display:inline-block;width:80px;height:80px">
+                  <div ng-show="colorTest.$visible" blur="submit">
+                    <span buttons="no" e-name="Color_Red" e-style="background-color:#F7464A;color:white;text-align:center" editable-text="Recruit.currentRecruit.Color_Red" e-form="colorTest">{{Recruit.currentRecruit.Color_Red}}</span>
+                    <span buttons="no" e-name="Color_Blue" e-style="background-color:#97BBCD;color:white;text-align:center" editable-text="Recruit.currentRecruit.Color_Blue" e-form="colorTest">{{Recruit.currentRecruit.Color_Blue}}</span>
+                    <span buttons="no" e-name="Color_Yellow" e-style="background-color:#FDB45C;color:white;text-align:center" editable-text="Recruit.currentRecruit.Color_Yellow" e-form="colorTest">{{Recruit.currentRecruit.Color_Yellow}}</span>
+                    <span buttons="no" e-name="Color_White" e-style="background-color:#DCDCDC;color:white;text-align:center" editable-text="Recruit.currentRecruit.Color_White" e-form="colorTest">{{Recruit.currentRecruit.Color_White}}</span>
+                    <form editable-form name="colorTest" blur="submit" onaftersave="updateRecruit()"></form>
+                  </div>
+                  <div style="width:80px;height:80px" ng-show="!colorTest.$visible" ng-dblclick="colorTest.$show()" tooltip-placement="bottom" uib-tooltip="Color Test">
+                    <canvas id="doughnut" class="chart chart-doughnut" chart-data="[Recruit.currentRecruit.Color_Blue,Recruit.currentRecruit.Color_White,Recruit.currentRecruit.Color_Red,Recruit.currentRecruit.Color_Yellow]" chart-legend="false" chart-colours="colors2" chart-labels="labels2"
+                        chart-options="options2" height="10px" width="10px">
+                    </canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6" style="text-align:center;padding-top:20px">
+                <div class="btn-group" style="margin-bottom:0px;padding:0px;position:relative;margin:0">
+                  <button type="button" class="btn btn-warning" style="line-height:25px;vertical-align:middles;height:38px;padding:5px">POP</button>
+                  <div class="well clickable" style="height:38px;padding-top:6px;padding-left:50px;min-width:50px" ng-dblclick="POP.$show()"> <span class="clickable" e-style="width:40px;" style="font-weight:bolder;text-decoration:none;color:black;border:none;max-width:30px" onaftersave="updateRecruit()" editable-text="Recruit.currentRecruit.POP" e-form="POP" ng-dblclick="POP.$show()">{{Recruit.currentRecruit.POP}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-10">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="btn-group" style="margin-bottom:0px;margin-top:0px;padding:0px;top:0px;bottom:0px;position:relative;display:block;padding:0">
+                  <button type="button" class="btn btn-default" style="border-radius:0;line-height:40px;vertical-align:middles;height:50px;min-width:40px;margin:0"><i class="fa fa-at"></i></button>
+                  <div ng-dblclick="email.$show()" class="well clickable" style="border-radius:0;height:50px;padding-top:0px;vertical-align:middle;line-height:50px;padding-left:50px;min-width:300px;margin:0;display:block"><span class="clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" onaftersave="updateRecruit()" editable-text="Recruit.currentRecruit.EMAIL" e-form="email" ng-dblclick="email.$show()">{{Recruit.currentRecruit.EMAIL}}</span>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-bottom:0px;margin-top:0px;padding:0px;top:0px;bottom:0px;position:relative;display:block">
+                  <button type="button" class="btn btn-default" style="border-radius:0;line-height:25px;vertical-align:middles;height:100%;min-width:40px;height:87px;margin:0"><i class="fa fa-map-marker"></i></button>
+                  <div class="well" style="border-radius:0;min-height:38px;padding-top:6px;padding-left:50px;min-width:300px;margin:0"><span style="font-weight:bolder">{{CurrentRecruitLiscence.Address1}}<br>{{CurrentRecruitLiscence.Address2}}<br>{{CurrentRecruitLiscence.City + ', ' +CurrentRecruitLiscence.State+' ' +CurrentRecruitLiscence.Zip}}</span>
+                  </div>
+                </div>
+
+                <div class="btn-group" style="margin-bottom:0px;margin-top:0px;padding:0px;bottom:0px;position:relative;display:block">
+                  <button type="button" class="btn btn-default" style="border-radius:0;line-height:40px;vertical-align:middles;height:50px;min-width:40px;margin:0;"><i class="fa fa-phone"></i></button>
+                  <div class="well clickable" style="border-radius:0;height:50px;padding-top:0px;vertical-align:middle;line-height:50px;padding-left:50px;min-width:300px;margin:0;display:block" ng-dblclick="phone.$show()"><span class="clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" onaftersave="updateRecruit()" editable-text="Recruit.currentRecruit.BUS_PH_NBR" e-form="phone" ng-dblclick="phone.$show()">{{Recruit.currentRecruit.BUS_PH_NBR}}</span>
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-bottom:0px;padding:0px;margin-top:0;bottom:0px;position:relative;display:block">
+                  <button type="button" class="btn btn-success" ng-click="showPopup(CurrentRecruitLiscence,'/Admin/ManagmentPortal/AngularApp/Modals/ScheduleMeeting.html')" style="border-radius:0;line-height:25px;vertical-align:middles;height:38px;min-width:40px;margin:0"><i class="fa fa-calendar"></i></button>
+                  <div class="well" style="border-radius:0;min-width:300px;height:38px;padding-top:6px;padding-left:50px;margin:0" ng-click="showPopup(CurrentRecruitLiscence,'/Admin/ManagmentPortal/AngularApp/Modals/ScheduleMeeting.html')">
+                    {{Recruit.currentRecruit.NextAppointment|sqldate:'EEEE, MMM d, h:mm a'}}
+                  </div>
+                </div>
+                <div class="btn-group" style="margin-bottom:0px;margin-top:px;padding:0px;bottom:0px;position:relative;display:block">
+                  <button type="button" class="btn btn-info" ng-click="isvis.todo={ 'yes': 'no', 'no':'yes'}[isvis.todo]" style="border-radius:0;line-height:25px;vertical-align:middles;height:50px;min-width:40px;margin:0"><i class="fa fa-check-square-o"></i></button>
+                  <div class="well" style="border-radius:0;min-width:300px;height:50px;padding-top:0px;line-height:50px;padding-left:50px;margin:0;vertical-align:middle" ng-dblclick="NextStep.$show()">
+                    <span class="clickable" onaftersave="updateRecruit()" style="text-decoration:none;color:black;border:none" editable-text="Recruit.currentRecruit.NextStep" e-form="NextStep" ng-dblclick="NextStep.$show()">{{Recruit.currentRecruit.NextStep}}  {{Recruit.currentRecruit.NextStepScheduled|cmdate:'MM-dd-yyyy'}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+              <button type="button" class="btn btn-info" ng-click="getSocial(CurrentRecruitLiscence.Email)" style="display:inline:block;position:relative;z-index:1">get Social</button>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Social Media
+      </div>
+      <div class="social-header shadow-2">
+        Profile Photos
+      </div>
+      <div style="white-space: nowrap!important;overflow-x:auto;overflow-y:hidden;width:100%;padding:10px">
+
+        <div ng-repeat="img in Recruit.currentRecruit.Info.ContactDetails.photos" style="white-space: nowrap;display:inline-block;position:relative;margin:10px">
+
+          <img class="shadow-4 clickable" ng-click="img.selected=true;SetPicture(img)" ng-src="{{img.url}}" style="height:200px;white-space: nowrap;display:inline-block;">
+          <div ng-show="img.selected" style="width:100%;height:170px;background-color:rgba(250,250,250,.8);position:absolute;display:block;top:0px;text-align:center"><i class="fa fa-check fa-5x" style="margin-top:50px;color:rgba(29,125,0,.5)"></i></div>
+          <span style="color:white;display:block;position:absolute;bottom:0px;width:100%;background-color:rgba(0,0,0,.5);text-align:center;height:30px;line-height:30px">
+					<i class="fa fa-{{img.type}}" style="opacity:.9"></i> {{img.type}}
+					</span>
+
+        </div>
+      </div>
+      <div class="social-header shadow-2">
+        Social Accounts
+      </div>
+      <div style="text-align:center">
+        <div class="panel panel-default" ng-repeat="social in Recruit.currentRecruit.Info.ContactDetails.socialProfiles" style="text-align:justify;display:inline-block;position:relative;width:30%;min-width:200px;margin:10px">
+          <div class="panel-heading" style="text-align:center;height:auto">
+            <a ng-href="{{social.url}}" target="_blank" style="color:black;text-decoration:none"><i class="fa fa-{{social.type}} fa-3x clickable" style="display:block"></i></a><span>{{social.type}}</span>
+          </div>
+          <div class="panel-body" style="height:200px;overflow:scroll">
+            <div ng-repeat="(key, value) in social" style="text-align:left">
+              <span style="font-weight:bold">{{key}}: </span> {{value}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="right-panel" ng-show="User.visibility.recruitSidebar">
+  <div ng-include="User.visibility.recruitSidebarType" style="height:100%;width:100%">
+  </div>
+</div>

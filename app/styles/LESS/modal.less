@@ -1,0 +1,84 @@
+
+.ProfileCard{
+  padding:0;
+  height:500px;
+  display:block;
+  border-radius:5px;
+  overflow: hidden;
+  .left-panel{
+    height:100%;
+    display:inline-block;
+    position: relative;
+    min-width:250px;
+    background-color:@gray;
+    margin:0;
+    padding:10px;
+    color:@gray-lighter;
+    text-align: center;
+    .name{
+      font-size: 20px;
+      font-weight: bolder;
+      position: relative;
+      margin-top:50px;
+    }
+    .card_btn{
+      width:50px;
+    }
+  }
+  .main-panel{
+    display:inline-block;
+    position:absolute;
+    margin:0;
+    height:100%;
+    width:650px;
+  }
+  img{
+    height:150px;
+    width:150px;
+    display:block;
+    position:relative;
+    border-radius:100%;
+    margin-top:20px;
+    margin-bottom: 10px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.draw_line(@length){
+  stroke-dasharray: @length;
+  stroke-dashoffset: @length;
+  animation-name: draw;
+  animation-duration: 5s;
+  animation-fill-mode: forwards; // Stay on the last frame
+  animation-iteration-count: 1; // Run only once
+  animation-timing-function: linear;
+}
+.ct-series-a .ct-line {/* Rectangle 269: */
+    stroke:url(#gradient)!important;
+    stroke-linecap:round;
+    stroke-width:5px;
+    stroke-dasharray: 1500px;
+    stroke-dashoffset: 1500px;
+    animation-name: draw;
+    animation-duration: 5s;
+    animation-fill-mode: forwards; // Stay on the last frame
+    animation-iteration-count: 1; // Run only once
+    animation-timing-function: linear;
+    //stroke-image:linear-gradient(-90deg, #70FABB 0%, #E1E85B 100%);
+}
+.ct-series-a .ct-area{
+  background-image: linear-gradient(-90deg, #70FABB 0%, #E1E85B 100%);
+  fill:#70FABB;
+  opacity:1;
+}
+.ct-series-b .ct-line {/* Rectangle 269: */
+    stroke:url(#gradient2)!important;
+    stroke-linecap:round;
+    stroke-width:5px;
+    .draw_line(1500px);
+}

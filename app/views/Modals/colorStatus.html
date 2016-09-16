@@ -1,0 +1,58 @@
+<div class="modal-header" ng-controller ='RecruitCtrl'>
+	Color Status - {{Recruit.currentRecruit.Color_Status}}
+	<button type="button" class="close" aria-hidden="true" ng-click="CloseModal()" style="font-size:20pt;vertical-align:middle">&times;</button>
+
+</div>
+<div class="modal-body scrollbar popstatus" style="padding:0" ng-controller ='RecruitCtrl'>
+	<div class="row">
+			<div class="col-md-4 key_header">
+				Number of Times Sent
+			</div>
+			<div class="col-md-8 key_status clickable" ng-click="popStatus()" >
+				{{Recruit.currentRecruit.Info.ColorStatus.TotalSent}}
+			</div>
+	</div>
+	<div class="row">
+			<div class="col-md-4 key_header">
+				Last Sent
+			</div>
+			<div class="col-md-8 key_status">
+				{{Recruit.currentRecruit.Info.ColorStatus.LastSent|date : 'MMM d yyyy @ h:mm a'}}
+			</div>
+	</div>
+	<div class="row">
+			<div class="col-md-4 key_header">
+				Date Completed
+			</div>
+			<div class="col-md-8 key_status">
+				{{Recruit.currentRecruit.Info.ColorStatus.TestCompleted|date : 'MMM d yyyy @ h:mm a'}}
+			</div>
+	</div>
+	<div class="row">
+			<div class="col-md-4 key_header">
+				Follow Up
+			</div>
+			<div class="col-md-8 key_status">
+				<button type="button" ng-click="popFollowUp()" class="btn btn-info"><i class="fa fa-envelope"></i></button>
+				<button type="button" ng-click="popFollowUp()" class="btn btn-info"><i class="fa fa-comments"></i></button>
+
+			</div>
+	</div>
+	<div class="row">
+			<div class="col-md-4 key_header">
+				Resend Color
+			</div>
+			<div class="col-md-8 key_status">
+				<button type="button" ng-click="sendColor()" class="btn btn-info">Send</button>
+			</div>
+	</div>
+	<div class="row">
+			<div class="col-md-4 key_header">
+				Color Recieved
+			</div>
+			<div class="col-md-8 key_status">
+				<button type="button" ng-click="colorRecieved();CloseModal()" class="btn btn-success" style="background-color:green"><i class="fa fa-check"></i></button>
+			</div>
+	</div>
+
+</div>

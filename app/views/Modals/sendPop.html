@@ -1,0 +1,41 @@
+<div class="modal-header">
+	Send Pop
+	<button type="button" class="close" aria-hidden="true" ng-click="CloseModal()" style="font-size:20pt;vertical-align:middle">&times;</button>
+
+</div>
+<div class="modal-body scrollbar" style="padding:0" ng-controller ='RecruitCtrl'>
+	<div style="display:inline-block;min-width:898px;">
+		<div style="width:600px;height:600px;position:relative;overflow:hidden;display:inline-block;margin:0">
+			<iframe ng-src="{{Recruit.popInfo.url}}"
+				height="800px" width="800px" style="top:0;position:absolute;background-color:white">
+			</iframe>
+		</div>
+		<div class="shadow-6" style="width:290px;height:600px;position:relative;overflow:hidden;display:inline-block;background-color:white;padding:10px">
+			<h6>
+				Login Credentials
+			</h6><br>
+			Username:<br>
+			Password:<br>
+			<div style="position:absolute;top:250px">
+			<button class="btn btn-info" ng-click="clipboard(Recruit.popInfo.subject)" style="margin-bottom:20px">
+				<i class="fa fa-clipboard" style="font-size:10px"></i>
+			</button>
+			<span style="margin-bottom:20px">
+			 click here to copy text for subject
+			</span><br>
+			<i class="fa fa-arrow-left" style="color:red;font-size:20px;margin-right:10px"></i>Paste here
+							</div>
+			<div style="position:absolute;top:350px">
+			<button class="btn btn-info" ng-click="clipboard(Recruit.popInfo.message)"  style="margin-bottom:20px">
+				<i class="fa fa-clipboard" style="font-size:10px"></i>
+			</button>
+			<span>
+			 click here to copy text for message
+			</span>
+				<i class="fa fa-arrow-left" style="color:red;font-size:20px;margin-right:10px"></i>Paste here
+			</div>
+				<button type="button" ng-click="popSent();CloseModal()" class="btn btn-info" style="display:inline:block;position:absolute;z-index:1;bottom:50px;margin-left:80px">POP Sent</button>
+		</div>
+
+	</div>
+</div>

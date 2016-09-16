@@ -1,0 +1,20 @@
+<div class="view messaging temp" >
+  <div class="chat" style="display:block;postion:relative;height:100%;width:100%;background-color:#5C96BF;">
+    <div class="shadow-1" style="height:70px;width:100%;background-color:#5C96BF;padding:20px;display:block;color:white;position:absolute">
+      Messages
+      </div>
+
+    <div style="height:100%;padding-top:70px;padding-bottom:190px;position:relative;display:block">
+      <div class="chatbody scrollbar" style="width:100%;height:100%;background-color:white;padding:10px;position:relative" scroll-glue>
+        <div class="chat-bubble" ng-class="{right: (text.type==0), left: (text.type==1)}" ng-repeat="text in Recruit.currentRecruit.texts">{{text.message}}</div>
+      </div>
+      <!-- end chat-message -->
+      <div class="chat-message clearfix">
+       <textarea ng-model="newTextMessage" placeholder ="Type your message" rows="3"></textarea>
+       <button class="btn" ng-click="sendText(newTextMessage); newTextMessage=''">Send</button>
+     </div> <!-- end chat-message -->
+    </div>
+  </div>
+  <button type="button" class="close clickable" aria-hidden="true" ng-click="User.visibility.recruitSidebar=false" style="font-size:30pt;vertical-align:middle;z-index:99;position:absolute;right:5px;top:5px">&times;</button>
+
+</div>

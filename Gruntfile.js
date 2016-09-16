@@ -22,7 +22,7 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: 'web'
   };
 
   // Define the configuration for all the tasks
@@ -39,7 +39,7 @@ module.exports = function (grunt) {
             },
             files: {
                 // target.css file: source.less file
-                'bower_components/bootstrap/dist/css/bootstrap.css': 'bower_components/bootstrap/less/bootstrap.less',
+                //'bower_components/bootstrap/dist/css/bootstrap.css': 'bower_components/bootstrap/less/bootstrap.less',
                 '<%= yeoman.app %>/styles/app.css':'<%= yeoman.app %>/styles/LESS/app.less'
             }
         }
@@ -59,11 +59,15 @@ module.exports = function (grunt) {
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
-        tasks: ['newer:jshint:test', 'newer:jscs:test', 'karma']
+        tasks: ['newer:jshint:test', 'newer:jscs:test']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css','<%= yeoman.app %>/styles/{,*/}*.less','bower_components/bootstrap/less/{,*/}*.less'],
-        tasks: ['newer:copy:styles', 'postcss','less']
+        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
+        tasks: ['newer:copy:styles', 'postcss']
+      },
+      less:{
+        files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+        tasks: ['less']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -236,7 +240,7 @@ module.exports = function (grunt) {
             }
           }
       }
-    }, 
+    },
 
     // Renames files for browser caching purposes
     filerev: {
@@ -354,12 +358,12 @@ module.exports = function (grunt) {
     ngtemplates: {
       dist: {
         options: {
-          module: 'jfsApp',
+          module: 'JFS_Admin',
           htmlmin: '<%= htmlmin.dist.options %>',
           usemin: 'scripts/scripts.js'
         },
         cwd: '<%= yeoman.app %>',
-        src: 'views/{,*/}*.html',
+        src: 'views/{,**/}*.html',
         dest: '.tmp/templateCache.js'
       }
     },
@@ -396,7 +400,7 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '{,*/}*.html','*.php','{,*/}*.json',
             'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*'
+            'styles/font/{,*/}*.*','views/{,**/}*'
           ]
         }, {
           expand: true,
@@ -411,6 +415,11 @@ module.exports = function (grunt) {
         },{
           expand: true,
           cwd: 'bower_components/Ionicons',
+          src: 'fonts/*',
+          dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true,
+          cwd: 'bower_components/font-awesome',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
         }]
@@ -474,8 +483,8 @@ module.exports = function (grunt) {
     'concurrent:test',
     'postcss',
     'connect:test',
-    'karma',
-    'less'
+    //'karma',
+    //'less'
   ]);
 
   grunt.registerTask('build', [
@@ -494,7 +503,7 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'less',
+    //'less',
     'htmlmin'
   ]);
 
