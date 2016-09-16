@@ -115,11 +115,12 @@
 
       <span><i class="fa fa-comments"></i> Comments</span>
       <hr>
-      <div ng-repeat="comment in comments">
+      <div scroll-glue class="comment_list">
+      <div ng-repeat="comment in Tasks.currentTask.More_Detail.Comments">
         <div class="row">
           <div class="col-md-3" style="width:60px">
 
-            <img class="task_image" ng-src="/Images/ProfilePhotos/{{comment.photo}}" />
+            <img class="task_image" ng-src="https://jfsapp.com/Images/ProfilePhotos/{{comment.photo}}" />
           </div>
           <div class="col-md-9">
             <h5 style="display:inline-block;margin-right:10px">
@@ -129,7 +130,7 @@
         </div>
         <hr>
       </div>
-
+</div>
       <div>
         <table style="width:100%">
           <tr>

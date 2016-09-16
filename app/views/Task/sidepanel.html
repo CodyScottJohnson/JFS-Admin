@@ -117,23 +117,23 @@
     <hr>
     <div class="comments">
 
-    <div ng-repeat="comment in comments" >
-      <div class="row">
-        <div class="col-md-3" style="width:60px">
+      <div scroll-glue class="comment_list">
+        <div ng-repeat="comment in Tasks.currentTask.More_Detail.Comments">
+          <div class="row">
+            <div class="col-md-3" style="width:60px">
 
-          <img class="task_image" ng-src="https://jfsapp.com/Images/ProfilePhotos/{{comment.photo}}" />
-        </div>
-        <div class="col-md-9">
-          <h5 style="display:inline-block;margin-right:10px">
+              <img class="task_image" ng-src="https://jfsapp.com/Images/ProfilePhotos/{{comment.photo}}" />
+            </div>
+            <div class="col-md-9">
+              <h5 style="display:inline-block;margin-right:10px">
             {{comment.User}}
-          </h5>
-          <time class="time" am-time-ago="comment.date"></time>
-          <br> {{comment.text}}
+          </h5><time class="time" am-time-ago="comment.date"></time> <br> {{comment.text}}
+            </div>
+          </div>
+          <hr>
         </div>
       </div>
-      <hr>
     </div>
-</div>
     <div>
       <table style="width:100%">
         <tr>

@@ -16,7 +16,6 @@ angular.module('JFS_Admin')
      };
     $scope.User = User.data;
     $scope.Tasks = Task.data;
-    $scope.comments=[];
     $scope.addComment = function(text) {
         var date = new Date();
         ////console.log(date);
@@ -27,8 +26,9 @@ angular.module('JFS_Admin')
             photo: $rootScope.currentUser.Info.display_photo,
             User: $rootScope.currentUser.Info.display_name
         };
-        $scope.comments.push(comment);
+        $scope.Tasks.currentTask.More_Detail.Comments.push(comment);
         $scope.text='';
+        Task.updateTask($scope.Tasks.currentTask);
     };
     Task.getAllTasks();
     $scope.updateTask = function(task){
