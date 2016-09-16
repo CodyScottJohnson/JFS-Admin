@@ -31,8 +31,8 @@ angular.module('JFS_Admin')
         Task.updateTask($scope.Tasks.currentTask);
     };
     Task.getAllTasks();
-    $scope.updateTask = function(task){
-      Task.updateTask(task);
+    $scope.updateTask = function(task,message){
+      Task.updateTask(task,message);
     };
     $scope.to_trusted = function(html_code) {
         return $sce.trustAsHtml(html_code);

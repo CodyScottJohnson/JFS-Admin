@@ -10,6 +10,17 @@
 angular.module('JFS_Admin')
   .factory('Task', function($rootScope,$http,$q,Functions) {
     var Task = {data:{}};
+    Task.Socket = function(data) {
+      if (data.event === 'taskupdated') {
+        if(data.for_id ==$rootScope.currentUser.Info.id){
+          Task.getUsersTasks();
+          Task.getTask(data.data.Task_ID);
+        }
+        Task.getAllTasks();
+
+
+      }
+    };
     Task.getUsersTasks = function(detail) {
         detail = typeof detail !== 'undefined' ? detail : false;
         var deferred = $q.defer();
@@ -84,7 +95,7 @@ angular.module('JFS_Admin')
               data.data[0].Due_Date = Functions.SQLDate(data.data[0].Due_Date);
               data.data[0].Created_Date = Functions.SQLDate(data.data[0].Created_Date);
               data.data[0].Reminder_Date = Functions.SQLDate(data.data[0].Reminder_Date);
-              if(!angular.isDefined(data.data[0].More_Detail)){
+              if(!angular.isDefined(data.data[0].More_Detail) || data.data[0].More_Detail===null){
                 data.data[0].More_Detail = {Comments:[]};
               }
               console.log(data.data[0]);
@@ -95,7 +106,7 @@ angular.module('JFS_Admin')
           });
       return deferred.promise;
     };
-    Task.updateTask = function(task) {
+    Task.updateTask = function(task,notify) {
       $http({
         method: 'PATCH',
         url: 'https://jfsapp.com/Secure/API/Task/',
@@ -106,6 +117,19 @@ angular.module('JFS_Admin')
         },
         data: task
       }).then(function(data){
+        var message = {
+								type: 'task',
+                event: 'taskupdated',
+                for_id: task.User_ID,
+                data: task,
+                          };
+        if(notify){
+        message.browsernotification={Title:$rootScope.currentUser.Info.display_name,
+                             Body:'has assigned a new task to you',
+                             Icon:'https://jfsapp.com/Images/ProfilePhotos/'+$rootScope.currentUser.Info.display_photo
+                           };
+        }
+        Functions.SendSocket(angular.toJson(message));
         Task.getUsersTasks();
         Task.getTask(task.Task_ID);
         Task.getAllTasks(task.Task_ID);
