@@ -12,6 +12,8 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  // Deploy Build to Server
+  grunt.loadNpmTasks('grunt-ssh-deploy');
   // Automatically load required Grunt tasks
   require('jit-grunt')(grunt, {
     useminPrepare: 'grunt-usemin',
@@ -27,7 +29,24 @@ module.exports = function (grunt) {
 
   // Define the configuration for all the tasks
   grunt.initConfig({
+    environments: {
+      options: {
+        local_path: 'web',
+      },
+      production: {
+          options: {
+              host: 'jfsapp.com',
+              username: 'cody',
+              password: 'skiutah4969',
+              deploy_path: '/srv/Builds/JFS_App/Production',
+              current_symlink: 'current',
+              //port: '<%= secret.production.port %>',
+              releases_to_keep: '3'
+              //release_subdir: 'myapp'
+          }
+      }
 
+  },
     // Project settings
     yeoman: appConfig,
     less: {
@@ -453,6 +472,9 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+    push: {
+
     }
   });
 
@@ -486,7 +508,6 @@ module.exports = function (grunt) {
     //'karma',
     //'less'
   ]);
-
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
