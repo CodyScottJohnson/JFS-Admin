@@ -75,7 +75,24 @@ angular.module('JFS_Admin')
       });
       return deferred.promise;
     };
+    Email.deletePerson = function(person) {
+      var deferred = $q.defer();
+      $http({
+        method: 'DELETE',
+        url: 'https://jfsapp.com/Secure/API/Email/Lists/People/'+person.EmailPeople_ID,
+        params: {
+          'access_token': $rootScope.currentUser.Token.access_token,
+          client_id: 'testclient',
+          client_secret: 'testpass',
 
+        }
+      }).then(function(data) {
+        deferred.resolve(data.data);
+      }, function(error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
     //Email.getMailingList();
     return Email;
   });

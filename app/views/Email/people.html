@@ -15,7 +15,7 @@
         </ul>
       </div>
       <div class="btn-group" role="group" aria-label="...">
-        <button class="btn btn-info red hvr-float-shadow" ng-click="addPerson([{FNAME:''}])"><i class="icon ion-person-add"></i></button>
+        <button class="btn btn-info red hvr-float-shadow" ng-click="addPerson({FNAME:''});  emailPeople.$show();"><i class="icon ion-person-add"></i></button>
         <button class="btn btn-info red hvr-float-shadow" ng-click="advancedSearch.Show=!advancedSearch.Show;rowform.$show()"><i class="icon ion-android-search"></i></button>
         <button class="btn btn-info red hvr-float-shadow" ng-click="reload()"><i class="icon ion-loop"></i></button>
       </div>
@@ -42,7 +42,7 @@
 
         </th>
       </tr>
-      <tr ng-repeat="contact in MailingListPeople">
+      <tr ng-repeat="contact in MailingListPeople track by contact.EmailPeople_ID">
         <td ng-dblclick="emailPeople.$show()" class="expand">
           <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="contact.FNAME" e-name="FNAME" e-form="emailPeople">{{contact.FNAME}}</span>
         </td>
@@ -70,7 +70,7 @@
           </form>
           <div class="buttons" ng-show="!emailPeople.$visible">
             <button class="btn btn-primary" ng-click="emailPeople.$show()">edit</button>
-            <button class="btn btn-danger" ng-click="deleteRecruit(recruit.INDV_ID)">del</button>
+            <button class="btn btn-danger" ng-click="deletePerson(contact)">del</button>
           </div>
         </td>
       </tr>
