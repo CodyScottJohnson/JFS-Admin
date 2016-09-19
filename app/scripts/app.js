@@ -106,17 +106,19 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
 
     })
     .state('app.Recruiting.Archived', {
-            url: "/ArchivedRecruits",
-			 			params: {
-                search: {RecruitStatus_ID:2}
-            },
-            views: {
-                '': {
-                    templateUrl: 'views/Recruiting/ArchivedRecruits.html',
-                    controller: 'ArchivedRecruitsCtrl'
-                }
-            }
-        })
+      url: "/ArchivedRecruits",
+      params: {
+        search: {
+          RecruitStatus_ID: 2
+        }
+      },
+      views: {
+        '': {
+          templateUrl: 'views/Recruiting/ArchivedRecruits.html',
+          controller: 'ArchivedRecruitsCtrl'
+        }
+      }
+    })
     .state('app.Recruiting.Assigned', {
       url: '/Recruiting/Assigned',
       templateUrl: 'views/Recruiting/assigned.html',
@@ -140,10 +142,10 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
 
     })
     .state('app.Reporting', {
-            url: "/Reporting",
-            templateUrl: 'views/Reporting/index.html',
-            controller: 'ReportCtrl'
-        })
+      url: "/Reporting",
+      templateUrl: 'views/Reporting/index.html',
+      controller: 'ReportCtrl'
+    })
     .state('app.Reporting.Dashboard', {
       url: "/Reporting/Dashboard",
       templateUrl: 'views/Reporting/Dashboard.html'
@@ -157,12 +159,21 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
       templateUrl: 'views/Reporting/Pop_Test.html'
     })
     .state('app.Style', {
-            url: "/Style",
-            templateUrl: 'views/Style/index.html',
-            controller: 'StyleCtrl'
-        })
+      url: "/Style",
+      templateUrl: 'views/Style/index.html',
+      controller: 'StyleCtrl'
+    })
     .state('app.Style.Guide', {
-                url: "/Style/Guide",
-                templateUrl: 'views/Style/guide.html'
-            });
+      url: "/Style/Guide",
+      templateUrl: 'views/Style/guide.html'
+    })
+    .state('app.Email', {
+      url: "/Email",
+      templateUrl: 'views/Email/index.html'
+    })
+    .state('app.Email.People', {
+      url: "/Email/Dashboard",
+      templateUrl: 'views/Email/people.html',
+      controller: 'EmailPeopleCtrl'
+    });
 });

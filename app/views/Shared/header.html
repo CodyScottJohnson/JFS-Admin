@@ -209,7 +209,12 @@
 							<li><a href="ui-elements.html"><i class="fa fa-list"></i><span class="text"> Presentations</span></a></li>
 							<li><a href="ui-elements.html"><i class="fa fa-file-text"></i><span class="text"> Marketing</span></a></li>
 						</ul>
-						<li><a href="/owncloud"><i class="fa fa-cloud"></i><span class="text">Drive</span></a></li>
+						<li><a href="" ng-model="collapsed31" ng-click="collapsed31=!collapsed31"><i class="fa fa-envelope"></i><span class="text"> Email</span> <span class="fa fa-angle-down pull-right"></span></a></li>
+						<ul class="subMenu" ng-show="collapsed31">
+							<li><a ui-sref="app.Email.Campaigns"><i class="fa fa-archive"></i><span class="text"> Campaigns</span></a></li>
+							<li><a ui-sref="app.Email.Lists"><i class="fa fa-list-alt"></i><span class="text"> Mailing Lists</span></a></li>
+							<li><a ui-sref="app.Email.People"><i class="fa fa-users"></i><span class="text"> People</span></a></li>
+						</ul>
 						<li><a href="" ng-model="collapsed4" ng-click="collapsed4=!collapsed4"><i class="fa fa-group"></i><span class="text"> Manage Agents</span> <span class="fa fa-angle-down pull-right"></span></a></li>
 						<ul class="subMenu" ng-show="collapsed4">
 							<li><a ui-sref="app.Agents.Dashboard"><i class="fa fa-align-left"></i><span class="text"> Agent List</span></a></li>

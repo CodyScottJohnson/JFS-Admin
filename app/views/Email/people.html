@@ -1,0 +1,80 @@
+<div class="container view" style="padding:10px">
+  <br />
+  <br />
+  <div class="panel" style="width:100%">
+    <div class="panel-heading heading_main">
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {{CurrentList}}
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li ng-repeat="list in MailingLists"><a ng-click="setList(list)">{{list.Name}}</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a ng-click="getPeople();CurrentList='All'">All</a></li>
+        </ul>
+      </div>
+      <div class="btn-group" role="group" aria-label="...">
+        <button class="btn btn-info red hvr-float-shadow" ng-click="addPerson([{FNAME:''}])"><i class="icon ion-person-add"></i></button>
+        <button class="btn btn-info red hvr-float-shadow" ng-click="advancedSearch.Show=!advancedSearch.Show;rowform.$show()"><i class="icon ion-android-search"></i></button>
+        <button class="btn btn-info red hvr-float-shadow" ng-click="reload()"><i class="icon ion-loop"></i></button>
+      </div>
+    </div>
+
+    <table style="width:100%;" class="table table-striped">
+      <tr>
+        <th>
+          First Name
+        </th>
+        <th>
+          Last Name
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Phone
+        </th>
+        <th>
+          Address
+        </th>
+        <th>
+
+        </th>
+      </tr>
+      <tr ng-repeat="contact in MailingListPeople">
+        <td ng-dblclick="emailPeople.$show()" class="expand">
+          <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="contact.FNAME" e-name="FNAME" e-form="emailPeople">{{contact.FNAME}}</span>
+        </td>
+        <td ng-dblclick="emailPeople.$show()" class="expand">
+          <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="contact.LNAME" e-name="LNAME" e-form="emailPeople">{{contact.LNAME}}</span>
+        </td>
+        <td ng-dblclick="emailPeople.$show()" class="expand">
+          <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="contact.Email" e-name="Email" e-form="emailPeople">{{contact.Email}}</span>
+        </td>
+        <td ng-dblclick="emailPeople.$show()" class="expand">
+          <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="contact.Phone" e-name="Phone" e-form="emailPeople">{{contact.Phone}}</span>
+        </td>
+        <td ng-dblclick="emailPeople.$show()" class="expand">
+          <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="contact.Address" e-name="Address" e-form="emailPeople">{{contact.Address}}</span>
+        </td ng-dblclick="emailPeople.$show()" class="expand">
+        <td style="white-space: nowrap;vertical-align:middle">
+          <!-- form -->
+          <form editable-form name="emailPeople" onbeforesave="saveRecruit(recruit)" ng-show="emailPeople.$visible" class="form-buttons form-inline">
+            <button type="submit" ng-disabled="emailPeople.$waiting" class="btn btn-primary">
+              save
+            </button>
+            <button type="button" ng-disabled="emailPeople.$waiting" ng-click="emailPeople.$cancel()" class="btn btn-default">
+              cancel
+            </button>
+          </form>
+          <div class="buttons" ng-show="!emailPeople.$visible">
+            <button class="btn btn-primary" ng-click="emailPeople.$show()">edit</button>
+            <button class="btn btn-danger" ng-click="deleteRecruit(recruit.INDV_ID)">del</button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</div>
