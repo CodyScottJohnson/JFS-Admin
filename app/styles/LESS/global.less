@@ -198,3 +198,51 @@ html,body{
     color:white;
   };
 }
+.default .tags {
+  background-color: #FFF;
+  border: 1px solid #ccc;
+  border-radius: 4px!important;
+  padding:5px!important;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.default .tags.focused {
+  border-color: darken(@color-primary-0,30%);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(37, 70, 93,0.6);
+}
+
+.default .tag-item {
+  background: @color-primary-0!important;
+  font-size: 15px!important;
+  height:30px!important;
+  line-height: 30px!important;
+  margin:5px!important;
+  font-family: 'Roboto', sans-serif;
+  border: 0px solid darken(@color-primary-0,30%)!important;
+  border-radius: 0px!important;
+  color: contrast(@color-primary-0);
+  .BoxShadowHelper(2);
+}
+
+.default .tag-item.selected {
+  background: #d9534f;
+  border: 1px solid #d43f3a;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.default .tag-item button {
+  background: transparent;
+  color: contrast(@color-primary-0);
+  opacity: .4;
+}
+
+.default.autocomplete {
+  border-radius: 4px;
+}
+
+.default .suggestion-item.selected {
+  color: contrast(@color-primary-4);
+  background-color: @color-primary-4!important;
+}

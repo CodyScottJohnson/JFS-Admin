@@ -42,7 +42,7 @@
 
         </th>
       </tr>
-      <tr ng-repeat="contact in MailingListPeople track by contact.EmailPeople_ID">
+      <tr context-menu="peopleOptions" ng-repeat="contact in MailingListPeople track by contact.EmailPeople_ID">
         <td ng-dblclick="emailPeople.$show()" class="expand">
           <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="contact.FNAME" e-name="FNAME" e-form="emailPeople">{{contact.FNAME}}</span>
         </td>
@@ -60,7 +60,7 @@
         </td ng-dblclick="emailPeople.$show()" class="expand">
         <td style="white-space: nowrap;vertical-align:middle">
           <!-- form -->
-          <form editable-form name="emailPeople" onbeforesave="saveRecruit(recruit)" ng-show="emailPeople.$visible" class="form-buttons form-inline">
+          <form editable-form name="emailPeople" onbeforesave="editPerson(contact)" ng-show="emailPeople.$visible" class="form-buttons form-inline">
             <button type="submit" ng-disabled="emailPeople.$waiting" class="btn btn-primary">
               save
             </button>

@@ -22,6 +22,7 @@ angular
     'ngFileSaver',
     'ngIdle',
     'ngSanitize',
+    'ngTagsInput',
     'summernote',
     'toastr',
     'ui.bootstrap',
