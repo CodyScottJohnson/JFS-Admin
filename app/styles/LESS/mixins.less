@@ -1,6 +1,11 @@
 .center {
   &.vertical {}
-  &.horizontal {}
+  &.horizontal {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+  }
   &.both {
     position: absolute;
     top: 50%;

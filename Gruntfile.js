@@ -85,7 +85,7 @@ module.exports = function (grunt) {
         tasks: ['newer:copy:styles', 'postcss']
       },
       less:{
-        files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+        files: ['<%= yeoman.app %>/styles/{,**/}*.less'],
         tasks: ['less']
       },
       gruntfile: {

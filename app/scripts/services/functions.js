@@ -51,8 +51,8 @@ angular.module('JFS_Admin')
         return new Date(date+'z');
       }
     };
-    Functions.OpenModal = function(modalname,size,data){
-      var modalInstance = $uibModal.open({
+    Functions.OpenModal = function(modalname,size,data,options){
+      var default_options = {
        animation: true,
        templateUrl: modalname,
        controller: 'ModalCtrl',
@@ -62,7 +62,9 @@ angular.module('JFS_Admin')
            return data;
          }
        }
-     });
+     };
+     default_options = _.assign(default_options,options);
+      var modalInstance = $uibModal.open(default_options);
      modalInstance.result.then(function (selectedItem) {
        //console.log(selectedItem);
      }, function () {
