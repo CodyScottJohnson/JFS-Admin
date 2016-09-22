@@ -3,35 +3,48 @@
     <b>Color Test</b>
   </div>
   <div class="panel-body">
-    <div class="row">
-      <h3><b>Cody Johnson</b> - Has Completed the Color Test</h3>
+    <div class="row" style="padding-left:20px">
+      <h3><b>{{notification.Data.Recruit.FNAME+' ' +notification.Data.Recruit.LNAME}}</b> - Has Completed the Color Test</h3>
     </div>
     <div class="row">
-      <div class="col-md-6" style="height:200px;display:block;position:relative;text-align:right">
+      <div class="col-md-12" style="height:200px;display:block;position:relative;text-align:right;text-align:center">
         <div style="width:180px;height:180px" class="center both" tooltip-placement="bottom" uib-tooltip="Color Test">
-          <canvas id="doughnut" class="chart chart-doughnut" chart-data="[5,5,5,5]" chart-legend="false" chart-colours="['#97BBCD', '#DCDCDC', '#F7464A', '#FDB45C']" chart-labels="['','','','']" chart-options="options2" height="10px" width="10px">
+          <canvas id="doughnut" class="chart chart-doughnut" chart-data="[notification.Data.Color_Result.Color_Blue,notification.Data.Color_Result.Color_White,notification.Data.Color_Result.Color_Red,notification.Data.Color_Result.Color_Yellow]" chart-legend="false" chart-colours="['#97BBCD', '#DCDCDC', '#F7464A', '#FDB45C']" chart-labels="['','','','']" chart-options="options2" height="10px" width="10px">
       </canvas>
         </div>
       </div>
-      <div class="col-md-2" style="height:200px;display:block;position:relative;text-align:left">
-        <div class="btn btn-primary">
-          Download
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12" style="text-align:center">
-      <div class="btn btn-success">
-        Resolve
-      </div>
-    </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12" style="text-align:center">
 
-      <div class="btn btn-warning">
-        Postpone
+    </div>
+    <div class="row">
+      <div class="col-md-12" style="text-align:center">
+        <div uib-dropdown  style="width:200px;margin-left:auto;margin-right:auto">
+          <div class="btn btn-success" uib-dropdown-toggle id="postpone">
+            Resolve
+          </div>
+          <ul class="dropdown-menu dropdown-menu-center" style="width:200px" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+          <li role="menuitem"><a ng-click="resetPassword(user.user_name)"><i class="fa fa-calendar"></i><span> Schedule Meeting</span></a></li>
+          <li class="divider"></li>
+          <li role="menuitem"><a href="#"><i class="fa fa-envelope"></i> Email</a></li>
+          <li class="divider"></li>
+          <li role="menuitem"><a href="#"><i class="fa fa-phone"></i> Call</a></li>
+          <li class="divider"></li>
+          <li role="menuitem"><a href="#"><i class="fa fa-user"></i> Re-Assign</a></li>
+        </ul>
       </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" style="text-align:center">
+      <div uib-dropdown  style="width:200px;margin-left:auto;margin-right:auto">
+        <div class="btn btn-warning" uib-dropdown-toggle id="postpone">
+          Postpone
+        </div>
+        <ul class="dropdown-menu dropdown-menu-center" style="width:200px" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <li ng-click="PostPone(notification)" role="menuitem"><a >For 1 Hour</a></li>
+        <li class="divider"></li>
+        <li role="menuitem"><a href="#">For 1 Day</a></li>
+      </ul>
+    </div>
     </div>
   </div>
   </div>
