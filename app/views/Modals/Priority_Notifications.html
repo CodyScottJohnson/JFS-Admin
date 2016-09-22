@@ -1,5 +1,5 @@
   <button type="button" class="close" aria-hidden="true" ng-click="CloseModal()" style="font-size:20pt;vertical-align:middle">&times;</button>
-<div style="width:100%">
+<div style="width:100%" ng-controller="PrioritynotificationsCtrl">
 
 
 <div class="panel left" style="position:absolute">
@@ -8,9 +8,9 @@
 <div class="panel right" style="position:absolute">
   Cody
 </div>
-<div class="panel center" style="position:absolute">
+<div ng-repeat="notification in Notifications.Priority|limitTo:3" class="panel center" style="position:absolute;top:{{$index*10}}px; left:{{(Notifications.Priority|limitTo:3).length-$index*10}}px">
   <div ng-include="'views/Modals/Notifications/Templates/Color_Test_Completed.html'">
-    
+
   </div>
 </div>
 </div>

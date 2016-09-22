@@ -8,10 +8,6 @@
  * Controller of the JFS_Admin
  */
 angular.module('JFS_Admin')
-  .controller('PrioritynotificationsCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('PrioritynotificationsCtrl', function ($scope,Notifications) {
+    $scope.Notifications = Notifications.data;
   });

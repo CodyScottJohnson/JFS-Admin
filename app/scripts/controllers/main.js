@@ -8,8 +8,7 @@
  * Controller of the jfsApp
  */
 angular.module('JFS_Admin')
-  .controller('MainCtrl', function($scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox) {
-    Functions.OpenModal('views/Modals/Priority_Notifications.html', 'md',null,{backdrop:'static',windowClass:'notification_modal'});
+  .controller('MainCtrl', function($scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications) {
     $scope.Functions = Functions;
     $scope.viewRecruit =function(ID){
       recruit.setRecruit(ID);
