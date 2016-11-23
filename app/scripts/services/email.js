@@ -166,6 +166,27 @@ angular.module('JFS_Admin')
       });
       return deferred.promise;
     };
+    Email.SendContactCard = function(email){
+      var deferred = $q.defer();
+      $http({
+        method: 'POST',
+        url: 'https://jfsapp.com/Secure/API/Email/Send/ContactCard',
+        params: {
+          'access_token': $rootScope.currentUser.Token.access_token,
+          client_id: 'testclient',
+          client_secret: 'testpass',
+
+        },
+        data:email
+      }).then(function(data) {
+        deferred.resolve(data.data);
+        Functions.Toast('success','Contact Info Sent','  To: '+email.FNAME ,{iconClass: 'jfsToast_success',extendedTimeOut: 9000000});
+
+      }, function(error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    }
 
     //Email.getMailingList();
     return Email;
