@@ -246,3 +246,32 @@ html,body{
   color: contrast(@color-primary-4);
   background-color: @color-primary-4!important;
 }
+.jfsToast{
+  background-color: white;
+  color:black!important;
+  min-height:60px;
+  padding-left:100px!important;
+  border-radius: 10px!important;
+  .BoxShadowHelper(5)!important;
+  i{
+    .center.both;
+    font-size:50px;
+  }
+}
+.jfsToast_success{
+  .jfsToast;
+  .toast_icon{
+    height:100%!important;
+    width:80px!important;
+    position: absolute;
+    text-align: center;
+    vertical-align: middle;
+    background-color: @color-success-1!important;
+    left:0px;
+    top:0px;
+    i{
+      color:fade(black,15%);
+    }
+
+  }
+}

@@ -168,7 +168,7 @@ angular.module('JFS_Admin')
         }).then(function(data) {
           var message = currentRecruit.data.currentRecruit.FNAME + ",\n This is Scott Johnson it was great talking with you. I've emailed you the color test we talked about. If you don't see it please check your spam folder";
           User.sendText(message, currentRecruit.data.currentRecruit.BUS_PH_NBR ||'');
-          Functions.Toast('', '', 'Color Test Sent');
+          Functions.Toast('success','Color Test Sent','  To: '+currentRecruit.data.currentRecruit.FNAME + ' '+currentRecruit.data.currentRecruit.LNAME ,{iconClass: 'jfsToast_success',extendedTimeOut: 9000000});
           if (!angular.isDefined(currentRecruit.data.currentRecruit.Info.ColorStatus)) {
             currentRecruit.data.currentRecruit.Info.ColorStatus = {
               ColorTests: [],

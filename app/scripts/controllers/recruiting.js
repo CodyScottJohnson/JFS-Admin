@@ -52,6 +52,10 @@ angular.module('JFS_Admin')
           ['No Response', function($itemScope) {
             $itemScope.recruit.RecruitStatus_ID = '5';
             Recruits.save($itemScope.recruit);
+          }],
+          ['Need To Sort', function($itemScope) {
+            $itemScope.recruit.RecruitStatus_ID = '7';
+            Recruits.save($itemScope.recruit);
           }]
         ]
       ],

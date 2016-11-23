@@ -130,7 +130,7 @@ angular.module('JFS_Admin')
                            };
         }
         Functions.SendSocket(angular.toJson(message));
-        Task.getUsersTasks();
+        Task.getUsersTasks(true);
         Task.getTask(task.Task_ID);
         Task.getAllTasks(task.Task_ID);
       });

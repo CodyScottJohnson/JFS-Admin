@@ -37,8 +37,8 @@ angular.module('JFS_Admin')
 
       return true;
     };
-    Functions.Toast = function(type,title,message){
-      toastr[type](message,title);
+    Functions.Toast = function(type,title,message,options){
+      toastr[type](message,title,options);
     };
     Functions.SendSocket = function(data){
         $rootScope.conn.send(data);
@@ -72,8 +72,7 @@ angular.module('JFS_Admin')
      });
 
     };
-
-
+    
 
 
     // Public API here
