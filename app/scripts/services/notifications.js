@@ -32,7 +32,7 @@ angular.module('JFS_Admin')
       });
       return deferred.promise;
     };
-    Notifications.getPriority();
+    //Notifications.getPriority();
 
     //Email.getMailingList();
     return Notifications;

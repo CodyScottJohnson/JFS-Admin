@@ -8,7 +8,7 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('recruit', function($rootScope, $http, $filter, UUID, Functions, User,Task) {
+  .factory('recruit', function($rootScope, $q, $http, $filter, UUID, Functions, User,Task) {
     var currentRecruit = {
       data: {
         popInfo: {}
@@ -206,6 +206,53 @@ angular.module('JFS_Admin')
       Task.getRecruitTasks(currentRecruit.data.currentRecruit.INDV_ID).then(function(data){
         currentRecruit.data.Task ={List:data};
       });
+    };
+    currentRecruit.getSocial = function(email) {
+      var deferred = $q.defer();
+       $http({
+           method: 'GET',
+           url: 'https://api.fullcontact.com/v2/person.json?email=' + email + '&apiKey=18f2292b957c799'
+       }).then(function(data) {
+           currentRecruit.data.currentRecruit.Info.ContactDetails = data.data;
+           currentRecruit.save();
+           Functions.Toast('success','','Success');
+           deferred.resolve(data.data);
+       }, function(error) {
+         console.log(error.data.message);
+          Functions.Toast('error','',error.data.message);
+       });
+
+       return deferred.promise;
+
+    };
+    currentRecruit.SetPicture = function(photo) {
+        var formData = {
+            ProfilePic: photo.url
+
+        };
+        var postData = JSON.stringify(formData);
+        $http({
+            method: 'PATCH',
+            url: 'https://jfsapp.com/Secure/API/Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/ProfilePic/',
+            params: {
+                'access_token': '8c7ba91d562f5b566544e8bd94a518f71d4ad6b0',
+                client_id: 'testclient',
+                client_secret: 'testpass'
+            },
+            data: postData,
+
+        }).then(function(data) {
+            angular.forEach(currentRecruit.data.currentRecruit.Info.ContactDetails.photos, function(value) {
+                value.selected = false;
+            });
+            var index = currentRecruit.data.currentRecruit.Info.ContactDetails.photos.indexOf(photo);
+            //console.log(data);
+            currentRecruit.data.currentRecruit.Info.ContactDetails.photos[index].selected = true;
+            currentRecruit.data.currentRecruit.ProfilePic = data.data.ProfilePic;
+            currentRecruit.save();
+        }, function(error) {
+            //console.log(error)
+        });
     };
     return currentRecruit;
   });

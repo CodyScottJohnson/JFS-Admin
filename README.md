@@ -48,6 +48,10 @@ Run `grunt` for building and `grunt serve` for preview.
 
 Running `grunt test` will run the unit tests with karma.
 
-## Also
+## Deploying to Production
 
 This is a test
+```
+grunt ssh_deploy:production
+
+```

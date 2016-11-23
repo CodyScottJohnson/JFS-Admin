@@ -38,7 +38,7 @@ angular.module('JFS_Admin')
       return true;
     };
     Functions.Toast = function(type,title,message){
-      toastr.info(message);
+      toastr[type](message,title);
     };
     Functions.SendSocket = function(data){
         $rootScope.conn.send(data);

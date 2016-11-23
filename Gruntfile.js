@@ -36,10 +36,12 @@ module.exports = function (grunt) {
       production: {
           options: {
               host: 'jfsapp.com',
-              username: 'cody',
-              password: 'skiutah4969',
+              username: 'root',
+              //password: 'skiutah4969',
               deploy_path: '/srv/Builds/JFS_App/Production',
               current_symlink: 'current',
+              port:'4969',
+              privateKey: require('fs').readFileSync('/Users/Cody/devApps/Keys/JFS.pem'),
               //port: '<%= secret.production.port %>',
               releases_to_keep: '3'
               //release_subdir: 'myapp'
