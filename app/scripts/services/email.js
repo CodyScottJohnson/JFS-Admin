@@ -180,13 +180,13 @@ angular.module('JFS_Admin')
         data:email
       }).then(function(data) {
         deferred.resolve(data.data);
-        Functions.Toast('success','Contact Info Sent','  To: '+email.FNAME ,{iconClass: 'jfsToast_success',extendedTimeOut: 9000000});
+        Functions.Toast('success','Contact Info Sent','  To: '+email.Email.FNAME ,{iconClass: 'jfsToast_success',extendedTimeOut: 9000000});
 
       }, function(error) {
         deferred.reject(error);
       });
       return deferred.promise;
-    }
+    };
 
     //Email.getMailingList();
     return Email;

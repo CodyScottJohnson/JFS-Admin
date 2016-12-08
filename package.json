@@ -1,5 +1,5 @@
 {
-  "name": "JFS_Admin",
+  "name": "JFS_Public",
   "private": true,
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
