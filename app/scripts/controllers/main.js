@@ -8,8 +8,9 @@
  * Controller of the jfsApp
  */
 angular.module('JFS_Admin')
-  .controller('MainCtrl', function($scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications) {
+  .controller('MainCtrl', function($scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications, Recruits) {
     $scope.Functions = Functions;
+    $scope.Recruits = Recruits.data;
     $scope.viewRecruit =function(ID){
       recruit.setRecruit(ID);
       $state.go('app.Recruiting.Recruit', {RecruitID:ID});

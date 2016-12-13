@@ -60,7 +60,7 @@
       <td></td>
       <td></td>
     </tr>
-    <tr context-menu="recruitListOptions" ng-repeat="recruit in (Recruits.List|filter:search|filter:search2|filter:{RecruitStatus_ID:1}).slice(((Recruits.currentPage-1)*itemsPerPage), ((Recruits.currentPage)*itemsPerPage))">
+    <tr context-menu="recruitListOptions" context-menu-class="context_menu" ng-repeat="recruit in (Recruits.List|filter:search|filter:search2|filter:{RecruitStatus_ID:1}).slice(((Recruits.currentPage-1)*itemsPerPage), ((Recruits.currentPage)*itemsPerPage))">
       <td class="profile">
         <div ng-click="viewRecruit(recruit.INDV_ID)" class="img_container clickable" style="width:80px;height:80px;overflow:hidden;position:absolute;display:inline-block;background-color:#EBF4F3">
           <img ng-src="https://jfsapp.com/Images/Recruits/{{recruit.ProfilePic || 'blank.jpg'}}" style="heigth:100%;box-shadow:none">

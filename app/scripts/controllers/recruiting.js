@@ -15,7 +15,13 @@ angular.module('JFS_Admin')
       task.Status = 'Completed';
       Task.updateTask(task);
     };
-
+    var customItem = {
+      html:'<a style="cursor: pointer"><i class="fa fa-user"></i>cody</a>',
+      enabled: function() {return true;},
+      click: function ($itemScope, $event, value) {
+        console.log("custom html");
+    }
+  };
     $scope.itemsPerPage = 10;
     $scope.Recruits = Recruits.data;
     $scope.Recruits.currentPage = 1;
@@ -27,7 +33,7 @@ angular.module('JFS_Admin')
         //console.log($itemScope.recruit.INDV_ID);
         Task.newTask({Recruit_ID:$itemScope.recruit.INDV_ID});
         Functions.OpenModal('views/Modals/TaskModal.html', 'md');
-      }],
+      },false],customItem,
       ['Email', function($itemScope) {
           console.log($itemScope);
         },

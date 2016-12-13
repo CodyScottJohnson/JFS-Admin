@@ -124,27 +124,21 @@
 					</ul>
 				</li>
 				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="setting.isopen" auto-close="outsideClick">
-					<a uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-gears"></i></a>
-					<ul class="dropdown-menu update-menu" role="menu">
-						<li><a href="#"><i class="fa fa-database"></i> Database </a>
+					<a uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-search"></i></a>
+					<ul class="dropdown-menu search_menu" role="menu">
+						<li ng-click="$event.stopPropagation()" class="header">
+							<i class="fa fa-search"></i>
+							<input ng-model="Global_Search" placeholder="Search recruit, task, or anything"/>
 						</li>
-						<li><a href="#"><i class="fa fa-bar-chart-o"></i> Connection </a>
+
+						<li ng-click="viewRecruit(recruit.INDV_ID)" ng-show="Global_Search.length>0" class="result recruit" ng-repeat="recruit in Recruits.List|filter:Global_Search"><i class="fa fa-user" ></i>
+							{{recruit.FNAME}} {{recruit.LNAME}}
 						</li>
-						<li><a href="#"><i class="fa fa-bell"></i> Notification </a>
-						</li>
-						<li><a href="#"><i class="fa fa-envelope"></i> Message </a>
-						</li>
-						<li><a href="#"><i class="fa fa-flash"></i> Traffic </a>
-						</li>
-						<li><a href="#"><i class="fa fa-credit-card"></i> Invoices </a>
-						</li>
-						<li><a href="#"><i class="fa fa-dollar"></i> Finances </a>
-						</li>
-						<li><a href="#"><i class="fa fa-thumbs-o-up"></i> Orders </a>
-						</li>
-						<li><a href="#"><i class="fa fa-folder"></i> Directories </a>
-						</li>
-						<li><a href="#"><i class="fa fa-users"></i> Users </a>
+						<li ng-click="ViewTask(task.Task_ID)" ng-show="Global_Search.length>0" class="result task" ng-repeat="task in Task.currentUsersTasks|filter:Global_Search"><i class="fa fa-check-square-o" ></i>
+							<div class="body">
+							{{task.Title}} <br />
+							<span>{{task.RecruitName}}</span>
+						</div>
 						</li>
 					</ul>
 				</li>
