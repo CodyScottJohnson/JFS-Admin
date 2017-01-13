@@ -1,0 +1,45 @@
+.User{
+  .Settings{
+    .settings_card{
+      .Font_Body;
+      .clickable;
+      float:left;
+      padding:10px;
+      margin: 10px;
+      font-size:30px;
+      height:200px;
+      width: 150px;
+      background-color: white;
+      border-radius: 5px;
+      text-align: center;
+      vertical-align: middle;
+      .BoxShadowHelper(4);
+      i{
+        font-size: 70px;
+      }
+    }
+    .menu_bar{
+      width:100%;
+      background-color: @color-secondary-2-1;
+      .BoxShadowHelper(2);
+      .option{
+        .Font_Body;
+        .clickable;
+        padding: 10px;
+        text-align: center;
+        i{
+          font-size:20px;
+        }
+        span{
+          display: block;
+          font-size:13px;
+        }
+        &.selected{
+          color:darken(@color-secondary-2-1,70%);
+          border-bottom: 4px solid darken(@color-secondary-2-1,70%);
+        }
+      }
+
+    }
+  }
+}

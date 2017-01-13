@@ -1,0 +1,64 @@
+<div class="modal-header" >
+	POP Test Settings
+	<button type="button" class="close" aria-hidden="true" ng-click="CloseModal()" style="font-size:20pt;vertical-align:middle">&times;</button>
+
+</div>
+<div class="modal-body" style="padding:0"  ng-controller ='UserCtrl'>
+  <div class="default_form">
+  <form class="body">
+    <div class="row">
+      <div class="col-md-12 input" style="height:auto!important">
+        <div class="title">
+          Send Text Message
+        </div>
+        <switch style="margin-top:15px;" id="enabled" name="enabled" ng-model="UserData.GlobalSettings.POP.SendText" class="green"></switch>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 input" ng-init="edit_text=false" ng-click="edit_text=!edit_text" >
+        <div class="title  clickable">
+          What The Text Says
+        </div>
+        <div ng-show="!edi_textt"  class="description  clickable" ng-bind-html="to_trusted(UserData.GlobalSettings.POP.TextMessage)">
+        </div>
+        <div ng-show="edit_text" ng-click="$event.stopPropagation()" style="display:block;position:relative">
+          <div summernote ng-model="UserData.GlobalSettings.POP.TextMessage"></div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 input" ng-init="edit_subject=false" ng-click="edit_subject=!edit_subject" >
+        <div class="title  clickable">
+          Email Subject Line
+        </div>
+        <div ng-show="!edit_subject" class="description clickable" ng-bind-html="to_trusted(UserData.GlobalSettings.POP.EmailSubject)">
+        </div>
+        <div ng-show="edit_subject" ng-click="$event.stopPropagation()" style="display:block;position:relative">
+          <div summernote ng-model="UserData.GlobalSettings.POP.EmailSubject"></div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 input" ng-init="edit_text=false" ng-click="edit_body=!edit_body" >
+        <div class="title clickable">
+          Email Body
+        </div>
+        <div ng-show="!edit_body"  class="description clickable" ng-bind-html="to_trusted(UserData.GlobalSettings.POP.EmailBody)">
+        </div>
+        <div ng-show="edit_body" ng-click="$event.stopPropagation()" style="display:block;position:relative">
+          <div summernote ng-model="UserData.GlobalSettings.POP.EmailBody"></div>
+
+        </div>
+      </div>
+    </div>
+  </form>
+  </div>
+
+</div>
+<div class="modal-footer modal_save" ng-controller ='UserCtrl' ng-click="saveGlobalSettings()">
+
+    Save
+
+</div>

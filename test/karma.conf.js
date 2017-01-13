@@ -47,6 +47,7 @@ module.exports = function(config) {
       'bower_components/angular-file-upload/dist/angular-file-upload.min.js',
       'bower_components/angular-sortable-view/src/angular-sortable-view.js',
       'bower_components/ng-tags-input/ng-tags-input.js',
+      'bower_components/angular-ui-switch/angular-ui-switch.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

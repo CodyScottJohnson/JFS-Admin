@@ -28,7 +28,8 @@ angular
     'ui.bootstrap',
     'ui.bootstrap.contextMenu',
     'ui.router',
-    'xeditable'
+    'xeditable',
+    'uiSwitch'
   ]);
 angular.module('JFS_Admin').run(function($rootScope, $state, $cookies, Idle, editableOptions) {
   Idle.watch();
@@ -106,6 +107,18 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
       templateUrl: 'views/Recruiting/dashboard.html',
 
     })
+    .state('app.User', {
+      url: '/User',
+      templateUrl: 'views/User/index.html',
+      controller: 'UserCtrl',
+
+    })
+    .state('app.User.Settings', {
+      url: '/Settings',
+      templateUrl: 'views/User/Pages/settings.html',
+
+    })
+
     .state('app.Recruiting.Archived', {
       url: "/ArchivedRecruits",
       params: {

@@ -41,6 +41,35 @@ angular.module('JFS_Admin')
       $rootScope.state = $state.current;
       $state.go('login');
     };
+    currentUser.getGlobalSettings = function(){
+      $http({
+        method:'Get',
+        url: 'https://jfsapp.com/Secure/API/User/Settings/Global',
+        params: {
+            access_token:  $rootScope.currentUser.Token.access_token,
+            client_id: 'testclient',
+            client_secret: 'testpass'
+        },
+      }).then(function(data){
+          currentUser.data.GlobalSettings = data.data;
+      });
+    };
+    currentUser.saveGlobalSettings = function(){
+      $http({
+        method:'Post',
+        url: 'https://jfsapp.com/Secure/API/User/Settings/Global',
+        params: {
+            access_token:  $rootScope.currentUser.Token.access_token,
+            client_id: 'testclient',
+            client_secret: 'testpass'
+        },
+        data:{
+          Settings:currentUser.data.GlobalSettings
+        }
+      }).then(function(data){
+          Functions.Toast('success','Settings Saved','',{iconClass: 'jfsToast_success'})
+      });
+    };
     currentUser.getToken = function() {
         var deferred = $q.defer();
         if (angular.isDefined(Token)) {
@@ -181,6 +210,7 @@ angular.module('JFS_Admin')
 };
     //currentUser.getColumns = function(){return ColumnsToShow}
     //Initialize
+    currentUser.getGlobalSettings();
     currentUser.getTexts();
     currentUser.getUserList();
     currentUser.getInfo();

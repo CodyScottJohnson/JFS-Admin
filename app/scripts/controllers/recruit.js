@@ -60,9 +60,9 @@ angular.module('JFS_Admin')
       Functions.OpenModal('views/Modals/FileUpload.html', 'lg');
     };
     $scope.sendPop = function() {
-
-      recruit.data.popInfo.message = recruit.data.currentRecruit.FNAME + ',\n\nThis is the POP7 evaluation I mentioned in my first email.  Just click on the link below and you will be connected to the evaluation page.  If you have any questions, please feel welcome to contact myself or Scott Johnson at 801-296-2000\n\nThank you \n\n' + $scope.User.displayname + '\nAmerican National Insurance Company\nJohnson Agency';
-      recruit.data.popInfo.subject = 'Online Profile Invitation for American National';
+      console.log($rootScope.currentUser.Info);
+      recruit.data.popInfo.message = recruit.data.currentRecruit.FNAME + ',\n\n' + (User.data.GlobalSettings.POP.EmailBody.replace('<br>','\n')).replace(/<\//g,'\n<').replace(/<[^>]+>/gm,'') + '\n' + $rootScope.currentUser.Info.display_name + '\nAmerican National Insurance Company\nJohnson Agency';
+      recruit.data.popInfo.subject = (User.data.GlobalSettings.POP.EmailSubject.replace('<br>','\n')).replace(/<[^>]+>/gm,'');
       recruit.data.popInfo.url = $sce.trustAsResourceUrl("https://www.selfmgmt.com/cgi-bin/pac.exe?function=InviteCandidate&ProgramLang=eng&TestType=POP7&TestLang=eng&Attachment=&Name=" + recruit.data.currentRecruit.FNAME + "&Subject=Online%20Profile%20Invitation&EMail=" + recruit.data.currentRecruit.EMAIL + "&CC=scott@anpac.net,david.moultrie@american-national.com&FromName=" + encodeURIComponent($scope.User.displayname) + "&ID=&Source=&FromTracker=&FromResumeLeads=&Resend=");
       ecopy(recruit.data.popInfo.message);
       Functions.OpenModal('views/Modals/sendPop.html', 'lg');

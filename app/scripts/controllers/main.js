@@ -8,9 +8,12 @@
  * Controller of the jfsApp
  */
 angular.module('JFS_Admin')
-  .controller('MainCtrl', function($scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications, Recruits) {
+  .controller('MainCtrl', function($scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications, Recruits, $sce) {
     $scope.Functions = Functions;
     $scope.Recruits = Recruits.data;
+    $scope.to_trusted = function(html_code) {
+        return $sce.trustAsHtml(html_code);
+    };
     $scope.viewRecruit =function(ID){
       recruit.setRecruit(ID);
       $state.go('app.Recruiting.Recruit', {RecruitID:ID});
