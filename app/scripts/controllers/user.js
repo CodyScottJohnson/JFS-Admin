@@ -19,6 +19,6 @@ angular.module('JFS_Admin')
       User.saveGlobalSettings();
     };
     $scope.OpenSettingsModal = function(setting){
-      Functions.OpenModal('views/Modals/Settings/'+setting+'.html','md');
-    }
+      Functions.OpenModal('views/Modals/Settings/'+setting+'.html','lg');
+    };
   });

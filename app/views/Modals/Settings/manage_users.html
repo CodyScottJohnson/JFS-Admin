@@ -1,0 +1,52 @@
+<div class="manage_users scrollbar" ng-controller="ManageUserCtrl">
+  <div class="toolbar shadow-2">
+    <i class="fa fa-user-plus clickable" ng-click="newUserForm.$show()"></i>
+    <i ng-show="newUserForm.$visible" class="fa fa-check clickable" type="submit" ng-disabled="newUserForm" style="color:#5CB34E"></i>
+    <i ng-show="newUserForm.$visible" class="fa fa-close clickable" ng-click="newUserForm.$cancel()" style="color:#FE5E52"></i>
+    <i  class="fa fa-expand clickable" style="float:right;margin-right:50px;margin-top:10px" ng-click="fullscreen.userIsFullscreen=!fullscreen.userIsFullscreen"></i>
+  </div>
+  <div ng-show="newUserForm.$visible" blur="submit" class="newUserBar shadow-2 scrollbar" style="margin-top:50px">
+    <table>
+
+<tr>
+  <td>
+    <span e-ng-keypress="keypress($event, newUserForm)" buttons="no" e-name="user_name" e-required e-placeholder="user name" editable-text="newUser.user_name" e-form="newUserForm" onbeforesave="checkvalue($data)"></span></td>
+  <td><span e-ng-keypress="keypress($event, newUserForm)" buttons="no" e-name="firstname"  e-required e-placeholder="first name" editable-text="newUser.firstname" e-form="newUserForm" onbeforesave="checkvalue($data)"></span></td>
+  <td><span e-ng-keypress="keypress($event, newUserForm)" buttons="no" e-name="lastname"  e-required e-placeholder="last name" editable-text="newUser.lastname" e-form="newUserForm" onbeforesave="checkvalue($data)"></span></td>
+  <td><span e-ng-keypress="keypress($event, newUserForm)" buttons="no" e-name="email" e-placeholder="email" editable-email="newUser.email" e-form="newUserForm" onbeforesave="checkvalue($data)"></span></td>
+  <td><form editable-form name="newUserForm" blur="submit" onaftersave="AddUser()"></form></td>
+      </tr>
+    </table>
+  </div>
+  <table class="table table-hover table-striped" style="margin-top:50px">
+    <tr>
+      <th></th>
+      <th>Display Name</th>
+      <th>User Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Active</th>
+      <th></th>
+    </tr>
+    <tr ng-repeat="user in Users.userList">
+      <td class="img"><img ng-src="https://jfsapp.com/Images/ProfilePhotos/{{user.display_photo || 'null.png'}}" ></td>
+      <td>{{user.display_name}}</td>
+      <td>{{user.user_name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.title}}</td>
+      <td> <div style="position:relative;display:block;height:100%" >
+        <switch style="margin-top:15px;" id="enabled" name="enabled" ng-model="user.active" class="green"></switch>
+
+      </td>
+      <td uib-dropdown is-open="status.isopen">
+        <div class="btn btn-primary" uib-dropdown-toggle><i class="fa fa-gears"></i></div>
+        <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <li role="menuitem"><a ng-click="resetPassword(user.user_name)">Reset Password</a></li>
+        <li role="menuitem"><a href="#">Change Status</a></li>
+        <li class="divider"></li>
+        <li role="menuitem"><a href="#">Remove</a></li>
+      </ul>
+      </td>
+    </tr>
+  </table>
+</div>

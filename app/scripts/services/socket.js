@@ -8,7 +8,7 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('Socket', function ($rootScope,Recruits,User,Functions,Task) {
+  .factory('Socket', function ($rootScope,Recruits,User,Functions,Task, Agents) {
     // Service logic
     // ...
     var Socket = {};
@@ -28,6 +28,9 @@ angular.module('JFS_Admin')
       }
       if (temp.type == 'task') {
         Task.Socket(temp);
+      }
+      if (temp.type == 'agent') {
+        Agents.Socket(temp);
       }
 
     };

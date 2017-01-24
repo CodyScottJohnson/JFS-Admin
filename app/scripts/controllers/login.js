@@ -8,7 +8,7 @@
  * Controller of the JFS_AgentPortal
  */
 angular.module('JFS_Admin')
-  .controller('LoginCtrl', function($scope, $http,$rootScope,$state,$cookies) {
+  .controller('LoginCtrl', function($scope, $http,$rootScope,$state,$cookies, $window) {
     $scope.User = {};
     $scope.login = function(username, password) {
       $http({
@@ -43,7 +43,13 @@ angular.module('JFS_Admin')
                   $scope.User.Token= Token;
                   $rootScope.currentUser =$scope.User;
                   $cookies.putObject('user',$scope.User,{"expires":moment().add(24,'hours').format(),secure:false});
-                  $state.go(state);
+                  console.log($scope.User.Info.PermissionLevel);
+                  if($rootScope.currentUser.Info.PermissionLevel == 3){
+                    $window.location.href ='https://jfsapp.com/Admin/Portal/Agent/#/';
+                  }
+                  else{
+                    $state.go(state);
+                  }
             }, function(error) {
 
             });

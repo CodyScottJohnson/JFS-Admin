@@ -39,7 +39,7 @@ angular.module('JFS_Admin').run(function($rootScope, $state, $cookies, Idle, edi
     console.log("Connection established!");
   };
 
-  $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams,$window) {
     if ($state.current.name != "login") {
       $rootScope.state = $state.current;
     }
@@ -51,6 +51,11 @@ angular.module('JFS_Admin').run(function($rootScope, $state, $cookies, Idle, edi
       event.preventDefault();
       $state.go('login');
     }
+    if($rootScope.currentUser.Info.PermissionLevel == 3){
+      //location.href ='https://jfsapp.com/Admin/Portal/Agent/#/';
+    }
+
+
   });
 
 });

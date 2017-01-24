@@ -1,7 +1,8 @@
+<div class="view">
 <div class="dashboard">
   <table>
     <tr class="title">
-      <td colspan="6">
+      <td colspan="7">
         Agents
       </td>
     </tr>
@@ -12,17 +13,38 @@
       <th>Address</th>
       <th>City</th>
       <th>State</th>
+      <th>Active</th>
     </tr>
-    <tr ng-repeat="agent in Agents">
-      <td class="profile" ng-click="open()"><img ng-src="{{'https://jfsapp.com'+agent.profilepic}}" />
+    <tr context-menu="agentListOptions" context-menu-class="context_menu" ng-repeat="agent in Agents.AgentList">
+      <td class="profile expand" ng-click="open()"><img ng-src="{{'https://jfsapp.com/Secure/API/Images/General/Agents/Profile/'+agent.profilepic+'?access_token='+currentUser.Token.access_token+'&client_id=testclient&client_secret=testpass'}}" />
         <div class="info">
-          <span><h3>{{agent.FirstName + ' ' + agent.LastName}}</h3></span><span class="market"><b>Area:</b></span><span>{{agent.City}}</span></div>
+          <span><h3 ng-dblclick="rowform.$show()"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.FirstName" e-name="FirstName" e-form="rowform">{{agent.FirstName}}</span> <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.LastName" e-name="LastName" e-form="rowform">{{agent.LastName}}</span></h3></span><span class="market"><b>Area:</b></span><span>{{agent.City}}</span></div>
       </td>
-      <td>{{agent.Phone}}</td>
-      <td>{{agent.Email}}</td>
-      <td>{{agent.Adress}}</td>
-      <td>{{agent.City}}</td>
-      <td>{{agent.State}}</td>
+      <td class="expand" ng-dblclick="rowform.$show()"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.Phone" e-name="Phone" e-form="rowform">{{agent.Phone}}</span></td>
+      <td class="expand" ng-dblclick="rowform.$show()"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.Email" e-name="EMAIL" e-form="rowform">{{agent.Email}}</span></td>
+      <td class="expand" ng-dblclick="rowform.$show()"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.Address" e-name="Address" e-form="rowform">{{agent.Address}}</span></td>
+      <td class="expand" ng-dblclick="rowform.$show()"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.City" e-name="City" e-form="rowform">{{agent.City}}</span></td>
+      <td class="expand" ng-dblclick="rowform.$show()"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.State" e-name="State" e-form="rowform">{{agent.State}}</span></td>
+      <td ng-hide="rowform.$visible" class="clickable">
+        <div style="position:relative;display:block">
+        <div  ng-click="toggleAgent(agent)" style="height:100%;width:100%;position:absolute;display:block;z-index:99">
+
+        </div>
+        <switch  style="margin-top:10px;" id="enabled" name="enabled" ng-model="agent.Active" class="green"></switch>
+      </div>
+      </td>
+      <td ng-show="rowform.$visible">
+        <form editable-form name="rowform" onbeforesave="updateAgent(agent)"  class="form-buttons form-inline">
+          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+            save
+          </button>
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+            cancel
+          </button>
+        </form>
+      </td>
+
     </tr>
   </table>
+</div>
 </div>

@@ -76,8 +76,17 @@
         <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.POP" e-name="POP" e-form="rowform">{{recruit.POP}}</span>
       </td>
       <td ng-dblclick="rowform.$show()">
-        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.POP" e-name="POP" e-form="rowform">{{recruit.fa}}</span>
-      </td>
+        <div ng-show="rowform.$visible">
+        							<span e-name="Color_Red" e-style="background-color:#F7464A;color:white;text-align:center" editable-text="recruit.Color_Red" e-name="contactType" e-form="rowform">{{recruit.Color_Red}}</span>
+        							<span e-name="Color_Blue" e-style="background-color:#97BBCD;color:white;text-align:center" editable-text="recruit.Color_Blue" e-name="contactType" e-form="rowform">{{recruit.Color_Blue}}</span>
+        							<span e-name="Color_Yellow" e-style="background-color:#FDB45C;color:white;text-align:center" editable-text="recruit.Color_Yellow" e-name="contactType" e-form="rowform">{{recruit.Color_Yellow}}</span>
+        							<span e-name="Color_White" e-style="background-color:#DCDCDC;color:white;text-align:center" editable-text="recruit.Color_White" e-name="contactType" e-form="rowform">{{recruit.Color_White}}</span>
+        						</div>
+        					<div style="width:60px;height:60px" ng-show="!rowform.$visible">
+                  <canvas id="doughnut" class="chart chart-doughnut"
+                      chart-data="[recruit.Color_Blue,recruit.Color_White,recruit.Color_Red,recruit.Color_Yellow]" chart-legend="false" chart-colours="colors2" chart-labels="labels2" chart-options="options2" width="10px" height="10px">
+        							</canvas></div>
+        </td>
       <td class="expand" ng-dblclick="rowform.$show()">
         <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.NextStep" e-name="NextStep" e-form="rowform">{{recruit.NextStep}}</span>
       </td>

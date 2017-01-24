@@ -9,6 +9,8 @@
  */
 angular.module('JFS_Admin')
   .controller('RecruitingCtrl', function($scope, Recruits, Task,Functions, Email) {
+    $scope.colors2 = ['#97BBCD', '#DCDCDC', '#F7464A', '#FDB45C'];
+    $scope.labels2 = ['', '', '', ''];
     Task.getUsersTasks(true);
     $scope.Task = Task.data;
     $scope.removeFlag = function(task) {
