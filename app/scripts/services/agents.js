@@ -76,8 +76,14 @@ angular.module('JFS_Admin')
             var index = _.findIndex(Agents.data.AgentList, {
               'Agent_ID': Agent.Agent_ID
             });
-
-            Agents.data.AgentList[index] = Agent;
+            console.log(index);
+            if(index === -1){
+                Agents.data.AgentList.push(data.data);
+                Agent = data.data;
+            }
+            else{
+              Agents.data.AgentList[index] = Agent;
+            }
             var message = {
     								type: 'agent',
                     event: 'agentupdated',

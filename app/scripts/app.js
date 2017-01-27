@@ -16,6 +16,7 @@ angular
     'angular-sortable-view',
     'chart.js',
     'FBAngular',
+    'LocalStorageModule',
     'luegg.directives',
     'ngAnimate',
     'ngCookies',
@@ -31,7 +32,7 @@ angular
     'xeditable',
     'uiSwitch'
   ]);
-angular.module('JFS_Admin').run(function($rootScope, $state, $cookies, Idle, editableOptions) {
+angular.module('JFS_Admin').run(function($rootScope, $state, localStorageService, Idle, editableOptions) {
   Idle.watch();
   editableOptions.theme = 'bs3';
   $rootScope.conn = new WebSocket('wss://jfsapp.com/WebSocket');
@@ -45,26 +46,34 @@ angular.module('JFS_Admin').run(function($rootScope, $state, $cookies, Idle, edi
     }
     var requireLogin = toState.data.requireLogin;
     if (typeof $rootScope.currentUser === 'undefined') {
-      $rootScope.currentUser = $cookies.getObject('user');
+      $rootScope.currentUser = localStorageService.cookie.get('user');
     }
     if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
       event.preventDefault();
       $state.go('login');
     }
-    if($rootScope.currentUser.Info.PermissionLevel == 3){
-      //location.href ='https://jfsapp.com/Admin/Portal/Agent/#/';
+    else if (toState.name !='login' && toState.name !== '' && ($rootScope.currentUser === null))
+    {
+      console.log('here');
+      event.preventDefault();
+      $state.go('login');
+    }
+    else if(angular.isDefined($rootScope.currentUser) && $rootScope.currentUser !== null) {
+      if($rootScope.currentUser.Info.PermissionLevel == 3){
+      location.href ='https://jfsapp.com/Admin/Portal/Agent/#/';
+    }
     }
 
 
   });
 
 });
-angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, KeepaliveProvider, IdleProvider) {
+angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, KeepaliveProvider, IdleProvider,localStorageServiceProvider) {
   // configure Idle settings
   IdleProvider.idle(10000); // in seconds
   IdleProvider.timeout(10000); // in seconds
   KeepaliveProvider.interval(2); // in seconds
-
+  localStorageServiceProvider.setPrefix('JFS');
   $urlRouterProvider.otherwise("/");
   $stateProvider
     .state('login', {
@@ -77,6 +86,7 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
     })
     .state('app', {
       url: '',
+      abstract: true,
       templateUrl: 'views/index.html',
       controller: 'MainCtrl',
       data: {
@@ -103,6 +113,7 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
     })
     .state('app.Recruiting', {
       url: '',
+      abstract: true,
       templateUrl: 'views/Recruiting/index.html',
       controller: 'RecruitingCtrl',
 
@@ -151,6 +162,7 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
     })
     .state('app.Agents', {
       url: '',
+      abstract: true,
       templateUrl: 'views/Agents/index.html',
       controller: 'AgentsCtrl',
 

@@ -22,6 +22,10 @@ angular.module('JFS_Admin')
     $scope.updateAgent =function(agent){
       Agents.setAgent(agent);
     };
+    $scope.addNewAgent = function(agent){
+      Agents.setAgent(agent).then(function(data){$scope.newagent ={};});
+
+    };
     $scope.deleteAgent =function(agent){
       Agents.deleteAgent(agent);
     };

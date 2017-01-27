@@ -8,7 +8,7 @@
  * Factory in the jfsApp.
  */
 angular.module('JFS_Admin')
-  .factory('User', function($q, $http, $cookies, $rootScope, $state, $filter, Functions, UUID) {
+  .factory('User', function($q, $http, $cookies, $rootScope, $state, $filter, Functions, UUID, localStorageService) {
     var currentUser = {
       data: {
         currentTextConversation: -1,
@@ -41,8 +41,8 @@ angular.module('JFS_Admin')
       // the user has come back from AFK and is doing stuff. if you are warning them, you can use this to hide the dialog
     });
     currentUser.logout = function() {
-      $rootScope.User = null;
-      $cookies.remove('user');
+      $rootScope.currentUser = null;
+      localStorageService.cookie.clearAll();
       $rootScope.state = $state.current;
       $state.go('login');
     };

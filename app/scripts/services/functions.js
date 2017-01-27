@@ -13,7 +13,9 @@ angular.module('JFS_Admin')
     // ...
     var Functions = {};
     var notification = window.Notification || window.mozNotification || window.webkitNotification;
+    if(angular.isDefined(notification)){
     notification.requestPermission();
+    }
     Functions.browserNotify = function(title, body, icon) {
       if ('undefined' === typeof notification){
         return false;
@@ -72,7 +74,7 @@ angular.module('JFS_Admin')
      });
 
     };
-    
+
 
 
     // Public API here
