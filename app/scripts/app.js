@@ -54,7 +54,6 @@ angular.module('JFS_Admin').run(function($rootScope, $state, localStorageService
     }
     else if (toState.name !='login' && toState.name !== '' && ($rootScope.currentUser === null))
     {
-      console.log('here');
       event.preventDefault();
       $state.go('login');
     }

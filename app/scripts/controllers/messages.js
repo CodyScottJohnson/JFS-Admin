@@ -18,4 +18,11 @@ angular.module('JFS_Admin')
       User.sendText(to,message);
       $scope.newTextMessage ='';
     };
+
+    $scope.messageListOptions = [
+      ['Delete Conversation', function($itemScope) {
+        //console.log($itemScope);
+        User.deleteConversation($itemScope.key);
+      }, false]
+    ];
   });

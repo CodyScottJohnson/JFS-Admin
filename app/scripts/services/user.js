@@ -124,6 +124,20 @@ angular.module('JFS_Admin')
         currentUser.getTexts();
       });
     };
+    currentUser.deleteConversation = function(ConversationID) {
+      currentUser.data.currentTextConversation = ConversationID;
+      $http({
+        method: 'delete',
+        url: 'https://jfsapp.com/Secure/API/Messages/DeleteConversation/' + ConversationID + '/',
+        params: {
+          access_token: $rootScope.currentUser.Token.access_token,
+          client_id: 'testclient',
+          client_secret: 'testpass'
+        },
+      }).then(function() {
+        currentUser.getTexts();
+      });
+    };
     currentUser.addText = function(text) {};
     currentUser.getTexts = function() {
       $http({

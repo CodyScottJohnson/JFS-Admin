@@ -7,7 +7,7 @@
       </div>
       <div class="main">
         <div style="overflow-x: hidden">
-          <li class="summary" ng-repeat="(key, value) in User.TextMessages|orderBy:['-date_recieved']| groupBy:'[id_number]'" ng-click="showConversation(value[0].id_number)">
+          <li class="summary" context-menu="messageListOptions" context-menu-class="context_menu" ng-repeat="(key, value) in User.TextMessages|orderBy:['-date_recieved']| groupBy:'[id_number]'" ng-click="showConversation(value[0].id_number)">
             <a style="margin-top:0;top:0;display:inline-block;position:relative" ng-repeat="text in value|orderBy:'-date_recieved'|limitTo:1">
               <img style="height:50px;width:50px;border-radius:100%;display:inline-block;top:5px;position:absolute" ng-src="https://jfsapp.com/Images/Recruits/{{text.ProfilePic || 'blank.jpg'}}">
               <div style="display:inline-block;height:100%;width:300px;position:absolute;padding-left:60px">
