@@ -172,6 +172,12 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
       templateUrl: 'views/Agents/dashboard.html',
 
     })
+    .state('app.Agents.Agent', {
+      url: '/Agents/Agent?AgentID',
+      templateUrl: 'views/Agents/agentPortal.html',
+      controller: 'AgentsCtrl',
+
+    })
     .state('app.Reporting', {
       url: "/Reporting",
       templateUrl: 'views/Reporting/index.html',

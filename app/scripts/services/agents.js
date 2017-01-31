@@ -9,7 +9,7 @@
  */
 angular.module('JFS_Admin')
   .factory('Agents', function ($rootScope,$q,$http,Functions, User) {
-    var Agents = {data:{}};
+    var Agents = {data:{CurrentAgent:{}}};
     Agents.Socket = function(data) {
       if (data.event === 'agentupdated') {
         var index = _.findIndex(Agents.data.AgentList, {
@@ -37,7 +37,7 @@ angular.module('JFS_Admin')
         Functions.Toast('info',data.AlertTitle,data.AlertMessage);
       }
     };
-   Agents.getAgents = function(){
+    Agents.getAgents = function(){
       var deferred = $q.defer();
 
          $http({
@@ -58,7 +58,62 @@ angular.module('JFS_Admin')
          });
      return deferred.promise;
     };
-   Agents.setAgent = function(Agent){
+    Agents.getAgent = function(AgentID){
+      var deferred = $q.defer();
+         $http({
+             method: 'GET',
+             url: 'https://jfsapp.com/Secure/API/Agents/Agent/'+AgentID,
+             params: {
+                 'access_token': $rootScope.currentUser.Token.access_token,
+                 client_id: 'testclient',
+                 client_secret: 'testpass'
+
+             },
+         }).then(function(data) {
+             deferred.resolve(data.data);
+         }, function(error) {
+             deferred.reject(error);
+         });
+     return deferred.promise;
+    };
+
+    Agents.viewAgent = function(Agent_ID){
+      var index = _.findIndex(Agents.data.AgentList, {
+        'Agent_ID': Agent_ID
+      });
+      if(index != -1){
+        Agents.data.CurrentAgent.Info = Agents.data.AgentList[index];
+      }
+      else{
+        Agents.getAgent(Agent_ID).then(function(data){
+          Agents.data.CurrentAgent.Info = data;
+        });
+      }
+      Agents.getAgent_DailyNumbers(Agent_ID);
+    }
+    Agents.getAgent_DailyNumbers = function(Agent_ID){
+      var deferred = $q.defer();
+
+         $http({
+             method: 'GET',
+             url: 'https://jfsapp.com/Secure/API/Agents/Agent/'+Agent_ID+'/DailyNumbers',
+             params: {
+                 'access_token': $rootScope.currentUser.Token.access_token,
+                 client_id: 'testclient',
+                 client_secret: 'testpass'
+
+             },
+         }).then(function(data) {
+             //console.log(data.data);
+             Agents.data.CurrentAgent.DailyNumbers = data.data;
+             deferred.resolve(data.data);
+         }, function(error) {
+             deferred.reject(error);
+         });
+     return deferred.promise;
+    };
+
+    Agents.setAgent = function(Agent){
      var deferred = $q.defer();
 
         $http({
@@ -97,7 +152,7 @@ angular.module('JFS_Admin')
         });
     return deferred.promise;
     };
-   Agents.deleteAgent = function(Agent){
+    Agents.deleteAgent = function(Agent){
       var deferred = $q.defer();
 
          $http({

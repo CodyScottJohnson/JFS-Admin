@@ -41,7 +41,7 @@
 
     </tr>
     <tr context-menu="agentListOptions" context-menu-class="context_menu" ng-repeat="agent in Agents.AgentList">
-      <td class="profile expand" ng-click="open()"><img ng-src="{{'https://jfsapp.com/Secure/API/Images/General/Agents/Profile/'+agent.profilepic+'?access_token='+currentUser.Token.access_token+'&client_id=testclient&client_secret=testpass'}}" />
+      <td class="profile expand" ng-click="viewAgent(agent.Agent_ID)"><img ng-src="{{'https://jfsapp.com/Secure/API/Images/General/Agents/Profile/'+agent.profilepic+'?access_token='+currentUser.Token.access_token+'&client_id=testclient&client_secret=testpass'}}" />
         <div class="info">
           <span><h3 ng-dblclick="rowform.$show()"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.FirstName" e-name="FirstName" e-form="rowform">{{agent.FirstName}}</span> <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.LastName" e-name="LastName" e-form="rowform">{{agent.LastName}}</span></h3></span><span class="market"><b>Area:</b></span><span>{{agent.City}}</span></div>
       </td>

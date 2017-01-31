@@ -8,9 +8,17 @@
  * Controller of the JFS_Admin
  */
 angular.module('JFS_Admin')
-  .controller('AgentsCtrl', function ($scope,Agents, User) {
+  .controller('AgentsCtrl', function ($scope,Agents, User, $state,$location) {
+    if(angular.isDefined($location.search().AgentID))
+    {
+      Agents.viewAgent($location.search().AgentID);
+    }
     $scope.Agents = Agents.data;
     Agents.getAgents();
+    $scope.viewAgent = function(Agent_ID){
+      Agents.viewAgent(Agent_ID)
+      $state.go('app.Agents.Agent', {AgentID:Agent_ID});
+    };
     $scope.agentListOptions = [
       ['Reset Password', function($itemScope){
       },false],

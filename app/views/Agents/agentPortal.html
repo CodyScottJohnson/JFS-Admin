@@ -1,0 +1,80 @@
+<div class="AgentPortal view">
+  <div class="profile">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="profile_img">
+          <div class="outerimage">
+
+          <img  ng-src="{{'https://jfsapp.com/Secure/API/Images/General/Agents/Profile/'+Agents.CurrentAgent.Info.profilepic+'?access_token='+currentUser.Token.access_token+'&client_id=testclient&client_secret=testpass'}}" />
+          <div class="img_mask">
+            
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="col-md-9" style="padding:0">
+        <div class="row">
+          <div class="col-md-6 input">
+            <div class="title">
+              First Name
+            </div>
+            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.FirstName" placeholder="What is Your First Name" />
+          </div>
+          <div class="col-md-6 input">
+            <div class="title">
+              Last Name
+            </div>
+            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.LastName" placeholder="What is Your Last Name" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8 input">
+            <div class="title">
+              Phone
+            </div>
+            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.Phone" placeholder="What is Your First Name" />
+          </div>
+          <div class="col-md-4 input">
+            <div class="title">
+              Active
+            </div>
+            <div style="position:relative;display:block">
+            <div  ng-click="toggleAgent(Agents.CurrentAgent.Info)" style="height:100%;width:100%;position:absolute;display:block;z-index:99">
+
+            </div>
+            <switch  style="margin-top:5px;" id="enabled" name="enabled" ng-model="Agents.CurrentAgent.Info.Active" class="green"></switch>
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 input">
+            <div class="title">
+              Email
+            </div>
+            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.Email" placeholder="What is Your First Name" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 input">
+            <div class="title">
+              Address
+            </div>
+            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.Address" placeholder="What is Your First Name" />
+          </div>
+          <div class="col-md-3 input">
+            <div class="title">
+              City
+            </div>
+            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.City" placeholder="What is Your First Name" />
+          </div>
+          <div class="col-md-3 input">
+            <div class="title">
+              State
+            </div>
+            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.State" placeholder="What is Your First Name" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{Agents.CurrentAgent.Info | json}}
