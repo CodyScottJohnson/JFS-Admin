@@ -39,7 +39,7 @@ angular.module('JFS_Admin').run(function($rootScope, $state, localStorageService
   $rootScope.conn.onopen = function(e) {
     console.log("Connection established!");
   };
-
+  $rootScope.showLoading=true;
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams,$window) {
     if ($state.current.name != "login") {
       $rootScope.state = $state.current;

@@ -16,6 +16,9 @@ angular.module('JFS_Admin')
     if(angular.isDefined(notification)){
     notification.requestPermission();
     }
+    Functions.toggleLoading = function(){
+      $rootScope.showLoading = !$rootScope.showLoading;
+    };
     Functions.browserNotify = function(title, body, icon) {
       if ('undefined' === typeof notification){
         return false;

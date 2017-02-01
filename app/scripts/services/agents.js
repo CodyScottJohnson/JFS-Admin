@@ -90,7 +90,7 @@ angular.module('JFS_Admin')
         });
       }
       Agents.getAgent_DailyNumbers(Agent_ID);
-    }
+    };
     Agents.getAgent_DailyNumbers = function(Agent_ID){
       var deferred = $q.defer();
 

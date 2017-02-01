@@ -49,7 +49,7 @@ angular.module('JFS_Admin')
 
     $scope.downloadTest = function(test) {
       test.statusspinner = "fa fa-spinner fa-spin";
-
+      $rootScope.showLoading = !$rootScope.showLoading;
       $http({
         method: 'GET',
         url: 'https://jfsapp.com/Secure/API/ColorQuiz/Print/' + test.Test_Token + '/',
@@ -65,6 +65,7 @@ angular.module('JFS_Admin')
           type: 'application/pdf'
         });
         FileSaver.saveAs(myBlob, test.FNAME + '_' + test.LNAME + '_ColorTest.pdf');
+        $rootScope.showLoading = !$rootScope.showLoading;
         test.statusspinner = "";
       });
 

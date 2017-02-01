@@ -1,111 +1,132 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>JFS Portal</title>
-		<link href="https://jfsapp.com/Images/Logos/JohnsonFinanceMain.png" rel="shortcut icon" />
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.tmp) styles/other.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- endbuild -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
-    <link rel="stylesheet" href="bower_components/summernote/dist/summernote.css" />
-    <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
-    <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.css" />
-    <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
-    <link rel="stylesheet" href="bower_components/hover/css/hover.css" />
-    <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.css" />
-    <link rel="stylesheet" href="bower_components/angular-ui-switch/angular-ui-switch.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-		<link rel="stylesheet" href="styles/app.css">
-    <link rel="stylesheet" href="styles/animations.css">
 
-    <!-- endbuild -->
-  </head>
-  <body ng-app="JFS_Admin">
-    <div class="mainView" ui-view resize style="width:100%;height:{{windowHeight}}px;">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JFS Portal</title>
+  <link href="https://jfsapp.com/Images/Logos/JohnsonFinanceMain.png" rel="shortcut icon" />
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.tmp) styles/other.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- endbuild -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+  <link rel="stylesheet" href="bower_components/summernote/dist/summernote.css" />
+  <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css" />
+  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.css" />
+  <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
+  <link rel="stylesheet" href="bower_components/hover/css/hover.css" />
+  <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.css" />
+  <link rel="stylesheet" href="bower_components/angular-ui-switch/angular-ui-switch.css" />
+  <link rel="stylesheet" href="bower_components/SpinKit/css/spinkit.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/app.css">
+  <link rel="stylesheet" href="styles/animations.css">
+
+  <!-- endbuild -->
+</head>
+
+<body ng-app="JFS_Admin">
+  <div class="Loading" ng-hide="showLoading">
+    <div class="shadowCycle loading_box">
+
+      <div class="loader">
+        <div class="spinnerBlock">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <div class="text">We're working on it</div>
     </div>
+  </div>
+  <div class="mainView" ui-view resize style="width:100%;height:{{windowHeight}}px;">
+  </div>
 
-    <!-- build:js(.) scripts/vendor.js -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- build:js(.) scripts/vendor.js -->
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/ng-idle/angular-idle.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/moment/moment.js"></script>
-    <script src="bower_components/lodash/lodash.js"></script>
-    <script src="bower_components/angular-bootstrap-contextmenu/contextMenu.js"></script>
-    <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
-    <script src="bower_components/angular-scroll-glue/src/scrollglue.js"></script>
-    <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
-    <script src="bower_components/angular-moment/angular-moment.js"></script>
-    <script src="bower_components/summernote/dist/summernote.js"></script>
-    <script src="bower_components/angular-summernote/dist/angular-summernote.js"></script>
-    <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
-    <script src="bower_components/blob-polyfill/Blob.js"></script>
-    <script src="bower_components/file-saver.js/FileSaver.js"></script>
-    <script src="bower_components/angular-file-saver/dist/angular-file-saver.bundle.js"></script>
-    <script src="bower_components/angular-fullscreen/src/angular-fullscreen.js"></script>
-    <script src="bower_components/Chart.js/Chart.js"></script>
-    <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
-    <script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
-    <script src="bower_components/angular-sortable-view/src/angular-sortable-view.js"></script>
-    <script src="bower_components/ng-tags-input/ng-tags-input.js"></script>
-    <script src="bower_components/angular-ui-switch/angular-ui-switch.js"></script>
-    <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
-    <!-- endbower -->
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- endbuild -->
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/ng-idle/angular-idle.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/lodash/lodash.js"></script>
+  <script src="bower_components/angular-bootstrap-contextmenu/contextMenu.js"></script>
+  <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
+  <script src="bower_components/angular-scroll-glue/src/scrollglue.js"></script>
+  <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+  <script src="bower_components/angular-moment/angular-moment.js"></script>
+  <script src="bower_components/summernote/dist/summernote.js"></script>
+  <script src="bower_components/angular-summernote/dist/angular-summernote.js"></script>
+  <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+  <script src="bower_components/blob-polyfill/Blob.js"></script>
+  <script src="bower_components/file-saver.js/FileSaver.js"></script>
+  <script src="bower_components/angular-file-saver/dist/angular-file-saver.bundle.js"></script>
+  <script src="bower_components/angular-fullscreen/src/angular-fullscreen.js"></script>
+  <script src="bower_components/Chart.js/Chart.js"></script>
+  <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+  <script src="bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+  <script src="bower_components/angular-sortable-view/src/angular-sortable-view.js"></script>
+  <script src="bower_components/ng-tags-input/ng-tags-input.js"></script>
+  <script src="bower_components/angular-ui-switch/angular-ui-switch.js"></script>
+  <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+  <!-- endbower -->
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- endbuild -->
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/recruiting.js"></script>
-        <script src="scripts/controllers/login.js"></script>
-        <script src="scripts/directives/resize.js"></script>
-        <script src="scripts/services/user.js"></script>
-        <script src="scripts/services/functions.js"></script>
-        <script src="scripts/services/recruit.js"></script>
-        <script src="scripts/controllers/agents.js"></script>
-        <script src="scripts/services/agents.js"></script>
-        <script src="scripts/services/recruits.js"></script>
-        <script src="scripts/filters/phone.js"></script>
-        <script src="scripts/controllers/messages.js"></script>
-        <script src="scripts/services/socket.js"></script>
-        <script src="scripts/controllers/task.js"></script>
-        <script src="scripts/controllers/modal.js"></script>
-        <script src="scripts/services/task.js"></script>
-        <script src="scripts/filters/sqldate.js"></script>
-        <script src="scripts/controllers/report.js"></script>
-        <script src="scripts/filters/cmdate.js"></script>
-        <script src="scripts/services/dropbox.js"></script>
-        <script src="scripts/controllers/recruit.js"></script>
-        <script src="scripts/directives/preview.js"></script>
-        <script src="scripts/services/file.js"></script>
-        <script src="scripts/services/uuid.js"></script>
-        <script src="scripts/controllers/archivedrecruits.js"></script>
-        <script src="scripts/controllers/style.js"></script>
-        <script src="scripts/services/email.js"></script>
-        <script src="scripts/controllers/email.people.js"></script>
-        <script src="scripts/controllers/prioritynotifications.js"></script>
-        <script src="scripts/services/notifications.js"></script>
-        <script src="scripts/controllers/user.js"></script>
-        <script src="scripts/controllers/manageuser.js"></script>
-        <!-- endbuild -->
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/recruiting.js"></script>
+  <script src="scripts/controllers/login.js"></script>
+  <script src="scripts/directives/resize.js"></script>
+  <script src="scripts/services/user.js"></script>
+  <script src="scripts/services/functions.js"></script>
+  <script src="scripts/services/recruit.js"></script>
+  <script src="scripts/controllers/agents.js"></script>
+  <script src="scripts/services/agents.js"></script>
+  <script src="scripts/services/recruits.js"></script>
+  <script src="scripts/filters/phone.js"></script>
+  <script src="scripts/controllers/messages.js"></script>
+  <script src="scripts/services/socket.js"></script>
+  <script src="scripts/controllers/task.js"></script>
+  <script src="scripts/controllers/modal.js"></script>
+  <script src="scripts/services/task.js"></script>
+  <script src="scripts/filters/sqldate.js"></script>
+  <script src="scripts/controllers/report.js"></script>
+  <script src="scripts/filters/cmdate.js"></script>
+  <script src="scripts/services/dropbox.js"></script>
+  <script src="scripts/controllers/recruit.js"></script>
+  <script src="scripts/directives/preview.js"></script>
+  <script src="scripts/services/file.js"></script>
+  <script src="scripts/services/uuid.js"></script>
+  <script src="scripts/controllers/archivedrecruits.js"></script>
+  <script src="scripts/controllers/style.js"></script>
+  <script src="scripts/services/email.js"></script>
+  <script src="scripts/controllers/email.people.js"></script>
+  <script src="scripts/controllers/prioritynotifications.js"></script>
+  <script src="scripts/services/notifications.js"></script>
+  <script src="scripts/controllers/user.js"></script>
+  <script src="scripts/controllers/manageuser.js"></script>
+  <!-- endbuild -->
 </body>
+
 </html>
