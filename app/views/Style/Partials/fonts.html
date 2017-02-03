@@ -1,0 +1,33 @@
+<div class="Style_Logos">
+  <div class="row">
+
+  <div class="col-md-3 col-sm-6">
+    <div class="logo">
+    <div class="logo_title">
+      Main
+    </div>
+    <div class="image">
+      <div class="font">
+        AaBb
+      </div>
+    </div>
+    <div class="sizes" ng-init="main_size={display:'Select Size',file:'Logo_Main.png'}">
+      <div class="btn-group" uib-dropdown is-open="status.isopen">
+     <button  type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+       {{main_size.display}} <span class="caret"></span>
+     </button>
+     <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+       <li role="menuitem" ng-click="main_size={display:'Small',file:'Logo_Main.png'}"><a>Small</a></li>
+       <li role="menuitem" ng-click="main_size={display:'Medium',file:'Logo_Main@1.5x.png'}"><a >Medium</a></li>
+       <li role="menuitem" ng-click="main_size={display:'Large',file:'Logo_Main@2x.png'}"><a>Large</a></li>
+       <li role="menuitem" ng-click="main_size={display:'Extra Large',file:'Logo_Main@3x.png'}"><a>Extra Large</a></li>
+     </ul>
+   </div>
+    </div>
+    <div class="btn download" ng-click="dowloadLogo(main_size.file)">
+      Download
+    </div>
+  </div>
+  </div>
+</div>
+</div>
