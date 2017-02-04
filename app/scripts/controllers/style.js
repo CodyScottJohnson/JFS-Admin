@@ -20,6 +20,6 @@ angular.module('JFS_Admin')
       var image = new Blob([data.data],{type:mime});
       FileSaver.saveAs(image,name);
       $rootScope.showLoading=!$rootScope.showLoading;
-    })
-    }
+    });
+  };
   });
