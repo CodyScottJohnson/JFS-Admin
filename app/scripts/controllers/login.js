@@ -49,7 +49,14 @@ angular.module('JFS_Admin')
                     $window.location.href ='https://jfsapp.com/Admin/Portal/Agent/#/';
                   }
                   else{
-                    $state.go(state);
+                    if(angular.isDefined($rootScope.LastLocation)){
+                      var lastLocation = $rootScope.LastLocation;
+                      delete $rootScope.LastLocation;
+                      location.href = lastLocation;
+                    }
+                    else{
+                      $state.go(state);
+                    }
                   }
             }, function(error) {
 

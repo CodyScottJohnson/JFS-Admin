@@ -50,11 +50,13 @@ angular.module('JFS_Admin').run(function($rootScope, $state, localStorageService
     }
     if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
       event.preventDefault();
+      $rootScope.LastLocation =location.href;
       $state.go('login');
     }
     else if (toState.name !='login' && toState.name !== '' && ($rootScope.currentUser === null))
     {
       event.preventDefault();
+      $rootScope.LastLocation =location.href;
       $state.go('login');
     }
     else if(angular.isDefined($rootScope.currentUser) && $rootScope.currentUser !== null) {

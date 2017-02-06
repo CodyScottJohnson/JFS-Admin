@@ -8,7 +8,26 @@
  * Controller of the jfsApp
  */
 angular.module('JFS_Admin')
-  .controller('MainCtrl', function($scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications, Recruits, $sce) {
+  .controller('MainCtrl', function($scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications, Recruits, $sce, $location) {
+    $scope.ViewTask = function(taskID) {
+      Task.getTask(taskID);
+      Functions.OpenModal('views/Modals/TaskModal.html', 'md');
+    };
+    if(angular.isDefined($location.search().Task_ID))
+    {
+      if(angular.isDefined($location.search().Task_Completed) && $location.search().Task_Completed == 1){
+        Task.getTask($location.search().Task_ID).then(function(data){
+          data.Status = "Completed";
+          Task.updateTask(data);
+          Functions.OpenModal('views/Modals/TaskCompleted.html', 'sm');
+        });
+      }
+      else{
+        $scope.ViewTask($location.search().Task_ID);
+      }
+      $location.search('Task_ID', null);
+      $location.search('Task_Completed', null);
+    }
     $scope.Functions = Functions;
     //Functions.OpenModal('views/Modals/User/notes.html','md',null,{windowClass:'notification_modal'});
     $scope.Recruits = Recruits.data;
@@ -32,10 +51,6 @@ angular.module('JFS_Admin')
     $scope.ViewMessage = function(messageid) {
       User.setCurrentConversation(messageid);
       $state.go('app.Messages');
-    };
-    $scope.ViewTask = function(taskID) {
-      Task.getTask(taskID);
-      Functions.OpenModal('views/Modals/TaskModal.html', 'md');
     };
     $scope.TaskOptions = [
       ['Mark as Seen', function($itemScope) {
