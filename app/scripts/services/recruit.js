@@ -183,6 +183,8 @@ angular.module('JFS_Admin')
           currentRecruit.data.currentRecruit.Info.ColorStatus.TotalSent++;
           currentRecruit.data.currentRecruit.Info.ColorStatus.LastSent = moment.utc().format();
           currentRecruit.data.currentRecruit.Color_Status = 'Test Sent';
+          var message2 = "If there's any problems with the email here's the link:\n"+"https://www.JFSApp.com/ColorQuiz/dist/#/"+testdata.Test_Token;
+          User.sendText(message2, currentRecruit.data.currentRecruit.BUS_PH_NBR ||'');
           currentRecruit.save();
         });
       });

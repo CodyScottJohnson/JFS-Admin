@@ -1,5 +1,10 @@
 .center {
-  &.vertical {}
+  &.vertical {
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
+    -webkit-transform: translate(0,-50%);
+  }
   &.horizontal {
     position: absolute;
     left: 50%;
@@ -59,6 +64,9 @@
 .DirectionalBoxShadowHelper(@level:'right') {
   & when (@level = 'right') {
     box-shadow: 1px 0 3px rgba(0,0,0,0.12), 1px 0 2px rgba(0,0,0,0.24);
+  }
+  & when (@level = 'left') {
+    box-shadow: -1px 0 3px rgba(0,0,0,0.12), -1px 0 2px rgba(0,0,0,0.24);
   }
   & when (@level = 2) {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);

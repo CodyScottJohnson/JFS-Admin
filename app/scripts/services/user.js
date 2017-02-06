@@ -283,6 +283,51 @@ angular.module('JFS_Admin')
       });
       return deferred.promise;
     };
+    currentUser.getNotes = function() {
+        var deferred = $q.defer();
+        $http({
+                method: 'GET',
+                url: 'https://jfsapp.com/Secure/API/User/Notes/',
+                params: {
+                    'access_token': $rootScope.currentUser.Token.access_token,
+                    client_id: 'testclient',
+                    client_secret: 'testpass'
+
+                },
+            }).then(function(data) {
+                //console.log(data.data);
+                deferred.resolve(data.data);
+            }, function(error) {
+                deferred.reject(error);
+            });
+
+        return deferred.promise;
+    };
+    currentUser.setNotes = function(notes) {
+        var deferred = $q.defer();
+
+            $http({
+                method: 'post',
+                url: 'https://jfsapp.com/Secure/API/User/Notes/',
+                params: {
+                    'access_token': $rootScope.currentUser.Token.access_token,
+                    client_id: 'testclient',
+                    client_secret: 'testpass'
+
+                },
+                data: {
+                    notes: notes,
+                    User_ID: $rootScope.currentUser.Info.id
+                }
+            }).then(function(data) {
+                //console.log(data.data);
+                deferred.resolve(data.data);
+            }, function(error) {
+                deferred.reject(error);
+            });
+        return deferred.promise;
+    };
+
     //currentUser.getColumns = function(){return ColumnsToShow}
     //Initialize
     currentUser.getGlobalSettings();

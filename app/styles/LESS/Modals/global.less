@@ -55,3 +55,158 @@
   color:darken(@color-primary-2,50%);
   border-radius: 0 0 5px 5px;
 }
+.notes_modal{
+  background-color: #F6FAF9;
+  .BoxShadowHelper(5);
+  height:600px;
+  border-radius: 20px;
+  display: block;
+  position: relative;
+  padding:0;
+  padding-top:60px;
+  overflow: hidden!important;
+  z-index:1;
+  .note_text{
+    width:100%;
+    min-height:200px;
+  }
+  .note_header{
+    .Font_Body;
+    font-size: 20px;
+    padding:20px;
+    color:@gray-pleasing;
+    width: 100%;
+    text-align: center;
+    input{
+      outline: none;
+      border:none;
+      background: none;
+      text-align: center;
+      width:100%;
+    }
+  }
+  .note_body{
+    .Font_Body;
+    font-size: 15px;
+    font-weight: 400;
+    padding-left:60px;
+    padding-right:60px;
+    padding-bottom:150px;
+    height: 100%;
+    .scrollbar;
+  }
+  .note_footer{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom:0;
+    padding-bottom:15px;
+    background: fade(@almost-white,90%);
+    border-radius: 0 0 20px 20px;
+    i{
+      color:@tech;
+      font-size: 40px;
+      margin:20px;
+      .clickable
+    }
+  }
+  .fa-ellipsis-v{
+    position: absolute;
+    font-size: 25px;
+    top:20px;
+    right:30px;
+    color: @tech;
+    .clickable;
+  }
+  .side_panel{
+    height:600px;
+    width:270px;
+    background-color: fade(#FBFBFD,95%);
+    position: absolute;
+    right:0;
+    top:0;
+    border-radius: 0 20px 20px 0;
+    .animateLeave(slideOutRight,1s);
+    .animateEnter(slideInRight,1s);
+    .DirectionalBoxShadowHelper('left');
+    .note_outer_list{
+      height: 100%;
+      width:100%;
+      top:0;
+      padding-top: 70px;
+      padding-bottom: 50px;
+      border-radius: 0 20px 20px 0;
+      .scrollbar;
+      position: absolute;
+    }
+    .new_note{
+      position: absolute;
+      background-color: fade(#FBFBFD,95%);
+      width:100%;
+      height: 50px;
+      line-height: 50px;
+      bottom:0;
+      text-align: center;
+      color:@tech;
+      border-top: 1px solid fade(@gray-pleasing,10%);
+      border-radius: 0 0 20px 0;
+      i{
+        .clickable;
+      }
+    }
+    .note_list{
+      .Font_Body;
+      font-size:18px;
+      font-weight: 400;
+      padding:10px;
+      padding-left:30px;
+      line-height: 40px;
+      height:60px;
+      width:100%;
+      border-bottom: 1px solid fade(@gray-pleasing,10%);
+      .clickable;
+      &.selected{
+        background: @tech;
+        color:@almost-white;
+      }
+    }
+    .search{
+      width:100%;
+      padding-top: 24px;
+      display: block;
+      position: relative;
+      height:70px;
+      border-bottom: 1px solid fade(@gray-pleasing,10%);
+      color:@tech;
+      z-index:2;
+      background-color: fade(#FBFBFD,95%);
+      border-radius: 0 20px 0 0;
+      .fa-search{
+        .center.vertical;
+        right:30px;
+      }
+      .fa-stack{
+        .center.vertical;
+        left:20px;
+        font-size: 15px;
+        .clickable
+      }
+      input{
+        .Font_Body;
+        .center.vertical;
+        width:calc(100%-35px);
+        font-size:13px;
+        font-weight: 400;
+        border: 1px solid fade(@tech,100%);
+        border-radius:20px;
+        background: none;
+        color:@tech;
+        outline: none;
+        padding-left:20px;
+        color:@gray-pleasing;
+        position: absolute;
+        right:20px;
+      }
+    }
+  }
+}

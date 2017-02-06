@@ -10,6 +10,7 @@
 angular.module('JFS_Admin')
   .controller('MainCtrl', function($scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications, Recruits, $sce) {
     $scope.Functions = Functions;
+    //Functions.OpenModal('views/Modals/User/notes.html','md',null,{windowClass:'notification_modal'});
     $scope.Recruits = Recruits.data;
     $scope.to_trusted = function(html_code) {
         return $sce.trustAsHtml(html_code);

@@ -12,6 +12,7 @@ angular.module('JFS_Admin')
     $scope.User = User.data;
     $scope.showConversation = function(ConversationID){
       //User.MarkConversation(ConversationID)
+      $scope.currentConversationID = ConversationID;
       User.setCurrentConversation(ConversationID);
     };
     $scope.sendText=function(message,to){
