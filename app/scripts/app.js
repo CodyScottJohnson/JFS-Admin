@@ -15,6 +15,7 @@ angular
     'angularMoment',
     'angular-sortable-view',
     'chart.js',
+    'config',
     'FBAngular',
     'LocalStorageModule',
     'luegg.directives',
@@ -108,7 +109,7 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
     })
     .state('app.Tasks', {
       url: '/Tasks',
-      templateUrl: 'views/Task/index.html',
+      templateUrl: 'views/Task/index_new.html',
       controller: 'TaskCtrl',
 
     })

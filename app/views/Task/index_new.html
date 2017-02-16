@@ -1,0 +1,77 @@
+<style>
+  hr {
+    width: 100%;
+    border-color: #E0E0E0;
+  }
+
+  .task_list {
+    height: 50px;
+    border-bottom: 1px solid #E0E0E0;
+    display: block;
+    position: relative;
+    z-index: 0;
+  }
+</style>
+<div class="container-fluid view" fullscreen="taskIsFullscreen" only-watched-property class="scrollbar">
+  <div class="row view">
+    <div class="col-md-3 sidenav" style="background-color:white;padding:20px">
+      <!--<span style="right:0px;position:absolute"><i class="fa fa-bars fa-rotate-90" aria-hidden="true"></i></span>-->
+      <p class="clickable">
+
+        <span ng-click="taskIsFullscreen = true"> <i class="fa fa-expand" aria-hidden="true"></i> Full Screen</span>
+      </p>
+      <p class="clickable">
+
+        <span ng-click="taskFilter.User_ID = currentUser.Info.id;TaskViewOptions.show_users=false"> <i class="fa fa-user" aria-hidden="true"></i> My Tasks</span>
+      </p>
+      <p class="clickable">
+
+        <span ng-click="taskFilter.User_ID = '';TaskViewOptions.show_users=true"><i class="fa fa-users" aria-hidden="true"></i> All Tasks</span>
+      </p>
+      <hr>
+      <p>
+        Order By
+        <ul style="list-style:none;padding-left:15px">
+
+          <li ng-click="sort('Priority')" class="clickable"><a>Priority</a></li>
+          <li ng-click="sort('Created_Date')" class="clickable"><a>Date Created</a></li>
+          <li ng-click="sort('Due_Date')" class="clickable"><a>Deadline</a></li>
+
+        </ul>
+
+      </p>
+    </div>
+    <div class="col-md-9 mainBody">
+      <div class="input-group shadow-1" style="height:53px;border:none;z-index:4">
+        <input style="height:100%;height:53px;border-radius:0px;border:none;box-shadow:none;z-index:2" ng-model="taskSearch" type="text" class="form-control" placeholder="Search..." aria-describedby="basic-addon2">
+        <span style="border-radius:0px;border:none;border-bottom:1px solid #E0E0E0;background-color:#86B7D9;color:#226493" class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
+      </div>
+      <div ng-show="TaskViewOptions.show_users" style="height:60px;width:100%;background-color:#bababa;z-index:1;display:block;position:relative;white-space:nowrap;width:100%" class="shadow-1 scrollbar">
+        <div ng-click="taskFilter.User_ID =user_item.id" ng-repeat="user_item in User.userList" class="clickable" style="display:inline-block;height:100%;background-color:#E0E0E0;padding:20px;border-right:1px solid #a1a1a1;transition-delay: {{$index * 500}}ms">
+          {{user_item.display_name}}
+        </div>
+      </div>
+      <div class="task_list fadeInUpBig" context-menu="TaskOptions" ng-repeat="task in Tasks.allTasks|orderBy:sortKey:reverse|filter:taskFilter|filter:taskSearch|filter:{Status:'!'+'Completed'}" style="vertical-align:middle;background-color:white">
+        <div style="height:50px;width:20px;margin:0;display:inline-block;position:absolute;border-bottom: 1px solid #E0E0E0" ng-style="task.Priority=='Low' &&{'background-color':'#EBEBEB'}||task.Priority=='Medium' &&{'background-color':'#FFE372'}||task.Priority=='High' &&{'background-color':'#FF7C72'}">
+
+        </div>
+        <div style="display:inline-block;padding:5px;padding-left:20px">
+          <div class="media">
+            <div class="media-left media-middle">
+              <i ng-click="removeFlag(task)" ng-show="task.Status!='Completed'" class="icon ion-android-checkbox-outline-blank clickable" style="margin-left:10px;font-size:29px; display:inline-block"></i><i style="margin-left:10px;font-size:29px;color:rgba(177,217,120,1)"
+                  ng-show="task.Status =='Completed'" class="icon ion-ios-checkmark"></i>
+            </div>
+            <div class="media-body" style="vertical-align:middle">
+              <h5 ng-click="showTask(task)" class="media-heading clickable">{{task.FNAME + ' '+ task.LNAME}} <span ng-hide="task.Due_Date==null" style="background-color:#FF7C72;padding:2px;border-radius:2px;font-weight:normal;font-size:8pt;color:white;margin-left:5px;margin-right:5px">deadline</span><time class="time" am-time-ago="task.Due_Date"></time></h5> {{task.Title}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="task shadow-6" ng-show="ExpandedView.show">
+      <div style="height:100%;position:relative;display:block" ng-include="'views/Task/sidepanel.html'">
+
+      </div>
+    </div>
+  </div>
+</div>

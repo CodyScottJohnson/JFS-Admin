@@ -8,16 +8,16 @@
  * Controller of the JFS_AgentPortal
  */
 angular.module('JFS_Admin')
-  .controller('LoginCtrl', function($scope, $http,$rootScope,$state,$cookies, $window, localStorageService) {
+  .controller('LoginCtrl', function($scope, $http,$rootScope,$state,$cookies, $window, localStorageService, ENV) {
     $scope.User = {};
     $scope.login = function(username, password) {
       $http({
         method: 'POST',
-        url: 'https://jfsapp.com/Secure/OAUTH/getToken/',
+        url: ENV.Oauth + 'getToken/',
         data: {
           grant_type: 'password',
-          client_id: 'testclient',
-          client_secret: 'testpass',
+          client_id: ENV.APP_ID,
+          client_secret: ENV.APP_Secret,
           username: username,
           password: password
         }
@@ -27,11 +27,11 @@ angular.module('JFS_Admin')
         var Token = data.data;
         $http({
                 method: 'GET',
-                url: 'https://jfsapp.com/Secure/API/User/',
+                url: ENV.API +'User/',
                 params: {
                     'access_token': Token.access_token,
-                    client_id: 'testclient',
-                    client_secret: 'testpass'
+                    client_id: ENV.APP_ID,
+                    client_secret: ENV.APP_Secret
 
                 },
             }).then(function(data) {
