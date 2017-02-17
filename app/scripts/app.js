@@ -109,7 +109,7 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
     })
     .state('app.Tasks', {
       url: '/Tasks',
-      templateUrl: 'views/Task/index_new.html',
+      templateUrl: 'views/Task/index.html',
       controller: 'TaskCtrl',
 
     })

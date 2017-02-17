@@ -49,6 +49,7 @@ module.exports = function(config) {
       'bower_components/ng-tags-input/ng-tags-input.js',
       'bower_components/angular-ui-switch/angular-ui-switch.js',
       'bower_components/angular-local-storage/dist/angular-local-storage.js',
+      'bower_components/ng-sortable/dist/ng-sortable.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

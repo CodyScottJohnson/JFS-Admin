@@ -16,6 +16,10 @@ angular.module('JFS_Admin')
      };
     $scope.User = User.data;
     $scope.Tasks = Task.data;
+    $scope.MarkAsDone = function(task){
+      //task.Status = "Completed";
+      Task.updateTask(task);
+    };
     $scope.addComment = function(text) {
         var date = new Date();
         ////console.log(date);

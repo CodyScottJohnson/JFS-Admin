@@ -211,3 +211,24 @@
   }
 
 }
+.task_list {
+  height: 50px;
+  border-bottom: 1px solid #E0E0E0;
+  display: block;
+  position: relative;
+  z-index: 0;
+  .animateLeave(slideOutRight,1s)
+}
+.task_search{
+  position: relative;
+  .BoxShadowHelper;
+  display: block;
+  height:80px;
+  width:100%;
+  z-index:5;
+  .fa-search{
+    position: absolute;
+    .center.vertical;
+    left:30px;
+  }
+}
