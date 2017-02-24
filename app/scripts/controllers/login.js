@@ -45,7 +45,7 @@ angular.module('JFS_Admin')
                   //$cookies.putObject('user',$scope.User,{"expires":moment().add(24,'hours').format(),secure:false});
                   console.log($scope.User.Info.PermissionLevel);
                   localStorageService.cookie.set('user', $scope.User,1);
-                  if($rootScope.currentUser.Info.PermissionLevel == 3){
+                  if($rootScope.currentUser.Info.title != 'Administrator'){
                     $window.location.href ='https://jfsapp.com/Admin/Portal/Agent/#/';
                   }
                   else{

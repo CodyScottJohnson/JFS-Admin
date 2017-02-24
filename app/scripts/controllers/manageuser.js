@@ -22,7 +22,7 @@ angular.module('JFS_Admin')
 
     });
   	$scope.AddUser =function(){
-  		 User.AddUser($scope.newUser);
+  		 User.AddUser($scope.newUser, 'admin');
     };
     $scope.checkvalue = function(data) {
   		 console.log(data);

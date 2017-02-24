@@ -61,8 +61,9 @@ angular.module('JFS_Admin').run(function($rootScope, $state, localStorageService
       $state.go('login');
     }
     else if(angular.isDefined($rootScope.currentUser) && $rootScope.currentUser !== null) {
-      if($rootScope.currentUser.Info.PermissionLevel == 3){
-      location.href ='https://jfsapp.com/Admin/Portal/Agent/#/';
+      if($rootScope.currentUser.Info.title != 'Administrator'){
+        event.preventDefault();
+        location.href ='https://jfsapp.com/Admin/Portal/Agent/#/';
     }
     }
 

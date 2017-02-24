@@ -8,7 +8,7 @@
  * Factory in the jfsApp.
  */
 angular.module('JFS_Admin')
-  .factory('User', function($q, $http, $cookies, $rootScope, $state, $filter, Functions, UUID, localStorageService) {
+  .factory('User', function($q, $http, $cookies, $rootScope, $state, $filter, Functions, UUID, localStorageService, ENV) {
     var currentUser = {
       data: {
         currentTextConversation: -1,
@@ -255,12 +255,12 @@ angular.module('JFS_Admin')
       });
       return deferred.promise;
     };
-    currentUser.AddUser = function(newUser) {
+    currentUser.AddUser = function(newUser,type) {
       var deferred = $q.defer();
       newUser.password = UUID.newuuid();
       $http({
         method: 'post',
-        url: 'https://jfsapp.com/Secure/API/UserManagement/user/',
+        url: 'https://jfsapp.com/Secure/API/UserManagement/user/?Type='+type,
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -327,7 +327,29 @@ angular.module('JFS_Admin')
             });
         return deferred.promise;
     };
+    currentUser.changePassword = function(password){
+      var deferred = $q.defer();
+       $http({
+           method: 'POST',
+           url: ENV.API + 'UserManagement/user/changepassword',
+           params: {
+          'access_token': $rootScope.currentUser.Token.access_token,
+          client_id: 'testclient',
+          client_secret: 'testpass'
+        },
+        data: {password:password}
+       }).then(function(data) {
+         $rootScope.currentUser.Info.password = data.data.password;
+         $rootScope.currentUser.Info.password_reset = 0;
+         localStorageService.cookie.set('user',$rootScope.currentUser,1);
+         deferred.resolve(data.data);
+       }, function(error) {
+         console.log(error.data.message);
+       });
 
+       return deferred.promise;
+
+    };
     //currentUser.getColumns = function(){return ColumnsToShow}
     //Initialize
     currentUser.getGlobalSettings();

@@ -8,7 +8,10 @@
  * Controller of the jfsApp
  */
 angular.module('JFS_Admin')
-  .controller('MainCtrl', function($scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications, Recruits, $sce, $location) {
+  .controller('MainCtrl', function($rootScope,$scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications, Recruits, $sce, $location) {
+    if($rootScope.currentUser.Info.password_reset == 1){
+      Functions.OpenModal('views/Modals/User/PasswordReset.html','md');
+    }
     $scope.ViewTask = function(taskID) {
       Task.getTask(taskID);
       Functions.OpenModal('views/Modals/TaskModal.html', 'md');
