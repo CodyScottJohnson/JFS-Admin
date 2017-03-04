@@ -211,6 +211,10 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
       url: "/Email",
       templateUrl: 'views/Email/index.html'
     })
+    .state('app.Email.Dashboard', {
+      url: "/Email/Dashboard",
+      templateUrl: 'views/Email/dashboard.html'
+    })
     .state('app.Email.People', {
       url: "/Email/Dashboard",
       templateUrl: 'views/Email/people.html',

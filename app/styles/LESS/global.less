@@ -1,22 +1,28 @@
 .navbar{
-  background-color: @color-primary-4!important;
+  background-color: @ui-0!important;
+  border-radius: 0px!important;
   //background-color: #72D9D2!important;
   i{
-    color:#FFFFFF!important;
+    color: @ui-3!important;
+    .TextShadowHelper(0);
+    .clickable;
   }
   span{
     font-family: 'Roboto', sans-serif;
     font-weight: 900;
     font-size: 25px;
-    color:#FFFFFF!important;
+    color:white!important;
   }
   a{
-    color:white!important;
+    .Font_Body;
+    font-size:15px;
+    color:@ui-3!important;
   }
 }
 .navbar-nav a{
   &:hover{
-    background-color:@color-secondary-2-4!important;
+    background-color:@ui-1!important;
+    .clickable;
   }
 }
 .view{
@@ -284,4 +290,7 @@ html,body{
   width:50px!important;
   overflow-x: hidden!important;
   //background-color: blue;
+}
+.sidebar{
+  background: @gray-pleasing!important;
 }
