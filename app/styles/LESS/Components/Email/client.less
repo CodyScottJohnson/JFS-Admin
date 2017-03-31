@@ -1,0 +1,38 @@
+.Email_Client{
+  .row{
+    padding:0 15px 0 15px;
+  }
+  .modal-body{
+    max-height: 800px;
+    border-radius: 0 0 10px 10px;
+    .scrollbar;
+  }
+  .Client_SideNav{
+    min-height:500px;
+    width:100%;
+    background-color: @ui-0;
+    border-right: 1px solid darken(@ui-0,20%);
+  }
+  .Client_Templates{
+    min-height:500px;
+    width:100%;
+    background-color: @ui-0;
+  }
+  .Client_Content{
+    min-height:500px;
+    width:100%;
+    .DirectionalBoxShadowHelper('right',1);
+    .Client_Toolbar{
+      width:100%;
+      height:55px;
+      border-bottom: 1px solid fade(@gray-pleasing,20%);
+      padding:10px 25px 10px 25px;
+      i{
+        color:fade(@gray-pleasing,60%);
+        font-size:30px!important;
+        .clickable;
+        margin:0 10px 0 0;
+      }
+    }
+  }
+}

@@ -15,6 +15,7 @@ angular.module('JFS_Admin')
       }
     };
     currentRecruit.setRecruit = function(id) {
+      var deferred = $q.defer();
       $http({
         method: 'GET',
         url: 'https://jfsapp.com/Secure/API/Recruit/' + id + '/',
@@ -72,11 +73,15 @@ angular.module('JFS_Admin')
         }
 
         currentRecruit.data.currentRecruit = data.data;
+        currentRecruit.data.currentRecruit.NextStepScheduled = moment(currentRecruit.data.currentRecruit.NextStepScheduled).toDate();
+        currentRecruit.data.currentRecruit.NextStepUpdated = moment(currentRecruit.data.currentRecruit.NextStepUpdated).format('Y-MM-D');
+        deferred.resolve(currentRecruit.data.currentRecruit);
         currentRecruit.getConversationHistory();
         currentRecruit.getTaskList();
       }, function(error) {
-        console.log(error);
+        deferred.reject(error);
       });
+      return deferred.promise;
     };
     currentRecruit.getConversationHistory = function() {
       $http({

@@ -1,0 +1,31 @@
+<div class="Email_Client">
+  <div class="modal-header">
+    Email
+  </div>
+  <div class="modal-body nopadding">
+    <div class="row">
+    <div class="col-md-2 nopadding" ng-hide="HideMenu">
+      <div class="Client_SideNav">
+
+      </div>
+    </div>
+    <div ng-hide="HideMenu" class="col-md-3 nopadding">
+      <div class="Client_Templates">
+
+      </div>
+    </div>
+    <div class="nopadding" ng-class="{'col-md-12':HideMenu,'col-md-7':(!HideMenu)}">
+      <div class="Client_Content">
+        <div class="Client_Toolbar">
+          <i class="material-icons">save</i>
+          <i class="material-icons">mode_edit</i>
+          <i ng-hide="true" class="material-icons">remove_red_eye</i>
+          <i class="material-icons">info</i>
+          <i ng-click="HideMenu=!HideMenu" class="material-icons" style="float:right">zoom_out_map</i>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>

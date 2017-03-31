@@ -40,6 +40,10 @@ angular.module('JFS_Admin')
       }).then(function(data) {
         //console.log(data.data);
         Recruits.data.List = data.data;
+        _.forEach(Recruits.data.List, function(recruit){
+                      recruit.NextStepScheduled = moment(recruit.NextStepScheduled).toDate();
+                      recruit.NextStepUpdated = moment(recruit.NextStepUpdated).format('Y-MM-D');
+                    });
         deferred.resolve(data.data);
       }, function(error) {
         deferred.reject(error);

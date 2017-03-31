@@ -99,9 +99,9 @@
                   </div>
                 </div>
                 <div class="btn-group" style="margin-bottom:0px;margin-top:px;padding:0px;bottom:0px;position:relative;display:block">
-                  <button type="button" class="btn btn-info" ng-click="isvis.todo={ 'yes': 'no', 'no':'yes'}[isvis.todo]" style="border-radius:0;line-height:25px;vertical-align:middles;height:50px;min-width:40px;margin:0"><i class="fa fa-check-square-o"></i></button>
+                  <button uib-popover-template="'views/Recruiting/popovers/status_portalview.html'" popover-placement="right" popover-trigger="outsideClick"  type="button" class="btn btn-info"  style="border-radius:0;line-height:25px;vertical-align:middles;height:50px;min-width:40px;margin:0"><i class="fa fa-check-square-o"></i></button>
                   <div class="well" style="border-radius:0;min-width:300px;height:50px;padding-top:0px;line-height:50px;padding-left:50px;margin:0;vertical-align:middle" ng-dblclick="NextStep.$show()">
-                    <span class="clickable" onaftersave="saveRecruit()" style="text-decoration:none;color:black;border:none" editable-text="Recruit.currentRecruit.NextStep" e-form="NextStep" ng-dblclick="NextStep.$show()">{{Recruit.currentRecruit.NextStep}}  {{Recruit.currentRecruit.NextStepScheduled|cmdate:'MM-dd-yyyy'}}</span>
+                    <span class="clickable" uib-popover-template="'views/Recruiting/popovers/status_portalview.html'" popover-placement="right" popover-trigger="outsideClick">{{Recruit.currentRecruit.NextStep}}  {{Recruit.currentRecruit.NextStepScheduled|cmdate:'MM-dd-yyyy'}}</span>
                   </div>
                 </div>
               </div>

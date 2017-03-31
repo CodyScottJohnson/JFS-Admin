@@ -1,0 +1,17 @@
+<div style="text-align:center">
+  <label>Next Step</label>
+  <div ng-click="email.$show()" >
+    <span class="clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" editable-text="Recruit.currentRecruit.NextStep" onaftersave="Recruit.currentRecruit.NextStepScheduled = null" e-form="email" >{{Recruit.currentRecruit.NextStep||'None'}}</span>
+  </div>
+  <label style="margin-top:10px">Last Updated</label>
+  <div>
+  <input class="form-control" ng-model="Recruit.currentRecruit.NextStepUpdated" disabled/>
+  </div>
+  <label style="margin-top:10px">Set Reminder</label>
+  <div ng-click="showReminder=!showReminder">
+    <input ng-change="saveRecruitStatus(recruit)" type="text" class="form-control" uib-datepicker-popup ng-model="Recruit.currentRecruit.NextStepScheduled" is-open="showReminder" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+  </div>
+  <div ng-click="saveRecruitStatus(recruit)" class="btn btn-success" style="margin-top:20px">
+    Save
+  </div>
+</div>

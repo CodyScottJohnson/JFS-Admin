@@ -8,7 +8,7 @@
  * Controller of the jfsApp
  */
 angular.module('JFS_Admin')
-  .controller('RecruitingCtrl', function($scope, Recruits, Task,Functions, Email) {
+  .controller('RecruitingCtrl', function($scope,recruit, Recruits, Task,Functions, Email) {
     $scope.colors2 = ['#97BBCD', '#DCDCDC', '#F7464A', '#FDB45C'];
     $scope.labels2 = ['', '', '', ''];
     Task.getUsersTasks(true);
@@ -30,12 +30,29 @@ angular.module('JFS_Admin')
     $scope.addRecruit =function(){
       Recruits.addRecruit();
     };
+
+
     $scope.recruitListOptions = [
       ['New Task', function($itemScope){
         //console.log($itemScope.recruit.INDV_ID);
         Task.newTask({Recruit_ID:$itemScope.recruit.INDV_ID});
         Functions.OpenModal('views/Modals/TaskModal.html', 'md');
-      },false],customItem,
+      },false],
+      ['Quick Look', function($itemScope){
+        //console.log($itemScope.recruit.INDV_ID);
+      },[
+        ['Notes', function($itemScope) {
+          recruit.setRecruit($itemScope.recruit.INDV_ID).then(function(data){
+              Functions.OpenModal('views/Modals/NotesModal.html', 'md');
+          });
+        }],
+        ['Tasks', function($itemScope) {
+          recruit.setRecruit($itemScope.recruit.INDV_ID).then(function(data){
+              Functions.OpenModal('views/Recruiting/modals/taskModal.html', 'md');
+          });
+        }]
+        ]
+      ],
       ['Email', function($itemScope) {
           console.log($itemScope);
         },
@@ -85,6 +102,10 @@ angular.module('JFS_Admin')
         Source: ['Referal', 'PO', 'COI', 'ARS', 'ROD', 'Other']
     };
     $scope.advancedSearch ={'show':true};
+    $scope.saveRecruitStatus = function(recruit){
+      recruit.NextStepUpdated = moment();
+      $scope.saveRecruit(recruit);
+    };
     $scope.saveRecruit = function(recruit){
       Recruits.save(recruit);
     };

@@ -19,7 +19,7 @@
       <th></th>
       <th>POP</th>
       <th>Color</th>
-      <th>TODO</th>
+      <th>Status</th>
       <th>Email</th>
       <th>Type</th>
       <th>Source</th>
@@ -87,7 +87,7 @@
                       chart-data="[recruit.Color_Blue,recruit.Color_White,recruit.Color_Red,recruit.Color_Yellow]" chart-legend="false" chart-colours="colors2" chart-labels="labels2" chart-options="options2" width="10px" height="10px">
         							</canvas></div>
         </td>
-      <td class="expand" ng-dblclick="rowform.$show()">
+      <td class="expand clickable" ng-dblclick="rowform.$show()" uib-popover-template="'views/Recruiting/popovers/status.html'" popover-placement="right" popover-trigger="outsideClick">
         <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.NextStep" e-name="NextStep" e-form="rowform">{{recruit.NextStep}}</span>
       </td>
       <td class="expand" ng-dblclick="rowform.$show()">

@@ -24,6 +24,10 @@ angular.module('JFS_Admin')
     {
       recruit.setRecruit($location.search().RecruitID);
     }
+    $scope.ViewTask = function(taskID) {
+      Task.getTask(taskID);
+      Functions.OpenModal('views/Modals/TaskModal.html', 'md');
+    };
     $scope.newTextMessage="";
     $scope.clipboard = function(string) {
       ecopy(string);
@@ -115,6 +119,10 @@ angular.module('JFS_Admin')
       User.data.visibility.recruitSidebarType = 'views/Recruiting/sidepanels/' + type;
       console.log($scope.User.visibility.recruitSidebarType);
     };
+    $scope.MarkAsDone = function(task){
+      //task.Status = "Completed";
+      Task.updateTask(task);
+    };
     $scope.updateToDo = function(){
       recruit.updateToDo();
     };
@@ -158,6 +166,10 @@ angular.module('JFS_Admin')
     };
     $scope.saveRecruit = function(){
       recruit.save();
+    };
+    $scope.saveRecruitStatus = function(recruit){
+      $scope.Recruit.currentRecruit.NextStepUpdated = moment();
+      $scope.saveRecruit();
     };
     $scope.SetPhoto = function(photo){
       recruit.SetPicture(photo);
