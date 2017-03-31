@@ -8,9 +8,27 @@
  * Service in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('Email', function($rootScope, $http, $q, Functions, User) {
+  .factory('Email', function($rootScope, $http, $q, Functions, User, ENV) {
     var Email = {
       data: {}
+    };
+    Email.getTemplates = function() {
+      var deferred = $q.defer();
+      $http({
+        method: 'GET',
+        url: ENV.API+'Email/Templates/',
+        params: {
+          'access_token': $rootScope.currentUser.Token.access_token,
+          client_id: ENV.APP_ID,
+          client_secret: ENV.APP_Secret,
+        },
+      }).then(function(data) {
+        deferred.resolve(data.data);
+        Email.data.Templates = data.data;
+      }, function(error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
     };
     Email.getMailingListPeople = function(ListID,Update) {
       var deferred = $q.defer();

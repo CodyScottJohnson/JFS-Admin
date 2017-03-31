@@ -1,20 +1,30 @@
-<div class="Email_Client">
+<div class="Email_Client" ng-controller="EmailClientCtrl">
   <div class="modal-header">
     Email
   </div>
   <div class="modal-body nopadding">
-    <div class="row">
-    <div class="col-md-2 nopadding" ng-hide="HideMenu">
-      <div class="Client_SideNav">
-
+    <div class="row .full_height">
+    <div class="col-md-2 nopadding .full_height" ng-hide="HideMenu">
+      <div class="Client_SideNav" ng-click="FNAME='Ted'">
+        <div class="Client_Btn">
+          New Template
+        </div>
       </div>
     </div>
-    <div ng-hide="HideMenu" class="col-md-3 nopadding">
+    <div ng-hide="HideMenu" class="col-md-3 nopadding .full_height">
       <div class="Client_Templates">
+        <div class="Client_Search">
+          <i class="fa fa-search"></i>
+          <input />
+        </div>
+        <div ng-click="setCurrent(email)" ng-repeat="email in Email.Templates" class="Template_List" ng-class="{selected:email.selected}">
+          <span class="title">{{email.Title}}</span>
+          <span class="description">{{email.Description}}</span>
+        </div>
 
       </div>
     </div>
-    <div class="nopadding" ng-class="{'col-md-12':HideMenu,'col-md-7':(!HideMenu)}">
+    <div class="nopadding .full_height" ng-class="{'col-md-12':HideMenu,'col-md-7':(!HideMenu)}">
       <div class="Client_Content">
         <div class="Client_Toolbar">
           <i class="material-icons">save</i>
@@ -23,7 +33,9 @@
           <i class="material-icons">info</i>
           <i ng-click="HideMenu=!HideMenu" class="material-icons" style="float:right">zoom_out_map</i>
         </div>
+        <div ng-bind-html="to_trusted(CurrentEmail.Template)">
 
+        </div>
       </div>
     </div>
   </div>
