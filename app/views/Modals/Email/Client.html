@@ -9,15 +9,18 @@
         <div class="Client_Btn">
           New Template
         </div>
+        <span ng-click="templateFilter={Type:'Default'}" class="hvr-pulse" ng-class="{selected:templateFilter.Type=='Default'}"><i class="fa fa-circle"></i> Default</span>
+        <span ng-click="templateFilter={Type:'Custom'}" class="hvr-pulse" ng-class="{selected:templateFilter.Type=='Custom'}"><i class="fa fa-circle"></i>Custom</span>
+        <span ng-click="templateFilter={favorite:true}" class="hvr-pulse" ng-class="{selected:templateFilter.favorite}"><i class="fa fa-circle"></i>Favorites</span>
       </div>
     </div>
     <div ng-hide="HideMenu" class="col-md-3 nopadding .full_height">
       <div class="Client_Templates">
         <div class="Client_Search">
           <i class="fa fa-search"></i>
-          <input />
+          <input ng-model="search" />
         </div>
-        <div ng-click="setCurrent(email)" ng-repeat="email in Email.Templates" class="Template_List" ng-class="{selected:email.selected}">
+        <div ng-click="setCurrent(email)" ng-repeat="email in Email.Templates|filter:search|filter:templateFilter" class="Template_List" ng-class="{selected:email.selected}">
           <span class="title">{{email.Title}}</span>
           <span class="description">{{email.Description}}</span>
         </div>
@@ -31,12 +34,19 @@
           <i class="material-icons">mode_edit</i>
           <i ng-hide="true" class="material-icons">remove_red_eye</i>
           <i class="material-icons">info</i>
+          <i ng-click="setFavorite(CurrentEmail)" class="material-icons" ng-class="{favorite:CurrentEmail.favorite}">star_rate</i>
           <i ng-click="HideMenu=!HideMenu" class="material-icons" style="float:right">zoom_out_map</i>
         </div>
         <div ng-bind-html="to_trusted(CurrentEmail.Template)">
 
         </div>
       </div>
+      <div class="Client_Footer">
+        <div class="Send_Bar">
+          Send
+      </div>
+      </div>
+
     </div>
   </div>
 </div>

@@ -51,7 +51,7 @@
         <div style="display:inline-block;padding:5px;padding-left:20px">
           <div class="media">
             <div class="media-left media-middle">
-              <i ng-click=task.Status='Completed';"MarkAsDone(task)" ng-show="task.Status!='Completed'" class="icon ion-android-checkbox-outline-blank clickable" style="margin-left:10px;font-size:29px; display:inline-block"></i>
+              <i ng-click="task.Status='Completed';MarkAsDone(task)" ng-show="task.Status!='Completed'" class="icon ion-android-checkbox-outline-blank clickable" style="margin-left:10px;font-size:29px; display:inline-block"></i>
               <i style="margin-left:10px;font-size:29px;color:rgba(177,217,120,1)"
                   ng-show="task.Status =='Completed'" class="icon ion-ios-checkmark"></i>
             </div>

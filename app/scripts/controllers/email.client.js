@@ -11,9 +11,10 @@ angular.module('JFS_Admin')
   .controller('EmailClientCtrl', function ($scope, Email, $sce, $interpolate, $parse) {
     Email.getTemplates();
     $scope.Email = Email.data;
+    $scope.templateFilter = {Type:'Default'};
     $scope.Recipient = {FNAME:'Cody'};
     $scope.variables = {FNAME:'John'};
-    $scope.CurrentEmail = {Template:'Cody'};
+    $scope.CurrentEmail = {Template:''};
     $scope.to_trusted = function(html_code) {
         return $sce.trustAsHtml($interpolate(html_code.replace('\\',''))($scope.variables));
 
@@ -21,7 +22,7 @@ angular.module('JFS_Admin')
     $scope.setCurrent = function(email){
       $scope.Email.Templates= _.map($scope.Email.Templates, function(x) {
         x.selected = false;
-        return x
+        return x;
       });
       email.selected = true;
       _.forEach(email.Variables, function(variable){
@@ -33,5 +34,12 @@ angular.module('JFS_Admin')
                     }
                   });
       $scope.CurrentEmail = email;
+    };
+    $scope.setFavorite = function(email){
+      var index = _.findIndex(Email.data.Templates, {
+        'Template_ID': email.Template_ID
+      });
+      email.favorite = !email.favorite;
+      Email.data.Templates[index].favorite = email.favorite;
     };
   });
