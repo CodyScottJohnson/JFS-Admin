@@ -123,8 +123,23 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
     })
     .state('app.Recruiting.Dashboard', {
       url: '/Recruiting',
+      params: {
+          Archived: 0
+      },
       templateUrl: 'views/Recruiting/dashboard.html',
+      controller: 'RecruitingCtrl',
 
+    })
+    .state('app.Recruiting.Archived', {
+      url: '/Recruiting/Archived',
+      params: {
+          Archived: 1
+      },
+      views: {
+        '': {
+          templateUrl: 'views/Recruiting/dashboard.html',
+          controller: 'RecruitingCtrl',
+}}
     })
     .state('app.User', {
       url: '/User',
@@ -136,21 +151,6 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
       url: '/Settings',
       templateUrl: 'views/User/Pages/settings.html',
 
-    })
-
-    .state('app.Recruiting.Archived', {
-      url: "/ArchivedRecruits",
-      params: {
-        search: {
-          RecruitStatus_ID: 2
-        }
-      },
-      views: {
-        '': {
-          templateUrl: 'views/Recruiting/ArchivedRecruits.html',
-          controller: 'ArchivedRecruitsCtrl'
-        }
-      }
     })
     .state('app.Recruiting.Assigned', {
       url: '/Recruiting/Assigned',

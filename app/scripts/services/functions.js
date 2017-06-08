@@ -8,10 +8,10 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('Functions', function(toastr,$uibModal,$rootScope) {
+  .factory('Functions', function(toastr,$uibModal,$rootScope, $http, $q) {
     // Service logic
     // ...
-    var Functions = {};
+    var Functions = {data:{Tags:[]}};
     var notification = window.Notification || window.mozNotification || window.webkitNotification;
     if(angular.isDefined(notification)){
     notification.requestPermission();
@@ -77,7 +77,59 @@ angular.module('JFS_Admin')
      });
 
     };
+    Functions.getTags = function() {
+        var deferred = $q.defer();
+            $http({
+                method: 'get',
+                url: 'https://jfsapp.com/Secure/API/Tags/',
+                params: {
+                    'access_token': $rootScope.currentUser.Token.access_token,
+                    client_id: 'testclient',
+                    client_secret: 'testpass'
 
+                },
+            }).then(function(data) {
+                //console.log(data.data);
+                Functions.data.Tags = data.data;
+                deferred.resolve(data.data);
+            }, function(error) {
+                deferred.reject(error);
+            });
+        return deferred.promise;
+    };
+    Functions.editTags = function(tag) {
+        var deferred = $q.defer();
+            $http({
+                method: 'patch',
+                url: 'https://jfsapp.com/Secure/API/Tags/',
+                params: {
+                    'access_token': $rootScope.currentUser.Token.access_token,
+                    client_id: 'testclient',
+                    client_secret: 'testpass'
+
+                },
+                data:tag
+            }).then(function(data) {
+                console.log(data.data);
+                Functions.data.Tags.push(data.data);
+                //console.log()
+                deferred.resolve(data.data);
+            }, function(error) {
+                deferred.reject(error);
+            });
+        return deferred.promise;
+    };
+    Functions.loadTags = function(query) {
+        var deferred = $q.defer();
+        var Tags = Functions.data.Tags;
+        Tags.filter(function(tag) {
+        return tag.Name.toLowerCase().indexOf(query.toLowerCase()) != -1;
+        });
+        deferred.resolve(Functions.data.Tags);
+
+        return deferred.promise;
+    };
+    Functions.getTags();
 
 
     // Public API here
