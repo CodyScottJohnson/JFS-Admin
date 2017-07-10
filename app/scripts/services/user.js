@@ -182,7 +182,7 @@ angular.module('JFS_Admin')
           deferred.reject(error);
         });
       } else {
-        Functions.Toast('toast', 'toast', To + ' Is not a valid number');
+        Functions.Toast('error', 'toast', To + ' Is not a valid number');
         deferred.reject('Invalid Number');
       }
 

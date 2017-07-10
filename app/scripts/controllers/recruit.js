@@ -80,7 +80,7 @@ angular.module('JFS_Admin')
       }
     };
     $scope.colorStatus = function(){
-      if($scope.Recruit.currentRecruit.Color_Status!=='Test Sent' && $scope.Recruit.currentRecruit.POP_Status!=='Test Completed'){
+      if($scope.Recruit.currentRecruit.Color_Status!=='Test Sent' && $scope.Recruit.currentRecruit.Color_Status!=='Test Completed'){
         recruit.sendColor();
       }
       else{
