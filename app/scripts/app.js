@@ -99,7 +99,7 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
     })
     .state('app.Home', {
       url: '/',
-      templateUrl: 'views/Recruiting/index.html',
+      templateUrl: 'views/Dashboard/index.html',
 
     })
     .state('app.Messages', {

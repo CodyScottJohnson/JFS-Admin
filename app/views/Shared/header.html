@@ -24,7 +24,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="messages.isopen" auto-close="outsideClick">
 					<a uib-dropdown-toggle><i class="fa fa-comments"></i><span ng-hide="(UserData.TextMessages|filter:{'status':'0','type':0}).length<=0" class="badge shake">{{(UserData.TextMessages|filter:{'status':'0','type':0}).length}}</span></a>
-					<ul class="dropdown-menu shadow-5" style="width:300px;overflow-x: hidden;">
+					<ul class="dropdown-menu messages" style="width:300px;overflow-x: hidden;">
 						<li class="dropdown-menu-header">
 							<strong>Messages</strong>
 						</li>
@@ -42,67 +42,23 @@
 							</li>
 						</div>
 						<div>
-							<li class="dropdown-menu-footer text-center">
-								<strong>View all notification</strong>
+							<li ui-sref="app.Messages" class="dropdown-menu-footer text-center clickable">
+								<strong>View all messages</strong>
 							</li>
 						</div>
 					</ul>
 				</li>
-				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="status.isopen" auto-close="outsideClick">
-
-					<a uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-envelope-o"></i><span class="badge">{{Emails.Unread}}</span></a>
-					<ul class="dropdown-menu" style="max-height:400px;width:400px;overflow-y: scroll;overflow-x: hidden;margin-right:-100px">
-						<li class="dropdown-menu-header">
-							<strong>{{Emails.AllEmails.Total}}</strong>
-						</li>
-						<li class="avatar" ng-repeat="email in Emails.AllEmails" style="width:400px;border-bottom:5px;border-color:black;overflow-x: hidden;">
-							<a style="width:400px">
-								<div ng-click="showPopup(email,'myModalContent.html');" style="width:400px;">
-									<img class="avatar" src="">
-									<div style="width:250px;overflow:hidden">{{email.subject}}</div>
-									<small>{{email.date}}</small>
-								</div>
-
-								<span class="label label-info" style="background:none;"><i class="fa fa-navicon" style ="color:black;z-index:9" ng-click="email.Expand =1"></i></span>
-
-								<div class="emailMenu" ng-show="email.Expand==1" style="top:0px;display:block;position:absolute;right:0px;height:100%;width:150px;background-color:blue;z-index:10">
-									<div style="float:left;background-color:green;position:relative;height:100%;width:40%;color:white;line-height:100%;text-align:center;vertical-align:middle"><i style="color:white" class="fa fa-mail-reply"></i></div>
-									<div style="float:left;background-color:red;position:relative;height:100%;width:40%;line-height:100%;text-align:center;vertical-align:middle"><i style="color:white;vertical-align:middle;font-weight:bolder" class="fa fa-trash-o"></i></div>
-									<div ng-click="email.Expand =2" style="float:left;background-color:grey;position:relative;height:100%;width:20%;line-height:100%;text-align:center;vertical-align:middle"><i style="color:white" class="fa fa-remove"></i></div>
-								</div>
-							</a>
-
-						</li>
-
-						<li class="dropdown-menu-footer text-center">
-							<a href="page-inbox.html">{{isPopupVisible}}</a>
-						</li>
-					</ul>
-					<script type="text/ng-template" id="myModalContent.html">
-						<div class="modal-header">
-							<button type="button" class="close" aria-hidden="true" ng-click="closePopup()">&times;</button>
-							<h3>{{Currentemail.subject}}</h3>
-						</div>
-						<div class="modal-body">
-							<strong>From:</strong> {{Currentemail.from}}
-							<br />
-							<strong>Date:</strong> {{Currentemail.date}}
-							<br />
-							<br />
-							<iframe src='{{ "/Test/GetSpecificEmail.php?id="+Currentemail.uid}}' width="100%" height="300" style="border:none"></iframe>
-
-						</div>
-						<div class="modal-footer">
-							<a class="btn btn-primary" ng-click="closePopup()">Close</a>
-						</div>
-					</script>
-
-				</li>
+		
 				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="notification.isopen" auto-close="outsideClick">
 					<a uib-dropdown-toggle><i class="fa fa-bell"></i><span ng-hide="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0" class="badge shake">{{(Task.currentUsersTasks|filter:{'Status':'new'}).length}}</span></a>
-					<ul class="dropdown-menu shadow-5" style="width:300px;overflow-x: hidden;">
-						<li class="dropdown-menu-header">
-							<strong>New Tasks</strong>
+					<ul class="dropdown-menu notifications" style="width:300px;">
+						<div class="NoNotifications" id="NoNotification" ng-show="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0">
+							<i class="fa fa-bell"></i>
+							<strong>Congratulations!</strong><div class="SubTitle">No New Notifactions</div>
+						</div>
+						<div id="NotificationList" ng-hide="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0">
+						<li ng-hide="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0" class="dropdown-menu-header">
+							<strong>New Tasks</strong> <span class="badge">{{(Task.currentUsersTasks|filter:{'Status':'new'}).length}}</span>
 						</li>
 						<div class="scrollbar" style="max-height:500px;overflow-x: hidden">
 							<div ng-repeat="(key, value) in Task.currentUsersTasks|filter:{'Status':'new'}|orderBy:['Status']| groupBy:'[Recruit_ID]'">
@@ -125,7 +81,7 @@
 									</div>
 								</li>
 							</div>
-							<li class="dropdown-menu-header">
+							<li ng-show="false" class="dropdown-menu-header">
 								<strong>New Notifications</strong>
 							</li>
 						</div>
@@ -134,6 +90,7 @@
 								<strong>View all notification</strong>
 							</li>
 						</div>
+					</div>
 					</ul>
 				</li>
 				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="setting.isopen" auto-close="outsideClick">
