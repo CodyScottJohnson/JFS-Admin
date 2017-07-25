@@ -10,6 +10,7 @@
 angular.module('JFS_Admin')
   .controller('TaskCtrl', function ($rootScope,$scope,User,Functions,Task, $sce) {
     $scope.ExpandedView ={};
+    $scope.taskFilter = {User_ID:$rootScope.currentUser.Info.id};
     $scope.sort = function(keyname) {
        $scope.sortKey = keyname; //set the sortKey to the param passed
        $scope.reverse = !$scope.reverse; //if true make it false and vice versa

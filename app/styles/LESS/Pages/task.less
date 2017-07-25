@@ -1,0 +1,191 @@
+.task-page {
+  .Font_Body;
+  .task-search {
+    .Font_Body;
+    position: absolute;
+    .BoxShadowHelper(1);
+    display: block;
+    height: 80px;
+    width: 100%;
+    z-index: 1;
+
+    .fa-search {
+      font-size:28px;
+      position: absolute;
+      .center.vertical;
+      left: 30px;
+    }
+
+    input {
+      font-size: 16px;
+      height: 100%;
+      padding-left:80px;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      z-index: 2;
+    }
+  }
+  .task-sidenav{
+    height:100%;
+    width:180px;
+    position:absolute;
+    left:0px;
+    display: block;
+    z-index:2;
+    background: white;
+    .BoxShadowHelper(3);
+    .title{
+      .BoxShadowHelper(1);
+      font-size:24px;
+      text-transform: uppercase;;
+      width:100%;
+      height:80px;
+      line-height: 80px;
+      text-align: center;
+      //border-bottom:1px solid fade(@gray-pleasing,30%);
+    }
+    .tile{
+      .clickable;
+      height:150px;
+      border-bottom:1px solid fade(@gray-pleasing,30%);
+      text-align: center;
+      padding:35px;
+      &.selected{
+        background-color: @color-button;
+        color:white;
+      }
+      i{
+        display: block;
+        font-size:35px;
+        margin-bottom:10px;
+      }
+      span{
+        font-size:20px;
+      }
+    }
+  }
+  .task-page-body{
+    .scrollbar;
+    display: inline-block;
+    width:100%;
+    padding-left:180px;
+    height:100%;
+    background: @gray-lighter;
+    .inner{
+      padding:80px 40px 40px 40px;
+    }
+    .task-panel{
+      .animateLeave(fadeOutDown,500ms);
+      .BoxShadowHelper(1);
+      .clickable;
+      margin-top:20px;
+      width:100%;
+      height:180px;
+      border-radius: 10px;
+      background-color: white;
+      padding:20px;
+      display: block;
+      position: relative;
+      .new{
+        position: absolute;
+        height:20px;
+        width:20px;
+        background: fade(@color-secondary-2-0,80%);
+        border-radius: 100%;
+        top:-8px;
+        left:-8px;
+        .BoxShadowHelper(1);
+
+      }
+      .title{
+        font-size: 16px;
+        color:fade(@gray-pleasing,90%)
+      }
+      .actions{
+        position: absolute;
+        right:5px;
+        top:20px;
+        color:fade(@gray-pleasing,70%);
+        //display: none;
+        i{
+          font-size: 20px;
+          margin-right:25px;
+        }
+      }
+      .priority{
+        //font-weight: 400;
+        margin-top:5px;
+        font-size: 14px;
+        color:fade(@gray-pleasing,70%);
+        span{
+          background: lighten(@gray-pleasing, 50%);
+          padding:2px 5px 2px 5px;
+          border-radius: 2px;
+          color:@almost-white;
+        }
+      }
+      .time{
+        position: absolute;
+        font-size:14px;
+        right:40px;
+        bottom:25px;
+        vertical-align: middle;
+        color:fade(@gray-pleasing,70%);
+        i{
+          margin-right:5px;
+          font-size: 25px;
+        }
+      }
+      .regarding{
+        .task_image_small{
+          height:35px;
+          width:35px;
+          margin-right:10px;
+          .BoxShadowHelper(1);
+        }
+        .logo_circle{
+          display: inline-block;
+          padding:5px;
+          height:35px;
+          width:35px;
+          border-radius: 100%;
+          background: @almost-white;
+          .BoxShadowHelper(1);
+          margin-right:10px;
+        }
+        .task_image_logo{
+          margin-top:4px;
+          max-height: 100%;
+          max-width:100%;
+
+        }
+        font-size:14px;
+        position: absolute;
+        bottom:20px;
+        color:fade(@gray-pleasing,70%)
+      }
+      &:hover{
+        background-color: #5A5A5A;
+        .title{
+          color:white;
+        }
+        .regarding{
+          color:fade(white,90%);
+        }
+        .priority{
+          color:fade(white,90%);
+        }
+        .actions{
+          display: block;
+          color:fade(white,90%);
+        }
+        .time{
+          color:fade(white,90%);
+        }
+      }
+
+    }
+
+  }
+}
