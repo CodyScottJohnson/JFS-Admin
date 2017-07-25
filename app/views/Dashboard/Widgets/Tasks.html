@@ -1,13 +1,13 @@
 <div class="widget task-widget">
-  <div class="widget-header" ui-sref="app.Tasks">
-    <span class="clickable">My Tasks</span>
+  <div class="widget-header">
+    <span class="clickable"  ui-sref="app.Tasks">My Tasks</span>
     <div class="button" ng-click="newGenericTask()">
       New Task
     </div>
   </div>
   <div class="widget-body">
     <div class="task-panel" ng-repeat="Task in Task.currentUsersTasks|filter:{Status:'!'+'Completed'}|orderBy:'-Created_Date'">
-      <div class="new" ng-show="Task.Status=='New'">
+      <div class="new" ng-show="Task.Status=='New'" ng-click="$event.stopPropagation();Task_Seen(Task)">
 
       </div>
       <div class="title">
