@@ -70,5 +70,17 @@ angular.module('JFS_Admin')
         $scope.items.splice($itemScope.$index, 1);
       }]
     ];
+    $scope.Task_Seen = function(task){
+      task.Status = "Started";
+      Task.updateTask(task);
+    };
+    $scope.Task_Completed = function(task){
+      task.Status = "Completed";
+      Task.updateTask(task);
+    };
+    $scope.newGenericTask = function(){
+      Task.newTask({});
+      Functions.OpenModal('views/Modals/TaskModal.html', 'md');
+    };
     recruit.setRecruit(10336);
   });

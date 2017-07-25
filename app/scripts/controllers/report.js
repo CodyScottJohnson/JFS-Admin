@@ -9,7 +9,7 @@
  */
 angular.module('JFS_Admin')
   .controller('ReportCtrl', function($scope, $rootScope, $http, $state, User, FileSaver, Blob) {
-    $scope.ColorTests = {};
+    $scope.ColorTests = [];
     $scope.getColorStatus = function() {
 
       $http({
@@ -138,6 +138,29 @@ angular.module('JFS_Admin')
       });
     };
     $scope.getPopStatus();
+    $scope.MarkColorReviewed = function(color){
+      color.Status = "Reviewed";
+      $http({
+        method: 'Patch',
+        url: 'https://jfsapp.com/Secure/API/ColorQuiz/',
+        params: {
+          'access_token': $rootScope.currentUser.Token.access_token,
+          client_id: 'testclient',
+          client_secret: 'testpass'
+
+        },
+        data:color
+      }).then(function(data) {
+      },function(error){
+        color.Status = "Completed";
+      });
+
+    };
+    $scope.PreviewColorTest = function(test){
+      if(test.Status=='Completed'){
+        $scope.downloadTest(test);
+      }
+    };
     $scope.reportColorListOptions = [
       ['Delete Test', function($itemScope) {
         //console.log($itemScope.test.ColorTest_ID);

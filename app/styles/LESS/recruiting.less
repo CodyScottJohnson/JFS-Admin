@@ -1,6 +1,6 @@
 .recruit {
   font-family: roboto;
-  background-color: #F9FCFE;
+  background-color: #F8F8F8;
 
   .panel {
     width: 95%;
@@ -39,6 +39,210 @@
     background-color: rgba(215,228,236,.9)!important;
     line-height: 40px;
     text-align: center;
+  }
+}
+
+.recruit-info {
+  .Font_Body;
+  padding: 30px;
+
+  .card {
+    .BoxShadowHelper(3);
+    border-radius: 5px;
+    width: 100%;
+    background: white;
+    overflow: hidden;
+  }
+
+  .full {
+    height: 100%;
+  }
+
+  .left-panel {
+    height: 100%;
+    width: 100%;
+    border-right: 1px solid fade(@gray-pleasing,10%);
+    text-align: center;
+    .account-info {
+      width: 100%;
+      text-align: center;
+      font-size: 20px;
+      .status{
+        font-weight: 400;
+        font-size: 16px;
+        span{
+          font-size:12px;
+          padding:5px;
+          border-radius: 5px;
+          color:white;
+        }
+        &.active{
+          span{
+            background-color: @tech;
+          }
+        }
+        &.archived{
+          span{
+            background-color: @gray-lighter;
+          }
+        }
+      }
+    }
+    .button{
+      .Font_Body;
+      font-size: 15px;
+      .BoxShadowHelper(1);
+      margin-left: auto;
+      margin-right: auto;
+      background: @color-button;
+      color:@almost-white;
+      border-radius: 2px;
+      padding:5px 25px 5px 25px;
+      margin-top:50px;
+    }
+    .social {
+      margin-top: 50px;
+      margin-bottom: 50px;
+      width:100%;
+      text-align: center;
+
+      .account {
+        margin: 5px;
+          color: fade(@gray-pleasing,40%);
+
+          i {
+            font-size: 20px;
+          }
+
+      }
+    }
+
+    .img-box {
+      .clickable;
+      width: 100%;
+      height: 170px;
+      display: block;
+      position: relative;
+    }
+
+    .img-profile {
+      .center.both;
+      border-radius: 100%;
+      padding: 7px;
+      height: 120px;
+      width: 120px;
+      background: fade(@color-primary-4,20%);
+
+      img {
+        height: 106px;
+        width: 106px;
+        border-radius: 100%;
+      }
+    }
+  }
+  .contact{
+    padding: 20px 10px 20px 0px;
+    .title {
+      font-size: 16px;
+    }
+    .contact-item{
+      margin:20px 50px 0px 0px;
+      float:left;
+      text-align: left;
+      width:auto;
+    .contact-label{
+      display:block;
+      text-align: left;
+      font-size: 14px;
+      color:fade(@gray-pleasing,60%);
+    }
+    .detail{
+      font-size: 14px;
+    }
+  }
+  }
+  .progress-row{
+    padding: 20px 10px 140px 20px;
+    border-top: 1px solid fade(@gray-pleasing,10%);
+    .title {
+      font-size: 16px;
+    }
+    .progress-item{
+      margin:20px 50px 0px 0px;
+      float:left;
+      text-align: left;
+      width:auto;
+    .progress-label{
+      display:block;
+      text-align: left;
+      font-size: 14px;
+      color:fade(@gray-pleasing,60%);
+    }
+    .button{
+      .Font_Body;
+      font-size: 12px;
+      border-radius: 2px;
+      margin-top:20px;
+      &.danger{
+        color:white;
+        background-color: fade(@gray-pleasing,60%);
+      }
+        &.warning{
+          background-color: fade(@color-secondary-1-4,50%);
+        }
+    }
+    .pop{
+      margin-left: auto;
+      margin-right: auto;
+      margin-top:20px;
+      font-size: 20px;
+      width:40px;
+      height:40px;
+      line-height: 40px;
+      text-align:center;
+      color:@almost-white;
+      border-radius: 100%;
+    }
+    .detail{
+      font-size: 14px;
+    }
+  }
+  }
+  .tags {
+    padding: 20px 10px 80px;
+    border-top: 1px solid fade(@gray-pleasing,10%);
+
+    .title {
+      font-size: 16px;
+    }
+
+    .tag {
+      font-size: 12px;
+      float: left;
+      line-height: 22px;
+      padding: 5px 10px;
+      margin: 5px;
+      border-radius: 10px;
+      background-color: fade(@color-primary-4,10%);
+
+      .close {
+        border-left: 1px solid black;
+        margin-left: 5px;
+        padding-left: 5px;
+      }
+    }
+
+    .tag-new {
+      .BoxShadowHelper(1);
+      .clickable;
+      font-size: 12px;
+      float: left;
+      line-height: 22px;
+      padding: 5px 10px;
+      margin: 5px;
+      border-radius: 22px;
+      background-color: fade(@tech,50%);
+    }
   }
 }
 
@@ -111,40 +315,44 @@
     padding-bottom: 40px;
     .scrollbar;
 
-    .btn-group{
-      margin:10px;
+    .btn-group {
+      margin: 10px;
     }
-    .btn{
-      span{
+
+    .btn {
+      span {
         display: inline-block;
-        height:50px;
+        height: 50px;
         position: relative;
         vertical-align: middle;
         line-height: 50px;
       }
-      .material-icons{
-        margin:0!important;
-        padding:0!important;
-        height:100%;
-        display:inline-block;
-        line-height:50px;
-        margin-right:10px;
+
+      .material-icons {
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 100%;
+        display: inline-block;
+        line-height: 50px;
+        margin-right: 10px;
       }
-      &.unsent{
-        padding-top:0;
+
+      &.unsent {
+        padding-top: 0;
         background-color: @color-primary-0!important;
-        border-color:darken(@color-primary-0,10%);
-        color:contrast(@color-primary-0);
-        line-height:50px;
-        height:50px;
+        border-color: darken(@color-primary-0,10%);
+        color: contrast(@color-primary-0);
+        line-height: 50px;
+        height: 50px;
       };
-      &.sent{
-        padding-top:0;
+
+      &.sent {
+        padding-top: 0;
         background-color: @color-success-1!important;
-        border-color:darken(@color-success-1,10%);
-        color:contrast(@color-success-1);
-        line-height:50px;
-        height:50px;
+        border-color: darken(@color-success-1,10%);
+        color: contrast(@color-success-1);
+        line-height: 50px;
+        height: 50px;
       };
     }
   }
@@ -375,7 +583,7 @@
         padding: 0 0 0 40px;
         background-color: @gray-lighter;
         position: relative;
-        .DirectionalBoxShadowHelper( 'right');
+        .DirectionalBoxShadowHelper(  'right');
         z-index: 3;
       }
 
@@ -428,7 +636,7 @@
     padding: 0 0 0 40px;
     background-color: @gray-lighter;
     position: relative;
-    .DirectionalBoxShadowHelper( 'right');
+    .DirectionalBoxShadowHelper(  'right');
     z-index: 3;
   }
 

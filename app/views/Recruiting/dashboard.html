@@ -178,4 +178,4 @@
     </tr>
   </table>
 </div>
-<ul style="margin-left:30px" uib-pagination total-items="(Recruits.List|filter:{RecruitStatus_ID:1}).length" items-per-page="itemsPerPage" ng-model="Recruits.currentPage" max-size="3" class="pagination-sm" boundary-link-numbers="true" rotate="true"></ul>
+<ul style="margin-left:30px" uib-pagination total-items="(Recruits.List|filter:search|filter:search2|filter:{Archived:Archived}|filter:tagSearch(TagSearch)).length" items-per-page="itemsPerPage" ng-model="Recruits.currentPage" max-size="3" class="pagination-sm" boundary-link-numbers="true" rotate="true"></ul>

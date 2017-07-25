@@ -1,0 +1,35 @@
+<div class="widget color-widget" ng-controller="ReportCtrl">
+  <div class="widget-header">
+    Pending Color Tests <span class="badge">{{(ColorTests|filter:{Status:'!'+'Reviewed'}).length}}</span>
+  </div>
+  <div class="widget-body">
+    <div class="color-panel" ng-click="PreviewColorTest(Test)" ng-repeat="Test in ColorTests|filter:{Status:'!'+'Reviewed'}">
+      <div class="completed" ng-show="Test.Status=='Completed'">
+
+      </div>
+      <div class="regarding">
+        <img ng-show="Test.RecruitName" class="task_image_small" ng-src="https://jfsapp.com/Images/Recruits/{{Test.ProfilePic||'blank.jpg'}}" />
+        <div ng-hide="Test.RecruitName" class="logo_circle"><img class="task_image_logo" ng-src="https://jfsapp.com/Open/API/Images/Brand/Logos/JFS/Logo_Main_Simp.png" /></div>
+        <div class="name">
+          {{Test.RecruitName||'General'}}
+          <div class="priority">
+            <span ng-style="Test.Status=='Started' &&{'background-color':'#FFE372'}||Test.Status=='Completed' &&{'background-color':'#72D9D2'}">{{Test.Status|| 'None'}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="actions" ng-click="$event.stopPropagation();" uib-dropdown is-open="Test.isopen">
+        <i class="fa fa-ellipsis-v" uib-dropdown-toggle></i>
+        <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+          <li ng-show="Test.Status=='Completed'" role="menuitem" ng-click="MarkColorReviewed(Test)"><a>Marks as Reviewed</a></li>
+          <li ng-show="Test.Status!='Completed'" role="menuitem" ng-click="Task_Completed(Task)"><a href="#">Follow Up</a></li>
+          <li class="divider"></li>
+          <li role="menuitem" ng-click="deleteColorTest(Test.Test_Token)"><a href="#">Delete</a></li>
+        </ul>
+      </div>
+
+      <div class="time" ng-show="Task.Due_Date">
+        <i class="fa fa-clock-o"></i> {{Task.Due_Date|momentdate:'MMM Do Y'}}
+      </div>
+    </div>
+  </div>
+</div>

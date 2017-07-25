@@ -18,7 +18,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/Recruit/' + id + '/',
+        url: 'https://jfsapp.com/Secure/API/v2/Recruits/' + id + '/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
