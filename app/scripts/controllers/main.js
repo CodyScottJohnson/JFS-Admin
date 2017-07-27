@@ -10,6 +10,7 @@
 angular.module('JFS_Admin')
   .controller('MainCtrl', function($rootScope,$scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications, Recruits, $sce, $location) {
     //Functions.OpenModal('views/Modals/Email/Client.html','lg');
+    Functions.OpenModal('views/Modals/FileExplorer.html','lg');
     if($rootScope.currentUser.Info.password_reset == 1){
       Functions.OpenModal('views/Modals/User/PasswordReset.html','md');
     }

@@ -33,7 +33,7 @@ angular
     'xeditable',
     'uiSwitch'
   ]);
-angular.module('JFS_Admin').run(function($rootScope, $state, localStorageService, Idle, editableOptions) {
+angular.module('JFS_Admin').run(function($rootScope, $state, localStorageService, Idle, editableOptions,$http) {
   Idle.watch();
   editableOptions.theme = 'bs3';
   $rootScope.conn = new WebSocket('wss://jfsapp.com/WebSocket');
@@ -65,6 +65,21 @@ angular.module('JFS_Admin').run(function($rootScope, $state, localStorageService
         event.preventDefault();
         location.href ='https://jfsapp.com/Admin/Portal/Agent/#/';
     }
+    }
+
+    //check for Settings
+    if(!angular.isDefined($rootScope.GlobalSettings)){
+      $http({
+        method: 'Get',
+        url: 'https://jfsapp.com/Secure/API/User/Settings/Global',
+        params: {
+          access_token: $rootScope.currentUser.Token.access_token,
+          client_id: 'testclient',
+          client_secret: 'testpass'
+        },
+      }).then(function(data) {
+        $rootScope.GlobalSettings = data.data;
+      });
     }
 
 

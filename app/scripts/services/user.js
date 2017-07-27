@@ -12,7 +12,9 @@ angular.module('JFS_Admin')
     var currentUser = {
       data: {
         currentTextConversation: -1,
-        visibility: {}
+        visibility: {},
+        Ready: false,
+        GlobalSettings:$rootScope.GlobalSettings
       }
     };
     var loggedin;
@@ -56,6 +58,7 @@ angular.module('JFS_Admin')
           client_secret: 'testpass'
         },
       }).then(function(data) {
+        $rootScope.GlobalSettings = data.data;
         currentUser.data.GlobalSettings = data.data;
       });
     };
@@ -72,6 +75,7 @@ angular.module('JFS_Admin')
           Settings: currentUser.data.GlobalSettings
         }
       }).then(function(data) {
+        $rootScope.GlobalSettings = currentUser.data.GlobalSettings;
         Functions.Toast('success', 'Settings Saved', '', {
           iconClass: 'jfsToast_success'
         });
@@ -352,7 +356,7 @@ angular.module('JFS_Admin')
     };
     //currentUser.getColumns = function(){return ColumnsToShow}
     //Initialize
-    currentUser.getGlobalSettings();
+    //currentUser.getGlobalSettings();
     currentUser.getTexts();
     currentUser.getUserList();
     currentUser.getInfo();

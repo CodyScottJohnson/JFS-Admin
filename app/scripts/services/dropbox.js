@@ -8,11 +8,13 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('Dropbox', function($rootScope, $http, $sce, $window, $q, FileSaver, Blob) {
+  .factory('Dropbox', function($rootScope, $http, $sce, $window, $q, FileSaver, Blob,User) {
     // Service logic
     // ...
+    //while(!User.data.GlobalSettings.DropBox.access_token){
+    //}
     var oauth = {
-      access_token: "Q97s2PcThkMAAAAAAAB12r6Z6FAIKdLFxUy8uTSFqAv2VnRRG6QxtK80OukeGzBh"
+      //access_token: $rootScope.GlobalSettings.DropBox.access_token
     };
     var Dropbox = {
       data: {}
@@ -21,7 +23,7 @@ angular.module('JFS_Admin')
      * Dropbox API Servers
      */
     var authServer = 'https://www.dropbox.com',
-      apiServer = 'https://api.dropbox.com',
+      apiServer = 'https://api.dropboxapi.com',
       fileServer = 'https://content.dropboxapi.com';
 
 
@@ -40,6 +42,7 @@ angular.module('JFS_Admin')
 
       // Files and metadata.
       getFile: fileServer + '/2/files/download',
+      listFolder: apiServer + '/2/files/list_folder',
       postFile: fileServer + '/1/files/auto/',
       putFile: fileServer + '/1/files_put/auto/',
       preview: fileServer + '/2/files/get_preview',
@@ -69,7 +72,9 @@ angular.module('JFS_Admin')
       if (!options.headers) {
         options.headers = {};
       }
-      options.headers.Authorization = 'Bearer ' + oauth.access_token;
+      if(!options.headers.Authorization){
+        options.headers.Authorization = 'Bearer ' + $rootScope.GlobalSettings.DropBox.access_token;
+      }
     }
 
     function oauthParams(options) {
@@ -108,7 +113,7 @@ angular.module('JFS_Admin')
      * HTTP GET Helper
      */
 
-    function GET(url, params) {
+    function GET(url, params,data,options) {
       var responseType = 'text';
       if (params) {
         if (params.arrayBuffer) {
@@ -123,15 +128,27 @@ angular.module('JFS_Admin')
           responseType = 'b'; // See the Dropbox.Util.Xhr.setResponseType docs
         }
       }
-
+      if(params){
       return request({
         responseType: responseType,
         method: 'POST',
+        headers: options,
         url: url,
+        data:data,
         params: {
           arg: params
         }
       });
+    }
+    else{
+      return request({
+        responseType: responseType,
+        method: 'POST',
+        headers: options,
+        url: url,
+        data:data,
+      });
+    }
     }
 
 
@@ -156,6 +173,9 @@ angular.module('JFS_Admin')
       },
       download: function(path, params, filetype) {
         return GET(urls.getFile + path, params);
+      },
+      listFolder: function(data,options) {
+        return GET(urls.listFolder, null,data,options);
       }
     };
 
@@ -198,6 +218,15 @@ angular.module('JFS_Admin')
       }).then(function(data) {
         FileSaver.saveAs(data.data, document.title.replace(/^.*[\\\/]/, '') + '.' + document.fileType);
         deferred.resolve(data);
+      });
+      return deferred.promise;
+    };
+    Dropbox.listFolder = function(path,options) {
+      var deferred = $q.defer();
+      api.listFolder({
+        path: path
+      },options).then(function(data) {
+        deferred.resolve(data.data);
       });
       return deferred.promise;
     };
