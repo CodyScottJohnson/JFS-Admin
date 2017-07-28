@@ -1,7 +1,22 @@
 .recruit {
   font-family: roboto;
   background-color: #F8F8F8;
+  .widget{
+    height:350px;
+    .widget-header{
+      padding:20px 30px 20px 30px;
+    };
+    .widget-body{
+      padding:70px 30px 70px 30px;
 
+    };
+    &.note-widget{
+      .widget-body{
+        padding:80px 30px 40px 30px;
+
+      }
+    }
+  }
   .panel {
     width: 95%;
     margin-left: 2.5%;
@@ -672,5 +687,28 @@
       background-color: fade(@color-success-3,80%);
       color: darken(@color-success-3,70%);
     }
+  }
+}
+.note-panel{
+  .BoxShadowHelper(1);
+  border-radius: 10px;
+  background: white;
+  height:100%;
+  width:100%;
+  display: block;
+  position: relative;
+  .note-body{
+    padding:30px;
+    font-size:14px;
+  }
+  .note-footer{
+    position: absolute;
+    width:100%;
+    bottom:0;
+    height:50px;
+    padding:20px;
+    background: @color-button;
+    border-radius: 0 0 10px 10px;
+    color:white;
   }
 }

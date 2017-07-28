@@ -1,16 +1,21 @@
 <div class="widget task-widget">
   <div class="widget-header">
-    <span class="clickable"  ui-sref="app.Tasks">My Tasks</span>
-    <div class="button" ng-click="newGenericTask()">
-      New Task
+    <span class="clickable"  ui-sref="app.Tasks">Tasks</span>
+    <div class="widget-sizes">
+      <div class="minimize">
+        <i class="fa fa-minus"></i>
+      </div>
+      <div class="maximize" ng-click="expandTaskWidget()">
+        <i class="fa fa-plus"></i>
+      </div>
     </div>
   </div>
   <div class="widget-body">
-    <div class="NoTasks" id="NoNotification" ng-show="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0">
+    <div class="NoTasks" id="NoNotification" ng-show="(Recruit.Task.List|filter:{Status:'!'+'Completed'}).length<=0">
       <i class="fa fa-check"></i>
       <strong>Congratulations!</strong><div class="SubTitle">You Don't Have Any Tasks</div>
     </div>
-    <div class="task-panel" ng-repeat="Task in Task.currentUsersTasks|filter:{Status:'!'+'Completed'}|orderBy:'-Created_Date'">
+    <div class="task-panel" ng-repeat="Task in Recruit.Task.List|filter:{Status:'!'+'Completed'}|orderBy:'-Created_Date'">
       <div class="new" ng-show="Task.Status=='New'" ng-click="$event.stopPropagation();Task_Seen(Task)">
 
       </div>
@@ -39,6 +44,14 @@
         <i class="fa fa-clock-o"></i>
         {{Task.Due_Date|momentdate:'MMM Do Y'}}
       </div>
+    </div>
+  </div>
+  <div class="widget-footer">
+    <div class="button" ng-click="newTask()">
+      New Task
+    </div>
+    <div class="badge">
+      {{(Recruit.Task.List|filter:{Status:'!'+'Completed'}).length}}
     </div>
   </div>
 </div>
