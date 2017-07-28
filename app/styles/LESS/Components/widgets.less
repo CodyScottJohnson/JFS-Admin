@@ -20,7 +20,36 @@
     border-bottom: 1px solid fade(@gray-pleasing,30%);
     position: absolute;
     display: block;
-    z-index:10;
+    z-index:5;
+    .widget-sizes{
+      .center.vertical;
+      right:30px;
+      font-size:12px;
+      .maximize{
+        .clickable;
+        display: inline-block;
+        margin:3px;
+        width:20px;
+        height:20px;
+        line-height: 20px;
+        text-align: center;
+        border-radius: 100%;
+        background: #4DB6AC;
+        color:@almost-white
+      };
+      .minimize{
+        .clickable;
+        display: inline-block;
+        margin:3px;
+        width:20px;
+        height:20px;
+        line-height: 20px;
+        text-align: center;
+        border-radius: 100%;
+        background: #FDD835;
+        color:@almost-white
+      };
+    };
     .badge{
       .BoxShadowHelper(1);
       margin-left:10px;
@@ -43,6 +72,39 @@
     }
 
   }
+  .widget-footer{
+    background: fade(white,98%);
+    width:100%;
+    font-size: 18px;
+    padding:10px;
+    border-radius: 0 0 5px 5px;
+    border-top: 1px solid fade(@gray-pleasing,30%);
+    position: absolute;
+    bottom:0;
+    display: block;
+    z-index:5;
+    .badge{
+      .BoxShadowHelper(1);
+      .center.vertical;
+      right:30px;
+      border-radius: 15px;
+      font-size: 17px;
+      padding:7px 10px 7px 10px;
+      background: @tech;
+      color:white!important;
+    }
+    .button{
+      font-size: 15px;
+      border-radius: 5px;
+      width:90px;
+      padding:10px;
+      background-color:#6F94FF;
+      .BoxShadowHelper(1);
+      .clickable;
+      color:white;
+    }
+
+  }
   .widget-body{
     height:100%;
     width:100%;
@@ -52,6 +114,30 @@
   }
 }
 .task-widget.widget{
+  .NoTasks{
+    height:200px;
+    text-align: center;
+    line-height: 30px;
+    i{
+      margin-top:80px;
+      margin-bottom: 40px;
+      display: block;
+      color:fade(@gray-pleasing,30%)!important;
+      font-size:80px;
+      text-shadow: none!important;
+    }
+    strong{
+      font-size: 26px;
+      line-height:18px;
+      height:18px;
+      margin:0;
+    }
+    .SubTitle{
+      font-size:16px;
+      padding:0!important;
+      margin:0!important;
+    }
+  }
   .task-panel{
     .animateLeave(fadeOutDown,500ms);
     .BoxShadowHelper(1);

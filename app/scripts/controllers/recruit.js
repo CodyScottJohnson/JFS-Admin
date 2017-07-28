@@ -24,6 +24,7 @@ angular.module('JFS_Admin')
     {
       recruit.setRecruit($location.search().RecruitID);
     }
+    $scope.widgets = {Task:{size:'normal'},Note:{size:'normal'}};
     $scope.ViewTask = function(taskID) {
       Task.getTask(taskID);
       Functions.OpenModal('views/Modals/TaskModal.html', 'md');
@@ -163,6 +164,12 @@ angular.module('JFS_Admin')
     };
     $scope.getTaskList = function(){
       recruit.getTaskList();
+    };
+    $scope.expandTaskWidget = function(){
+      Functions.OpenModal('views/Recruiting/modals/taskModal.html', 'lg');
+    };
+    $scope.expandNotesWidget = function(){
+      Functions.OpenModal('views/Modals/NotesModal.html', 'lg');
     };
     $scope.saveRecruit = function(){
       recruit.save();
