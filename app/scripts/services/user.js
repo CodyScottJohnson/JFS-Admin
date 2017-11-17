@@ -49,6 +49,7 @@ angular.module('JFS_Admin')
       $state.go('login');
     };
     currentUser.getGlobalSettings = function() {
+      var deferred = $q.defer();
       $http({
         method: 'Get',
         url: 'https://jfsapp.com/Secure/API/User/Settings/Global',
@@ -58,9 +59,14 @@ angular.module('JFS_Admin')
           client_secret: 'testpass'
         },
       }).then(function(data) {
+        console.log('here');
         $rootScope.GlobalSettings = data.data;
         currentUser.data.GlobalSettings = data.data;
+        deferred.resolve(data.data);
+      },function(){
+        deferred.reject("Couldn't Load Global Settings");
       });
+      return deferred.promise;
     };
     currentUser.saveGlobalSettings = function() {
       $http({

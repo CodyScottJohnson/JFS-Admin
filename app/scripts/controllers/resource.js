@@ -18,6 +18,15 @@ angular.module('JFS_Admin')
         $scope.Folder.CurrentPath = item;
       });
     };
+    $scope.folderSort = function(item){
+      switch (item['.tag']) {
+            case 'folder':
+                return [1,item.name];
+
+            case 'file':
+                return [2,item.name];
+        }
+    };
     $scope.goToFolder({id:''});
     $scope.fileIcon = function(item){
       if(item['.tag'] == 'folder'){

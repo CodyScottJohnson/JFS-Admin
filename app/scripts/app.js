@@ -35,6 +35,7 @@ angular
   ]);
 angular.module('JFS_Admin').run(function($rootScope, $state, localStorageService, Idle, editableOptions,$http) {
   Idle.watch();
+  var Ready = true;
   editableOptions.theme = 'bs3';
   $rootScope.conn = new WebSocket('wss://jfsapp.com/WebSocket');
   $rootScope.conn.onopen = function(e) {
@@ -62,32 +63,17 @@ angular.module('JFS_Admin').run(function($rootScope, $state, localStorageService
     }
     else if(angular.isDefined($rootScope.currentUser) && $rootScope.currentUser !== null) {
       if($rootScope.currentUser.Info.title != 'Administrator'){
-        event.preventDefault();
-        location.href ='https://jfsapp.com/Admin/Portal/Agent/#/';
+        //event.preventDefault();
+        //location.href ='https://jfsapp.com/Admin/Portal/Agent/#/';
     }
     }
-
-    //check for Settings
-    if(!angular.isDefined($rootScope.GlobalSettings)){
-      $http({
-        method: 'Get',
-        url: 'https://jfsapp.com/Secure/API/User/Settings/Global',
-        params: {
-          access_token: $rootScope.currentUser.Token.access_token,
-          client_id: 'testclient',
-          client_secret: 'testpass'
-        },
-      }).then(function(data) {
-        $rootScope.GlobalSettings = data.data;
-      });
-    }
-
 
   });
 
 });
 angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, KeepaliveProvider, IdleProvider,localStorageServiceProvider) {
   // configure Idle settings
+
   IdleProvider.idle(10000); // in seconds
   IdleProvider.timeout(10000); // in seconds
   KeepaliveProvider.interval(2); // in seconds
@@ -107,6 +93,11 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
       abstract: true,
       templateUrl: 'views/index.html',
       controller: 'MainCtrl',
+      resolve:{
+        GlobalSettings: function(User){
+          return User.getGlobalSettings();
+        }
+      },
       data: {
         requireLogin: true
       }

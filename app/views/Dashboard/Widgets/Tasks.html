@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="widget-body">
-    <div class="NoTasks" id="NoNotification" ng-show="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0">
+    <div class="NoTasks" id="NoNotification" ng-show="(Task.currentUsersTasks|filter:{Status:'!'+'Completed'}).length<=0">
       <i class="fa fa-check"></i>
       <strong>Congratulations!</strong><div class="SubTitle">You Don't Have Any Tasks</div>
     </div>

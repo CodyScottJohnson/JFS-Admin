@@ -131,11 +131,11 @@ angular.module('JFS_Admin')
     $scope.File.recruitUploader.onSuccessItem = function(fileItem, response, status, headers) {
       console.info('onSuccessItem', fileItem, response, status, headers);
       var newDoc = {
-        filePath: response.path,
+        filePath: response.path_lower,
         fileName: fileItem.newName,
         fileType: fileItem.ext,
         fileSize: response.bytes,
-        fileIcon: response.icon,
+        fileIcon: $scope.fileIcon(fileItem.ext),
         fileUploaded: new Date(),
         fileUploadedBy: $rootScope.currentUser.user_id,
         title: fileItem.file.name
@@ -193,7 +193,7 @@ angular.module('JFS_Admin')
       });
     };
     $scope.fileIcon = function(type){
-    console.log(type);
+    //console.log(type);
     if(['png','bmp','jpg','jpeg','tiff','gif'].indexOf(type)!== -1){
       return 'page_white_picture';
     }
