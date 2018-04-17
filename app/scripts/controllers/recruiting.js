@@ -61,6 +61,7 @@ angular.module('JFS_Admin')
         Recruits.addTag(recruit, tag.id)
           .then(
             function() {
+              Recruits.updateRecruits();
               return true;
             },
             function() {

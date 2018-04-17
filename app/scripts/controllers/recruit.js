@@ -19,11 +19,18 @@ function ecopy(e) {
   }
 }
 angular.module('JFS_Admin')
-  .controller('RecruitCtrl', function($scope, $http, $rootScope, Task, Recruits, recruit, Dropbox, Functions, FileUploader, File, User, $sce,$location) {
+  .controller('RecruitCtrl', function($scope, $http, $rootScope, Task, Recruits, recruit, Dropbox, Functions, FileUploader, File, User, $sce,$location, Email) {
     if(angular.isDefined($location.search().RecruitID))
     {
       recruit.setRecruit($location.search().RecruitID);
     }
+    $scope.changepic = function(){
+        Functions.OpenModal('views/Modals/ImageUpload.html','lg');
+    };
+    $scope.SendEmail = function(){
+      Email.data.currentRecipient = recruit.data.currentRecruit;
+      Functions.OpenModal('views/Modals/Email/Client.html','lg');
+    };
     $scope.widgets = {Task:{size:'normal'},Note:{size:'normal'}};
     $scope.ViewTask = function(taskID) {
       Task.getTask(taskID);

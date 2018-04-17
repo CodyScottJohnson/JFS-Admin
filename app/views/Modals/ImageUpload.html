@@ -1,0 +1,60 @@
+<div class="imgOuterModal" ng-controller="ImageCtrl">
+  <div class="imgModal">
+    <table>
+      <div class="image_header">
+        Image Upload
+        <div class="fileUploader">
+
+          <input id='fileUpload'  type="file" accept="image/*" onchange="angular.element(this).scope().onFile(this.files[0])"/>
+          <label for="fileUpload"><i class="fa fa-upload"></i></label>
+`         </div>`
+      </div>
+          <div class="no-image" ng-if="!dataUrl">
+            <div class="fileUploader">
+
+              <input id='fileUpload2'  type="file" accept="image/*" onchange="angular.element(this).scope().onFile(this.files[0])"/>
+              <label for="fileUpload2"><i class="fa fa-upload"></i>Choose a file</label>
+    `         </div>`
+          </div>
+          <div class="img-container" ng-if="dataUrl">
+            <img ng-src="{{dataUrl}}" width="600" style="max-height:300px" ng-cropper ng-cropper-proxy="cropperProxy" ng-cropper-show="showEvent" ng-cropper-hide="hideEvent" ng-cropper-options="options">
+          </div>
+
+
+
+
+
+        <div class="control">
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary lg" ng-click="preview()">Show preview</button>
+            <button type="button" class="btn btn-primary lg" ng-click="clear()">Clear selection</button>
+            <button type="button" class="btn btn-primary" ng-click="rotateRight(-45)"><i class="fa fa-rotate-left"></i></button>
+            <button type="button" class="btn btn-primary" ng-click="rotateRight(-1)"><i style="font-size:10px" class="fa fa-rotate-left"></i></button>
+            <button type="button" class="btn btn-primary" ng-click="rotateRight(1)"><i style="font-size:10px" class="fa fa-rotate-right"></i></button>
+            <button type="button" class="btn btn-primary" ng-click="rotateRight(45)"><i class="fa fa-rotate-right"></i></button>
+          </div>
+
+
+        <div class="image_submit" ng-click="saveRecruit();CloseModal()">
+            <span>Submit</span>
+        </div>
+      </div>
+        <td style="vertical-align:top; padding-left:5px;">
+          <table>
+            <tr>
+              <div class="preview-container" style="display:block">
+                <img ng-if="preview.dataUrl" ng-src="{{preview.dataUrl}}">
+              </div>
+            </tr>
+            <tr>
+              <div ng-if="preview.dataUrl" class="btn-group">
+                <button type="button" class="btn btn-success" ng-click="saveRecruit()">Save</button>
+                <button type="button" class="btn btn-danger" ng-click="close()">Cancel</button>
+              </div>
+            </tr>
+          </table>
+        </td>
+
+    </table>
+  </div>
+</div>

@@ -360,6 +360,46 @@ angular.module('JFS_Admin')
        return deferred.promise;
 
     };
+    currentUser.saveUser = function() {
+      $http({
+        method: 'PATCH',
+        url: 'https://jfsapp.com/Secure/API/User/',
+        params: {
+          access_token: $rootScope.currentUser.Token.access_token,
+          client_id: 'testclient',
+          client_secret: 'testpass'
+        },
+        data: $rootScope.currentUser.Info
+      }).then(function(data) {
+        localStorageService.cookie.set('user',$rootScope.currentUser,1);
+        Functions.Toast('success', 'User Saved', '', {
+          iconClass: 'jfsToast_success'
+        });
+      });
+    };
+    currentUser.setProfilePic = function(image){
+      var PhotoURL = $rootScope.currentUser.Info.user_name;
+      var formData = {
+            picture: image,
+            saveas: '/srv/jfsapp/public_html/Images/ProfilePhotos/' + PhotoURL
+        };
+        var postData = 'datas=' + JSON.stringify(formData);
+        $rootScope.currentUser.Info.display_photo = 'null.png';
+        $http({
+            method: 'POST',
+            url: 'https://jfsapp.com/Secure/API/Images/v2/Upload',
+            params:{
+            'access_token': $rootScope.currentUser.Token.access_token,
+            client_id: 'testclient',
+            client_secret: 'testpass'},
+            data: formData
+        }).then(function() {
+            $rootScope.currentUser.Info.display_photo = PhotoURL+'?'+UUID.newuuid();
+            currentUser.saveUser();
+        },function() {
+            //console.log('Fail');
+        });
+    };
     //currentUser.getColumns = function(){return ColumnsToShow}
     //Initialize
     //currentUser.getGlobalSettings();

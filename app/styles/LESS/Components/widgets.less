@@ -370,3 +370,162 @@
 
   }
 }
+.events{
+  .BoxShadowHelper(5);
+  //min-height:500px;
+  height:100%;
+  width:100%;
+  //min-width:400px;
+  border-radius: 8px;
+  //border: 1px solid @gray-pleasing;
+  margin:10px;
+  background: white;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  .header{
+    padding:15px;
+    .Font_Body;
+    font-size: 30px;
+    text-align: center;
+    display: block;
+    position: relative;
+    left:0;
+    right:0;
+    top:0;
+    width:100%;
+    z-index: 2;
+    background: fade(white,90%);
+    border-bottom: 1px solid @gray-pleasing;
+    .BoxShadowHelper(1);
+    .btn-default{
+      position: absolute;
+      top:20px;
+      right:20px;
+    }
+  }
+}
+.list{
+  padding:100px 20px 20px 20px;
+  top:0;
+  z-index: 0;
+  position: absolute;
+  height:100%;
+  width:100%;
+  .scrollbar;
+}
+.event{
+  .BoxShadowHelper(5);
+  padding:0 0 0 100px;
+  border-radius:8px 10px 10px 8px;
+  height:160px;
+  width:100%;
+  background: white;
+  margin-bottom: 20px;
+  position:relative;
+  display: block;
+  .date{
+    .center.vertical;
+    .Font_Body;
+    left:0;
+    width:100px;
+    font-size: 12px;
+    color:#48496B;
+    text-align: center;
+    line-height: 12px;
+    .multiday_divide{
+      margin-left:auto;
+      margin-right:auto;
+      width:3px;
+      margin-bottom: 5px;
+      height:25px;
+      background: #EA5B41;
+    }
+    .day{
+      display: block;
+      font-size: 40px;
+      line-height: 40px;
+      letter-spacing: -5px;
+    }
+  }
+  .detail{
+    .Font_Body;
+    font-weight: 400;
+    letter-spacing: 0px;
+    color:white;
+    font-size: 15px;
+    height:100%;
+    width:100%;
+    border-radius:0 8px 8px 0;
+    padding:20px 10px 20px 10px;
+    .overlay('Mean_Fruit');
+    i{
+      width:25px;
+    }
+    .Title{
+      font-size: 20px;
+      margin-bottom: 5px;
+      font-weight: 900;
+    }
+    .actions{
+      .atc-btn-group{
+        .Font_Body;
+        margin-top:10px;
+        font-size: 13px;
+        border:none;
+        border-radius: 8px;
+        background: none;
+        box-shadow: none;
+        border: 1.5px solid white;
+        color:white;
+        &.active{
+          background: white;
+          color:#48496B;
+          .BoxShadowHelper(3);
+          display: block;
+          position: relative;
+          z-index: 2;
+          width:150px;
+        }
+        .caret{
+          display: none;
+        }
+        .atc-dropdown{
+          list-style: none;
+          text-align: left;
+          padding:5px;
+
+          li{
+            line-height:25px;
+            a{
+              color:fade(@gray-pleasing,70%);
+            }
+          }
+
+        }
+      }
+    }
+
+  }
+  &:nth-child(2n+0){
+    .detail{
+      .overlay('Smile');
+    }
+  }
+  &:nth-child(3n+0){
+    .detail{
+      .overlay('Norse_Beauty');
+    }
+  }
+  &:nth-child(4n+0){
+    .detail{
+      .overlay('Strong_Bliss');
+    }
+  }
+  &:nth-child(5n+0){
+    .detail{
+      .overlay('Happy_Acid');
+    }
+  }
+
+}

@@ -122,11 +122,12 @@ angular.module('JFS_Admin')
     Functions.loadTags = function(query) {
         var deferred = $q.defer();
         var Tags = Functions.data.Tags;
-        Tags.filter(function(tag) {
+        var Subset = Tags.filter(function(tag) {
+        console.log(tag.Name.toLowerCase().indexOf(query.toLowerCase()) != -1);
         return tag.Name.toLowerCase().indexOf(query.toLowerCase()) != -1;
         });
-        deferred.resolve(Functions.data.Tags);
-
+        //deferred.resolve(Functions.data.Tags);
+        deferred.resolve(Subset);
         return deferred.promise;
     };
     Functions.getTags();

@@ -29,6 +29,8 @@
 
             </tags-input>
 
+
+
           </div>
         </script></div>
       </td>
@@ -149,6 +151,7 @@
                           on-tag-adding="tagAdded($tag,recruit)"
                           on-tag-removing="tagRemoved($tag,recruit)"
                           tag-class="'tag'"
+                          key-property="id"
                           replace-spaces-with-dashes="false">
                   <auto-complete source="tags($query)"
                                  load-on-focus="true"

@@ -205,6 +205,56 @@ angular.module('JFS_Admin')
       });
       return deferred.promise;
     };
+    Email.PreviewTemplate = function(template,data) {
+      var deferred = $q.defer();
+      $http({
+        method: 'POST',
+        url: 'https://jfsapp.com/Secure/API/Email/Send/PreviewTemplate',
+        params: {
+          'access_token': $rootScope.currentUser.Token.access_token,
+          client_id: 'testclient',
+          client_secret: 'testpass',
+
+        },
+        data:{
+          Template:template,
+          EmailData:data
+        }
+      }).then(function(data) {
+        deferred.resolve(data.data);
+      }, function(error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
+    Email.Send = function(email,subject,template,email_data,recruit_id) {
+      Functions.toggleLoading();
+      var deferred = $q.defer();
+      $http({
+        method: 'POST',
+        url: 'https://jfsapp.com/Secure/API/Email/Send/Template',
+        params: {
+          'access_token': $rootScope.currentUser.Token.access_token,
+          client_id: 'testclient',
+          client_secret: 'testpass',
+
+        },
+        data:{
+          Email:email,
+          Subject:subject,
+          Template:template,
+          EmailData:email_data,
+          RecruitID:recruit_id
+        }
+      }).then(function(data) {
+        Functions.toggleLoading();
+        Functions.Toast('success','Email Sent');
+        deferred.resolve(data.data);
+      }, function(error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
 
     //Email.getMailingList();
     return Email;

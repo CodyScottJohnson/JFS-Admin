@@ -48,7 +48,7 @@
 						</div>
 					</ul>
 				</li>
-		
+
 				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="notification.isopen" auto-close="outsideClick">
 					<a uib-dropdown-toggle><i class="fa fa-bell"></i><span ng-hide="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0" class="badge shake">{{(Task.currentUsersTasks|filter:{'Status':'new'}).length}}</span></a>
 					<ul class="dropdown-menu notifications" style="width:300px;">
@@ -60,7 +60,29 @@
 						<li ng-hide="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0" class="dropdown-menu-header">
 							<strong>New Tasks</strong> <span class="badge">{{(Task.currentUsersTasks|filter:{'Status':'new'}).length}}</span>
 						</li>
-						<div class="scrollbar" style="max-height:500px;overflow-x: hidden">
+						<div class="scrollbar notification_list" style="max-height:500px;overflow-x: hidden">
+							<div ng-repeat="Task in Task.currentUsersTasks|filter:{'Status':'new'}|orderBy:['Status']">
+								<li style="display:block;position:relative" class="new_task_not" context-menu="TaskOptions" ng-click="ViewTask(Task.Task_ID)">
+									<div class="task_icon">
+										<i class="fa fa-check"></i>
+									</div>
+									<span class="first">New Task: </span>{{Task.Title|truncate:36}}
+									<span class="recruit_id"><img class="task_image_small" ng-src="https://jfsapp.com/Images/Recruits/{{Task.ProfilePic||'blank.jpg'}}" />
+										{{Task.RecruitName}}</span>
+								</li>
+								</div>
+								<div>
+									<li style="display:block;position:relative" class="date_not" >
+										<div class="date_icon">
+											<span class="month">May</span>
+											16
+										</div>
+										<span class="first">New Task: </span>{{Task.Title|truncate:36}}
+										<span class="recruit_id"><img class="task_image_small" ng-src="https://jfsapp.com/Images/Recruits/{{Task.ProfilePic||'blank.jpg'}}" />
+											{{Task.RecruitName}}</span>
+									</li>
+									</div>
+								<!--
 							<div ng-repeat="(key, value) in Task.currentUsersTasks|filter:{'Status':'new'}|orderBy:['Status']| groupBy:'[Recruit_ID]'">
 								<li style="display:block;position:relative" class="avatar" ng-click="showDetails = ! showDetails;$event.stopPropagation()">
 
@@ -80,7 +102,7 @@
 									<span ng-hide="task.Due_Date==null" style="background-color:#FF7C72;padding:2px;border-radius:2px;font-weight:normal;font-size:8pt;color:white;margin-left:5px;margin-right:5px">deadline</span><time class="time" am-time-ago="task.Due_Date"></time>
 									</div>
 								</li>
-							</div>
+							</div>-->
 							<li ng-show="false" class="dropdown-menu-header">
 								<strong>New Notifications</strong>
 							</li>
@@ -113,7 +135,7 @@
 					</ul>
 				</li>
 				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="usersetting.isopen" auto-close="outsideClick">
-					<a uib-dropdown-toggle ng-disabled="disabled"><img class="user-avatar" style="border-radius:20px;max-height:60px" ng-src="{{'https://jfsapp.com/Images/ProfilePhotos/' +currentUser.Info.display_photo}}" alt="user-mail">{{currentUser.Info.display_name}}</a>
+					<a uib-dropdown-toggle ng-disabled="disabled"><img ng-click="changeProfile()" class="user-avatar" style="border-radius:20px;max-height:60px" ng-src="{{'https://jfsapp.com/Images/ProfilePhotos/' +currentUser.Info.display_photo}}" alt="user-mail">{{currentUser.Info.display_name}}</a>
 					<ul class="dropdown-menu">
 						<li class="dropdown-menu-header">
 							<strong>Account</strong>
@@ -177,7 +199,7 @@
 							<li><a ui-sref="app.Email.Lists"><i class="fa fa-list-alt"></i><span class="text"> Mailing Lists</span></a></li>
 							<li><a ui-sref="app.Email.People"><i class="fa fa-users"></i><span class="text"> People</span></a></li>
 						</ul>
-						<li><a href="" ng-model="collapsed4" ng-click="collapsed4=!collapsed4"><i class="fa fa-group"></i><span class="text"> Manage Agents</span> <span class="fa fa-angle-down pull-right"></span></a></li>
+						<li><a ui-sref="app.Agents.Landing" ng-model="collapsed4" ng-click="collapsed4=!collapsed4"><i class="fa fa-group"></i><span class="text"> Manage Agents</span> <span class="fa fa-angle-down pull-right"></span></a></li>
 						<ul class="subMenu" ng-show="collapsed4">
 							<li><a ui-sref="app.Agents.Dashboard"><i class="fa fa-align-left"></i><span class="text"> Agent List</span></a></li>
 							<li><a href="ui-nestable-list.html"><i class="fa fa-outdent"></i><span class="text"> Add Agent</span></a></li>

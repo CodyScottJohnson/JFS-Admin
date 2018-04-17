@@ -8,12 +8,18 @@
  * Controller of the jfsApp
  */
 angular.module('JFS_Admin')
-  .controller('MainCtrl', function($rootScope,$scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications, Recruits, $sce, $location) {
+  .controller('MainCtrl', function($rootScope,$scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications, Recruits, $sce, $location, $window) {
     //Functions.OpenModal('views/Modals/Email/Client.html','lg');
     //Functions.OpenModal('views/Modals/FileExplorer.html','lg');
     if($rootScope.currentUser.Info.password_reset == 1){
       Functions.OpenModal('views/Modals/User/PasswordReset.html','md');
     }
+    $scope.mailTo = function(email){
+      $window.open("mailto:"+ email + "?_self");
+    };
+    $scope.changeProfile = function(){
+      Functions.OpenModal('views/Modals/ImageUploadUser.html','md');
+    };
     $scope.ViewTask = function(taskID) {
       Task.getTask(taskID);
       Functions.OpenModal('views/Modals/TaskModal.html', 'md');

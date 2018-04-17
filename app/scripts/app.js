@@ -21,6 +21,7 @@ angular
     'luegg.directives',
     'ngAnimate',
     'ngCookies',
+    'ngCropper',
     'ngFileSaver',
     'ngIdle',
     'ngSanitize',
@@ -170,10 +171,15 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
 
     })
     .state('app.Agents', {
-      url: '',
+      url: '/Agents',
       abstract: true,
       templateUrl: 'views/Agents/index.html',
       controller: 'AgentsCtrl',
+
+    })
+    .state('app.Agents.Landing', {
+      url: '/Landing',
+      templateUrl: 'views/Agents/Landing.html',
 
     })
     .state('app.Agents.Dashboard', {

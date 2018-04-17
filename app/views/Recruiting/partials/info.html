@@ -4,7 +4,7 @@
       <div class="col-md-4 col-sm-12 col-xs-12">
         <div class="left-panel">
           <div class="img-box">
-            <div class="img-profile" ng-click="getSocial(Recruit.currentRecruit.EMAIL)">
+            <div class="img-profile" ng-click="changepic()">
               <img ng-src="https://jfsapp.com/Images/Recruits/{{Recruit.currentRecruit.ProfilePic || 'blank.jpg'}}" />
             </div>
           </div>
@@ -17,7 +17,10 @@
               Status: <span>Archived</span>
             </div>
           </div>
-          <div class="button btn">
+          <div class="button btn" ng-click="getSocial(Recruit.currentRecruit.EMAIL)">
+            Get Social
+          </div>
+          <div class="button btn" ng-click="SendEmail()">
             Contact
           </div>
           <div class="social">
@@ -33,8 +36,8 @@
           <div class="title">
             Contact Info
           </div>
-          <div class="contact-item">
-            <span class="contact-label">Email</span>
+          <div class="contact-item" >
+            <span class="contact-label" ng-click="mailTo(Recruit.currentRecruit.EMAIL)">Email</span>
             <span class="detail clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" onaftersave="saveRecruit()" editable-text="Recruit.currentRecruit.EMAIL" e-form="Email" ng-dblclick="Email.$show()">{{Recruit.currentRecruit.EMAIL}}</span>
           </div>
           <div class="contact-item">
@@ -94,10 +97,17 @@
               </div>
             </div>
               </div>
+              <form editable-form name="pop" blur="submit" onaftersave="saveRecruit()">
+              </form>
               <div class="progress-item clickable" ng-dblclick="pop.$show()">
                 <span class="progress-label">POP Results</span>
                 <div ng-hide="pop.$visible || !Recruit.currentRecruit.POP" class="pop" ng-style="Recruit.currentRecruit.POP< 3 &&{'background-color':'#FF7C72'}||Recruit.currentRecruit.POP>= 3 &&{'background-color':'#72D9D2'}">{{Recruit.currentRecruit.POP}}</div>
-                <span class="clickable" e-style="width:40px;" onaftersave="saveRecruit()" editable-text="Recruit.currentRecruit.POP" e-form="pop"></span>
+                <span class="clickable" e-style="width:60px;text-align:center;" e-name="pop" editable-text="Recruit.currentRecruit.POP" e-form="pop"></span>
+              </div>
+              <div class="progress-item clickable" ng-dblclick="pop.$show()">
+                <span class="progress-label">Predictor</span>
+                <div ng-hide="pop.$visible || !Recruit.currentRecruit.POP || !Recruit.currentRecruit.Predictor_Score" class="pop" ng-style="Recruit.currentRecruit.Predictor_Score < 55 &&{'background-color':'#FFE372'}||Recruit.currentRecruit.Predictor_Score>= 55 &&{'background-color':'#72D9D2'}">{{Recruit.currentRecruit.Predictor_Score}}</div>
+                <span class="clickable" e-style="width:60px;text-align:center" e-name="predictor" editable-text="Recruit.currentRecruit.Predictor_Score" e-form="pop"></span>
               </div>
           </div>
         </div>
@@ -109,9 +119,29 @@
             <div class="tag" ng-repeat="tag in Recruit.currentRecruit.Tags">
               {{tag.Name}}<span class="close"><i class="fa fa-close"></i></span>
             </div>
-            <div class="tag-new">
+            <div class="tag-new" uib-popover-template="'tagPopoverTemplate.html'" popover-trigger="outsideClick" popover-placement="bottom-right" popover-append-to-body="true">
               <i class="fa fa-plus"></i>
             </div>
+            <script type="text/ng-template" id="tagPopoverTemplate.html">
+              <div class="form-group">
+                <label>Tags</label>
+                <tags-input ng-model="Recruit.currentRecruit.Tags"
+                            display-property="Name"
+                            placeholder="Add a Tag"
+                            on-tag-adding="tagAdded($tag,Recruit.currentRecruit)"
+                            on-tag-removing="tagRemoved($tag,Recruit.currentRecruit)"
+                            tag-class="'tag'"
+                            key-property="id"
+                            replace-spaces-with-dashes="false">
+                    <auto-complete source="tags($query)"
+                                   load-on-focus="true"
+                                   min-length=0
+                                   displayProperty="Name"></auto-complete>
+
+                </tags-input>
+
+              </div>
+            </script>
           </div>
         </div>
 

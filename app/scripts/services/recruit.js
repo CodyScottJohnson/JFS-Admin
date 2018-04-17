@@ -232,6 +232,33 @@ angular.module('JFS_Admin')
        return deferred.promise;
 
     };
+    currentRecruit.SetPictureURI = function(photo) {
+        var formData = {
+            ProfilePic: photo.url
+
+        };
+        var postData = JSON.stringify(formData);
+        $http({
+            method: 'PATCH',
+            url: 'https://jfsapp.com/Secure/API/Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/ProfilePic/',
+            params: {
+                'access_token': '8c7ba91d562f5b566544e8bd94a518f71d4ad6b0',
+                client_id: 'testclient',
+                client_secret: 'testpass'
+            },
+            data: postData,
+
+        }).then(function(data) {
+            angular.forEach(currentRecruit.data.currentRecruit.Info.ContactDetails.photos, function(value) {
+                value.selected = false;
+            });
+
+            currentRecruit.data.currentRecruit.ProfilePic = data.data.ProfilePic;
+            currentRecruit.save();
+        }, function(error) {
+            //console.log(error)
+        });
+    };
     currentRecruit.SetPicture = function(photo) {
         var formData = {
             ProfilePic: photo.url

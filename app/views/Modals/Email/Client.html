@@ -1,3 +1,9 @@
+<script type="text/ng-template" id="customTemplate.html">
+  <a>
+      <span >{{match.model.FNAME}}</span>
+      <span >{{match.model.LNAME}}</span>
+  </a>
+</script>
 <div class="Email_Client" ng-controller="EmailClientCtrl">
   <div class="modal-header">
     Email
@@ -33,33 +39,34 @@
             <i class="material-icons">save</i>
             <i ng-click="edit_mode = !edit_mode" ng-hide="edit_mode" class="material-icons">mode_edit</i>
             <i ng-click="edit_mode = !edit_mode" ng-hide="!edit_mode" class="material-icons">remove_red_eye</i>
-            <i class="material-icons">info</i>
+            <i class="material-icons" ng-click="Preview(Email.CurrentEmail.Template)">refresh</i>
             <i ng-click="setFavorite(CurrentEmail)" class="material-icons" ng-class="{favorite:CurrentEmail.favorite}">star_rate</i>
             <i ng-click="HideMenu=!HideMenu" class="material-icons" style="float:right">zoom_out_map</i>
           </div>
           <div class="Client_Address" ng-class="{expanded:expand_address}">
             <i ng-click="expand_address=!expand_address" class="material-icons center vertical clickable hvr-sink" style="right:20px">keyboard_arrow_down</i>
-            <form class="form-inline">
+            <form class="form-inline" autocomplete="off">
               <div class="form-group">
                 <label ng-show="expand_address" for="To">To</label>
-                <input ng-show="expand_address" type="text" class="form-control" id="To" placeholder="Jane Doe"><br ng-show="expand_address"/>
+                <input ng-show="expand_address" ng-model="Email.currentRecipient" typeahead-input-formatter="$model.FNAME + ' ' + $model.LNAME" typeahead-template-url="customTemplate.html" type="text" class="form-control" id="To" uib-typeahead="recruit for recruit in RecipientList | filter:$viewValue | limitTo:8"><br ng-show="expand_address"/>
                 <label for="Subject">Subject</label>
-                <input ng-model="CurrentEmail.Subject" type="text" class="form-control" id="Subject" placeholder="subject">
+                <input autocomplete="off" ng-model="Email.CurrentEmail.Subject" type="text" class="form-control" id="Subject" placeholder="subject">
               </div>
           </div>
           <div ng-show="expand_address" class="Client_Attachment">
             <i class="material-icons">attach_file</i>
           </div>
-          <div ng-hide="edit_mode" ng-bind-html="to_trusted(CurrentEmail.Template)">
-
-          </div>
+          <div ng-hide="edit_mode" style="width:100%;height:100%">
+          <iframe srcdoc="{{currentPreview}}" style="height:100%;width:100%;border:none">
+          </iframe>
+        </div>
           <div ng-show="edit_mode" style="display:block;position:relative">
-            <div summernote ng-model="CurrentEmail.Template"></div>
+            <div summernote config="summernoteOptions" ng-model="Email.CurrentEmail.Template"></div>
 
           </div>
         </div>
         <div class="Client_Footer">
-          <div class="Send_Bar">
+          <div class="Send_Bar" ng-click="send()">
             Send
           </div>
         </div>
