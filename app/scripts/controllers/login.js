@@ -8,16 +8,16 @@
  * Controller of the JFS_AgentPortal
  */
 angular.module('JFS_Admin')
-  .controller('LoginCtrl', function($scope, $http,$rootScope,$state,$cookies) {
+  .controller('LoginCtrl', function($scope, $http,$rootScope,$state,$cookies, $window, localStorageService, ENV) {
     $scope.User = {};
     $scope.login = function(username, password) {
       $http({
         method: 'POST',
-        url: 'https://jfsapp.com/Secure/OAUTH/getToken/',
+        url: ENV.Oauth + 'getToken/',
         data: {
           grant_type: 'password',
-          client_id: 'testclient',
-          client_secret: 'testpass',
+          client_id: ENV.APP_ID,
+          client_secret: ENV.APP_Secret,
           username: username,
           password: password
         }
@@ -27,11 +27,11 @@ angular.module('JFS_Admin')
         var Token = data.data;
         $http({
                 method: 'GET',
-                url: 'https://jfsapp.com/Secure/API/User/',
+                url: ENV.API +'User/',
                 params: {
                     'access_token': Token.access_token,
-                    client_id: 'testclient',
-                    client_secret: 'testpass'
+                    client_id: ENV.APP_ID,
+                    client_secret: ENV.APP_Secret
 
                 },
             }).then(function(data) {
@@ -42,8 +42,22 @@ angular.module('JFS_Admin')
                   $scope.User.Info= data.data;
                   $scope.User.Token= Token;
                   $rootScope.currentUser =$scope.User;
-                  $cookies.putObject('user',$scope.User,{"expires":moment().add(24,'hours').format(),secure:false});
-                  $state.go(state);
+                  //$cookies.putObject('user',$scope.User,{"expires":moment().add(24,'hours').format(),secure:false});
+                  console.log($scope.User.Info.PermissionLevel);
+                  localStorageService.cookie.set('user', $scope.User,1);
+                  if($rootScope.currentUser.Info.title != 'Administrator'){
+                    $window.location.href ='https://jfsapp.com/Admin/Portal/Agent/#/';
+                  }
+                  else{
+                    if(angular.isDefined($rootScope.LastLocation)){
+                      var lastLocation = $rootScope.LastLocation;
+                      delete $rootScope.LastLocation;
+                      location.href = lastLocation;
+                    }
+                    else{
+                      $state.go(state);
+                    }
+                  }
             }, function(error) {
 
             });

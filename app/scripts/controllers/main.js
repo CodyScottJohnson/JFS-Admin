@@ -8,10 +8,57 @@
  * Controller of the jfsApp
  */
 angular.module('JFS_Admin')
-  .controller('MainCtrl', function($scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox) {
+  .controller('MainCtrl', function($rootScope,$scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications, Recruits, $sce, $location, $window) {
+    //Functions.OpenModal('views/Modals/Email/Client.html','lg');
+    //Functions.OpenModal('views/Modals/Agents/FollowUp.html','lg');
+    //Functions.OpenModal('views/Modals/FileExplorer.html','lg');
+    $scope.newsearch = {Global_Search:""}
+    if($rootScope.currentUser.Info.password_reset == 1){
+      Functions.OpenModal('views/Modals/User/PasswordReset.html','md');
+    }
+    $scope.mailTo = function(email){
+      $window.open("mailto:"+ email + "?_self");
+    };
+    $scope.changeProfile = function(){
+      Functions.OpenModal('views/Modals/ImageUploadUser.html','md');
+    };
+    $scope.ViewTask = function(taskID) {
+      Task.getTask(taskID);
+      Functions.OpenModal('views/Modals/TaskModal.html', 'md');
+    };
+    if(angular.isDefined($location.search().Task_ID))
+    {
+      if(angular.isDefined($location.search().Task_Completed) && $location.search().Task_Completed == 1){
+        Task.getTask($location.search().Task_ID).then(function(data){
+          data.Status = "Completed";
+          Task.updateTask(data);
+          Functions.OpenModal('views/Modals/TaskCompleted.html', 'sm');
+        });
+      }
+      else{
+        $scope.ViewTask($location.search().Task_ID);
+      }
+      $location.search('Task_ID', null);
+      $location.search('Task_Completed', null);
+    }
     $scope.Functions = Functions;
+    //Functions.OpenModal('views/Modals/User/notes.html','md',null,{windowClass:'notification_modal'});
+    $scope.Recruits = Recruits.data;
+    $scope.to_trusted = function(html_code) {
+        return $sce.trustAsHtml(html_code);
+    };
+    $scope.clear = function(){
+
+      $scope.newsearch.Global_Search = "";
+
+    }
     $scope.viewRecruit =function(ID){
-      recruit.setRecruit(ID);
+      Functions.toggleLoading();
+      recruit.setRecruit(ID).then(function(result){
+        Functions.toggleLoading();
+      },function(err){
+        Functions.toggleLoading();
+      });
       $state.go('app.Recruiting.Recruit', {RecruitID:ID});
     };
     $scope.newestText = function(arr) {
@@ -28,10 +75,6 @@ angular.module('JFS_Admin')
       User.setCurrentConversation(messageid);
       $state.go('app.Messages');
     };
-    $scope.ViewTask = function(taskID) {
-      Task.getTask(taskID);
-      Functions.OpenModal('views/Modals/TaskModal.html', 'md');
-    };
     $scope.TaskOptions = [
       ['Mark as Seen', function($itemScope) {
         $itemScope.task.Status = "Started";
@@ -46,5 +89,17 @@ angular.module('JFS_Admin')
         $scope.items.splice($itemScope.$index, 1);
       }]
     ];
-    recruit.setRecruit(10336);
+    $scope.Task_Seen = function(task){
+      task.Status = "Started";
+      Task.updateTask(task);
+    };
+    $scope.Task_Completed = function(task){
+      task.Status = "Completed";
+      Task.updateTask(task);
+    };
+    $scope.newGenericTask = function(){
+      Task.newTask({});
+      Functions.OpenModal('views/Modals/TaskModal.html', 'md');
+    };
+    //recruit.setRecruit(10336);
   });

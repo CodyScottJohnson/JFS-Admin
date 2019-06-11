@@ -1,0 +1,162 @@
+<div class="recruit-info">
+  <div class="card">
+    <div class="row is-flex">
+      <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="left-panel">
+          <div class="img-box">
+            <div class="img-profile" ng-click="changepic()">
+              <img ng-src="https://jfsapp.com/Images/Recruits/{{Recruit.currentRecruit.ProfilePic || 'blank.jpg'}}" />
+            </div>
+          </div>
+          <div class="account-info">
+            <span>{{Recruit.currentRecruit.FNAME}}</span> <span>{{Recruit.currentRecruit.LNAME}}</span>
+            <div ng-show="Recruit.currentRecruit.Archived == 0" class="status active">
+              Status: <span>Active</span>
+            </div>
+            <div ng-show="Recruit.currentRecruit.Archived == 1" class="status archived">
+              Status: <span>Archived</span>
+            </div>
+          </div>
+          <div class="button btn" ng-click="getSocial(Recruit.currentRecruit.EMAIL)">
+            Get Social
+          </div>
+          <div class="button btn" ng-click="SendEmail()">
+            Contact
+          </div>
+          <a href="https://americannational.icims.com/icims2/servlet/icims2?module=Root&action=login&hashed=993263154" target="_blank" class="button btn" >
+            ICIMS
+          </a>
+          <div class="social">
+
+            <a class="account" ng-href="{{social.url}}" target="_blank" style="text-decoration:none" ng-repeat="social in Recruit.currentRecruit.Info.ContactDetails.socialProfiles">
+            <i class="fa fa-{{social.type}} fa-3x clickable" ></i>
+          </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 col-sm-12 nopadding">
+        <div class="contact">
+          <div class="title">
+            Contact Info
+          </div>
+          <div class="contact-item" >
+            <span class="contact-label" ng-click="mailTo(Recruit.currentRecruit.EMAIL)">Email </span>
+            <span class="detail clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" onaftersave="saveRecruit()" editable-text="Recruit.currentRecruit.EMAIL" e-form="Email" ng-dblclick="Email.$show()">{{Recruit.currentRecruit.EMAIL}} <div class="btn btn-default copy-btn" ng-click="clipboard(Recruit.currentRecruit.EMAIL);$event.stopPropagation();"> <i class="fa fa-clipboard"></i></div></span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Phone</span>
+            <span class="detail clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" onaftersave="saveRecruit()" editable-text="Recruit.currentRecruit.BUS_PH_NBR" e-form="Phone" ng-dblclick="Phone.$show()">{{Recruit.currentRecruit.BUS_PH_NBR}}<div class="btn btn-default copy-btn" ng-click="clipboard(Recruit.currentRecruit.BUS_PH_NBR);$event.stopPropagation();"> <i class="fa fa-clipboard"></i></div></span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Address</span>
+            <form editable-form name="Address" onaftersave="saveRecruit()">
+              <span class="detail clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" editable-text="Recruit.currentRecruit.LINE_ONE_ADDR" e-form="Address" ng-dblclick="Address.$show()">
+              {{Recruit.currentRecruit.LINE_ONE_ADDR}} {{Recruit.currentRecruit.LINE_TWO_ADDR}}<br>{{Recruit.currentRecruit.CITY_NAME + ', ' +Recruit.currentRecruit.ST_CD+' ' +Recruit.currentRecruit.PSTL_CD}}
+              <div class="btn btn-default copy-btn" ng-click="clipboard(Recruit.currentRecruit.LINE_ONE_ADDR +' ' + Recruit.currentRecruit.LINE_TWO_ADDR+', '+Recruit.currentRecruit.CITY_NAME + ', ' +Recruit.currentRecruit.ST_CD+' ' +Recruit.currentRecruit.PSTL_CD);$event.stopPropagation();"> <i class="fa fa-clipboard"></i></div>
+            </span>
+              <span editable-text="Recruit.currentRecruit.LINE_TWO_ADDR" e-form="Address" ng-show="Address.$visible">
+            </span>
+              <span editable-text="Recruit.currentRecruit.CITY_NAME" e-form="Address" ng-show="Address.$visible">
+            </span>
+              <span editable-text="Recruit.currentRecruit.ST_CD" e-form="Address" ng-show="Address.$visible">
+            </span>
+              <span editable-text="Recruit.currentRecruit.PSTL_CD" e-form="Address" ng-show="Address.$visible">
+            </span>
+              <span ng-show="Address.$visible">
+               <button type="submit" class="btn btn-primary" ng-disabled="Address.$waiting">
+                 Save
+               </button>
+               <button type="button" class="btn btn-default" ng-disabled="Address.$waiting" ng-click="Address.$cancel()">
+                 Cancel
+               </button>
+             </span>
+            </form>
+          </div>
+        </div>
+          <div class="row">
+          <div class="progress-row">
+            <div class="title">
+              Progress
+            </div>
+            <div class="progress-item">
+              <span class="progress-label">Color Results</span>
+              <div ng-show="!Recruit.currentRecruit.Color_Blue">
+                <div class="button btn" ng-click="colorStatus()" ng-class="{'danger':Recruit.currentRecruit.Color_Status=='Not Sent','warning':Recruit.currentRecruit.Color_Status=='Test Sent','success':Recruit.currentRecruit.Color_Status=='Test Completed'}">
+                  {{Recruit.currentRecruit.Color_Status}}
+                </div>
+              </div>
+              <div ng-show="Recruit.currentRecruit.Color_Blue">
+              <div ng-show="colorTest.$visible" blur="submit">
+                <form editable-form name="colorTest" blur="submit" onaftersave="saveRecruit()">
+                <span buttons="no" e-name="Color_Red" e-style="background-color:#F7464A;color:white;text-align:center" editable-text="Recruit.currentRecruit.Color_Red" e-form="colorTest">{{Recruit.currentRecruit.Color_Red}}</span>
+                <span buttons="no" e-name="Color_Blue" e-style="background-color:#97BBCD;color:white;text-align:center" editable-text="Recruit.currentRecruit.Color_Blue" e-form="colorTest">{{Recruit.currentRecruit.Color_Blue}}</span>
+                <span buttons="no" e-name="Color_Yellow" e-style="background-color:#FDB45C;color:white;text-align:center" editable-text="Recruit.currentRecruit.Color_Yellow" e-form="colorTest">{{Recruit.currentRecruit.Color_Yellow}}</span>
+                <span buttons="no" e-name="Color_White" e-style="background-color:#DCDCDC;color:white;text-align:center" editable-text="Recruit.currentRecruit.Color_White" e-form="colorTest">{{Recruit.currentRecruit.Color_White}}</span>
+                </form>
+              </div>
+              <div style="width:80px;height:80px" ng-show="!colorTest.$visible" ng-dblclick="colorTest.$show()" tooltip-placement="bottom" uib-tooltip="Color Test">
+                <canvas id="doughnut" class="chart chart-doughnut" chart-data="[Recruit.currentRecruit.Color_Blue,Recruit.currentRecruit.Color_White,Recruit.currentRecruit.Color_Red,Recruit.currentRecruit.Color_Yellow]" chart-legend="false" chart-colours="colors2" chart-labels="labels2"
+                    chart-options="options2" height="10px" width="10px">
+                </canvas>
+              </div>
+            </div>
+              </div>
+              <form editable-form name="pop" blur="submit" onaftersave="saveRecruit()">
+              </form>
+              <div class="progress-item clickable" >
+                <span class="progress-label">CPA</span>
+                <div class="btn-group success-toggle">
+                  <div class="btn btn-default" ng-class="{active:Recruit.currentRecruit.CPA==1}" ng-click="Recruit.currentRecruit.CPA=1;saveRecruit()"><i class="fa fa-check"></i></div>
+                  <div class="btn btn-default failure" ng-class="{active:Recruit.currentRecruit.CPA==0}" ng-click="Recruit.currentRecruit.CPA=0;saveRecruit()"><i class="fa fa-close"></i></div>
+                </div>
+               
+              </div>
+              <div class="progress-item clickable">
+                <span class="progress-label">Credit</span>
+                <div class="btn-group success-toggle">
+                    <div class="btn btn-default" ng-class="{active:Recruit.currentRecruit.CreditCheck==1}" ng-click="Recruit.currentRecruit.CreditCheck=1;saveRecruit()"><i class="fa fa-check"></i></div>
+                    <div class="btn btn-default failure" ng-class="{active:Recruit.currentRecruit.CreditCheck==0}" ng-click="Recruit.currentRecruit.CreditCheck=0;saveRecruit()"><i class="fa fa-close"></i></div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="tags">
+            <div class="title">
+              Tags
+            </div>
+            <div class="tag" ng-repeat="tag in Recruit.currentRecruit.Tags">
+              {{tag.Name}}<span class="close"><i class="fa fa-close"></i></span>
+            </div>
+            <div class="tag-new" uib-popover-template="'tagPopoverTemplate.html'" popover-trigger="outsideClick" popover-placement="bottom-right" popover-append-to-body="true">
+              <i class="fa fa-plus"></i>
+            </div>
+            <script type="text/ng-template" id="tagPopoverTemplate.html">
+              <div class="form-group">
+                <label>Tags</label>
+                <tags-input ng-model="Recruit.currentRecruit.Tags"
+                            display-property="Name"
+                            placeholder="Add a Tag"
+                            on-tag-adding="tagAdded($tag,Recruit.currentRecruit)"
+                            on-tag-removing="tagRemoved($tag,Recruit.currentRecruit)"
+                            tag-class="'tag'"
+                            key-property="id"
+                            replace-spaces-with-dashes="false">
+                    <auto-complete source="tags($query)"
+                                   load-on-focus="true"
+                                   min-length=0
+                                   displayProperty="Name"></auto-complete>
+
+                </tags-input>
+
+              </div>
+            </script>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

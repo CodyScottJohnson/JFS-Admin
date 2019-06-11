@@ -1,20 +1,22 @@
 .login {
-    background-image: linear-gradient(-212deg, #3D637B 0, #A8C3D4 77%);
-    box-shadow: inset -1px -114px 72px 0 rgba(0, 0, 0, .19);
+    .overlay('Glass_Water');
+    //background-image: linear-gradient(-212deg, #3D637B 0, #A8C3D4 77%);
+    box-shadow: inset -1px -80px 72px 0 rgba(0, 0, 0, .19);
     padding:10px;
     .submit{
-      background-color: fade(@color-secondary-2-3,80%);
-      border:none;
-      color:white;
+      //background-color: fade(@color-secondary-2-3,80%);
+      background: none;
+      border: 2px solid @color-new-1;
+      color: @gray-pleasing;
       font-size:15px;
       padding:10px;
       width:90%;
       max-width:400px;
-      margin-top:10px;
-      border-radius:0;
+      margin-top:20px;
+      border-radius:35px;
     }
     .input-group{
-      margin-top:20px;
+      margin-top:30px;
       width:90%;
       max-width:400px;
       margin-left:auto;
@@ -23,14 +25,22 @@
     .input-group-addon{
       width:50px;
       height:50px;
+      border:none;
       background-color:fade(#ffffff,60%);
-      color:fade(@gray,60%)!important;
+      background: none;
+      color:@color-new-1;
+      i{
+        font-size: 20px;
+      }
     }
     input{
       height:50px;
-      background-color:fade(#ffffff,50%);
+      background:none;
       color:@gray-darker!important;
       border:none;
+      border-bottom:2px solid @color-new-1;
+      box-shadow: none;
+      
       &::-webkit-input-placeholder{
         color:fade(@gray,40%)!important;
       }
@@ -42,5 +52,7 @@
     img{
       margin-left:auto;
       margin-right:auto;
+      width:100%;
+      max-width: 250px;
     }
 }

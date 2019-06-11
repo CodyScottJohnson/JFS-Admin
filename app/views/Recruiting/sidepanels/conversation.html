@@ -6,7 +6,7 @@
 
     <div style="height:100%;padding-top:70px;padding-bottom:190px;position:relative;display:block">
       <div class="chatbody scrollbar" style="width:100%;height:100%;background-color:white;padding:10px;position:relative" scroll-glue>
-        <div class="chat-bubble" ng-class="{right: (text.type==0), left: (text.type==1)}" ng-repeat="text in Recruit.currentRecruit.texts">{{text.message}}</div>
+        <div class="chat-bubble" ng-class="{right: (text.Outgoing==0), left: (text.Outgoing==1)}" ng-repeat="text in Recruit.currentRecruit.texts">{{text.Detail.Message}}</div>
       </div>
       <!-- end chat-message -->
       <div class="chat-message clearfix">

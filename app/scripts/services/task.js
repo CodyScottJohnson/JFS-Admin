@@ -8,7 +8,7 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('Task', function($rootScope,$http,$q,Functions) {
+  .factory('Task', function($rootScope,$http,$q,Functions, ENV) {
     var Task = {data:{}};
     Task.Socket = function(data) {
       if (data.event === 'taskupdated') {
@@ -26,7 +26,7 @@ angular.module('JFS_Admin')
         var deferred = $q.defer();
             $http({
                 method: 'GET',
-                url: 'https://jfsapp.com/Secure/API/User/Assigned/',
+                url: ENV.API +'User/Assigned/',
                 params: {
                     'access_token': $rootScope.currentUser.Token.access_token,
                     client_id: 'testclient',
@@ -36,6 +36,10 @@ angular.module('JFS_Admin')
             }).then(function(data) {
                 //console.log(data.data);
                 Task.data.currentUsersTasks = data.data;
+                var array = _.countBy(Task.data.currentUsersTasks, function(t){
+                    return t.Group;
+                });
+                Task.data.currentUsersTaskGroups = {GroupList:array};
                 deferred.resolve(data.data);
             }, function(error) {
                 deferred.reject(error);
@@ -47,7 +51,7 @@ angular.module('JFS_Admin')
         var deferred = $q.defer();
             $http({
                 method: 'GET',
-                url: 'https://jfsapp.com/Secure/API/Tasks/',
+                url: ENV.API +'Tasks/',
                 params: {
                     'access_token': $rootScope.currentUser.Token.access_token,
                     client_id: 'testclient',
@@ -67,7 +71,7 @@ angular.module('JFS_Admin')
         var deferred = $q.defer();
             $http({
                 method: 'GET',
-                url: 'https://jfsapp.com/Secure/API/Task/Recruit/'+RecruitID+'/',
+                url: ENV.API +'Task/Recruit/'+RecruitID+'/',
                 params: {
                     'access_token': $rootScope.currentUser.Token.access_token,
                     client_id: 'testclient',
@@ -84,7 +88,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
           $http({
               method: 'GET',
-              url: 'https://jfsapp.com/Secure/API/Task/'+taskID+'/',
+              url: ENV.API +'Task/'+taskID+'/',
               params: {
                   'access_token': $rootScope.currentUser.Token.access_token,
                   client_id: 'testclient',
@@ -109,7 +113,7 @@ angular.module('JFS_Admin')
     Task.updateTask = function(task,notify) {
       $http({
         method: 'PATCH',
-        url: 'https://jfsapp.com/Secure/API/Task/',
+        url: ENV.API + 'Task/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -130,7 +134,7 @@ angular.module('JFS_Admin')
                            };
         }
         Functions.SendSocket(angular.toJson(message));
-        Task.getUsersTasks();
+        Task.getUsersTasks(true);
         Task.getTask(task.Task_ID);
         Task.getAllTasks(task.Task_ID);
       });
@@ -141,7 +145,7 @@ angular.module('JFS_Admin')
 
       $http({
         method: 'POST',
-        url: 'https://jfsapp.com/Secure/API/Task/',
+        url: ENV.API +'Task/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',

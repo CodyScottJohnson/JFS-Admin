@@ -1,0 +1,69 @@
+.folder{
+  img{
+    height:40px;
+  }
+}
+.file{
+  height:40px;
+  width:40px;
+  background-size:cover;
+  border-radius: 5px;
+  .BoxShadowHelper(1);
+  background-repeat: no-repeat;
+  &.page_white_picture{
+    background-image: url('https://jfsapp.com/Images/Icons/Files/ic_jpg_solid_48@2x.png');
+  }
+  &.page_white_word{
+    background-image: url('https://jfsapp.com/Images/Icons/Files/ic_word_solid_48@2x.png');
+  }
+  &.page_white_excel{
+    background-image: url('https://jfsapp.com/Images/Icons/Files/ic_excel_solid_48@2x.png');
+  }
+  &.page_white_powerpoint{
+    background-image: url('https://jfsapp.com/Images/Icons/Files/ic_powerpoint_solid_48@2x.png');
+  }
+  &.page_white_acrobat{
+    background-image: url('https://jfsapp.com/Images/Icons/Files/ic_pdf_solid_48@2x.png');
+  }
+  &.page_white_text{
+    background-image: url('https://jfsapp.com/Images/Icons/Files/ic_txt_solid_48@2x.png');
+  }
+  &.page_white_zip{
+    background-image: url('https://jfsapp.com/Images/Icons/Files/ic_zip_solid_48@2x.png');
+  }
+  &.folder{
+    background-image: url('https://jfsapp.com/Images/Icons/Files/Icon_Folder@2x.png');
+    background-size:contain;
+    background-position: center;
+  }
+}
+.doc{
+    height:60px;
+    border-radius:5px;
+    background-color: white;
+    width:100%;
+    margin:5px;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    .BoxShadowHelper(2);
+    span{
+      padding-left:75px;
+    }
+    .title{
+      display: block;
+      font-weight: bolder;
+      margin-top:10px;
+    }
+    .date{
+      display: block;
+      color: #BDC7C7;
+    }
+  }
+.docs{
+  display: block;
+  position: relative;
+  padding:10px!important;
+  padding-left:5px!important;
+  padding-right:15px!important;
+}

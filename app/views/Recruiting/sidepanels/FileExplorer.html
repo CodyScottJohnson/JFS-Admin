@@ -28,16 +28,20 @@
         <th></th>
       </tr>
       <tr ng-repeat="document in Recruit.currentRecruit.Info.Documents">
-        <td align="right" valign="middle" style="vertical-align:middle"><i ng-class="document.fileIcon" class="fileIcon clickable"></i></td>
+        <td align="right" valign="middle" style="vertical-align:middle"><div class="file" ng-class="fileIcon(document.fileType)"></div></td>
         <td e-style="top:10px;display:inline-block;position:relative" e-form="textBtnForm" ng-dblclick="textBtnForm.$show()" editable-text="document.title" style="color:black;vertical-align:middle">{{document.title}} </td>
-        <td>{{document.dateUploaded | date : 'MMM d EEE, h:mm a'}}</td>
+        <td>{{document.fileUploaded | momentdate : 'MMM D Y' }}<br />{{document.fileUploaded | momentdate :  'h:mm a'}}</td>
         <td ng-init="totalSpace.size = totalSpace.size + file.fileSize">{{document.fileSize| byteFmt:0}}</td>
         <td>{{document.fileType}}</td>
-        <td>
-          <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-danger" ng-click="deleteFile(document)" style="display:inline:block;position:relative"><i class="fa fa-trash"></i></button>
-            <button type="button" class="btn btn-success" ng-click="getFile(document)" style="display:inline:block;position:relative"><i class="fa fa-download"></i></button>
-            <button type="button" class="btn btn-primary" ng-click="previewFile(document)" style="display:inline:block;position:relative"><i class="fa fa-eye"></i></button>
+        <td valign="middle">
+          <div class="actions" ng-click="$event.stopPropagation();" uib-dropdown is-open="document.isopen">
+            <i class="fa fa-ellipsis-h" uib-dropdown-toggle></i>
+            <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+              <li role="menuitem" ng-click="previewFile(document)"><a>Preview</a></li>
+              <li role="menuitem" ng-click="getFile(document)"><a href="#">Download</a></li>
+              <li class="divider"></li>
+              <li role="menuitem" ng-click="deleteFile(document)"><a href="#">Delete</a></li>
+            </ul>
           </div>
         </td>
       </tr>

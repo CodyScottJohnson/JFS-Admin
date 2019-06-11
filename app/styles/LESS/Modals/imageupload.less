@@ -1,0 +1,94 @@
+.imgModal {
+  overflow: hidden;
+  .no-image{
+    height:300px;
+  }
+  .fileUploader {
+    input {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+
+    label {
+      .BoxShadowHelper(1);
+      .clickable;
+      background: fade(@color-secondary-2-3,50%);
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      display: inline-block;
+      text-align: center;
+      height:100px;
+      width:100px;
+      padding-top:25px;
+      vertical-align: middle;
+      .center.both;
+      i{
+        display: block;
+      }
+    }
+  }
+
+  .image_header {
+    padding: 10px;
+    border-bottom: 1px solid @gray-pleasing;
+
+    .fileUploader {
+      input {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+      }
+
+      label {
+        position: relative;
+        display: block;
+        left:0;
+        right:0;
+        height:auto;
+        width:auto;
+        float: right;
+        padding-top: 10px;
+      }
+    }
+  }
+
+  .control {
+    .image_submit {
+      .clickable;
+      .Font_Body;
+      font-size: 18px;
+      width: 100%;
+      text-align: center;
+      padding: 10px;
+      color: darken(@color-secondary-2-3,40%);
+      background: fade(@color-secondary-2-3,50%);
+      border-radius: 0 0 5px 5px;
+    }
+
+    .btn-group {
+      width: calc(100% + 1px);
+      padding: 0;
+      margin: 0;
+    }
+
+    .btn-primary {
+      background-color: white;
+      color: fade(@gray-pleasing,70%);
+      border-color: fade(@gray-pleasing,10%)!important;
+      border-radius: 0;
+      width: 12.5%;
+
+      &.lg {
+        width: 25%;
+      }
+    }
+  }
+}

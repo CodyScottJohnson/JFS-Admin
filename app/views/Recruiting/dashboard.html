@@ -1,45 +1,64 @@
 <div class="dashboard">
   <table>
     <tr class="title">
-      <td colspan="13">
+      <td colspan="14">
         <div class="btn-group pull-left" role="group" aria-label="...">
           <button class="btn btn-info red hvr-float-shadow" ng-click="addRecruit();rowform.$show()"><i class="icon ion-person-add"></i></button>
           <button class="btn btn-info red hvr-float-shadow" ng-click="advancedSearch.Show=!advancedSearch.Show;rowform.$show()"><i class="icon ion-android-search"></i></button>
           <button class="btn btn-info red hvr-float-shadow" ng-click="reload()"><i class="icon ion-loop"></i></button>
         </div>
         Recruits
+
         <div class="input-group pull-right">
 				<div class="input-group-addon red" style="height:50px;font-size:13px"><i class="fa fa-search"></i></div>
 				<input type="text" class="form-control" placeholder="Search Prospects" ng-model="search" style="height:50px;width: 200px">
 			</div>
+      <div class="input-group pull-right">
+        <i uib-popover-template="'tagSearchPopoverTemplate.html'" popover-trigger="outsideClick" popover-placement="left-top" class="fa fa-tags clickable"></i>
+        <script type="text/ng-template" id="tagSearchPopoverTemplate.html">
+          <div class="form-group">
+            <label>Tags</label>
+            <tags-input ng-model="TagSearch"
+                        display-property="Name"
+                        placeholder="Search by Tag"
+                        replace-spaces-with-dashes="false">
+                <auto-complete source="tags($query)"
+                               load-on-focus="true"
+                               min-length=0
+                               displayProperty="Name"></auto-complete>
+
+            </tags-input>
+
+
+
+          </div>
+        </script></div>
       </td>
 
     </tr>
     <tr>
       <th></th>
-      <th>POP</th>
+      <th>CPA</th>
+      <th>Credit</th>
       <th>Color</th>
-      <th>TODO</th>
+      <th>Status</th>
       <th>Email</th>
-      <th>Type</th>
+     
       <th>Source</th>
       <th>Phone</th>
       <th>Address</th>
       <th>City</th>
       <th>Zip</th>
       <th>State</th>
+      <th>Tag</th>
       <th></th>
     </tr>
     <tr ng-show="advancedSearch.Show">
       <td></td>
-      <td> <select class="form-control" ng-model="search2.POP" style="height:30px;width: 100%;font-size:10px;background-color:white">
-                <option></option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
+      <td> 
+        <div ng-show="recruit.CPA==1">
+          <i class="fa fa-check"></i>
+        </div>
       </td>
       <td></td>
       <td> <input type="text" class="form-control" ng-model="search2.NextStep" placeholder="&#xF002;" style="font-family:Arial, FontAwesome;height:30px;width: 100%"></td>
@@ -60,7 +79,7 @@
       <td></td>
       <td></td>
     </tr>
-    <tr context-menu="recruitListOptions" ng-repeat="recruit in (Recruits.List|filter:search|filter:search2|filter:{RecruitStatus_ID:1}).slice(((Recruits.currentPage-1)*itemsPerPage), ((Recruits.currentPage)*itemsPerPage))">
+    <tr context-menu="recruitListOptions" context-menu-class="context_menu" ng-repeat="recruit in (Recruits.List|filter:search|filter:search2|filter:{Archived:Archived}|filter:tagSearch(TagSearch)).slice(((Recruits.currentPage-1)*itemsPerPage), ((Recruits.currentPage)*itemsPerPage))">
       <td class="profile">
         <div ng-click="viewRecruit(recruit.INDV_ID)" class="img_container clickable" style="width:80px;height:80px;overflow:hidden;position:absolute;display:inline-block;background-color:#EBF4F3">
           <img ng-src="https://jfsapp.com/Images/Recruits/{{recruit.ProfilePic || 'blank.jpg'}}" style="heigth:100%;box-shadow:none">
@@ -73,22 +92,40 @@
         </div>
       </td>
       <td ng-dblclick="rowform.$show()">
-        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.POP" e-name="POP" e-form="rowform">{{recruit.POP}}</span>
+          <div ng-show="recruit.CPA==1">
+              <i class="fa fa-check" style="color:green"></i>
+            </div>
+            <div ng-show="recruit.CPA==0">
+                <i class="fa fa-close" style="color:red"></i>
+              </div>
       </td>
       <td ng-dblclick="rowform.$show()">
-        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.POP" e-name="POP" e-form="rowform">{{recruit.fa}}</span>
+          <div ng-show="recruit.CreditCheck==1">
+              <i class="fa fa-check" style="color:green"></i>
+            </div>
+            <div ng-show="recruit.CreditCheck==0">
+                <i class="fa fa-close" style="color:red"></i>
+              </div>
       </td>
-      <td class="expand" ng-dblclick="rowform.$show()">
+      <td ng-dblclick="rowform.$show()">
+        <div ng-show="rowform.$visible">
+        							<span e-name="Color_Red" e-style="background-color:#F7464A;color:white;text-align:center" editable-text="recruit.Color_Red" e-name="contactType" e-form="rowform">{{recruit.Color_Red}}</span>
+        							<span e-name="Color_Blue" e-style="background-color:#97BBCD;color:white;text-align:center" editable-text="recruit.Color_Blue" e-name="contactType" e-form="rowform">{{recruit.Color_Blue}}</span>
+        							<span e-name="Color_Yellow" e-style="background-color:#FDB45C;color:white;text-align:center" editable-text="recruit.Color_Yellow" e-name="contactType" e-form="rowform">{{recruit.Color_Yellow}}</span>
+        							<span e-name="Color_White" e-style="background-color:#DCDCDC;color:white;text-align:center" editable-text="recruit.Color_White" e-name="contactType" e-form="rowform">{{recruit.Color_White}}</span>
+        						</div>
+        					<div style="width:60px;height:60px" ng-show="!rowform.$visible">
+                  <canvas id="doughnut" class="chart chart-doughnut"
+                      chart-data="[recruit.Color_Blue,recruit.Color_White,recruit.Color_Red,recruit.Color_Yellow]" chart-legend="false" chart-colours="colors2" chart-labels="labels2" chart-options="options2" width="10px" height="10px">
+        							</canvas></div>
+        </td>
+      <td class="expand clickable" ng-dblclick="rowform.$show()" uib-popover-template="'views/Recruiting/popovers/status.html'" popover-placement="right" popover-trigger="outsideClick">
         <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.NextStep" e-name="NextStep" e-form="rowform">{{recruit.NextStep}}</span>
       </td>
       <td class="expand" ng-dblclick="rowform.$show()">
         <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.EMAIL" e-name="EMAIL" e-form="rowform">{{recruit.EMAIL}}</span>
       </td>
-      <td class="expand" ng-dblclick="rowform.$show()">
-        <span  editable-select="recruit.Type" e-value="Initial Contact" e-ng-options="s as s for s in TableDefaults.type" e-name="Type" e-form="rowform" style="text-align:middle">
-          {{recruit.Type}}
-        </span>
-      </td>
+
       <td class="expand" ng-dblclick="rowform.$show()">
         <span  editable-select="recruit.Source" e-value="recruit.Source" e-ng-options="s as s for s in TableDefaults.Source" e-name="Source" e-form="rowform" style="text-align:middle">
           {{recruit.Source}}
@@ -109,6 +146,29 @@
       <td class="expand" ng-dblclick="rowform.$show()">
         <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.ST_CD" e-name="ST_CD" e-form="rowform">{{recruit.ST_CD}}</span>
       </td>
+      <td>
+          <i uib-popover-template="'tagPopoverTemplate.html'" popover-trigger="outsideClick" popover-placement="left" class="fa fa-tags clickable"></i>
+          <script type="text/ng-template" id="tagPopoverTemplate.html">
+            <div class="form-group">
+              <label>Tags</label>
+              <tags-input ng-model="recruit.Tags"
+                          display-property="Name"
+                          placeholder="Add a Tag"
+                          on-tag-adding="tagAdded($tag,recruit)"
+                          on-tag-removing="tagRemoved($tag,recruit)"
+                          tag-class="'tag'"
+                          key-property="id"
+                          replace-spaces-with-dashes="false">
+                  <auto-complete source="tags($query)"
+                                 load-on-focus="true"
+                                 min-length=0
+                                 displayProperty="Name"></auto-complete>
+
+              </tags-input>
+
+            </div>
+          </script>
+      </td>
       <td style="white-space: nowrap;vertical-align:middle">
         <!-- form -->
         <form editable-form name="rowform" onbeforesave="saveRecruit(recruit)" ng-show="rowform.$visible" class="form-buttons form-inline">
@@ -127,4 +187,4 @@
     </tr>
   </table>
 </div>
-<ul style="margin-left:30px" uib-pagination total-items="(Recruits.List|filter:{RecruitStatus_ID:1}).length" items-per-page="itemsPerPage" ng-model="Recruits.currentPage" max-size="3" class="pagination-sm" boundary-link-numbers="true" rotate="true"></ul>
+<ul style="margin-left:30px" uib-pagination total-items="(Recruits.List|filter:search|filter:search2|filter:{Archived:Archived}|filter:tagSearch(TagSearch)).length" items-per-page="itemsPerPage" ng-model="Recruits.currentPage" max-size="3" class="pagination-sm" boundary-link-numbers="true" rotate="true"></ul>

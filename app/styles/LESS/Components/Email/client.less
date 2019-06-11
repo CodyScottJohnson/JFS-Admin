@@ -1,0 +1,195 @@
+.Email_Client{
+  .row{
+    padding:0 15px 0 15px;
+  }
+  .modal-body{
+    max-height: 700px;
+    overflow: hidden;
+    border-radius: 0 0 5px 5px;
+  }
+
+  .Client_SideNav{
+    .scrollbar;
+    height:700px;
+    width:100%;
+    background-color: lighten(@gray-pleasing,70%);
+    border-right: 1px solid fade(@gray-pleasing,20%);
+    .Client_Btn{
+      .Font_Body;
+      .BoxShadowHelper(1);
+      .clickable;
+      font-size:13px;
+      height:55px;
+      line-height:55px;
+      text-align: center;
+      width:100%;
+      background: @tech;
+      color:darken(@tech,40%);
+      display: block;
+      position: relative;
+      z-index:299;
+    }
+    span{
+      .Font_Body;
+      .clickable;
+      font-size: 15px;
+      padding:20px;
+      width:100%;
+      z-index:1!important;
+      &.selected{
+        background: fade(white,50%);
+      }
+      &:nth-child(2){
+        i{
+        color:@color-primary-1;
+      }
+      }
+      &:nth-child(3){
+        i{
+        color:@color-secondary-2-1;
+      }
+      }
+      &:nth-child(4){
+        i{
+        color:@color-complement-1;
+      }
+      }
+      i{
+        margin-right:10px;
+        font-size:12px;
+        .TextShadowHelper(1);
+
+      }
+      vertical-align: middle;
+    }
+  }
+  .Client_Templates{
+    .scrollbar;
+    height:700px;
+    width:100%;
+    background-color: lighten(@gray-pleasing,70%);
+    .Client_Search{
+      .BoxShadowHelper(1);
+      border-bottom: 1px solid fade(@gray-pleasing,20%);
+      height:55px;
+      width:100%;
+      display: block;
+      position: relative;
+      z-index:199;
+      background-color: lighten(@gray-pleasing,70%);
+      i{
+        position: absolute;
+        left:20px;
+        .center.vertical;
+      }
+      input{
+        height: 100%;
+        width:100%;
+        border:none;
+        background: none;
+        padding-left:35px;
+        background: fade(white,50%);
+      }
+    }
+    .Template_List{
+      .Font_Body;
+      .clickable;
+      height:100px;
+      border-bottom: 1px solid fade(@gray-pleasing,20%);;
+      //border-right: 1px solid fade(@gray-pleasing,20%);
+      padding: 20px 20px 10px 25px;
+      .title{
+        font-weight: bolder;
+        display: block;
+        font-size: 15px;
+      }
+      &.selected{
+        .BoxShadowHelper(1);
+        background: white;
+        display: block;
+        position: relative;
+        z-index:99;
+      }
+    }
+  }
+  .Client_Content{
+    .scrollbar;
+    height:700px;
+    width:100%;
+    display: block;
+    position: relative;
+    border-left: 1px solid fade(@gray-pleasing,20%);
+    .DirectionalBoxShadowHelper('right',1);
+    .Client_Toolbar{
+      width:100%;
+      height:55px;
+      border-bottom: 1px solid fade(@gray-pleasing,20%);
+      padding:10px 25px 10px 25px;
+      i{
+        color:fade(@gray-pleasing,60%);
+        font-size:30px!important;
+        .clickable;
+        margin:0 10px 0 0;
+        &.favorite{
+          color:@color-secondary-1-4!important;
+        }
+      }
+    }
+    .Client_Address{
+      width:100%;
+      height:45px;
+      display: block;
+      position: relative;
+      border-bottom: 1px solid fade(@gray-pleasing,20%);
+      padding:5px 10px 5px 10px;
+      label{
+        .Font_Body;
+        color:darken(@tech,30%);
+        font-size: 15px;
+        text-transform: uppercase;
+        margin-top:5px;
+      }
+      input{
+        .Font_Body;
+        font-size: 13px;
+        border:none;
+        box-shadow: none;
+        &:focus{
+          border-radius: 0;
+          background: fade(@gray-pleasing,10%);
+        }
+      }
+      &.expanded{
+        height:80px;
+      }
+    }
+    .Client_Attachment{
+      .BoxShadowHelper(1);
+      width:100%;
+      height:40px;
+      .scrollbar;
+      padding:5px 20px 5px 20px;
+      background: darken(white,5%);
+      border-bottom: 1px solid fade(@gray-pleasing,20%);
+      color:fade(@gray-pleasing,60%);
+    }
+
+  }
+  .Client_Footer{
+    position: absolute;
+    bottom:0;
+    width:100%;
+    .Send_Bar{
+      .Font_Body;
+      width:100%;
+      height:50px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 25px;
+      background: @tech;
+      color:darken(@tech,30%);
+      border-top: 1px solid fade(@gray-pleasing,20%);
+      .BoxShadowHelperUp(1);
+    }
+  }
+}

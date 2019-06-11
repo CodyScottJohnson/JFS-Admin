@@ -10,12 +10,17 @@
 angular.module('JFS_Admin')
   .controller('TaskCtrl', function ($rootScope,$scope,User,Functions,Task, $sce) {
     $scope.ExpandedView ={};
+    $scope.taskFilter = {User_ID:$rootScope.currentUser.Info.id};
     $scope.sort = function(keyname) {
        $scope.sortKey = keyname; //set the sortKey to the param passed
        $scope.reverse = !$scope.reverse; //if true make it false and vice versa
      };
     $scope.User = User.data;
     $scope.Tasks = Task.data;
+    $scope.MarkAsDone = function(task){
+      //task.Status = "Completed";
+      Task.updateTask(task);
+    };
     $scope.addComment = function(text) {
         var date = new Date();
         ////console.log(date);

@@ -1,0 +1,26 @@
+<div class="widget note-widget">
+  <div class="widget-header">
+    <span class="clickable">Notes</span>
+    <div class="widget-sizes">
+      <div class="maximize" ng-click="expandNotesWidget()">
+        <i class="fa fa-expand"></i>
+      </div>
+    </div>
+  </div>
+  <div class="widget-body"  scroll-glue>
+    <div class="note-panel" ng-repeat="note in Recruit.currentRecruit.Info.Notes track by $index">
+      <div class="note-body" >
+        {{note.text| truncate: 304: '...'}}
+      </div>
+      <div class="note-footer">
+        <span style="float:left">{{note.datetime| momentdate : 'MMM D Y @ h:mm a'}}</span><span style="float:right;margin-left:5px">{{note.userName}}</span>
+        <div style="float:right;display:block;height:100%"><img style="height:30px; border-radius:30px;top:-7px;position:relative;display:block" src="https://jfsapp.com/Images/ProfilePhotos/{{note.userPhoto}}"></div>
+      </div>
+    </div>
+  </div>
+  <div class="widget-footer">
+      <div class="button" ng-click="newTask()">
+          New Note
+        </div>
+  </div>
+</div>

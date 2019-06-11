@@ -1,97 +1,108 @@
 <!--Start Navigation Bar-->
-<div class="hidden-print">
-	<div class="navbar shadow-3" style="position:absolute" role="navigation">
+<div class="hidden-print" style="background:none">
+	<div class="minimalist-header navbar" style="position:absolute" role="navigation">
 
-		<div class="container-fluid">
-			<ul class="nav navbar-nav navbar-actions navbar-left" ng-click="Visibility.sidebar=!Visibility.sidebar" style="left:0px; display:block;position:relative" ng-style="Visibility.sidebar && {'left':'10px'}||{'left':'-240px'}">
-				<li class="visible-md visible-lg"><a id="main-menu-toggle"><i class="fa fa-th-large"></i></a></li>
-				<li class="visible-xs visible-sm"><a id="sidebar-menu"><i class="fa fa-navicon"></i></a></li>
-			</ul>
+		<div class="container-fluid" style="background:none">
+			<ul class="nav navbar-nav navbar-actions navbar-left">
 
-			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="messages.isopen" auto-close="outsideClick">
-					<a uib-dropdown-toggle><i class="fa fa-comments"></i><span ng-hide="(UserData.TextMessages|filter:{'status':'0','type':0}).length<=0" class="badge shake">{{(UserData.TextMessages|filter:{'status':'0','type':0}).length}}</span></a>
-					<ul class="dropdown-menu shadow-5" style="width:300px;overflow-x: hidden;">
-						<li class="dropdown-menu-header">
-							<strong>Messages</strong>
-						</li>
-						<div class="scrollbar" style="max-height:500px;overflow-x: hidden">
-							<li style="display:block;position:relative" class="avatar" ng-click="ViewMessage(value[0].id_number)" ng-repeat="(key, value) in UserData.TextMessages|filter:{'type':'0','status':'0'}|orderBy:['status','-date_recieved']| groupBy:'[id_number]'">
+				<li ng-click="$event.stopPropagation()" class="search-header">
+					<i class="fa fa-search"></i>
+					<input ng-model="newsearch.Global_Search" placeholder="How Can I Help?" />
+				</li>
+				<div class="search-results" ng-show="newsearch.Global_Search.length>0">
+					<div ng-click="viewRecruit(recruit.INDV_ID);clear()" class="result recruit"
+						ng-repeat="recruit in Recruits.List|filter:newsearch.Global_Search">
+						<div class="type">
+							<i class="fa fa-user"></i>
+						</div>
+						<img class="avatar"
+							ng-src="https://jfsapp.com/Images/Recruits/{{recruit.ProfilePic || 'blank.jpg'}}">
+						<div class="text">
+							<div class="name">
+								{{recruit.FNAME}} {{recruit.LNAME}}
+							</div>
 
-								<a style="margin-top:0;top:0;display:inline-block;position:relative" ng-repeat="text in value|orderBy:'-date_recieved'|limitTo:1">
-									<img style="height:50px;width:50px;border-radius:100%;display:inline-block;top:5px;position:absolute" ng-src="https://jfsapp.com/Images/Recruits/{{text.ProfilePic || 'blank.jpg'}}">
-									<span class="badge shake">{{(value|filter:{'status':'0'}).length}}</span>
-									<div style="display:inline-block:height:100%;width:300px;position:absolute;padding-left:60px">
-										<div style="color:black">{{text.RecruitName||text.id_number|phone}}</div>
-										<small>{{text.message|truncate:80}}...</small>
+							<div ng-show="recruit.Archived == 0" class="status active">
+								Status: <span>Active</span>
+							</div>
+							<div ng-show="recruit.Archived == 1" class="status archived">
+								Status: <span>Archived</span>
+							</div>
+
+						</div>
+					</div>
+					<div ng-click="ViewTask(task.Task_ID);clear()" class="result task"
+						ng-repeat="task in Task.currentUsersTasks|filter:newsearch.Global_Search|orderBy:'-Created_Date'">
+						<div class="type">
+							<i class="fa fa-check-square-o"></i>
+						</div>
+						<div class="task-panel">
+							
+							<div class="title">
+								{{task.Title}}
+								<div class="completed" ng-show="task.Status=='Completed'">
+										<i class="fa fa-check"></i>Completed
 									</div>
-								</a>
-							</li>
-						</div>
-						<div>
-							<li class="dropdown-menu-footer text-center">
-								<strong>View all notification</strong>
-							</li>
-						</div>
-					</ul>
-				</li>
-				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="status.isopen" auto-close="outsideClick">
+							</div>
 
-					<a uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-envelope-o"></i><span class="badge">{{Emails.Unread}}</span></a>
-					<ul class="dropdown-menu" style="max-height:400px;width:400px;overflow-y: scroll;overflow-x: hidden;margin-right:-100px">
-						<li class="dropdown-menu-header">
-							<strong>{{Emails.AllEmails.Total}}</strong>
+						
+						<div class="priority">
+							Priority: <span
+								ng-style="task.Priority=='Medium' &&{'background-color':'#FFE372'}||task.Priority=='High' &&{'background-color':'#FF7C72'}">{{task.Priority|| 'None'}}</span>
+						</div>
+						
+						<div class="regarding">
+							<img ng-show="task.RecruitName" class="task_image_small"
+								ng-src="https://jfsapp.com/Images/Recruits/{{task.ProfilePic||'blank.jpg'}}" />
+							<div ng-hide="task.RecruitName" class="logo_circle"><img class="task_image_logo"
+									ng-src="https://jfsapp.com/Open/API/Images/Brand/Logos/JFS/Logo_Main_Simp.png" />
+							</div>
+							{{task.RecruitName||'General'}}
+						</div>
+						<div class="time" ng-show="task.Due_Date">
+							<i class="fa fa-clock-o"></i>
+							{{task.Due_Date|momentdate:'MMM Do Y'}}
+						</div>
+					</div>
+				
+				</div>
+		</div>
+
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="task_notifications.isopen"
+				auto-close="outsideClick">
+				<a uib-dropdown-toggle><i class="fa fa-check-square-o"></i><span
+						ng-hide="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0"
+						class="badge shake">{{(Task.currentUsersTasks|filter:{'Status':'new'}).length}}</span></a>
+				<ul class="dropdown-menu notifications" style="width:300px;">
+					<div class="NoNotifications" id="NoNotification"
+						ng-show="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0">
+						<i class="fa fa-bell"></i>
+						<strong>Congratulations!</strong>
+						<div class="SubTitle">No New Notifactions</div>
+					</div>
+					<div id="NotificationList" ng-hide="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0">
+						<li ng-hide="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0"
+							class="dropdown-menu-header">
+							<strong>New Tasks</strong> <span
+								class="badge">{{(Task.currentUsersTasks|filter:{'Status':'new'}).length}}</span>
 						</li>
-						<li class="avatar" ng-repeat="email in Emails.AllEmails" style="width:400px;border-bottom:5px;border-color:black;overflow-x: hidden;">
-							<a style="width:400px">
-								<div ng-click="showPopup(email,'myModalContent.html');" style="width:400px;">
-									<img class="avatar" src="">
-									<div style="width:250px;overflow:hidden">{{email.subject}}</div>
-									<small>{{email.date}}</small>
-								</div>
-
-								<span class="label label-info" style="background:none;"><i class="fa fa-navicon" style ="color:black;z-index:9" ng-click="email.Expand =1"></i></span>
-
-								<div class="emailMenu" ng-show="email.Expand==1" style="top:0px;display:block;position:absolute;right:0px;height:100%;width:150px;background-color:blue;z-index:10">
-									<div style="float:left;background-color:green;position:relative;height:100%;width:40%;color:white;line-height:100%;text-align:center;vertical-align:middle"><i style="color:white" class="fa fa-mail-reply"></i></div>
-									<div style="float:left;background-color:red;position:relative;height:100%;width:40%;line-height:100%;text-align:center;vertical-align:middle"><i style="color:white;vertical-align:middle;font-weight:bolder" class="fa fa-trash-o"></i></div>
-									<div ng-click="email.Expand =2" style="float:left;background-color:grey;position:relative;height:100%;width:20%;line-height:100%;text-align:center;vertical-align:middle"><i style="color:white" class="fa fa-remove"></i></div>
-								</div>
-							</a>
-
-						</li>
-
-						<li class="dropdown-menu-footer text-center">
-							<a href="page-inbox.html">{{isPopupVisible}}</a>
-						</li>
-					</ul>
-					<script type="text/ng-template" id="myModalContent.html">
-						<div class="modal-header">
-							<button type="button" class="close" aria-hidden="true" ng-click="closePopup()">&times;</button>
-							<h3>{{Currentemail.subject}}</h3>
-						</div>
-						<div class="modal-body">
-							<strong>From:</strong> {{Currentemail.from}}
-							<br />
-							<strong>Date:</strong> {{Currentemail.date}}
-							<br />
-							<br />
-							<iframe src='{{ "/Test/GetSpecificEmail.php?id="+Currentemail.uid}}' width="100%" height="300" style="border:none"></iframe>
-
-						</div>
-						<div class="modal-footer">
-							<a class="btn btn-primary" ng-click="closePopup()">Close</a>
-						</div>
-					</script>
-
-				</li>
-				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="notification.isopen" auto-close="outsideClick">
-					<a uib-dropdown-toggle><i class="fa fa-bell"></i><span ng-hide="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0" class="badge shake">{{(Task.currentUsersTasks|filter:{'Status':'new'}).length}}</span></a>
-					<ul class="dropdown-menu shadow-5" style="width:300px;overflow-x: hidden;">
-						<li class="dropdown-menu-header">
-							<strong>New Tasks</strong>
-						</li>
-						<div class="scrollbar" style="max-height:500px;overflow-x: hidden">
+						<div class="scrollbar notification_list" style="max-height:500px;overflow-x: hidden">
+							<div ng-repeat="Task in Task.currentUsersTasks|filter:{'Status':'new'}|orderBy:['Status']">
+								<li style="display:block;position:relative" class="new_task_not"
+									context-menu="TaskOptions" ng-click="ViewTask(Task.Task_ID);Task_Seen(Task)">
+									<div class="task_icon">
+										<i class="fa fa-check"></i>
+									</div>
+									<span class="first">New Task: </span>{{Task.Title|truncate:36}}
+									<span class="recruit_id"><img class="task_image_small"
+											ng-src="https://jfsapp.com/Images/Recruits/{{Task.ProfilePic||'blank.jpg'}}" />
+										{{Task.RecruitName}}</span>
+								</li>
+							</div>
+						
+							<!--
 							<div ng-repeat="(key, value) in Task.currentUsersTasks|filter:{'Status':'new'}|orderBy:['Status']| groupBy:'[Recruit_ID]'">
 								<li style="display:block;position:relative" class="avatar" ng-click="showDetails = ! showDetails;$event.stopPropagation()">
 
@@ -111,8 +122,8 @@
 									<span ng-hide="task.Due_Date==null" style="background-color:#FF7C72;padding:2px;border-radius:2px;font-weight:normal;font-size:8pt;color:white;margin-left:5px;margin-right:5px">deadline</span><time class="time" am-time-ago="task.Due_Date"></time>
 									</div>
 								</li>
-							</div>
-							<li class="dropdown-menu-header">
+							</div>-->
+							<li ng-show="false" class="dropdown-menu-header">
 								<strong>New Notifications</strong>
 							</li>
 						</div>
@@ -121,126 +132,240 @@
 								<strong>View all notification</strong>
 							</li>
 						</div>
-					</ul>
-				</li>
-				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="setting.isopen" auto-close="outsideClick">
-					<a uib-dropdown-toggle ng-disabled="disabled"><i class="fa fa-gears"></i></a>
-					<ul class="dropdown-menu update-menu" role="menu">
-						<li><a href="#"><i class="fa fa-database"></i> Database </a>
-						</li>
-						<li><a href="#"><i class="fa fa-bar-chart-o"></i> Connection </a>
-						</li>
-						<li><a href="#"><i class="fa fa-bell"></i> Notification </a>
-						</li>
-						<li><a href="#"><i class="fa fa-envelope"></i> Message </a>
-						</li>
-						<li><a href="#"><i class="fa fa-flash"></i> Traffic </a>
-						</li>
-						<li><a href="#"><i class="fa fa-credit-card"></i> Invoices </a>
-						</li>
-						<li><a href="#"><i class="fa fa-dollar"></i> Finances </a>
-						</li>
-						<li><a href="#"><i class="fa fa-thumbs-o-up"></i> Orders </a>
-						</li>
-						<li><a href="#"><i class="fa fa-folder"></i> Directories </a>
-						</li>
-						<li><a href="#"><i class="fa fa-users"></i> Users </a>
-						</li>
-					</ul>
-				</li>
-				<li class="dropdown visible-md visible-lg" uib-dropdown is-open="usersetting.isopen" auto-close="outsideClick">
-					<a uib-dropdown-toggle ng-disabled="disabled"><img class="user-avatar" style="border-radius:20px;max-height:60px" ng-src="{{'https://jfsapp.com/Images/ProfilePhotos/' +currentUser.Info.display_photo}}" alt="user-mail">{{currentUser.Info.display_name}}</a>
-					<ul class="dropdown-menu">
-						<li class="dropdown-menu-header">
-							<strong>Account</strong>
-						</li>
-						<li><a href="#UserSettings"><i class="fa fa-user"></i> Profile</a></li>
-						<li><a href="../../../Users/account.php"><i class="fa fa-wrench"></i> Settings</a></li>
-						<li><a href="page-invoice.html"><i class="fa fa-usd"></i> Payments <span class="label label-default">10</span></a></li>
-						<li><a href="gallery.html"><i class="fa fa-file"></i> File <span class="label label-primary">27</span></a></li>
-						<li class="divider"></li>
-						<li><a ng-click="User.logout()"><i class="fa fa-sign-out"></i> Logout</a></li>
-					</ul>
-				</li>
-				<li><a ng-click="User.logout()"><i class="fa fa-power-off"></i></a></li>
-			</ul>
+					</div>
+				</ul>
+			</li>
+			<li class="dropdown visible-md visible-lg" uib-dropdown is-open="messages.isopen" auto-close="outsideClick">
+				<a uib-dropdown-toggle><i class="fa fa-comments"></i><span
+						ng-hide="(UserData.TextMessages|filter:{'status':'0','type':0}).length<=0"
+						class="badge shake">{{(UserData.TextMessages|filter:{'status':'0','type':0}).length}}</span></a>
+				<ul class="dropdown-menu messages" style="width:300px;overflow-x: hidden;">
+					<li class="dropdown-menu-header">
+						<strong>Messages</strong>
+					</li>
+					<div class="scrollbar" style="max-height:500px;overflow-x: hidden">
+						<li style="display:block;position:relative" class="avatar"
+							ng-click="ViewMessage(value[0].id_number)"
+							ng-repeat="(key, value) in UserData.TextMessages|filter:{'type':'0','status':'0'}|orderBy:['status','-date_recieved']| groupBy:'[id_number]'">
 
-		</div>
+							<a style="margin-top:0;top:0;display:inline-block;position:relative"
+								ng-repeat="text in value|orderBy:'-date_recieved'|limitTo:1">
+								<img style="height:50px;width:50px;border-radius:100%;display:inline-block;top:5px;position:absolute"
+									ng-src="https://jfsapp.com/Images/Recruits/{{text.ProfilePic || 'blank.jpg'}}">
+								<span class="badge shake">{{(value|filter:{'status':'0'}).length}}</span>
+								<div
+									style="display:inline-block:height:100%;width:300px;position:absolute;padding-left:60px">
+									<div style="color:black">{{text.RecruitName||text.id_number|phone}}</div>
+									<small>{{text.message|truncate:80}}...</small>
+								</div>
+							</a>
+						</li>
+					</div>
+					<div>
+						<li ui-sref="app.Messages" class="dropdown-menu-footer text-center clickable">
+							<strong>View all messages</strong>
+						</li>
+					</div>
+				</ul>
+			</li>
+
+			<li class="dropdown visible-md visible-lg" uib-dropdown is-open="notification.isopen"
+				auto-close="outsideClick">
+				<a uib-dropdown-toggle><i class="fa fa-bell"></i><span
+						ng-hide="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0"
+						class="badge shake">{{(Task.currentUsersTasks|filter:{'Status':'new'}).length}}</span></a>
+				<ul class="dropdown-menu notifications" style="width:300px;">
+					<div class="NoNotifications" id="NoNotification"
+						ng-show="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0">
+						<i class="fa fa-bell"></i>
+						<strong>Congratulations!</strong>
+						<div class="SubTitle">No New Notifactions</div>
+					</div>
+					<div id="NotificationList" ng-hide="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0">
+						<li ng-hide="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0"
+							class="dropdown-menu-header">
+							<strong>New Tasks</strong> <span
+								class="badge">{{(Task.currentUsersTasks|filter:{'Status':'new'}).length}}</span>
+						</li>
+						<div class="scrollbar notification_list" style="max-height:500px;overflow-x: hidden">
+							<div ng-repeat="Task in Task.currentUsersTasks|filter:{'Status':'new'}|orderBy:['Status']">
+								<li style="display:block;position:relative" class="new_task_not"
+									context-menu="TaskOptions" ng-click="ViewTask(Task.Task_ID)">
+									<div class="task_icon">
+										<i class="fa fa-check"></i>
+									</div>
+									<span class="first">New Task: </span>{{Task.Title|truncate:36}}
+									<span class="recruit_id"><img class="task_image_small"
+											ng-src="https://jfsapp.com/Images/Recruits/{{Task.ProfilePic||'blank.jpg'}}" />
+										{{Task.RecruitName}}</span>
+								</li>
+							</div>
+							<div>
+								<li style="display:block;position:relative" class="date_not">
+									<div class="date_icon">
+										<span class="month">May</span>
+										16
+									</div>
+									<span class="first">New Task: </span>{{Task.Title|truncate:36}}
+									<span class="recruit_id"><img class="task_image_small"
+											ng-src="https://jfsapp.com/Images/Recruits/{{Task.ProfilePic||'blank.jpg'}}" />
+										{{Task.RecruitName}}</span>
+								</li>
+							</div>
+							<!--
+							<div ng-repeat="(key, value) in Task.currentUsersTasks|filter:{'Status':'new'}|orderBy:['Status']| groupBy:'[Recruit_ID]'">
+								<li style="display:block;position:relative" class="avatar" ng-click="showDetails = ! showDetails;$event.stopPropagation()">
+
+									<a style="margin-top:0;top:0;display:inline-block;position:relative">
+										<span class="badge shake">{{(value|filter:{'Status':'New'}).length}}</span>
+										<div style="display:inline-block:height:100%;width:300px;position:absolute;padding-left:15px">
+											<div style="color:black"> New Tasks Regarding:</div>
+											<small>{{value[0].RecruitName||'General'}}</small>
+										</div>
+									</a>
+								</li>
+								<li context-menu="TaskOptions" ng-click="ViewTask(task.Task_ID)" class="clickable" style="padding:0;height:50px;line-height:50px;background-color:#eee" ng-show="showDetails" ng-repeat="task in value|orderBy:'-CreatedDate'">
+									<div style="overflow:hidden;height:50px;width:20px;margin:0;display:inline-block;position:absolute;border-bottom: 1px solid #E0E0E0" ng-style="task.Priority=='Low' &&{'background-color':'#EBEBEB'}||task.Priority=='Medium' &&{'background-color':'#FFE372'}||task.Priority=='High' &&{'background-color':'#FF7C72'}">
+									</div>
+									<div style="display:inline-block;margin-left:25px">
+									<small style="color:black!important;font-weight:bolder">{{task.Title|truncate:36}}</small>
+									<span ng-hide="task.Due_Date==null" style="background-color:#FF7C72;padding:2px;border-radius:2px;font-weight:normal;font-size:8pt;color:white;margin-left:5px;margin-right:5px">deadline</span><time class="time" am-time-ago="task.Due_Date"></time>
+									</div>
+								</li>
+							</div>-->
+							<li ng-show="false" class="dropdown-menu-header">
+								<strong>New Notifications</strong>
+							</li>
+						</div>
+						<div>
+							<li class="dropdown-menu-footer text-center">
+								<strong>View all notification</strong>
+							</li>
+						</div>
+					</div>
+				</ul>
+			</li>
+
+
+
+		</ul>
 
 	</div>
 
+</div>
+</div>
 
-	<!--End Navigation Bar-->
+<!--End Navigation Bar-->
 
-	<!--Start Side Bar-->
-	<div ng-show="Visibility.sidebar">
+<!--Start Side Bar-->
+<div ng-show="Visibility.sidebar">
 
-		<div class="sidebar shadow-5 scrollbar" style="z-index:30;heigth:100%">
+	<div class="minimalist sidebar shadow-5 scrollbar" style="z-index:30;heigth:100%">
 
-			<div class="sidebar-collapse scrollbar" style="padding-bottom:30px;height:100%;overflow-x:hidden">
-				<div class="sidebar-header t-center">
-					<span><img class="text-logo" style="width:80%;diplay:block;margin-top:10px;position:relative" src="https://jfsapp.com/Images/Logos/logosimp3.png"></span>
-				</div>
-				<div class="sidebar-menu" style="margin-top:30px">
-					<ul class="nav nav-sidebar">
-						<li><a href="#Home"><i class="fa fa-laptop"></i><span class="text"> Dashboard</span></a></li>
-						<li><a href="" ng-model="collapsed1" ng-click="collapsed1=!collapsed1"><i class="fa fa-user"></i><span class="text">{{currentUser.Info.display_name}}</span><span class="fa fa-angle-down pull-right"></span></a></li>
-						<ul class="subMenu" ng-show="collapsed1">
-							<li><a ui-sref="app.Messages"><i class="fa fa-envelope"></i><span class="text">Message Center</span></a></li>
-							<li><a ui-sref="app.Tasks"><i class="fa fa-tasks" aria-hidden="true"></i><span class="text">Tasks</span></a></li>
-							<li><a ui-sref="Notes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="text">Notes</span></a></li>
-							<li><a href="../../../Users/account.php"><i class="fa fa-gear"></i><span class="text"> Settings</span></a></li>
-							<li><a href="#Test"><i class="fa fa-book"></i><span class="text"> Contact Info</span></a></li>
-							<li><a href="ui-elements.html"><i class="fa fa-bar-chart-o"></i><span class="text"> Update Numbers</span></a></li>
-						</ul>
-						<li><a href=""><i class="fa fa-bar-chart-o"></i><span class="text"> Reports</span></a></li>
-						<li><a href="" ng-model="collapsed2" ng-click="collapsed2=!collapsed2"><i class="fa  fa-pencil-square-o"></i><span class="text"> Training</span> <span class="fa fa-angle-down pull-right"></span></a></li>
-						<ul class="subMenu" ng-show="collapsed2">
-							<li><a href="ui-sliders-progress.html"><i class="fa fa-envelope"></i><span class="text"> Videos</span></a></li>
-							<li><a href="ui-nestable-list.html"><i class="fa fa-picture-o"></i><span class="text"> Documents</span></a></li>
-							<li><a href="ui-nestable-list.html"><i class="fa fa-film"></i><span class="text"> Meeting Notes</span></a></li>
-						</ul>
-						<li><a href="" ng-model="collapsed3" ng-click="collapsed3=!collapsed3"><i class="fa fa-briefcase"></i><span class="text"> Rescources</span> <span class="fa fa-angle-down pull-right"></span></a></li>
-						<ul class="subMenu" ng-show="collapsed3">
-							<li><a ui-sref="app.Style.Guide"><i class="fa fa-paint-brush"></i><span class="text">Style Guide</span></a></li>
-							<li><a href="#SendEmail"><i class="fa fa-envelope"></i><span class="text"> Emails</span></a></li>
-							<li><a href="#LostPassword"><i class="fa fa-picture-o"></i><span class="text"> Graphics</span></a></li>
-							<li><a href="ui-nestable-list.html"><i class="fa fa-film"></i><span class="text"> Videos</span></a></li>
-							<li><a href="ui-elements.html"><i class="fa fa-list"></i><span class="text"> Presentations</span></a></li>
-							<li><a href="ui-elements.html"><i class="fa fa-file-text"></i><span class="text"> Marketing</span></a></li>
-						</ul>
-						<li><a href="/owncloud"><i class="fa fa-cloud"></i><span class="text">Drive</span></a></li>
-						<li><a href="" ng-model="collapsed4" ng-click="collapsed4=!collapsed4"><i class="fa fa-group"></i><span class="text"> Manage Agents</span> <span class="fa fa-angle-down pull-right"></span></a></li>
-						<ul class="subMenu" ng-show="collapsed4">
-							<li><a ui-sref="app.Agents.Dashboard"><i class="fa fa-align-left"></i><span class="text"> Agent List</span></a></li>
-							<li><a href="ui-nestable-list.html"><i class="fa fa-outdent"></i><span class="text"> Add Agent</span></a></li>
-							<li><a href="ui-elements.html"><i class="fa fa-list"></i><span class="text"> Reports</span></a></li>
-						</ul>
-						<li><a href="" ng-model="collapsed5" ng-click="collapsed5=!collapsed5"><i class="fa fa-sitemap"></i><span class="text"> Recruiting</span><span class="fa fa-angle-down pull-right"></span></a></li>
-						<ul class="subMenu" ng-show="collapsed5">
-							<li><a ui-sref="app.Recruiting.Recruit"><i class="fa fa-align-left"></i><span class="text"> To Do List</span></a></li>
-							<li><a ui-sref="app.Recruiting.Assigned"><i class="fa fa-child"></i><span class="text"> Assigned To Me</span></a></li>
-							<li><a ui-sref="app.Reporting.Dashboard"><i  class="fa fa-bar-chart"></i><span class="text"> Reports</span></a></li>
-							<li><a ui-sref="app.Recruiting.Dashboard"><i style="color:#FAC559" class="fa fa-users"></i><span class="text"> Recruiting Pool</span><span ng-model="collapsed6" ng-click="collapsed6=!collapsed6;$event.stopPropagation()" class="fa fa-angle-down pull-right"></span></a></li>
-							<ul class="subMenu" ng-show="collapsed6">
-								<li><a ui-sref="LiscencedAgents({ search: {Source:'Referal'} })"><i style="font-size:15px" class="fa fa-user"></i><span class="text"> Referal</span></a></li>
-								<li><a ui-sref="LiscencedAgents({ search: {Source:'PO'} })"><i style="" class="fa fa-user"></i><span class="text"> PO</span></a></li>
-								<li><a ui-sref="LiscencedAgents({ search: {Source:'COI'} })"><i style="" class="fa fa-user"></i><span class="text"> COI</span></a></li>
-								<li><a ui-sref="LiscencedAgents({ search: {Source:'ARS'} })"><i style="" class="fa fa-user"></i><span class="text"> ARS</span></a></li>
-								<li><a ui-sref="LiscencedAgents({ search: {Source:'ROD'} })"><i style="" class="fa fa-user"></i><span class="text"> ROD</span></a></li>
-								<li><a ui-sref="LiscencedAgents({ search: {Source:'Other'} })"><i style="" class="fa fa-user"></i><span class="text"> Other</span></a></li>
-							</ul>
-              <li><a ng-click="collapsed7=!collapsed7;$event.stopPropagation()"><i class="fa fa-archive"></i><span class="text"> Archived</span><span ng-model="collapsed7"  class="fa fa-angle-down pull-right"></span></a></li>
-                <ul class="subMenu" ng-show="collapsed7">
+		<div class="sidebar-collapse scrollbar" style="padding-bottom:30px;height:100%;overflow-x:hidden">
+			<div class="t-center">
+				<div class="avatar">
+					<img ng-click="collapsed1=!collapsed1" class="user-avatar"
+						ng-src="{{'https://jfsapp.com/Images/ProfilePhotos/' +currentUser.Info.display_photo}}"
+						alt="user-mail"> </div>
+				<ul class="subMenu" ng-show="collapsed1">
+					<li><a ui-sref="app.Messages"><i class="main-icon fa fa-envelope"></i><span class="text">Message
+								Center</span></a></li>
+					<li><a ui-sref="app.Tasks"><i class="fa fa-tasks" aria-hidden="true"></i><span
+								class="text">Tasks</span></a></li>
+					<li ng-click="changeProfile();"><a><i class="fa fa-pencil" aria-hidden="true"></i><span
+								class="text">Change Profile</span></a></li>
+					<li><a ui-sref="app.User.Settings"><i class="fa fa-gear"></i><span class="text">
+								Settings</span></a></li>
+				</ul>
+			</div>
+			<div class="sidebar-menu">
+				<ul class="nav nav-sidebar">
+					<li class="top-level" ng-class="{active: ('app.Home' | 
+						includedByState) 
+						}"><a href="#Home"><i class="main-icon fa fa-home"></i><span class="text"> Dashboard</span></a></li>
+						<!--
+					<li ng-class="{active: ('app.Style.Guide' | 
+						includedByState) 
+						}" class="top-level"><a href="" ng-model="collapsed3" ng-click="collapsed3=!collapsed3"><i
+								class="main-icon fa fa-briefcase"></i><span class="text"> Rescources</span> <span
+								class="fa fa-angle-down pull-right"></span></a></li>
+					<ul class="subMenu" ng-show="collapsed3">
+						<li><a ui-sref="app.Style.Guide"><i class="fa fa-paint-brush"></i><span class="text">Style
+									Guide</span></a></li>
+						<li><a href="#SendEmail"><i class="fa fa-envelope"></i><span class="text"> Emails</span></a>
+						</li>
+						<li><a href="#LostPassword"><i class="fa fa-picture-o"></i><span class="text">
+									Graphics</span></a></li>
+						<li><a href="ui-nestable-list.html"><i class="fa fa-film"></i><span class="text">
+									Videos</span></a></li>
+						<li><a href="ui-elements.html"><i class="fa fa-list"></i><span class="text">
+									Presentations</span></a></li>
+						<li><a ng-click="showLoading=!showLoading;"><i class="fa fa-file-text"></i><span class="text">
+									Marketing</span></a></li>
+					</ul>-->
+					<!--
+					<li ng-class="{active: ('app.Email.Campaigns' | 
+						includedByState) || ('app.Email.Lists' | includedByState) || 
+						('app.Email.People' | includedByState)
+						}" class="top-level"><a ng-model="collapsed31" ng-click="collapsed31=!collapsed31"><i
+								class="main-icon fa fa-envelope"></i><span ui-sref="app.Email.Dashboard"
+								class="text clickable"> Email</span> <span
+								class="fa fa-angle-down pull-right"></span></a></li>
+					<ul class="subMenu" ng-show="collapsed31">
+						<li><a ui-sref="app.Email.Campaigns"><i class="fa fa-archive"></i><span class="text">
+									Campaigns</span></a></li>
+						<li><a ui-sref="app.Email.Lists"><i class="fa fa-list-alt"></i><span class="text"> Mailing
+									Lists</span></a></li>
+						<li><a ui-sref="app.Email.People"><i class="fa fa-users"></i><span class="text">
+									People</span></a></li>
+					</ul>-->
+					<li ng-class="{active: ('app.Agents.Dashboard' | 
+						includedByState) }" class="top-level"><a ui-sref="app.Agents.Landing" ng-model="collapsed4"
+							ng-click="collapsed4=!collapsed4"><i class="main-icon fa fa-group"></i><span class="text">
+								Manage Agents</span> <span class="fa fa-angle-down pull-right"></span></a></li>
+					<ul class="subMenu" ng-show="collapsed4">
+						<li><a ui-sref="app.Agents.Dashboard"><i class="fa fa-align-left"></i><span class="text">
+									Agent List</span></a></li>
+						<li><a href="ui-nestable-list.html"><i class="fa fa-outdent"></i><span class="text"> Add
+									Agent</span></a></li>
+						<li><a href="ui-elements.html"><i class="fa fa-list"></i><span class="text">
+									Reports</span></a></li>
+					</ul>
+					<li class="top-level" ng-class="{active: ('app.Tasks' | 
+						includedByState) 
+						}"><a ui-sref="app.Tasks"><i class="main-icon fa fa-check-circle"></i><span class="text"> Tasks</span></a></li>
+
+					<li ng-class="{active: ('app.Recruiting.Assigned' | 
+						includedByState) || ('app.Recruiting.Dashboard' | includedByState) || 
+						('app.Recruiting.Archived' | includedByState) ||
+						('app.Recruiting.Recruit' | includedByState)
+						}" class="top-level"><a href="" ng-model="collapsed5" ng-click="collapsed5=!collapsed5"><i
+								class="main-icon fa fa-sitemap"></i><span class="text"> Recruiting</span><span
+								class="fa fa-angle-down pull-right"></span></a></li>
+					<ul class="subMenu" ng-show="collapsed5">
+						<li><a ui-sref="app.Recruiting.Assigned"><i class="fa fa-child"></i><span class="text">
+									Assigned To Me</span></a></li>
+						<li><a ui-sref="app.Reporting.Dashboard"><i class="fa fa-bar-chart"></i><span class="text">
+									Reports</span></a></li>
+						<li><a ui-sref="app.Recruiting.Dashboard"><i style="color:#FAC559" class="fa fa-users"></i><span
+									class="text"> Recruiting Pool</span></a></li>
+
+						<li><a ui-sref="app.Recruiting.Archived"><i class="fa fa-archive"></i><span class="text">
+									Archived</span>
+								<!--<span ng-model="collapsed7"  class="fa fa-angle-down pull-right"></span>--></a>
+						</li>
+						<!--<ul class="subMenu" ng-show="collapsed7">
                   <li><a ui-sref="app.Recruiting.Archived({ search: {RecruitStatus_ID:'2'} })"><i style="font-size:15px" class="fa fa-user"></i><span class="text"> Mailing List</span></a></li>
                   <li><a ui-sref="app.Recruiting.Archived({ search: {RecruitStatus_ID:'4'} })"><i style="" class="fa fa-user"></i><span class="text"> Not Interested</span></a></li>
                   <li><a ui-sref="app.Recruiting.Archived({ search: {RecruitStatus_ID:'5'} })"><i style="" class="fa fa-user"></i><span class="text"> No Response</span></a></li>
-                </ul>
-						</ul>
-
-
+									<li><a ui-sref="app.Recruiting.Archived({ search: {RecruitStatus_ID:'7'} })"><i style="" class="fa fa-user"></i><span class="text"> Unsorted</span></a></li>
+								</ul>-->
 					</ul>
-				</div>
+
+
+				</ul>
 			</div>
 		</div>
 	</div>
+</div>

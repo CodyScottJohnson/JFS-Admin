@@ -1,0 +1,41 @@
+<div class="Dropbox_Client" ng-controller="ResourceCtrl">
+  <div class="modal-header">
+    <img height=50 width=50 src="{{'https://jfsapp.com/Secure/API/Images/General/Brand/Vendors/dropbox@3x.png?access_token='+currentUser.Token.access_token+'&client_id=testclient&client_secret=testpass'}}" />
+  DropBox
+
+  </div>
+  <div class="modal-body nopadding">
+    <div class="row .full_height">
+
+
+      <div class="nopadding .full_height" ng-class="{'col-md-12':HideMenu,'col-md-12':(!HideMenu)}">
+        <div class="Client_Content">
+          <div class="Client_Toolbar">
+            <i class="material-icons">arrow_back</i>
+            <i ng-click="goToFolder({id:''})" class="material-icons">home</i>
+            <i  class="material-icons">search</i>
+            <i class="material-icons">info</i>
+            <i ng-click="setFavorite(CurrentEmail)" class="material-icons" ng-class="{favorite:CurrentEmail.favorite}">star_rate</i>
+            <i ng-click="HideMenu=!HideMenu" class="material-icons" style="float:right">zoom_out_map</i>
+          </div>
+          <div class="Client_Address" >
+            <form class="form-inline">
+              <div class="form-group">
+                  <label for="Subject">Current Folder</label>
+                {{Folder.CurrentPath.name||'/'}}
+                </div>
+          </div>
+          <div class="files">
+          <div ng-repeat="item in Folder.content|orderBy:folderSort" class="item">
+            <div ng-click="goToFolder(item)" ng-show="item['.tag']=='folder'" class="folder clickable"><img src="https://jfsapp.com/Images/Icons/Files/Icon_Folder@2x.png" /></div>
+            <div ng-show="item['.tag']=='file'" class="file" ng-class="fileIcon(item)"></div>
+            {{item.name}}
+          </div>
+        </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

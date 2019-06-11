@@ -30,7 +30,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/Recruits/',
+        url: 'https://jfsapp.com/Secure/API/v2/Recruits/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -40,6 +40,10 @@ angular.module('JFS_Admin')
       }).then(function(data) {
         //console.log(data.data);
         Recruits.data.List = data.data;
+        _.forEach(Recruits.data.List, function(recruit){
+                      recruit.NextStepScheduled = moment(recruit.NextStepScheduled).toDate();
+                      recruit.NextStepUpdated = moment(recruit.NextStepUpdated).format('Y-MM-D');
+                    });
         deferred.resolve(data.data);
       }, function(error) {
         deferred.reject(error);
@@ -103,6 +107,47 @@ angular.module('JFS_Admin')
        }).then(function(data){
          Recruits.data.List.splice(index,1);
        });
+    };
+    Recruits.addTag = function(recruit,tagID){
+      var deferred = $q.defer();
+      $http({
+        method: 'POST',
+        url: 'https://jfsapp.com/Secure/API/v2/Recruits/'+recruit.INDV_ID+'/Tag/'+tagID,
+        params: {
+          'access_token': $rootScope.currentUser.Token.access_token,
+          client_id: 'testclient',
+          client_secret: 'testpass'
+        },
+      }).then(function(data){
+        var message = {
+								type: 'recruit',
+                event: 'recruitupdated',
+                data: recruit,
+                AlertMessage: $rootScope.currentUser.Info.display_name + ' Edited ' + recruit.FNAME + ' ' + recruit.LNAME
+            };
+        Functions.SendSocket(angular.toJson(message));
+        deferred.resolve(data.data);
+      }, function(error) {
+        deferred.reject(error);
+      });
+      return deferred.promise;
+    };
+    Recruits.deleteTag = function(recruit,tagID) {
+      var deferred = $q.defer();
+       $http({
+         method: 'DELETE',
+         url: 'https://jfsapp.com/Secure/API/v2/Recruits/'+recruit.INDV_ID+'/Tag/'+tagID,
+         params: {
+           'access_token': $rootScope.currentUser.Token.access_token,
+           client_id: 'testclient',
+           client_secret: 'testpass'
+         }
+       }).then(function(data){
+         deferred.resolve(data.data);
+       }, function(error) {
+         deferred.reject(error);
+       });
+       return deferred.promise;
     };
     Recruits.updateRecruits();
 

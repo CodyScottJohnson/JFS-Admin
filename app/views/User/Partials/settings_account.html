@@ -1,0 +1,66 @@
+<div class="default_form">
+<form class="body">
+  <div class="row">
+    <div class="col-md-6 input">
+      <div class="title">
+        First Name
+      </div>
+      <input ng-model="application.FNAME" placeholder="What is Your First Name" />
+    </div>
+    <div class="col-md-6 input">
+      <div class="title">
+        Last Name
+      </div>
+      <input ng-model="application.LNAME" placeholder="What is Your Last Name" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 input">
+      <div class="title">
+        Email
+      </div>
+      <input ng-model="application.EMAIL" placeholder="What is Your Email" />
+    </div>
+    <div class="col-md-4 input">
+      <div class="title">
+        Phone
+      </div>
+      <input ng-model="application.BUS_PH_NBR" placeholder="What is Your Phone Number" />
+    </div>
+    <div class="col-md-4 input fixed">
+      <div class="title">
+        Mailing List?
+      </div>
+       <switch style="margin-top:15px;" id="enabled" name="enabled" ng-model="application.MailingList" class="green"></switch>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 input">
+      <div class="title">
+        Address
+      </div>
+      <input ng-model="application.LINE_ONE_ADDR" placeholder="Where do you live" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 input">
+      <div class="title">
+        City
+      </div>
+      <input ng-model="application.CITY_NAME" placeholder="What City is That In" />
+    </div>
+    <div class="col-md-4 input">
+      <div class="title">
+        State
+      </div>
+      <input ng-model="application.ST_CD" placeholder="What State is That In" />
+    </div>
+    <div class="col-md-4 input">
+      <div ng-model="application.PSTL_CD" class="title">
+        Zip
+      </div>
+      <input placeholder="What's Your Zip Code" />
+    </div>
+  </div>
+</form>
+</div>

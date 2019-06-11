@@ -1,153 +1,180 @@
-<div class="modal-header task-modal-header" >
-      <span>To Do</span>
-      <span class='icons'>
-     <button type="button" class="close" aria-hidden="true" ng-click="CloseModal()" style="font-size:20pt;vertical-align:middle">&times;</button>
-	</span>
-</div>
-<div class="modal-body scrollbar" resize style="height:{{windowHeight-150}}px;" ng-controller="TaskCtrl">
-    <div class="task_body">
-      <div class="row" style="width:100%;padding-left:20px;display:block">
+<div class="task-modal" ng-controller="TaskCtrl">
+  <div class="modal-header task-modal-header">
+    <span class='icons'>
+      <button type="button" class="close" aria-hidden="true" ng-click="CloseModal()"
+        style="font-size:20pt;vertical-align:middle;margin-top:7px;">&times;</button>
+    </span>
+    <div class="row" style="width:100%;padding-left:20px;display:block">
 
-        <h3 ng-click="Title.$show()" class="clickable" onaftersave="updateTask(Tasks.currentTask)" editable-text="Tasks.currentTask.Title" e-form="Title" style="float:left;max-width:300px">
+      <h3 ng-click="Title.$show()" class="clickable" onaftersave="updateTask(Tasks.currentTask)"
+        editable-text="Tasks.currentTask.Title" e-form="Title" style="float:left;max-width:300px">
         {{Tasks.currentTask.Title}}
       </h3>
-        <div style="float:right; line-height:50px;vertical-align:middle;margin-right:20px">
-          <span>Priority </span>
-          <div ng-click="Tasks.currentTask.Priority='Low';updateTask(Tasks.currentTask)" ng-style="Tasks.currentTask.Priority=='Low' &&{'background-color':'#EBEBEB'}" class="clickable" style="z-index:10;border:1px solid #EBEBEB;text-align:center;border-radius:100%;color:white;position:relative;margin-top:15px;height:20px;width:20px;display:inline-block;margin-left:10px"></div>
-          <div ng-click="Tasks.currentTask.Priority='Medium';updateTask(Tasks.currentTask)" ng-style="Tasks.currentTask.Priority=='Medium' &&{'background-color':'#FFE372'}" class="clickable" style="z-index:10;border:1px solid #E6C129;text-align:center;border-radius:100%;color:white;height:20px;width:20px;display:inline-block;margin-left:10px"></div>
-          <div ng-click="Tasks.currentTask.Priority='High';updateTask(Tasks.currentTask)" ng-style="Tasks.currentTask.Priority=='High' &&{'background-color':'#FF7C72'}" class="clickable" style="z-index:10;border:1px solid #E63729;text-align:center;border-radius:100%;color:white;height:20px;width:20px;display:inline-block;margin-left:10px"></div>
+      <div class="priority">
+        <div class="label">Priority </div>
+        <div ng-click="Tasks.currentTask.Priority='Low';updateTask(Tasks.currentTask)"
+          ng-style="Tasks.currentTask.Priority=='Low' &&{'background-color':'#EBEBEB'}" class="clickable"
+          style="z-index:10;border:1px solid #EBEBEB;text-align:center;border-radius:100%;color:white;position:relative;margin-top:25px;height:20px;width:20px;display:inline-block;margin-left:5px">
         </div>
-      </div>
-     <section class="row" style="display:block;margin-top:30px;position:relative;text-align:center">
-       <div class="col-md-4" style="text-align:center;padding:0;padding-left:20px">
-       <p class="input-group" ng-init="showScheduled=false">
-         	<span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="showScheduled=true" ><i class="fa fa-bell-o"></i></button>
-          </span>
-									<input ng-change="updateTask(Tasks.currentTask)" type="text" class="form-control" uib-datepicker-popup ng-model="Tasks.currentTask.Created_Date" is-open="showScheduled" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-
-								</p>
-       </div>
-       <div class="col-md-4" style="padding:0px;padding-left:10px;padding-right:10px">
-        <p class="input-group" ng-init="showReminder=false">
-         	<span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="showReminder=!showReminder" style="background-color:#FFE372;color:#a68500"><i class="fa fa-bell-o"></i></button>
-          </span>
-									<input ng-change="updateTask(Tasks.currentTask)" type="text" class="form-control" uib-datepicker-popup ng-model="Tasks.currentTask.Reminder_Date" is-open="showReminder" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-
-								</p>
-       </div>
-       <div class="col-md-4" style="padding:0;padding-right:20px">
-       <p class="input-group" ng-init="showDue=false">
-         	<span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="showDue=!showDue" style="background-color:#FF7C72;color:#8d0a00"><i class="fa fa-clock-o"></i></button>
-          </span>
-									<input ng-change="updateTask(Tasks.currentTask)" type="text" class="form-control" uib-datepicker-popup ng-model="Tasks.currentTask.Due_Date" is-open="showDue" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-
-								</p>
-       </div>
-      </section>
-    <section style="padding:30px;top:50px">
-      <span>Description</span>
-      <div ng-init="edit=false" ng-show="!edit" ng-click="edit=!edit" class="well clickable description" ng-bind-html="to_trusted(Tasks.currentTask.Detail)">
-
-      </div>
-      <div ng-show="edit" style="display:block;position:relative">
-        <div summernote ng-model="Tasks.currentTask.Detail"></div>
-        <div ng-click="edit=!edit;updateTask(Tasks.currentTask)" class="btn shadow-4" style="position:absolute; bottom:-10px;left:0px;background-color:#3B78A3;color:white;border-radius:0;width:100%">
-          <i class="fa fa-save"></i>
+        <div ng-click="Tasks.currentTask.Priority='Medium';updateTask(Tasks.currentTask)"
+          ng-style="Tasks.currentTask.Priority=='Medium' &&{'background-color':'#FFE372'}" class="clickable"
+          style="z-index:10;border:1px solid #E6C129;text-align:center;border-radius:100%;color:white;height:20px;width:20px;display:inline-block;margin-left:10px">
         </div>
-      </div>
-    </section>
-       <section style="display:block;margin-top:20px;padding-left:20px">
-        <div class="row">
-          <div  class="col-md-6" style="min-height:50px;text-align:left;">
-            <div style="display:block;text-decoration:underline" class="scrollbar">Assigned To:</div>
-
-
-            <img class="task_image_small" ng-src="https://jfsapp.com/Images/ProfilePhotos/{{Tasks.currentTask.Assigned_DisplayPhoto ||'null.png'}}" />
-
-            <h5 style="display:inline-block;margin-right:10px"  onaftersave="updateTask(Tasks.currentTask,true)" editable-select="Tasks.currentTask.User_ID" e-ng-options="s.id as s.display_name for s in User.userList">
-                {{Tasks.currentTask.Assigned_DisplayName|| 'No One'}}
-            </h5>
-          </div>
-          <div  class="col-md-6"  style="height:50px;text-align:left;margin-top:10px">
-            <div style="display:block;text-decoration:underline">Assigned By:</div>
-
-
-            <img class="task_image_small" ng-src="https://jfsapp.com/Images/ProfilePhotos/{{Tasks.currentTask.FlaggedBy_DisplayPhoto}}" />
-
-            <h5 style="display:inline-block;margin-right:10px">
-            {{Tasks.currentTask.FlaggedBy_DisplayName}}
-          </h5>
-          </div>
+        <div ng-click="Tasks.currentTask.Priority='High';updateTask(Tasks.currentTask)"
+          ng-style="Tasks.currentTask.Priority=='High' &&{'background-color':'#FF7C72'}" class="clickable"
+          style="z-index:10;border:1px solid #E63729;text-align:center;border-radius:100%;color:white;height:20px;width:20px;display:inline-block;margin-left:10px">
         </div>
-        <div class="row">
-					<div class="col-md-6">
-          <div style="display:block;text-decoration:underline">Regarding:</div>
-
-
-          <img class="task_image_small" ng-src="https://jfsapp.com/Images/Recruits/{{Tasks.currentTask.ProfilePic||'blank.jpg'}}" />
-
-          <h5 style="display:inline-block;margin-right:10px">
-            {{Tasks.currentTask.FNAME + ' ' +Tasks.currentTask.LNAME}}
-          </h5>
-        </div>
-        <div  class="col-md-6" style="height:50px;text-align:left;margin-top:10px">
-
-        </div>
-    </div>
-    </section>
-    <hr>
-    <div class="task_comments">
-
-      <span><i class="fa fa-list"></i> Sub Tasks</span>
-      <div style="text-align:center;border-radius:100%;background-color:#E63729;color:white;height:20px;width:20px;display:inline-block;margin-left:10px" class="shadow-1"><i class="fa fa-plus"></i></div>
-      <hr>
-    </div>
-    <div class="task_comments">
-
-      <span><i class="fa fa-paperclip"></i> Attachments</span>
-      <div style="text-align:center;border-radius:100%;background-color:#E63729;color:white;height:20px;width:20px;display:inline-block;margin-left:10px" class="shadow-1"><i class="fa fa-plus"></i></div>
-      <hr>
-    </div>
-    <div class="task_comments">
-
-      <span><i class="fa fa-comments"></i> Comments</span>
-      <hr>
-      <div scroll-glue class="comment_list">
-      <div ng-repeat="comment in Tasks.currentTask.More_Detail.Comments">
-        <div class="row">
-          <div class="col-md-3" style="width:60px">
-
-            <img class="task_image" ng-src="https://jfsapp.com/Images/ProfilePhotos/{{comment.photo}}" />
-          </div>
-          <div class="col-md-9">
-            <h5 style="display:inline-block;margin-right:10px">
-            {{comment.User}}
-          </h5><time class="time" am-time-ago="comment.date"></time> <br> {{comment.text}}
-          </div>
-        </div>
-        <hr>
-      </div>
-</div>
-      <div>
-        <table style="width:100%">
-          <tr>
-            <td style="padding:5px; vertical-align:top;margin:0;width:65px">
-              <img class="task_image" ng-src="https://jfsapp.com/Images/ProfilePhotos/{{currentUser.Info.display_photo}}" />
-
-            </td>
-            <td style="margin:0">
-              <textarea ng-model="text" style="width:100%;height:100px;text-align:left"></textarea>
-              <div class="btn" ng-click="addComment(text)" style="margin-left:auto;margin-right:0px;position:relative;display:block;background-color:#3B78A3;color:white;width:100px">
-                reply
-              </div>
-            </td>
-          </tr>
-        </table>
       </div>
     </div>
   </div>
+  <div class="modal-body scrollbar" resize style="height:{{windowHeight-150}}px;">
+    <div class="task_body">
+      <section class="row" style="display:block;margin-top:30px;position:relative;text-align:center">
+        <div class="col-md-4" style="text-align:center;padding:0;padding-left:20px">
+          <p class="input-group" ng-init="showScheduled=false">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="showScheduled=true"><i
+                  class="fa fa-bell-o"></i></button>
+            </span>
+            <input ng-change="updateTask(Tasks.currentTask)" type="text" class="form-control" uib-datepicker-popup
+              ng-model="Tasks.currentTask.Created_Date" is-open="showScheduled" datepicker-options="dateOptions"
+              ng-required="true" close-text="Close" />
 
+          </p>
+        </div>
+        <div class="col-md-4" style="padding:0px;padding-left:10px;padding-right:10px">
+          <p class="input-group" ng-init="showReminder=false">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="showReminder=!showReminder"
+                style="background-color:#FFE372;color:#a68500"><i class="fa fa-bell-o"></i></button>
+            </span>
+            <input ng-change="updateTask(Tasks.currentTask)" type="text" class="form-control" uib-datepicker-popup
+              ng-model="Tasks.currentTask.Reminder_Date" is-open="showReminder" datepicker-options="dateOptions"
+              ng-required="true" close-text="Close" />
+
+          </p>
+        </div>
+        <div class="col-md-4" style="padding:0;padding-right:20px">
+          <p class="input-group" ng-init="showDue=false">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="showDue=!showDue"
+                style="background-color:#FF7C72;color:#8d0a00"><i class="fa fa-clock-o"></i></button>
+            </span>
+            <input ng-change="updateTask(Tasks.currentTask)" type="text" class="form-control" uib-datepicker-popup
+              ng-model="Tasks.currentTask.Due_Date" is-open="showDue" datepicker-options="dateOptions"
+              ng-required="true" close-text="Close" />
+
+          </p>
+        </div>
+      </section>
+      <section style="padding:30px;top:50px">
+        <span>Description</span>
+        <div ng-init="edit=false" ng-show="!edit" ng-click="edit=!edit" class="well clickable description"
+          ng-bind-html="to_trusted(Tasks.currentTask.Detail)">
+
+        </div>
+        <div ng-show="edit" style="display:block;position:relative">
+          <div summernote ng-model="Tasks.currentTask.Detail"></div>
+          <div ng-click="edit=!edit;updateTask(Tasks.currentTask)" class="btn shadow-4"
+            style="position:absolute; bottom:-10px;left:0px;background-color:#3B78A3;color:white;border-radius:0;width:100%">
+            <i class="fa fa-save"></i>
+          </div>
+        </div>
+      </section>
+      <section style="display:block;margin-top:20px;padding-left:20px">
+        <div class="row">
+          <div class="col-md-6" style="min-height:50px;text-align:left;">
+            <div style="display:block;text-decoration:underline" class="scrollbar">Assigned To:</div>
+
+
+            <img class="task_image_small"
+              ng-src="https://jfsapp.com/Images/ProfilePhotos/{{Tasks.currentTask.Assigned_DisplayPhoto ||'null.png'}}" />
+
+            <h5 style="display:inline-block;margin-right:10px" onaftersave="updateTask(Tasks.currentTask,true)"
+              editable-select="Tasks.currentTask.User_ID" e-ng-options="s.id as s.display_name for s in User.userList">
+              {{Tasks.currentTask.Assigned_DisplayName|| 'No One'}}
+            </h5>
+          </div>
+          <div class="col-md-6" style="height:50px;text-align:left;margin-top:10px">
+            <div style="display:block;text-decoration:underline">Assigned By:</div>
+
+
+            <img class="task_image_small"
+              ng-src="https://jfsapp.com/Images/ProfilePhotos/{{Tasks.currentTask.FlaggedBy_DisplayPhoto}}" />
+
+            <h5 style="display:inline-block;margin-right:10px">
+              {{Tasks.currentTask.FlaggedBy_DisplayName}}
+            </h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div style="display:block;text-decoration:underline">Regarding:</div>
+
+
+            <img class="task_image_small"
+              ng-src="https://jfsapp.com/Images/Recruits/{{Tasks.currentTask.ProfilePic||'blank.jpg'}}" />
+
+            <h5 style="display:inline-block;margin-right:10px">
+              {{Tasks.currentTask.FNAME + ' ' +Tasks.currentTask.LNAME}}
+            </h5>
+          </div>
+          <div class="col-md-6" style="height:50px;text-align:left;margin-top:10px">
+
+          </div>
+        </div>
+      </section>
+      <hr>
+
+      <div class="task_comments">
+
+        <span><i class="fa fa-paperclip"></i> Attachments</span>
+        <div
+          style="text-align:center;border-radius:100%;background-color:#E63729;color:white;height:20px;width:20px;display:inline-block;margin-left:10px"
+          class="shadow-1"><i class="fa fa-plus"></i></div>
+        <hr>
+      </div>
+      <div class="task_comments">
+
+        <span><i class="fa fa-comments"></i> Comments</span>
+        <hr>
+        <div scroll-glue class="comment_list">
+          <div ng-repeat="comment in Tasks.currentTask.More_Detail.Comments">
+            <div class="row">
+              <div class="col-md-3" style="width:60px">
+
+                <img class="task_image" ng-src="https://jfsapp.com/Images/ProfilePhotos/{{comment.photo}}" />
+              </div>
+              <div class="col-md-9">
+                <h5 style="display:inline-block;margin-right:10px">
+                  {{comment.User}}
+                </h5><time class="time" am-time-ago="comment.date"></time> <br> {{comment.text}}
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+        <div>
+          <table style="width:100%">
+            <tr>
+              <td style="padding:5px; vertical-align:top;margin:0;width:65px">
+                <img class="task_image"
+                  ng-src="https://jfsapp.com/Images/ProfilePhotos/{{currentUser.Info.display_photo}}" />
+
+              </td>
+              <td style="margin:0">
+                <textarea ng-model="text" style="width:100%;height:100px;text-align:left"></textarea>
+                <div class="btn" ng-click="addComment(text)"
+                  style="margin-left:auto;margin-right:0px;position:relative;display:block;background-color:#3B78A3;color:white;width:100px">
+                  reply
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer"></div>
 </div>

@@ -18,3 +18,23 @@ angular.module('JFS_Admin')
         };
     }
 ]);
+angular.module('JFS_Admin')
+.filter('momentdate', [
+  '$filter',
+  function($filter) {
+      return function(input, format) {
+          if (input === null) { return '';}
+          else { return moment(input).format(format);}
+      };
+  }
+]);
+angular.module('JFS_Admin')
+.filter('momentdateRelative', [
+  '$filter',
+  function($filter) {
+      return function(input, format) {
+          if (input === null) { return '';}
+          else { return moment(input).fromNow();}
+      };
+  }
+]);

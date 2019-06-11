@@ -1,8 +1,9 @@
 # JFS Admin
 
-This is the management portal for the Johnson Financial Service Website
+This is the management portal for the Johnson Financial Service Website.
 ## Built With
-<p>
+
+HTML Not Working.
 <img style="height:50px;width:50px; display:inline-block" src='http://devicon.fr/devicon.git/icons/nodejs/nodejs-original.svg'>
 <img style="height:50px;width:50px; display:inline-block" src='http://devicon.fr/devicon.git/icons/bower/bower-line.svg'>
 <img style="height:50px;width:50px" src='http://devicon.fr/devicon.git/icons/grunt/grunt-line.svg'>
@@ -11,7 +12,8 @@ This is the management portal for the Johnson Financial Service Website
 <img style="height:50px;width:50px" src='http://devicon.fr/devicon.git/icons/angularjs/angularjs-plain.svg'>
 <img style="height:50px;width:50px" src='http://devicon.fr/devicon.git/icons/less/less-plain-wordmark.svg'>
 <img style="height:50px" src='https://upload.wikimedia.org/wikipedia/en/thumb/e/e3/Yeoman.svg/543px-Yeoman.svg.png'>
-</p>
+
+
 ## Build & development
 #### requirements
 
@@ -46,6 +48,10 @@ Run `grunt` for building and `grunt serve` for preview.
 
 Running `grunt test` will run the unit tests with karma.
 
-## Also
+## Deploying to Production
 
 This is a test
+```
+grunt ssh_deploy:production
+
+```

@@ -1,0 +1,227 @@
+<div class="AgentPortal view">
+    <div class="recruit-info">
+        <div class="card">
+          <div class="row is-flex">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+              <div class="left-panel">
+                <div class="img-box">
+                  <div class="img-profile" ng-click="changepic()">
+                    <img ng-src="{{'https://jfsapp.com/Secure/API/Images/General/Agents/Profile/'+Agents.CurrentAgent.Info.profilepic+'?access_token='+currentUser.Token.access_token+'&client_id=testclient&client_secret=testpass'}}" />
+                  </div>
+                </div>
+                <div class="account-info">
+                  <span>{{Agents.CurrentAgent.Info.FirstName}}</span> <span>{{Agents.CurrentAgent.Info.LastName}}</span>
+                  <div class="agent-status active" ng-show="newAgent(Agents.CurrentAgent.Info.Hire_Date)">
+                      <span>New Agent</span>
+                    </div>
+                 </div>
+                 <div class="divider">
+                  </div>
+                 <div class="appointments" ng-show="newAgent(Agents.CurrentAgent.Info.Hire_Date)">
+                   <div class="title">
+                     Next Follow Up
+                   </div>
+                   <div class="appointment" ng-show="isFollowUpSet(Agents.CurrentAgent.Info)">
+                     <div class="date">
+                       <div class="header"></div>
+                       <div class="center both">
+                       <div class="month">{{Agents.CurrentAgent.Info.Next_Appointmen| momentdate:'MMM'}}</div>
+                       {{Agents.CurrentAgent.Info.Next_Appointmen| momentdate:'Do'}}
+                       </div>
+                     </div>
+                    
+            
+                     <div class="detail">
+                       <div class="time">
+                         <i class="fa fa-clock-o"></i>
+                         3:00pm
+                       </div>
+                        <div class="btn" ng-click="SendEmail()">
+                            Start
+                          </div>
+                          <div class="btn" ng-click="SendEmail()">
+                              Reschedule
+                            </div>
+                     </div>
+                    
+                   </div>
+                   <div class="no-appointment"  ng-hide="isFollowUpSet(Agents.CurrentAgent.Info)"> 
+                     <i class="fa fa-exclamation center both" ng-hide="isFollowUpSet(Agents.CurrentAgent.Info)"></i>
+                     <div class="v-divide"></div>               
+                     No Appointment Set
+                    </div>
+                 </div>
+                <div class="button btn" ng-click="SendEmail()">
+                  Contact
+                </div>
+                <div class="social">
+      
+                  <a class="account" ng-href="{{social.url}}" target="_blank" style="text-decoration:none" ng-repeat="social in Recruit.currentRecruit.Info.ContactDetails.socialProfiles">
+                  <i class="fa fa-{{social.type}} fa-3x clickable" ></i>
+                </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8 col-sm-12 nopadding">
+              <div class="contact">
+                <div class="title">
+                  Contact Info
+                </div>
+                <div class="contact-item" >
+                  <span class="contact-label" ng-click="mailTo(Recruit.currentRecruit.EMAIL)">Email</span>
+                  <span class="detail clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" onaftersave="saveRecruit()" editable-text="Agents.CurrentAgent.Info.Email" e-form="Email" ng-dblclick="Email.$show()">{{Agents.CurrentAgent.Info.Email}}</span>
+                </div>
+                <div class="contact-item">
+                  <span class="contact-label">Phone</span>
+                  <span class="detail clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" onaftersave="saveRecruit()" editable-text="Agents.CurrentAgent.Info.Phone" e-form="Phone" ng-dblclick="Phone.$show()">{{Agents.CurrentAgent.Info.Phone}}</span>
+                </div>
+                <div class="contact-item">
+                  <span class="contact-label">Address</span>
+                  <form editable-form name="Address" onaftersave="saveRecruit()">
+                    <span class="detail clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" editable-text="Agents.CurrentAgent.Info.Address" e-form="Address" ng-dblclick="Address.$show()">
+                    {{Agents.CurrentAgent.Info.Address}}<br>{{Agents.CurrentAgent.Info.City + ', ' +Agents.CurrentAgent.Info.State+' ' +Agents.CurrentAgent.Info.Zip}}
+                  </span>
+                   
+                    <span editable-text="Agents.CurrentAgent.Info.City" e-form="Address" ng-show="Address.$visible">
+                  </span>
+                    <span editable-text="Agents.CurrentAgent.Info.State" e-form="Address" ng-show="Address.$visible">
+                  </span>
+                    <span editable-text="Agents.CurrentAgent.Info.Zip" e-form="Address" ng-show="Address.$visible">
+                  </span>
+                    <span ng-show="Address.$visible">
+                     <button type="submit" class="btn btn-primary" ng-disabled="Address.$waiting">
+                       Save
+                     </button>
+                     <button type="button" class="btn btn-default" ng-disabled="Address.$waiting" ng-click="Address.$cancel()">
+                       Cancel
+                     </button>
+                   </span>
+                  </form>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="progress-row">
+                    <div class="title">
+                      Details
+                    </div>
+                    <div class="progress-item">
+                      <span class="progress-label">Hired</span>
+                      <div>{{Agents.CurrentAgent.Info.Hire_Date| momentdateRelative:'MMM Do Y'}}</div>
+                      </div>
+                      
+                      </form>
+                      <div class="progress-item clickable" ng-dblclick="pop.$show()">
+                        <span class="progress-label">POP Results</span>
+                        <div ng-hide="pop.$visible || !Recruit.currentRecruit.POP" class="pop" ng-style="Recruit.currentRecruit.POP< 3 &&{'background-color':'#FF7C72'}||Recruit.currentRecruit.POP>= 3 &&{'background-color':'#72D9D2'}">{{Recruit.currentRecruit.POP}}</div>
+                        <span class="clickable" e-style="width:60px;text-align:center;" e-name="pop" editable-text="Recruit.currentRecruit.POP" e-form="pop"></span>
+                      </div>
+                      <div class="progress-item clickable" ng-dblclick="pop.$show()">
+                        <span class="progress-label">Predictor</span>
+                        <div ng-hide="pop.$visible || !Recruit.currentRecruit.POP || !Recruit.currentRecruit.Predictor_Score" class="pop" ng-style="Recruit.currentRecruit.Predictor_Score < 55 &&{'background-color':'#FFE372'}||Recruit.currentRecruit.Predictor_Score>= 55 &&{'background-color':'#72D9D2'}">{{Recruit.currentRecruit.Predictor_Score}}</div>
+                        <span class="clickable" e-style="width:60px;text-align:center" e-name="predictor" editable-text="Recruit.currentRecruit.Predictor_Score" e-form="pop"></span>
+                      </div>
+                  </div>
+                </div>
+                <div class="row" ng-show="newAgent(Agents.CurrentAgent.Info.Hire_Date)">
+                <div class="progress-row">
+                  <div class="title">
+                    New Agent
+                  </div>
+                  <div class="progress-item">
+                    
+                    </div>
+                    <div class="progress-item clickable" ng-dblclick="pop.$show()">
+                     </div>
+                    <div class="progress-item clickable" ng-dblclick="pop.$show()">
+                     </div>
+                </div>
+              </div>
+             
+      
+      
+      
+            </div>
+          </div>
+        </div>
+      </div>
+  <!--   
+  <div class="profile">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="profile_img">
+          <div class="outerimage">
+
+          <img  ng-src="{{'https://jfsapp.com/Secure/API/Images/General/Agents/Profile/'+Agents.CurrentAgent.Info.profilepic+'?access_token='+currentUser.Token.access_token+'&client_id=testclient&client_secret=testpass'}}" />
+          <div class="img_mask">
+
+          </div>
+        </div>
+        </div>
+      </div>
+      <div class="col-md-9" style="padding:0">
+        <div class="row">
+          <div class="col-md-6 input">
+            <div class="title">
+              First Name
+            </div>
+            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.FirstName" placeholder="What is Your First Name" />
+          </div>
+          <div class="col-md-6 input">
+            <div class="title">
+              Last Name
+            </div>
+            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.LastName" placeholder="What is Your Last Name" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8 input">
+            <div class="title">
+              Phone
+            </div>
+            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.Phone" placeholder="What is Your First Name" />
+          </div>
+          <div class="col-md-4 input">
+            <div class="title">
+              Active
+            </div>
+            <div style="position:relative;display:block">
+            <div  ng-click="toggleAgent(Agents.CurrentAgent.Info)" style="height:100%;width:100%;position:absolute;display:block;z-index:99">
+
+            </div>
+            <switch  style="margin-top:5px;" id="enabled" name="enabled" ng-model="Agents.CurrentAgent.Info.Active" class="green"></switch>
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 input">
+            <div class="title">
+              Email
+            </div>
+            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.Email" placeholder="What is Your First Name" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 input">
+            <div class="title">
+              Address
+            </div>
+            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.Address" placeholder="What is Your First Name" />
+          </div>
+          <div class="col-md-3 input">
+            <div class="title">
+              City
+            </div>
+            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.City" placeholder="What is Your First Name" />
+          </div>
+          <div class="col-md-3 input">
+            <div class="title">
+              State
+            </div>
+            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.State" placeholder="What is Your First Name" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  {{Agents.CurrentAgent.Info | json}}-->

@@ -15,49 +15,70 @@ angular
     'angularMoment',
     'angular-sortable-view',
     'chart.js',
+    'config',
     'FBAngular',
+    'LocalStorageModule',
     'luegg.directives',
     'ngAnimate',
     'ngCookies',
+    'ngCropper',
     'ngFileSaver',
     'ngIdle',
     'ngSanitize',
+    'ngTagsInput',
     'summernote',
     'toastr',
     'ui.bootstrap',
     'ui.bootstrap.contextMenu',
     'ui.router',
-    'xeditable'
+    'xeditable',
+    'uiSwitch'
   ]);
-angular.module('JFS_Admin').run(function($rootScope, $state, $cookies, Idle, editableOptions) {
+angular.module('JFS_Admin').run(function($rootScope, $state, localStorageService, Idle, editableOptions,$http) {
   Idle.watch();
+  var Ready = true;
   editableOptions.theme = 'bs3';
   $rootScope.conn = new WebSocket('wss://jfsapp.com/WebSocket');
   $rootScope.conn.onopen = function(e) {
     console.log("Connection established!");
   };
-
-  $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
+  $rootScope.showLoading=true;
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams,$window) {
     if ($state.current.name != "login") {
       $rootScope.state = $state.current;
     }
     var requireLogin = toState.data.requireLogin;
     if (typeof $rootScope.currentUser === 'undefined') {
-      $rootScope.currentUser = $cookies.getObject('user');
+      $rootScope.currentUser = localStorageService.cookie.get('user');
     }
     if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
       event.preventDefault();
+      $rootScope.LastLocation =location.href;
       $state.go('login');
     }
+    else if (toState.name !='login' && toState.name !== '' && ($rootScope.currentUser === null))
+    {
+      event.preventDefault();
+      $rootScope.LastLocation =location.href;
+      $state.go('login');
+    }
+    else if(angular.isDefined($rootScope.currentUser) && $rootScope.currentUser !== null) {
+      if($rootScope.currentUser.Info.title != 'Administrator'){
+        //event.preventDefault();
+        //location.href ='https://jfsapp.com/Admin/Portal/Agent/#/';
+    }
+    }
+
   });
 
 });
-angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, KeepaliveProvider, IdleProvider) {
+angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, KeepaliveProvider, IdleProvider,localStorageServiceProvider) {
   // configure Idle settings
+
   IdleProvider.idle(10000); // in seconds
   IdleProvider.timeout(10000); // in seconds
   KeepaliveProvider.interval(2); // in seconds
-
+  localStorageServiceProvider.setPrefix('JFS');
   $urlRouterProvider.otherwise("/");
   $stateProvider
     .state('login', {
@@ -70,8 +91,14 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
     })
     .state('app', {
       url: '',
+      abstract: true,
       templateUrl: 'views/index.html',
       controller: 'MainCtrl',
+      resolve:{
+        GlobalSettings: function(User){
+          return User.getGlobalSettings();
+        }
+      },
       data: {
         requireLogin: true
       }
@@ -79,7 +106,7 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
     })
     .state('app.Home', {
       url: '/',
-      templateUrl: 'views/Recruiting/index.html',
+      templateUrl: 'views/Dashboard/index.html',
 
     })
     .state('app.Messages', {
@@ -96,27 +123,42 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
     })
     .state('app.Recruiting', {
       url: '',
+      abstract: true,
       templateUrl: 'views/Recruiting/index.html',
       controller: 'RecruitingCtrl',
 
     })
     .state('app.Recruiting.Dashboard', {
       url: '/Recruiting',
+      params: {
+          Archived: 0
+      },
       templateUrl: 'views/Recruiting/dashboard.html',
+      controller: 'RecruitingCtrl',
 
     })
     .state('app.Recruiting.Archived', {
-            url: "/ArchivedRecruits",
-			 			params: {
-                search: {RecruitStatus_ID:2}
-            },
-            views: {
-                '': {
-                    templateUrl: 'views/Recruiting/ArchivedRecruits.html',
-                    controller: 'ArchivedRecruitsCtrl'
-                }
-            }
-        })
+      url: '/Recruiting/Archived',
+      params: {
+          Archived: 1
+      },
+      views: {
+        '': {
+          templateUrl: 'views/Recruiting/dashboard.html',
+          controller: 'RecruitingCtrl',
+}}
+    })
+    .state('app.User', {
+      url: '/User',
+      templateUrl: 'views/User/index.html',
+      controller: 'UserCtrl',
+
+    })
+    .state('app.User.Settings', {
+      url: '/Settings',
+      templateUrl: 'views/User/Pages/settings.html',
+
+    })
     .state('app.Recruiting.Assigned', {
       url: '/Recruiting/Assigned',
       templateUrl: 'views/Recruiting/assigned.html',
@@ -129,9 +171,15 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
 
     })
     .state('app.Agents', {
-      url: '',
+      url: '/Agents',
+      abstract: true,
       templateUrl: 'views/Agents/index.html',
       controller: 'AgentsCtrl',
+
+    })
+    .state('app.Agents.Landing', {
+      url: '/Landing',
+      templateUrl: 'views/Agents/Landing.html',
 
     })
     .state('app.Agents.Dashboard', {
@@ -139,11 +187,17 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
       templateUrl: 'views/Agents/dashboard.html',
 
     })
+    .state('app.Agents.Agent', {
+      url: '/Agents/Agent?AgentID',
+      templateUrl: 'views/Agents/agentPortal.html',
+      controller: 'AgentsCtrl',
+
+    })
     .state('app.Reporting', {
-            url: "/Reporting",
-            templateUrl: 'views/Reporting/index.html',
-            controller: 'ReportCtrl'
-        })
+      url: "/Reporting",
+      templateUrl: 'views/Reporting/index.html',
+      controller: 'ReportCtrl'
+    })
     .state('app.Reporting.Dashboard', {
       url: "/Reporting/Dashboard",
       templateUrl: 'views/Reporting/Dashboard.html'
@@ -157,12 +211,25 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
       templateUrl: 'views/Reporting/Pop_Test.html'
     })
     .state('app.Style', {
-            url: "/Style",
-            templateUrl: 'views/Style/index.html',
-            controller: 'StyleCtrl'
-        })
+      url: "/Style",
+      templateUrl: 'views/Style/index.html',
+      controller: 'StyleCtrl'
+    })
     .state('app.Style.Guide', {
-                url: "/Style/Guide",
-                templateUrl: 'views/Style/guide.html'
-            });
+      url: "/Style/Guide",
+      templateUrl: 'views/Style/guide.html'
+    })
+    .state('app.Email', {
+      url: "/Email",
+      templateUrl: 'views/Email/index.html'
+    })
+    .state('app.Email.Dashboard', {
+      url: "/Email/Dashboard",
+      templateUrl: 'views/Email/dashboard.html'
+    })
+    .state('app.Email.People', {
+      url: "/Email/Dashboard",
+      templateUrl: 'views/Email/people.html',
+      controller: 'EmailPeopleCtrl'
+    });
 });

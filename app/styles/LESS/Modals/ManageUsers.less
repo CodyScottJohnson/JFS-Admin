@@ -1,0 +1,88 @@
+.manage_users {
+        height:100%;
+        background-color: white;
+        .toolbar {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            vertical-align: middle;
+            position: absolute;
+            background-color: fade(@gray,90%);
+            color: white;
+            padding-left: 60px;
+            font-size: 30px;
+        }
+        .newUserBar {
+            width: 100%;
+            height: 100px;
+            vertical-align: middle;
+            position: absolute;
+            background-color: @gray-lighter;
+            color: white;
+            padding-left: 60px;
+            padding-top:20px;
+            font-size: 10px;
+            z-index:5;
+            table{
+              text-align: center;
+              vertical-align: middle;
+              td{
+                vertical-align: top;
+                padding:5px;
+              }
+            }
+        }
+        table{
+          text-align: center;
+          vertical-align: middle;
+          td{
+            vertical-align: middle;
+            &.img{
+              padding:0!important;
+              margin: 0!important;
+              img{
+                height:70px;
+                width:70px;
+                margin-left: -8px;
+              }
+
+            }
+          }
+        }
+    }
+    .modal_save{
+      .clickable;
+      .Font_Body;
+      .BoxShadowHelperUp(5);
+      font-size:20px;
+      text-align: center;
+      background-color: @color-primary-2;
+      color:darken(@color-primary-2,50%);
+      border-radius: 0 0 5px 5px;
+    }
+
+    .modal-body{
+      .success{
+        text-align: center;
+        .Font_Body;
+        font-size: 30px;
+        i{
+          color:@color-success-2!important;
+          font-size: 120px;
+        }
+
+      }
+    }
+  .submit_pass {
+  height: 50px;
+  width: 100%!important;
+  margin:0!important;
+  border-radius:0;
+  background-color: @color-secondary-2-3!important;
+  border-color: darken(@color-secondary-2-3,40%);
+  //margin-bottom:200px;
+  padding: 5px;
+  display: block;
+  position: relative;
+
+}

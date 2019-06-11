@@ -8,16 +8,17 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('recruit', function($rootScope, $http, $filter, UUID, Functions, User,Task) {
+  .factory('recruit', function($rootScope, $q, $http, $filter, UUID, Functions, User,Task) {
     var currentRecruit = {
       data: {
         popInfo: {}
       }
     };
     currentRecruit.setRecruit = function(id) {
+      var deferred = $q.defer();
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/Recruit/' + id + '/',
+        url: 'https://jfsapp.com/Secure/API/v2/Recruits/' + id + '/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -72,16 +73,28 @@ angular.module('JFS_Admin')
         }
 
         currentRecruit.data.currentRecruit = data.data;
+        currentRecruit.data.currentRecruit.NextStepScheduled = moment(currentRecruit.data.currentRecruit.NextStepScheduled).toDate();
+        currentRecruit.data.currentRecruit.NextStepUpdated = moment(currentRecruit.data.currentRecruit.NextStepUpdated).format('Y-MM-D');
+        deferred.resolve(currentRecruit.data.currentRecruit);
         currentRecruit.getConversationHistory();
         currentRecruit.getTaskList();
       }, function(error) {
-        console.log(error);
+        deferred.reject(error);
       });
+      return deferred.promise;
+    };
+    currentRecruit.Socket = function(data) {
+      if (data.event === 'newsms') {
+        if(data.data.Recruit_ID == currentRecruit.data.currentRecruit.INDV_ID){
+          console.log("match");
+          currentRecruit.getConversationHistory()
+        }
+      }
     };
     currentRecruit.getConversationHistory = function() {
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/sms/',
+        url: 'https://jfsapp.com/Secure/API/v2/Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/messages/',
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -166,9 +179,9 @@ angular.module('JFS_Admin')
           },
           data: formData
         }).then(function(data) {
-          var message = currentRecruit.data.currentRecruit.FNAME + ",\n This is Scott Johnson it was great talking with you. I've emailed you the color test we talked about. If you don't see it please check your spam folder";
+          var message = currentRecruit.data.currentRecruit.FNAME + ",\n This is Scott Johnson it was great talking with you. I've emailed you the color test we talked about. If you don't see it please check your spam folder\n If there's any problems with the email here's the link:\n"+"https://www.JFSApp.com/ColorQuiz/dist/#/"+testdata.Test_Token;;
           User.sendText(message, currentRecruit.data.currentRecruit.BUS_PH_NBR ||'');
-          Functions.Toast('', '', 'Color Test Sent');
+          Functions.Toast('success','Color Test Sent','  To: '+currentRecruit.data.currentRecruit.FNAME + ' '+currentRecruit.data.currentRecruit.LNAME ,{iconClass: 'jfsToast_success',extendedTimeOut: 9000000});
           if (!angular.isDefined(currentRecruit.data.currentRecruit.Info.ColorStatus)) {
             currentRecruit.data.currentRecruit.Info.ColorStatus = {
               ColorTests: [],
@@ -206,6 +219,80 @@ angular.module('JFS_Admin')
       Task.getRecruitTasks(currentRecruit.data.currentRecruit.INDV_ID).then(function(data){
         currentRecruit.data.Task ={List:data};
       });
+    };
+    currentRecruit.getSocial = function(email) {
+      var deferred = $q.defer();
+       $http({
+           method: 'GET',
+           url: 'https://api.fullcontact.com/v2/person.json?email=' + email + '&apiKey=18f2292b957c799'
+       }).then(function(data) {
+           currentRecruit.data.currentRecruit.Info.ContactDetails = data.data;
+           currentRecruit.save();
+           Functions.Toast('success','','Success');
+           deferred.resolve(data.data);
+       }, function(error) {
+         console.log(error.data.message);
+          Functions.Toast('error','',error.data.message);
+       });
+
+       return deferred.promise;
+
+    };
+    currentRecruit.SetPictureURI = function(photo) {
+        var formData = {
+            ProfilePic: photo.url
+
+        };
+        var postData = JSON.stringify(formData);
+        $http({
+            method: 'PATCH',
+            url: 'https://jfsapp.com/Secure/API/Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/ProfilePic/',
+            params: {
+                'access_token': '8c7ba91d562f5b566544e8bd94a518f71d4ad6b0',
+                client_id: 'testclient',
+                client_secret: 'testpass'
+            },
+            data: postData,
+
+        }).then(function(data) {
+            angular.forEach(currentRecruit.data.currentRecruit.Info.ContactDetails.photos, function(value) {
+                value.selected = false;
+            });
+
+            currentRecruit.data.currentRecruit.ProfilePic = data.data.ProfilePic;
+            currentRecruit.save();
+        }, function(error) {
+            //console.log(error)
+        });
+    };
+    currentRecruit.SetPicture = function(photo) {
+        var formData = {
+            ProfilePic: photo.url
+
+        };
+        var postData = JSON.stringify(formData);
+        $http({
+            method: 'PATCH',
+            url: 'https://jfsapp.com/Secure/API/Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/ProfilePic/',
+            params: {
+                'access_token': '8c7ba91d562f5b566544e8bd94a518f71d4ad6b0',
+                client_id: 'testclient',
+                client_secret: 'testpass'
+            },
+            data: postData,
+
+        }).then(function(data) {
+            angular.forEach(currentRecruit.data.currentRecruit.Info.ContactDetails.photos, function(value) {
+                value.selected = false;
+            });
+            var index = currentRecruit.data.currentRecruit.Info.ContactDetails.photos.indexOf(photo);
+            //console.log(data);
+            currentRecruit.data.currentRecruit.Info.ContactDetails.photos[index].selected = true;
+            currentRecruit.data.currentRecruit.ProfilePic = data.data.ProfilePic;
+            currentRecruit.save();
+        }, function(error) {
+            //console.log(error)
+        });
     };
     return currentRecruit;
   });

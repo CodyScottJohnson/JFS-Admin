@@ -1,0 +1,25 @@
+<div  ng-controller="RecruitCtrl">
+  <div class="modal-header">
+    <div class="title">Notes For {{Recruit.currentRecruit.FNAME}}</div>
+      <button type="button" class="close" aria-hidden="true" ng-click="CloseModal()" style="font-size:30pt;vertical-align:middle">&times;</button>
+  </div>
+  <div class="modal-body scrollbar" scroll-glue style="max-height:400px">
+    <div class="note-for-modal" ng-repeat="note in Recruit.currentRecruit.Info.Notes track by $index"  >
+      <div class="panel-body" >
+        {{note.text}}
+      </div>
+      <div class="panel-footer panel-default" style="border-radius: 0 0 10px 10px; background-color:#F5F5F5;margin-top:-5px;height:37px">
+        <span style="float:left">{{note.datetime| date : 'MMM d yyyy @ h:mm a'}}</span><span style="float:right;margin-left:5px">{{note.userName}}</span>
+        <div style="float:right;display:block;height:100%"><img style="height:30px; border-radius:30px;top:-7px;position:relative;display:block" src="https://jfsapp.com/Images/ProfilePhotos/{{note.userPhoto}}"></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <form id="todo-form" ng-submit="addNote(Text);Text=''">
+      <div class="form-group">
+        <textarea class="form-control" rows="3" ng-model="Text" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-note" style="margin-left:auto;margin-right:auto;">Add Note</button>
+    </form>
+  </div>
+</div>

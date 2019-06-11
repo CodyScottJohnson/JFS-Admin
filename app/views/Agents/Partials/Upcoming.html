@@ -1,0 +1,35 @@
+<div class="events">
+  <div class="header">
+    Agent Follow Ups
+    
+  </div>
+  <div class="list">
+    <div class="event" ng-repeat="event in [1,2,3,4,5,6]">
+      <div class="date">
+        THU
+        <span class="day">5</span>
+        <div class="multiday_divide" ng-show="false">
+
+        </div>
+        <span ng-show="false">Sat</span>
+        <span class="day" ng-show="false">12</span>
+      </div>
+      <div class="detail">
+        <div class="Title">
+          This is an Event
+        </div>
+        <div class="type">
+          <i class="fa fa-birthday-cake"></i>Birthday
+        </div>
+        <div class="Location">
+          <i class="fa fa-map-marker"></i>Bountiful, Utah
+        </div>
+        <div class="actions">
+          <addtocalendar hide-caret=True btn-text="Add To Calendar" start-date="20150704T190000" end-date="20150704T210000" title="Fourth of July Fireworks" location="Battery Park City, New York, NY" class-name="btn btn-sm btn-default dropdown-toggle" description="Celebrate the independence of the United States with fireworks in one of the greatest cities in the world.">
+          </addtocalendar>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

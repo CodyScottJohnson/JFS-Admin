@@ -7,11 +7,14 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  // Deploy Build to Server
+  grunt.loadNpmTasks('grunt-ssh-deploy');
+  grunt.loadNpmTasks('grunt-ng-constant');
   // Automatically load required Grunt tasks
   require('jit-grunt')(grunt, {
     useminPrepare: 'grunt-usemin',
@@ -20,6 +23,7 @@ module.exports = function (grunt) {
   });
 
   // Configurable paths for the application
+  var env = grunt.option('env') || 'dev';
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
     dist: 'web'
@@ -27,22 +31,61 @@ module.exports = function (grunt) {
 
   // Define the configuration for all the tasks
   grunt.initConfig({
+    environments: {
+      options: {
+        local_path: 'web',
+      },
+      production: {
+        options: {
+          host: 'jfsapp.com',
+          username: 'root',
+          //password: 'skiutah4969',
+          deploy_path: '/srv/Builds/JFS_App/Production',
+          current_symlink: 'current',
+          port: '4969',
+          //privateKey: require('fs').readFileSync('F:/JFS.pem'),
+          privateKey: require('fs').readFileSync('/Users/Cody/devApps/Keys/JFS.pem'),
+          //port: '<%= secret.production.port %>',
+          releases_to_keep: '3'
+          //release_subdir: 'myapp'
+        }
+      }
 
+    },
+    ngconstant: {
+      options: {
+        space: '  ',
+        wrap: '"use strict";\n\n {\%= __ngModule %}',
+        name: 'config',
+      },
+      dev: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/services/config.js'
+        },
+        constants: grunt.file.readJSON('database/config/config_dev.json')
+      },
+      prod: {
+        options: {
+          dest: '<%= yeoman.app %>/scripts/services/config.js'
+        },
+        constants: grunt.file.readJSON('database/config/config_prod.json')
+      }
+    },
     // Project settings
     yeoman: appConfig,
     less: {
-        development: {
-            options: {
-                compress: true,
-                yuicompress: true,
-                optimization: 2
-            },
-            files: {
-                // target.css file: source.less file
-                //'bower_components/bootstrap/dist/css/bootstrap.css': 'bower_components/bootstrap/less/bootstrap.less',
-                '<%= yeoman.app %>/styles/app.css':'<%= yeoman.app %>/styles/LESS/app.less'
-            }
+      development: {
+        options: {
+          compress: true,
+          yuicompress: true,
+          optimization: 2
+        },
+        files: {
+          // target.css file: source.less file
+          //'bower_components/bootstrap/dist/css/bootstrap.css': 'bower_components/bootstrap/less/bootstrap.less',
+          '<%= yeoman.app %>/styles/app.css': '<%= yeoman.app %>/styles/LESS/app.less'
         }
+      }
     },
     // Watches files for changes and runs tasks based on the changed files
     watch: {
@@ -65,12 +108,16 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
         tasks: ['newer:copy:styles', 'postcss']
       },
-      less:{
-        files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+      less: {
+        files: ['<%= yeoman.app %>/styles/{,**/}*.less'],
         tasks: ['less']
       },
       gruntfile: {
         files: ['Gruntfile.js']
+      },
+      config: {
+        files: ['database/config/*.json'],
+        tasks: ['ngconstant:' + env]
       },
       livereload: {
         options: {
@@ -95,7 +142,7 @@ module.exports = function (grunt) {
       livereload: {
         options: {
           open: true,
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
               connect.static('.tmp'),
               connect().use(
@@ -114,7 +161,7 @@ module.exports = function (grunt) {
       test: {
         options: {
           port: 9001,
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
               connect.static('.tmp'),
               connect.static('test'),
@@ -191,7 +238,9 @@ module.exports = function (grunt) {
     postcss: {
       options: {
         processors: [
-          require('autoprefixer-core')({browsers: ['last 1 version']})
+          require('autoprefixer-core')({
+            browsers: ['last 1 version']
+          })
         ]
       },
       server: {
@@ -219,26 +268,26 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath:  /\.\.\//
+        ignorePath: /\.\.\//
       },
       options: {
-       exclude: ['{,*/}*bootstrap.js/']
+        exclude: ['{,*/}*bootstrap.js/']
       },
       test: {
         devDependencies: true,
         src: '<%= karma.unit.configFile %>',
-        ignorePath:  /\.\.\//,
-        fileTypes:{
+        ignorePath: /\.\.\//,
+        fileTypes: {
           js: {
             block: /(([\s\t]*)\/{2}\s*?bower:\s*?(\S*))(\n|\r|.)*?(\/{2}\s*endbower)/gi,
-              detect: {
-                js: /'(.*\.js)'/gi
-              },
-              replace: {
-                js: '\'{{filePath}}\','
-              }
+            detect: {
+              js: /'(.*\.js)'/gi
+            },
+            replace: {
+              js: '\'{{filePath}}\','
             }
           }
+        }
       }
     },
 
@@ -285,7 +334,9 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/styles'
         ],
         patterns: {
-          js: [[/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']]
+          js: [
+            [/(images\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']
+          ]
         }
       }
     },
@@ -297,24 +348,24 @@ module.exports = function (grunt) {
     cssmin: {
       dist: {
         files: {
-        '<%= yeoman.dist %>/styles/main.css': [
-          '.tmp/styles/{,*/}*.css'
-        ]
-       }
-       }
-     },
-     uglify: {
-       dist: {
-         files: {
-           '<%= yeoman.dist %>/scripts/scripts.js': [
-             '<%= yeoman.dist %>/scripts/scripts.js'
-           ]
+          '<%= yeoman.dist %>/styles/main.css': [
+            '.tmp/styles/{,*/}*.css'
+          ]
         }
-       }
-     },
-     concat: {
-       dist: {}
-     },
+      }
+    },
+    uglify: {
+      dist: {
+        files: {
+          '<%= yeoman.dist %>/scripts/scripts.js': [
+            '<%= yeoman.dist %>/scripts/scripts.js'
+          ]
+        }
+      }
+    },
+    concat: {
+      dist: {}
+    },
 
     imagemin: {
       dist: {
@@ -398,9 +449,9 @@ module.exports = function (grunt) {
           dest: '<%= yeoman.dist %>',
           src: [
             '*.{ico,png,txt}',
-            '{,*/}*.html','*.php','{,*/}*.json',
+            '{,*/}*.html', '*.php', '{,*/}*.json',
             'images/{,*/}*.{webp}',
-            'styles/font/{,*/}*.*','views/{,**/}*'
+            'styles/font/{,*/}*.*', 'views/{,**/}*'
           ]
         }, {
           expand: true,
@@ -412,7 +463,7 @@ module.exports = function (grunt) {
           cwd: 'bower_components/bootstrap/dist',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
-        },{
+        }, {
           expand: true,
           cwd: 'bower_components/Ionicons',
           src: 'fonts/*',
@@ -453,11 +504,14 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+    push: {
+
     }
   });
 
 
-  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
+  grunt.registerTask('serve', 'Compile then start a connect web server', function(target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
@@ -465,6 +519,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+      'ngconstant:' + env,
       'concurrent:server',
       'postcss:server',
       'connect:livereload',
@@ -472,7 +527,7 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
+  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function(target) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run(['serve:' + target]);
   });
@@ -486,10 +541,10 @@ module.exports = function (grunt) {
     //'karma',
     //'less'
   ]);
-
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
+    'ngconstant:' + env,
     'useminPrepare',
     'concurrent:dist',
     'less',
