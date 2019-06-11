@@ -22,7 +22,10 @@
 
 > This is the management portal for the Johnson Financial Service Website.
 
+<p align="center">
+    <img src="https://raw.githubusercontent.com/codyscottjohnson/JFS-Admin/master/preview/dashboard.png" />
 
+</p>
 
 ## Build & development
 #### requirements
