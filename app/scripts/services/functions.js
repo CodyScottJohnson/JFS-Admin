@@ -30,13 +30,15 @@ angular.module('JFS_Admin')
         //console.log('default');
         icon = 'https://jfsapp.com/Images/Logos/icon50.png';
       }
+      
       var trackNotification = new notification(
         title, {
           body: body,
           dir: 'auto',
           lang: 'EN',
           tag: 'JFSNotification',
-          icon: icon
+          icon: icon,
+          badge:'https://jfsapp.com/Images/Logos/icon50.png'
         }
       );
 

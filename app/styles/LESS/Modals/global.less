@@ -41,9 +41,34 @@
   }
 }
 }
+.modal-content{
+  border-radius:20px;
+}
 .modal-header{
   .Font_Body;
-  font-size:20px;
+  font-weight: normal;
+  color:@gray-pleasing;
+  font-size:18px;
+  background:#eeeff0;
+  border-radius:20px 20px 0px 0px;
+  display: block;
+  position: relative;
+  .title{
+   .center.vertical;
+  }
+}
+.modal-footer{
+  background:#eeeff0;
+  border-radius:0px 0px 20px 20px;
+  .btn-note{
+    //.BoxShadowHelper(1);
+    border:1px solid @color-button;
+    color: @color-button;
+    //background:fade(white,60%);
+    background:none;
+    border-radius:20px;
+
+  }
 }
 .modal_save{
   .clickable;
@@ -55,8 +80,11 @@
   color:darken(@color-primary-2,50%);
   border-radius: 0 0 5px 5px;
 }
+.modal-body{
+  background:#f9f9f9;
+}
 .notes_modal{
-  background-color: #F6FAF9;
+  background-color: @background;
   .BoxShadowHelper(5);
   height:600px;
   border-radius: 20px;
@@ -208,5 +236,20 @@
         right:20px;
       }
     }
+  }
+}
+.note-for-modal{
+    .BoxShadowHelper(1);
+    margin:20px 10px;
+    z-index:30px; 
+    border-radius:10px; 
+    min-width:200px;
+    width:calc(100% - 3px);
+    border:1px solid fade(@gray-pleasing,30%); 
+    background-color:white;
+}
+.task-modal{
+  .modal-body{
+    background: white;
   }
 }

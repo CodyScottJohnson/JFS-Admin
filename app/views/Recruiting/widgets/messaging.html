@@ -1,0 +1,30 @@
+<div class="widget message-widget">
+  <div class="widget-header">
+    <span class="clickable">Messages</span>
+    <div class="widget-sizes">
+
+      <div class="maximize" ng-click="expandNotesWidget()">
+        <i class="fa fa-expand"></i>
+      </div>
+    </div>
+  </div>
+  <div class="widget-body" scroll-glue>
+    <div class="message-panel" ng-class="{right: (message.Outgoing==1), left: (message.Outgoing==0)}"
+      ng-repeat="message in Recruit.currentRecruit.texts|orderBy:'Date' track by $index">
+      <div class="text-message" ng-show="message.Type=='Text'">
+        <span class="timestamp" >{{message.Date| momentdate : 'MMM Do h:mma'}}</span>
+        <div class="divider"></div>
+        <div class="icon">
+          <i class="fa fa-comment"></i>
+        </div>
+        <div class="body">
+          {{message.Detail.Message || message.Detail.body}}
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  <div class="widget-footer">
+
+  </div>
+</div>

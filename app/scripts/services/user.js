@@ -117,7 +117,8 @@ angular.module('JFS_Admin')
     };
     currentUser.Socket = function(data) {
       if (data.event == 'newsms') {
-        currentUser.data.TextMessages.push(data.data);
+        currentUser.getTexts();
+        //currentUser.data.TextMessages.push(data.data);
       }
     };
     currentUser.setCurrentConversation = function(ConversationID) {

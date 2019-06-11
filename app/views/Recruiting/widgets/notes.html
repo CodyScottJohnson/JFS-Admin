@@ -2,18 +2,15 @@
   <div class="widget-header">
     <span class="clickable">Notes</span>
     <div class="widget-sizes">
-      <div class="minimize" ng-click="widgets.Note.size='small'">
-        <i class="fa fa-minus"></i>
-      </div>
       <div class="maximize" ng-click="expandNotesWidget()">
-        <i class="fa fa-plus"></i>
+        <i class="fa fa-expand"></i>
       </div>
     </div>
   </div>
-  <div class="widget-body">
-    <div class="note-panel" ng-repeat="note in Recruit.currentRecruit.Info.Notes|orderBy:'-datetime'|limitTo:1 track by $index">
+  <div class="widget-body"  scroll-glue>
+    <div class="note-panel" ng-repeat="note in Recruit.currentRecruit.Info.Notes track by $index">
       <div class="note-body" >
-        {{note.text}}
+        {{note.text| truncate: 304: '...'}}
       </div>
       <div class="note-footer">
         <span style="float:left">{{note.datetime| momentdate : 'MMM D Y @ h:mm a'}}</span><span style="float:right;margin-left:5px">{{note.userName}}</span>
@@ -22,6 +19,8 @@
     </div>
   </div>
   <div class="widget-footer">
-
+      <div class="button" ng-click="newTask()">
+          New Note
+        </div>
   </div>
 </div>

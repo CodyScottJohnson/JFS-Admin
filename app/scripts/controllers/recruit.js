@@ -22,6 +22,7 @@ angular.module('JFS_Admin')
   .controller('RecruitCtrl', function($scope, $http, $rootScope, Task, Recruits, recruit, Dropbox, Functions, FileUploader, File, User, $sce,$location, Email) {
     if(angular.isDefined($location.search().RecruitID))
     {
+      console.log("found")
       recruit.setRecruit($location.search().RecruitID);
     }
     $scope.changepic = function(){
@@ -98,6 +99,7 @@ angular.module('JFS_Admin')
     $scope.sendColor = function(){
       recruit.sendColor();
     };
+    
     $scope.sendText = function(message) {
       var phone = $scope.Recruit.currentRecruit.BUS_PH_NBR.replace(/\D/g, '');
       if (phone.length >= 10 && phone.length <= 11) {

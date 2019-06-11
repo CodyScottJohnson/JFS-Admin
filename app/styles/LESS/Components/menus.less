@@ -24,6 +24,135 @@
     }
   }
 }
+.result{
+  .Font_Body;
+  .BoxShadowHelper(1);
+  width:100%;
+  font-size: 15px;
+  background:white;
+  margin:10px 0px;
+  border-radius:10px;
+  padding:10px;
+  position: relative;
+  display:block;
+  .clickable;
+  .type{
+    .center.vertical;
+    .BoxShadowHelper(1);
+    position:absolute;
+    height:35px;
+    width:35px;
+    background: @color-button;
+    border-radius:100%;
+    //top:-8px;
+    right:-10px;
+    padding:0!important;
+    i{
+      .center.both!important;
+      
+      margin:0px!important;
+      color:white!important;
+      font-size: 18px!important;
+    }
+  }
+  
+  &:hover{
+   background:lighten(@gray-pleasing,60%);
+  }
+  &.recruit{
+    .avatar{
+      .BoxShadowHelper(1);
+      .center.vertical;
+      border-radius:100%;
+      height:60px;
+      width:60px;
+      left:20px;
+      border: 1px solid @color-button;
+      margin-right:10px;
+    }
+    .text{
+      padding-left:90px;
+      display:inline-block;
+      .name{
+        padding:0px;
+        height:20px;
+      }
+      .status{
+        font-size:12px;
+        &.active{
+          span{
+          font-size:10px;
+          background:@tech;
+          padding:5px;
+          border-radius:5px;
+          }
+        }
+        &.archived{
+          span{
+          font-size:10px;
+          background:lighten(@gray-pleasing,20%);
+          padding:5px;
+          border-radius:5px;
+          }
+        }
+      }
+    }
+  }
+  &.task{
+    display: block;
+    position: relative;
+    .body{
+      display: inline-block;
+      line-height: 15px;
+      padding-top:15px;
+    }
+   .type{
+     background: @color-secondary-2-0;
+   }
+    span{
+      margin:0;
+      line-height: 10px;
+      .Font_Body!important;
+      font-size: 10px;
+    }
+    .task-panel{
+      height:auto;
+      box-shadow: none;
+      background: none;
+      margin:0px!important;
+      padding:0;
+      line-height:15px;
+      min-height:100px;
+      .regarding{
+        bottom:0px;
+      }
+      .completed{
+        display: inline-block;
+        margin-left:5px;
+        
+        color:@gray-pleasing;
+        i{
+          color: @tech!important;
+          text-shadow: none;
+          font-size:14px;
+          margin-right:5px;
+        }
+        font-size:12px;
+      }
+      .time{
+        bottom:8px;
+        i{
+          color:lighten(@gray-pleasing,40%)!important;
+        }
+      }
+      .priority{
+        span{
+          color:white!important;
+        }
+      }
+    }
+  }
+}
 .search_menu{
   border-radius: 5px!important;
   .BoxShadowHelper(5)!important;

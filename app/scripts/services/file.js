@@ -8,7 +8,7 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('File', function(FileUploader,UUID) {
+  .factory('File', function(FileUploader,UUID,$rootScope) {
     // Service logic
     var uploader ={};
     var File = {
@@ -19,7 +19,7 @@ angular.module('JFS_Admin')
         //url: 'https://api-content.dropbox.com/1/files_put/auto/Temp/',
         url: 'https://content.dropboxapi.com/2/files/upload',
         headers: {
-          Authorization: 'Bearer Q97s2PcThkMAAAAAAAB12r6Z6FAIKdLFxUy8uTSFqAv2VnRRG6QxtK80OukeGzBh',
+          Authorization: 'Bearer '+$rootScope.GlobalSettings.DropBox.access_token,
           "Dropbox-API-Arg": {"path": "/Homework/math/Matrices.txt","mode": "add","autorename": false},
           "Content-Type": "application/octet-stream"
 

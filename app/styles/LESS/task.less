@@ -10,15 +10,41 @@
   right: 0;
   z-index: 5;
 };
-
+.task-modal{
+  .priority{
+    float:right; 
+    line-height:50px;
+    vertical-align:middle;
+    margin-right:20px;
+    font-size:14px;
+    font-weight: normal;
+    vertical-align: middle;
+    //line-height: 10px;
+    .label{
+      display: inline-block;
+      color:black;
+      line-height:15px;
+      font-size:12px;
+      font-weight: normal;
+      //background: red;
+      margin-top:0;
+      top:0;
+      padding-top:28px;
+      //line-height:20px;
+      vertical-align: top;
+    }
+  }
+}
 .task-modal-header {
-  height: 80px;
-  background-color: #FE5E52;
-  line-height: 60px;
+
   vertical-align: middle;
-  color: white;
-  font-size: 20pt;
+  //color: white;
+  font-size: 12pt;
+  padding:0px 15px;
   border-radius: 5px 5px 0 0;
+  input, button{
+    margin-top:15px;
+  }
 };
 
 .task_header {
@@ -50,7 +76,7 @@
 .task_body {
   background-color: white;
   height: 100%;
-  padding: 20px;
+  padding: 5px 20px;
   .scrollbar;
 
   .description {

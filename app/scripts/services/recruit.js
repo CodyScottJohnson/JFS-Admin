@@ -83,10 +83,18 @@ angular.module('JFS_Admin')
       });
       return deferred.promise;
     };
+    currentRecruit.Socket = function(data) {
+      if (data.event === 'newsms') {
+        if(data.data.Recruit_ID == currentRecruit.data.currentRecruit.INDV_ID){
+          console.log("match");
+          currentRecruit.getConversationHistory()
+        }
+      }
+    };
     currentRecruit.getConversationHistory = function() {
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/sms/',
+        url: 'https://jfsapp.com/Secure/API/v2/Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/messages/',
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -171,7 +179,7 @@ angular.module('JFS_Admin')
           },
           data: formData
         }).then(function(data) {
-          var message = currentRecruit.data.currentRecruit.FNAME + ",\n This is Scott Johnson it was great talking with you. I've emailed you the color test we talked about. If you don't see it please check your spam folder";
+          var message = currentRecruit.data.currentRecruit.FNAME + ",\n This is Scott Johnson it was great talking with you. I've emailed you the color test we talked about. If you don't see it please check your spam folder\n If there's any problems with the email here's the link:\n"+"https://www.JFSApp.com/ColorQuiz/dist/#/"+testdata.Test_Token;;
           User.sendText(message, currentRecruit.data.currentRecruit.BUS_PH_NBR ||'');
           Functions.Toast('success','Color Test Sent','  To: '+currentRecruit.data.currentRecruit.FNAME + ' '+currentRecruit.data.currentRecruit.LNAME ,{iconClass: 'jfsToast_success',extendedTimeOut: 9000000});
           if (!angular.isDefined(currentRecruit.data.currentRecruit.Info.ColorStatus)) {
@@ -188,8 +196,6 @@ angular.module('JFS_Admin')
           currentRecruit.data.currentRecruit.Info.ColorStatus.TotalSent++;
           currentRecruit.data.currentRecruit.Info.ColorStatus.LastSent = moment.utc().format();
           currentRecruit.data.currentRecruit.Color_Status = 'Test Sent';
-          var message2 = "If there's any problems with the email here's the link:\n"+"https://www.JFSApp.com/ColorQuiz/dist/#/"+testdata.Test_Token;
-          User.sendText(message2, currentRecruit.data.currentRecruit.BUS_PH_NBR ||'');
           currentRecruit.save();
         });
       });

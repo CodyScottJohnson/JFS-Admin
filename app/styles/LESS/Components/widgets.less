@@ -1,531 +1,668 @@
-.widget{
-  .BoxShadowHelper(3);
-  .Font_Body;
-  //margin:20px;
-  background: @almost-white;
-  margin-bottom: 20px;
-  width:100%;
-  height:500px;
-  border-radius: 5px;
-  display: block;
-  position: relative;
-  overflow: hidden;
-  border:1px solid fade(@gray-pleasing,10%);
-  .widget-header{
-    background: fade(white,98%);
-    width:100%;
-    font-size: 18px;
-    padding:30px;
-    border-radius: 5px 5px 0 0;
-    border-bottom: 1px solid fade(@gray-pleasing,30%);
-    position: absolute;
-    display: block;
-    z-index:5;
-    .widget-sizes{
-      .center.vertical;
-      right:30px;
-      font-size:12px;
-      .maximize{
-        .clickable;
-        display: inline-block;
-        margin:3px;
-        width:20px;
-        height:20px;
-        line-height: 20px;
-        text-align: center;
-        border-radius: 100%;
-        background: #4DB6AC;
-        color:@almost-white
-      };
-      .minimize{
-        .clickable;
-        display: inline-block;
-        margin:3px;
-        width:20px;
-        height:20px;
-        line-height: 20px;
-        text-align: center;
-        border-radius: 100%;
-        background: #FDD835;
-        color:@almost-white
-      };
-    };
-    .badge{
-      .BoxShadowHelper(1);
-      margin-left:10px;
-      border-radius: 15px;
-      font-size: 17px;
-      padding:7px 10px 7px 10px;
-      background: #6F94FF;
-      color:white!important;
-    }
-    .button{
-      .center.vertical;
-      border-radius: 5px;
-      font-size:14px;
-      right:30px;
-      padding:10px;
-      background-color:#6F94FF;
-      .BoxShadowHelper(1);
-      .clickable;
-      color:white;
-    }
-
-  }
-  .widget-footer{
-    background: fade(white,98%);
-    width:100%;
-    font-size: 18px;
-    padding:10px;
-    border-radius: 0 0 5px 5px;
-    border-top: 1px solid fade(@gray-pleasing,30%);
-    position: absolute;
-    bottom:0;
-    display: block;
-    z-index:5;
-    .badge{
-      .BoxShadowHelper(1);
-      .center.vertical;
-      right:30px;
-      border-radius: 15px;
-      font-size: 17px;
-      padding:7px 10px 7px 10px;
-      background: @tech;
-      color:white!important;
-    }
-    .button{
-      font-size: 15px;
-      border-radius: 5px;
-      width:90px;
-      padding:10px;
-      background-color:#6F94FF;
-      .BoxShadowHelper(1);
-      .clickable;
-      color:white;
-    }
-
-  }
-  .widget-body{
-    height:100%;
-    width:100%;
-    .scrollbar;
-    padding:100px 30px 20px 30px;
-
-  }
-}
-.task-widget.widget{
-  .NoTasks{
-    height:200px;
-    text-align: center;
-    line-height: 30px;
-    i{
-      margin-top:80px;
-      margin-bottom: 40px;
-      display: block;
-      color:fade(@gray-pleasing,30%)!important;
-      font-size:80px;
-      text-shadow: none!important;
-    }
-    strong{
-      font-size: 26px;
-      line-height:18px;
-      height:18px;
-      margin:0;
-    }
-    .SubTitle{
-      font-size:16px;
-      padding:0!important;
-      margin:0!important;
-    }
-  }
-  .task-panel{
-    .animateLeave(fadeOutDown,500ms);
-    .BoxShadowHelper(1);
-    .clickable;
-    margin-top:20px;
-    width:100%;
-    height:180px;
-    border-radius: 10px;
-    background-color: white;
-    padding:20px;
+.widget {
+    .BoxShadowHelper(3);
+    .Font_Body;
+    //margin:20px;
+    background: @almost-white;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 500px;
+    border-radius: 5px;
     display: block;
     position: relative;
-    .new{
-      position: absolute;
-      height:20px;
-      width:20px;
-      background: fade(@color-secondary-2-0,80%);
-      border-radius: 100%;
-      top:-8px;
-      left:-8px;
-      .BoxShadowHelper(1);
+    overflow: hidden;
+    border: 1px solid fade(@gray-pleasing, 10%);
 
-    }
-    .title{
-      font-size: 16px;
-      color:fade(@gray-pleasing,90%)
-    }
-    .actions{
-      position: absolute;
-      right:5px;
-      top:20px;
-      color:fade(@gray-pleasing,70%);
-      //display: none;
-      i{
-        font-size: 20px;
-        margin-right:25px;
-      }
-    }
-    .priority{
-      //font-weight: 400;
-      margin-top:5px;
-      font-size: 14px;
-      color:fade(@gray-pleasing,70%);
-      span{
-        background: lighten(@gray-pleasing, 50%);
-        padding:2px 5px 2px 5px;
-        border-radius: 2px;
-        color:@almost-white;
-      }
-    }
-    .time{
-      position: absolute;
-      font-size:14px;
-      right:40px;
-      bottom:25px;
-      vertical-align: middle;
-      color:fade(@gray-pleasing,70%);
-      i{
-        margin-right:5px;
-        font-size: 25px;
-      }
-    }
-    .regarding{
-      .task_image_small{
-        height:35px;
-        width:35px;
-        margin-right:10px;
-        .BoxShadowHelper(1);
-      }
-      .logo_circle{
-        display: inline-block;
-        padding:5px;
-        height:35px;
-        width:35px;
-        border-radius: 100%;
-        background: @almost-white;
-        .BoxShadowHelper(1);
-        margin-right:10px;
-      }
-      .task_image_logo{
-        margin-top:4px;
-        max-height: 100%;
-        max-width:100%;
-
-      }
-      font-size:14px;
-      position: absolute;
-      bottom:20px;
-      color:fade(@gray-pleasing,70%)
-    }
-    &:hover{
-      background-color: #5A5A5A;
-      .title{
-        color:white;
-      }
-      .regarding{
-        color:fade(white,90%);
-      }
-      .priority{
-        color:fade(white,90%);
-      }
-      .actions{
+    .widget-header {
+        background: fade(white, 98%);
+        width: 100%;
+        font-size: 18px;
+        padding: 30px;
+        border-radius: 5px 5px 0 0;
+        border-bottom: 1px solid fade(@gray-pleasing, 30%);
+        position: absolute;
         display: block;
-        color:fade(white,90%);
-      }
-      .time{
-        color:fade(white,90%);
-      }
-    }
+        z-index: 5;
 
-  }
-}
-.color-widget.widget{
-  .widget-header{
-    z-index: 2;
-  }
-  .color-panel{
-    .animateLeave(fadeOutDown,500ms);
-    .BoxShadowHelper(1);
-    .clickable;
-    margin-top:20px;
-    width:100%;
-    height:120px;
-    border-radius: 10px;
-    background-color: white;
-    padding:20px;
-    display: block;
-    position: relative;
-    .completed{
-      position: absolute;
-      height:20px;
-      width:20px;
-      background: fade(@tech,80%);
-      border-radius: 100%;
-      top:-8px;
-      left:-8px;
-      .BoxShadowHelper(1);
-      .pulse(@tech);
+        .widget-sizes {
+            .center.vertical;
+            right: 30px;
+            font-size: 12px;
 
-    }
-      .name{
-        display:inline-block;
-        position:absolute;
-        left:70px;
-      }
-
-    .actions{
-      .center.vertical;
-      right:5px;
-      color:fade(@gray-pleasing,70%);
-      display: block;
-      z-index:1;
-      i{
-        font-size: 30px;
-        margin-right:25px;
-      }
-    }
-    .priority{
-      //font-weight: 400;
-      margin-top:5px;
-      font-size: 14px;
-      color:fade(@gray-pleasing,70%);
-      span{
-        background: lighten(@gray-pleasing, 50%);
-        padding:2px 5px 2px 5px;
-        border-radius: 2px;
-        color:@almost-white;
-      }
-    }
-    .time{
-      position: absolute;
-      font-size:14px;
-      right:40px;
-      bottom:25px;
-      vertical-align: middle;
-      color:fade(@gray-pleasing,70%);
-      i{
-        margin-right:5px;
-        font-size: 25px;
-      }
-    }
-    .regarding{
-      .task_image_small{
-        height:45px;
-        width:45px;
-        margin-right:10px;
-        display:inline-block;
-        .BoxShadowHelper(1);
-      }
-      .logo_circle{
-        display: inline-block;
-        padding:5px;
-        height:45px;
-        width:45px;
-        border-radius: 100%;
-        background: @almost-white;
-        display:inline-block;
-        .BoxShadowHelper(1);
-        margin-right:10px;
-      }
-      .task_image_logo{
-        margin-top:4px;
-        max-height: 100%;
-        max-width:100%;
-
-      }
-      font-size:14px;
-
-      color:fade(@gray-pleasing,70%)
-    }
-    &:hover{
-      background-color: #5A5A5A;
-      .title{
-        color:white;
-      }
-      .regarding{
-        color:fade(white,90%);
-      }
-      .priority{
-        color:fade(white,90%);
-      }
-      .actions{
-        display: block;
-        color:fade(white,90%);
-      }
-      .time{
-        color:fade(white,90%);
-      }
-    }
-
-  }
-}
-.events{
-  .BoxShadowHelper(5);
-  //min-height:500px;
-  height:100%;
-  width:100%;
-  //min-width:400px;
-  border-radius: 8px;
-  //border: 1px solid @gray-pleasing;
-  margin:10px;
-  background: white;
-  position: relative;
-  display: block;
-  overflow: hidden;
-  .header{
-    padding:15px;
-    .Font_Body;
-    font-size: 30px;
-    text-align: center;
-    display: block;
-    position: relative;
-    left:0;
-    right:0;
-    top:0;
-    width:100%;
-    z-index: 2;
-    background: fade(white,90%);
-    border-bottom: 1px solid @gray-pleasing;
-    .BoxShadowHelper(1);
-    .btn-default{
-      position: absolute;
-      top:20px;
-      right:20px;
-    }
-  }
-}
-.list{
-  padding:100px 20px 20px 20px;
-  top:0;
-  z-index: 0;
-  position: absolute;
-  height:100%;
-  width:100%;
-  .scrollbar;
-}
-.event{
-  .BoxShadowHelper(5);
-  padding:0 0 0 100px;
-  border-radius:8px 10px 10px 8px;
-  height:160px;
-  width:100%;
-  background: white;
-  margin-bottom: 20px;
-  position:relative;
-  display: block;
-  .date{
-    .center.vertical;
-    .Font_Body;
-    left:0;
-    width:100px;
-    font-size: 12px;
-    color:#48496B;
-    text-align: center;
-    line-height: 12px;
-    .multiday_divide{
-      margin-left:auto;
-      margin-right:auto;
-      width:3px;
-      margin-bottom: 5px;
-      height:25px;
-      background: #EA5B41;
-    }
-    .day{
-      display: block;
-      font-size: 40px;
-      line-height: 40px;
-      letter-spacing: -5px;
-    }
-  }
-  .detail{
-    .Font_Body;
-    font-weight: 400;
-    letter-spacing: 0px;
-    color:white;
-    font-size: 15px;
-    height:100%;
-    width:100%;
-    border-radius:0 8px 8px 0;
-    padding:20px 10px 20px 10px;
-    .overlay('Mean_Fruit');
-    i{
-      width:25px;
-    }
-    .Title{
-      font-size: 20px;
-      margin-bottom: 5px;
-      font-weight: 900;
-    }
-    .actions{
-      .atc-btn-group{
-        .Font_Body;
-        margin-top:10px;
-        font-size: 13px;
-        border:none;
-        border-radius: 8px;
-        background: none;
-        box-shadow: none;
-        border: 1.5px solid white;
-        color:white;
-        &.active{
-          background: white;
-          color:#48496B;
-          .BoxShadowHelper(3);
-          display: block;
-          position: relative;
-          z-index: 2;
-          width:150px;
-        }
-        .caret{
-          display: none;
-        }
-        .atc-dropdown{
-          list-style: none;
-          text-align: left;
-          padding:5px;
-
-          li{
-            line-height:25px;
-            a{
-              color:fade(@gray-pleasing,70%);
+            .maximize {
+                .clickable;
+                display: inline-block;
+                margin: 3px;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                text-align: center;
+                border-radius: 100%;
+                background: #4DB6AC;
+                color: @almost-white
             }
-          }
+
+            ;
+
+            .minimize {
+                .clickable;
+                display: inline-block;
+                margin: 3px;
+                width: 20px;
+                height: 20px;
+                line-height: 20px;
+                text-align: center;
+                border-radius: 100%;
+                background: #FDD835;
+                color: @almost-white
+            }
+
+            ;
+        }
+
+        ;
+
+        .badge {
+            .BoxShadowHelper(1);
+            margin-left: 10px;
+            border-radius: 15px;
+            font-size: 17px;
+            padding: 7px 10px 7px 10px;
+            background: #6F94FF;
+            color: white !important;
+        }
+
+        .button {
+            .center.vertical;
+            border-radius: 5px;
+            font-size: 14px;
+            right: 30px;
+            padding: 10px;
+            background-color: #6F94FF;
+            .BoxShadowHelper(1);
+            .clickable;
+            color: white;
+        }
+
+    }
+
+    .widget-footer {
+        background: fade(white, 98%);
+        width: 100%;
+        font-size: 18px;
+        padding: 10px;
+        border-radius: 0 0 5px 5px;
+        border-top: 1px solid fade(@gray-pleasing, 30%);
+        position: absolute;
+        bottom: 0;
+        display: block;
+        z-index: 5;
+
+        .badge {
+            .BoxShadowHelper(1);
+            .center.vertical;
+            right: 30px;
+            border-radius: 15px;
+            font-size: 17px;
+            padding: 7px 10px 7px 10px;
+            background: @tech;
+            color: white !important;
+        }
+
+        .button {
+            font-size: 15px;
+            border-radius: 5px;
+            width: 90px;
+            padding: 10px;
+            background-color: #6F94FF;
+            .BoxShadowHelper(1);
+            .clickable;
+            color: white;
+        }
+
+    }
+
+    .widget-body {
+        height: 100%;
+        width: 100%;
+        .scrollbar;
+        padding: 100px 30px 20px 30px;
+
+    }
+}
+
+.task-widget.widget {
+    .NoTasks {
+        height: 200px;
+        text-align: center;
+        line-height: 30px;
+
+        i {
+            margin-top: 80px;
+            margin-bottom: 40px;
+            display: block;
+            color: fade(@gray-pleasing, 30%) !important;
+            font-size: 80px;
+            text-shadow: none !important;
+        }
+
+        strong {
+            font-size: 26px;
+            line-height: 18px;
+            height: 18px;
+            margin: 0;
+        }
+
+        .SubTitle {
+            font-size: 16px;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+    }
+
+    .task-panel {
+        .animateLeave(fadeOutDown, 500ms);
+        .BoxShadowHelper(1);
+        .clickable;
+        margin-top: 20px;
+        width: 100%;
+        height: 180px;
+        border-radius: 10px;
+        background-color: white;
+        padding: 20px;
+        display: block;
+        position: relative;
+
+        .new {
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            background: fade(@color-secondary-2-0, 80%);
+            border-radius: 100%;
+            top: -8px;
+            left: -8px;
+            .BoxShadowHelper(1);
 
         }
-      }
+
+        .title {
+            font-size: 16px;
+            color: fade(@gray-pleasing, 90%)
+        }
+
+        .actions {
+            position: absolute;
+            right: 5px;
+            top: 20px;
+            color: fade(@gray-pleasing, 70%);
+
+            //display: none;
+            i {
+                font-size: 20px;
+                margin-right: 25px;
+            }
+        }
+
+        .priority {
+            //font-weight: 400;
+            margin-top: 5px;
+            font-size: 14px;
+            color: fade(@gray-pleasing, 70%);
+
+            span {
+                background: lighten(@gray-pleasing, 50%);
+                padding: 2px 5px 2px 5px;
+                border-radius: 2px;
+                color: @almost-white;
+            }
+        }
+
+        .time {
+            position: absolute;
+            font-size: 14px;
+            right: 40px;
+            bottom: 25px;
+            vertical-align: middle;
+            color: fade(@gray-pleasing, 70%);
+
+            i {
+                margin-right: 5px;
+                font-size: 25px;
+            }
+        }
+
+        .regarding {
+            .task_image_small {
+                height: 35px;
+                width: 35px;
+                margin-right: 10px;
+                .BoxShadowHelper(1);
+            }
+
+            .logo_circle {
+                display: inline-block;
+                padding: 5px;
+                height: 35px;
+                width: 35px;
+                border-radius: 100%;
+                background: @almost-white;
+                .BoxShadowHelper(1);
+                margin-right: 10px;
+            }
+
+            .task_image_logo {
+                margin-top: 4px;
+                max-height: 100%;
+                max-width: 100%;
+
+            }
+
+            font-size:14px;
+            position: absolute;
+            bottom:20px;
+            color:fade(@gray-pleasing, 70%)
+        }
+
+        &:hover {
+            background-color: #5A5A5A;
+
+            .title {
+                color: white;
+            }
+
+            .regarding {
+                color: fade(white, 90%);
+            }
+
+            .priority {
+                color: fade(white, 90%);
+            }
+
+            .actions {
+                display: block;
+                color: fade(white, 90%);
+            }
+
+            .time {
+                color: fade(white, 90%);
+            }
+        }
+
+    }
+}
+
+.color-widget.widget {
+    .widget-header {
+        z-index: 2;
     }
 
-  }
-  &:nth-child(2n+0){
-    .detail{
-      .overlay('Smile');
-    }
-  }
-  &:nth-child(3n+0){
-    .detail{
-      .overlay('Norse_Beauty');
-    }
-  }
-  &:nth-child(4n+0){
-    .detail{
-      .overlay('Strong_Bliss');
-    }
-  }
-  &:nth-child(5n+0){
-    .detail{
-      .overlay('Happy_Acid');
-    }
-  }
+    .color-panel {
+        .animateLeave(fadeOutDown, 500ms);
+        .BoxShadowHelper(1);
+        .clickable;
+        margin-top: 20px;
+        width: 100%;
+        height: 120px;
+        border-radius: 10px;
+        background-color: white;
+        padding: 20px;
+        display: block;
+        position: relative;
 
+        .completed {
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            background: fade(@tech, 80%);
+            border-radius: 100%;
+            top: -8px;
+            left: -8px;
+            .BoxShadowHelper(1);
+            .pulse(@tech);
+
+        }
+
+        .name {
+            display: inline-block;
+            position: absolute;
+            left: 70px;
+        }
+
+        .actions {
+            .center.vertical;
+            right: 5px;
+            color: fade(@gray-pleasing, 70%);
+            display: block;
+            z-index: 1;
+
+            i {
+                font-size: 30px;
+                margin-right: 25px;
+            }
+        }
+
+        .priority {
+            //font-weight: 400;
+            margin-top: 5px;
+            font-size: 14px;
+            color: fade(@gray-pleasing, 70%);
+
+            span {
+                background: lighten(@gray-pleasing, 50%);
+                padding: 2px 5px 2px 5px;
+                border-radius: 2px;
+                color: @almost-white;
+            }
+        }
+
+        .time {
+            position: absolute;
+            font-size: 14px;
+            right: 40px;
+            bottom: 25px;
+            vertical-align: middle;
+            color: fade(@gray-pleasing, 70%);
+
+            i {
+                margin-right: 5px;
+                font-size: 25px;
+            }
+        }
+
+        .regarding {
+            .task_image_small {
+                height: 45px;
+                width: 45px;
+                margin-right: 10px;
+                display: inline-block;
+                .BoxShadowHelper(1);
+            }
+
+            .logo_circle {
+                display: inline-block;
+                padding: 5px;
+                height: 45px;
+                width: 45px;
+                border-radius: 100%;
+                background: @almost-white;
+                display: inline-block;
+                .BoxShadowHelper(1);
+                margin-right: 10px;
+            }
+
+            .task_image_logo {
+                margin-top: 4px;
+                max-height: 100%;
+                max-width: 100%;
+
+            }
+
+            font-size:14px;
+
+            color:fade(@gray-pleasing, 70%)
+        }
+
+        &:hover {
+            background-color: #5A5A5A;
+
+            .title {
+                color: white;
+            }
+
+            .regarding {
+                color: fade(white, 90%);
+            }
+
+            .priority {
+                color: fade(white, 90%);
+            }
+
+            .actions {
+                display: block;
+                color: fade(white, 90%);
+            }
+
+            .time {
+                color: fade(white, 90%);
+            }
+        }
+
+    }
+}
+
+.events {
+    .BoxShadowHelper(5);
+    //min-height:500px;
+    height: 100%;
+    width: 100%;
+    //min-width:400px;
+    border-radius: 8px;
+    //border: 1px solid @gray-pleasing;
+    margin: 10px;
+    background: white;
+    position: relative;
+    display: block;
+    overflow: hidden;
+
+    .header {
+        padding: 15px;
+        .Font_Body;
+        font-size: 30px;
+        text-align: center;
+        display: block;
+        position: relative;
+        left: 0;
+        right: 0;
+        top: 0;
+        width: 100%;
+        z-index: 2;
+        background: fade(white, 90%);
+        border-bottom: 1px solid @gray-pleasing;
+        .BoxShadowHelper(1);
+
+        .btn-default {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+    }
+}
+
+.list {
+    padding: 100px 20px 20px 20px;
+    top: 0;
+    z-index: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    .scrollbar;
+}
+
+.event {
+    .BoxShadowHelper(5);
+    padding: 0 0 0 100px;
+    border-radius: 8px 10px 10px 8px;
+    height: 160px;
+    width: 100%;
+    background: white;
+    margin-bottom: 20px;
+    position: relative;
+    display: block;
+
+    .date {
+        .center.vertical;
+        .Font_Body;
+        left: 0;
+        width: 100px;
+        font-size: 12px;
+        color: #48496B;
+        text-align: center;
+        line-height: 12px;
+
+        .multiday_divide {
+            margin-left: auto;
+            margin-right: auto;
+            width: 3px;
+            margin-bottom: 5px;
+            height: 25px;
+            background: #EA5B41;
+        }
+
+        .day {
+            display: block;
+            font-size: 40px;
+            line-height: 40px;
+            letter-spacing: -5px;
+        }
+    }
+
+    .detail {
+        .Font_Body;
+        font-weight: 400;
+        letter-spacing: 0px;
+        color: white;
+        font-size: 15px;
+        height: 100%;
+        width: 100%;
+        border-radius: 0 8px 8px 0;
+        padding: 20px 10px 20px 10px;
+        .overlay('Mean_Fruit');
+
+        i {
+            width: 25px;
+        }
+
+        .Title {
+            font-size: 20px;
+            margin-bottom: 5px;
+            font-weight: 900;
+        }
+
+        .actions {
+            .atc-btn-group {
+                .Font_Body;
+                margin-top: 10px;
+                font-size: 13px;
+                border: none;
+                border-radius: 8px;
+                background: none;
+                box-shadow: none;
+                border: 1.5px solid white;
+                color: white;
+
+                &.active {
+                    background: white;
+                    color: #48496B;
+                    .BoxShadowHelper(3);
+                    display: block;
+                    position: relative;
+                    z-index: 2;
+                    width: 150px;
+                }
+
+                .caret {
+                    display: none;
+                }
+
+                .atc-dropdown {
+                    list-style: none;
+                    text-align: left;
+                    padding: 5px;
+
+                    li {
+                        line-height: 25px;
+
+                        a {
+                            color: fade(@gray-pleasing, 70%);
+                        }
+                    }
+
+                }
+            }
+        }
+
+    }
+
+    &:nth-child(2n+0) {
+        .detail {
+            .overlay('Smile');
+        }
+    }
+
+    &:nth-child(3n+0) {
+        .detail {
+            .overlay('Norse_Beauty');
+        }
+    }
+
+    &:nth-child(4n+0) {
+        .detail {
+            .overlay('Strong_Bliss');
+        }
+    }
+
+    &:nth-child(5n+0) {
+        .detail {
+            .overlay('Happy_Acid');
+        }
+    }
+
+}
+
+.message-widget {
+    .widget-body {
+        padding: 70px 5px!important;
+    }
+
+    .message-panel {
+        .BoxShadowHelper(3);
+        display:block;
+        position: relative;
+        background: white;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 10px 25px;
+        word-break: break-all;
+        &.left{
+          margin-right:50px;
+          padding-left:25px;
+        }
+        &.right{
+          margin-left:50px;
+          padding-right:25px;
+          .icon{
+            left:auto;
+            right:-20px;
+            background: @color-button;
+          }
+        }
+        .divider{
+          display:block;
+          position: relative;
+          width: 80px;
+          height:1px;
+          margin:0px;
+          margin-top:3px;
+          background: fade(@color-button,60);
+          
+        }
+        .body{
+          margin-top:8px;
+        }
+        .icon{
+          .BoxShadowHelper(1);
+          .center.vertical;
+          left:-20px;
+          border-radius:100%;
+          background: lighten(@gray-pleasing,40%);
+          color:white;
+          height:40px;
+          width:40px;
+          line-height: 45px;
+          text-align: center;
+          vertical-align: middle;
+          i{
+            font-size:20px;
+          }
+        }
+    }
 }

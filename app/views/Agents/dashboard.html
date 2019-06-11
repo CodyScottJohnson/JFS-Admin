@@ -73,3 +73,16 @@
   </table>
 </div>
 </div>
+
+<div class="container agent_list">
+  <div class="agent_row" ng-repeat="agent in Agents.AgentList">
+    <div class="row">
+      <div class="col-md-3">
+        <img class="profile" ng-src="{{'https://jfsapp.com/Secure/API/Images/General/Agents/Profile/'+agent.profilepic+'?access_token='+currentUser.Token.access_token+'&client_id=testclient&client_secret=testpass'}}"/>
+      </div>
+      <div class="col-md-9">
+        <div class="name">{{agent.FirstName}} {{agent.LastName}}</div>
+      </div>
+    </div>
+ </div>
+</div>

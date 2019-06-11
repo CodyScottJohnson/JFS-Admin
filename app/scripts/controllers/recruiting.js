@@ -166,7 +166,7 @@ angular.module('JFS_Admin')
     ];
     $scope.TableDefaults = {
       type: ['Initial Contact', 'Liscencing', 'ACP', 'Contract'],
-      Source: ['Referal', 'PO', 'COI', 'ARS', 'ROD', 'Other']
+      Source: ['Referal', 'PO', 'COI', 'ARS', 'Handshake','LinkedIn', 'Other']
     };
     $scope.advancedSearch = {
       'show': true

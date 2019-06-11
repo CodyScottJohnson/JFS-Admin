@@ -45,13 +45,14 @@ angular.module('JFS_Admin')
     };
     $scope.Preview = function(template)
     {
-      Email.PreviewTemplate(template,{First_Name:$scope.Email.currentRecipient.FNAME,GUID:'Invalid'}).then(function(data){
+      Email.PreviewTemplate(template,{First_Name:$scope.Email.currentRecipient.FNAME,GUID:'Invalid',Signature:$scope.Email.currentSignature}).then(function(data){
         $scope.currentPreview = $sce.trustAsHtml(data);
       });
     };
     $scope.setCurrent = function(email){
       $scope.Preview(email.Template);
-      $scope.Email.Templates= _.map($scope.Email.Template, function(x) {
+      
+      $scope.Email.Templates = _.map($scope.Email.Templates, function(x) {
         x.selected = false;
         return x;
       });

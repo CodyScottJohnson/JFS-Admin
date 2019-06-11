@@ -10,7 +10,9 @@
 angular.module('JFS_Admin')
   .controller('MainCtrl', function($rootScope,$scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications, Recruits, $sce, $location, $window) {
     //Functions.OpenModal('views/Modals/Email/Client.html','lg');
+    //Functions.OpenModal('views/Modals/Agents/FollowUp.html','lg');
     //Functions.OpenModal('views/Modals/FileExplorer.html','lg');
+    $scope.newsearch = {Global_Search:""}
     if($rootScope.currentUser.Info.password_reset == 1){
       Functions.OpenModal('views/Modals/User/PasswordReset.html','md');
     }
@@ -45,8 +47,18 @@ angular.module('JFS_Admin')
     $scope.to_trusted = function(html_code) {
         return $sce.trustAsHtml(html_code);
     };
+    $scope.clear = function(){
+
+      $scope.newsearch.Global_Search = "";
+
+    }
     $scope.viewRecruit =function(ID){
-      recruit.setRecruit(ID);
+      Functions.toggleLoading();
+      recruit.setRecruit(ID).then(function(result){
+        Functions.toggleLoading();
+      },function(err){
+        Functions.toggleLoading();
+      });
       $state.go('app.Recruiting.Recruit', {RecruitID:ID});
     };
     $scope.newestText = function(arr) {
@@ -89,5 +101,5 @@ angular.module('JFS_Admin')
       Task.newTask({});
       Functions.OpenModal('views/Modals/TaskModal.html', 'md');
     };
-    recruit.setRecruit(10336);
+    //recruit.setRecruit(10336);
   });

@@ -1,109 +1,279 @@
 <div class="Style_Logos">
   <div class="row">
 
-  <div class="col-md-3 col-sm-6">
-  <div class="logo">
-    <div class="logo_title">
-      Main
+    <div class="col-md-3 col-sm-6">
+      <div class="logo">
+        <div class="logo_title">
+          Main
+        </div>
+        <div class="image">
+          <img src="https://jfsapp.com/Images/Logos/JFS/Logo_Main.png" />
+        </div>
+        <div class="sizes" ng-init="main_size={display:'Select Size',file:'Logo_Main.png'}">
+          <div class="btn-group" uib-dropdown is-open="status.isopen">
+            <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+              {{main_size.display}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+              <li role="menuitem" ng-click="main_size={display:'Small',file:'Logo_Main.png'}"><a>Small</a></li>
+              <li role="menuitem" ng-click="main_size={display:'Medium',file:'Logo_Main@1.5x.png'}"><a>Medium</a></li>
+              <li role="menuitem" ng-click="main_size={display:'Large',file:'Logo_Main@2x.png'}"><a>Large</a></li>
+              <li role="menuitem" ng-click="main_size={display:'Extra Large',file:'Logo_Main@3x.png'}"><a>Extra Large</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="btn download" ng-click="dowloadLogo(main_size.file)">
+          Download
+        </div>
+      </div>
     </div>
-    <div class="image">
-      <img src="https://jfsapp.com/Images/Logos/JFS/Logo_Main.png" />
+    <div class="col-md-3 col-sm-6">
+      <div class="logo">
+        <div class="logo_title">
+          Simple
+        </div>
+        <div class="image">
+          <img src="https://jfsapp.com/Images/Logos/JFS/Logo_Main_Simp@3x.png" />
+        </div>
+        <div class="sizes" ng-init="main_size={display:'Select Size',file:'Logo_Main_Simp.png'}">
+          <div class="btn-group" uib-dropdown is-open="status.isopen">
+            <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+              {{main_size.display}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+              <li role="menuitem" ng-click="main_size={display:'Small',file:'Logo_Main_Simp.png'}"><a>Small</a></li>
+              <li role="menuitem" ng-click="main_size={display:'Medium',file:'Logo_Main_Simp@1.5x.png'}"><a>Medium</a></li>
+              <li role="menuitem" ng-click="main_size={display:'Large',file:'Logo_Main_Simp@2x.png'}"><a>Large</a></li>
+              <li role="menuitem" ng-click="main_size={display:'Extra Large',file:'Logo_Main_Simp@3x.png'}"><a>Extra
+                  Large</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="btn download" ng-click="dowloadLogo(main_size.file)">
+          Download
+        </div>
+      </div>
     </div>
-    <div class="sizes" ng-init="main_size={display:'Select Size',file:'Logo_Main.png'}">
-      <div class="btn-group" uib-dropdown is-open="status.isopen">
-     <button  type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-       {{main_size.display}} <span class="caret"></span>
-     </button>
-     <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-       <li role="menuitem" ng-click="main_size={display:'Small',file:'Logo_Main.png'}"><a>Small</a></li>
-       <li role="menuitem" ng-click="main_size={display:'Medium',file:'Logo_Main@1.5x.png'}"><a >Medium</a></li>
-       <li role="menuitem" ng-click="main_size={display:'Large',file:'Logo_Main@2x.png'}"><a>Large</a></li>
-       <li role="menuitem" ng-click="main_size={display:'Extra Large',file:'Logo_Main@3x.png'}"><a>Extra Large</a></li>
-     </ul>
-   </div>
+    <div class="col-md-3 col-sm-6">
+      <div class="logo">
+        <div class="logo_title">
+          White
+        </div>
+        <div class="image light">
+          <img src="https://jfsapp.com/Images/Logos/JFS/Logo_White.png" />
+        </div>
+        <div class="sizes" ng-init="main_size={display:'Select Size',file:'Logo_White.png'}">
+          <div class="btn-group" uib-dropdown is-open="status.isopen">
+            <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+              {{main_size.display}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+              <li role="menuitem" ng-click="main_size={display:'Small',file:'Logo_White.png'}"><a>Small</a></li>
+              <li role="menuitem" ng-click="main_size={display:'Medium',file:'Logo_White@1.5x.png'}"><a>Medium</a></li>
+              <li role="menuitem" ng-click="main_size={display:'Large',file:'Logo_White@2x.png'}"><a>Large</a></li>
+              <li role="menuitem" ng-click="main_size={display:'Extra Large',file:'Logo_White@3x.png'}"><a>Extra Large</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="btn download" ng-click="dowloadLogo(main_size.file)">
+          Download
+        </div>
+      </div>
     </div>
-    <div class="btn download" ng-click="dowloadLogo(main_size.file)">
-      Download
+    <div class="col-md-3 col-sm-6">
+      <div class="logo">
+        <div class="logo_title">
+          White Simple
+        </div>
+        <div class="image light">
+          <img src="https://jfsapp.com/Images/Logos/JFS/Logo_White_Simp@2x.png" />
+        </div>
+        <div class="sizes" ng-init="main_size={display:'Select Size',file:'Logo_White_Simp.png'}">
+          <div class="btn-group" uib-dropdown is-open="status.isopen">
+            <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+              {{main_size.display}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+              <li role="menuitem" ng-click="main_size={display:'Small',file:'Logo_White_Simp.png'}"><a>Small</a></li>
+              <li role="menuitem" ng-click="main_size={display:'Medium',file:'Logo_White_Simp@1.5x.png'}"><a>Medium</a></li>
+              <li role="menuitem" ng-click="main_size={display:'Large',file:'Logo_White_Simp@2x.png'}"><a>Large</a></li>
+              <li role="menuitem" ng-click="main_size={display:'Extra Large',file:'Logo_White_Simp@3x.png'}"><a>Extra
+                  Large</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="btn download" ng-click="dowloadLogo(main_size.file)">
+          Download
+        </div>
+      </div>
     </div>
+    <!--Logo Center Red-->
+    <div class="col-md-3 col-sm-6">
+      <div class="logo">
+        <div class="logo_title">
+          Center - Red
+        </div>
+        <div class="image">
+          <img src="https://jfsapp.com/Open/API/Images/Brand/Logos/JFS_New/logo-center-red.png" />
+        </div>
+        <div class="sizes" ng-init="menu_center_red={display:'Select Size',file:'logo-center-red.png'}">
+          <div class="btn-group" uib-dropdown is-open="menu_center_red.Open">
+            <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+              {{menu_center_red.display}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+              <li role="menuitem" ng-click="menu_center_red={display:'Small',file:'logo-center-red@0.5x.png'}"><a>Small</a></li>
+              <li role="menuitem" ng-click="menu_center_red={display:'Medium',file:'logo-center-red.png'}"><a>Medium</a></li>
+              <li role="menuitem" ng-click="menu_center_red={display:'Large',file:'logo-center-red@2x.png'}"><a>Large</a></li>
+              <li role="menuitem" ng-click="menu_center_red={display:'Extra Large',file:'logo-center-red@3x.png'}"><a>Extra
+                  Large</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="btn download" ng-click="dowloadLogoNew(menu_center_red.file)">
+          Download
+        </div>
+      </div>
+    </div>
+    <!--Logo Center Blue-->
+    <div class="col-md-3 col-sm-6">
+      <div class="logo">
+        <div class="logo_title">
+          Center - Blue
+        </div>
+        <div class="image">
+          <img src="https://jfsapp.com/Open/API/Images/Brand/Logos/JFS_New/logo-center-blue.png" />
+        </div>
+        <div class="sizes" ng-init="menu_center_blue={display:'Select Size',file:'logo-center-blue.png'}">
+          <div class="btn-group" uib-dropdown is-open="menu_center_blue.Open">
+            <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+              {{menu_center_blue.display}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+              <li role="menuitem" ng-click="menu_center_blue={display:'Small',file:'logo-center-blue@0.5x.png'}"><a>Small</a></li>
+              <li role="menuitem" ng-click="menu_center_blue={display:'Medium',file:'logo-center-blue.png'}"><a>Medium</a></li>
+              <li role="menuitem" ng-click="menu_center_blue={display:'Large',file:'logo-center-blue@2x.png'}"><a>Large</a></li>
+              <li role="menuitem" ng-click="menu_center_blue={display:'Extra Large',file:'logo-center-blue@3x.png'}"><a>Extra
+                  Large</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="btn download" ng-click="dowloadLogoNew(menu_center_blue.file)">
+          Download
+        </div>
+      </div>
+    </div>
+     <!--Logo Left Red-->
+     <div class="col-md-3 col-sm-6">
+      <div class="logo">
+        <div class="logo_title">
+          Left - Red
+        </div>
+        <div class="image">
+          <img src="https://jfsapp.com/Open/API/Images/Brand/Logos/JFS_New/logo-left-red.png" />
+        </div>
+        <div class="sizes" ng-init="menu_left_red={display:'Select Size',file:'logo-center-blue.png'}">
+          <div class="btn-group" uib-dropdown is-open="menu_left_red.Open">
+            <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+              {{menu_left_red.display}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+              <li role="menuitem" ng-click="menu_left_red={display:'Small',file:'logo-left-red@0.5x.png'}"><a>Small</a></li>
+              <li role="menuitem" ng-click="menu_left_red={display:'Medium',file:'logo-left-red.png'}"><a>Medium</a></li>
+              <li role="menuitem" ng-click="menu_left_red={display:'Large',file:'logo-left-red@2x.png'}"><a>Large</a></li>
+              <li role="menuitem" ng-click="menu_left_red={display:'Extra Large',file:'logo-left-red@3x.png'}"><a>Extra
+                  Large</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="btn download" ng-click="dowloadLogoNew(menu_left_red.file)">
+          Download
+        </div>
+      </div>
+    </div>
+      <!--Logo Left Blue-->
+      <div class="col-md-3 col-sm-6">
+        <div class="logo">
+          <div class="logo_title">
+            Left - Blue
+          </div>
+          <div class="image">
+            <img src="https://jfsapp.com/Open/API/Images/Brand/Logos/JFS_New/logo-left-blue.png" />
+          </div>
+          <div class="sizes" ng-init="menu_left_blue={display:'Select Size',file:'logo-center-blue.png'}">
+            <div class="btn-group" uib-dropdown is-open="menu_left_blue.Open">
+              <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                {{menu_left_blue.display}} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                <li role="menuitem" ng-click="menu_left_blue={display:'Small',file:'logo-left-blue@0.5x.png'}"><a>Small</a></li>
+                <li role="menuitem" ng-click="menu_left_blue={display:'Medium',file:'logo-left-blue.png'}"><a>Medium</a></li>
+                <li role="menuitem" ng-click="menu_left_blue={display:'Large',file:'logo-left-blue@2x.png'}"><a>Large</a></li>
+                <li role="menuitem" ng-click="menu_left_blue={display:'Extra Large',file:'logo-left-blue@3x.png'}"><a>Extra
+                    Large</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="btn download" ng-click="dowloadLogoNew(menu_left_blue.file)">
+            Download
+          </div>
+        </div>
+      </div>
+       <!--Logo Flat-->
+       <div class="col-md-3 col-sm-6">
+        <div class="logo">
+          <div class="logo_title">
+            Flat
+          </div>
+          <div class="image">
+            <img src="https://jfsapp.com/Open/API/Images/Brand/Logos/JFS_New/logo-flat.png" />
+          </div>
+          <div class="sizes" ng-init="menu_flat={display:'Select Size',file:'logo-center-blue.png'}">
+            <div class="btn-group" uib-dropdown is-open="menu_flat.Open">
+              <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                {{menu_flat.display}} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                <li role="menuitem" ng-click="menu_flat={display:'Small',file:'logo-flat@0.5x.png'}"><a>Small</a></li>
+                <li role="menuitem" ng-click="menu_flat={display:'Medium',file:'logo-flat.png'}"><a>Medium</a></li>
+                <li role="menuitem" ng-click="menu_flat={display:'Large',file:'logo-flat@2x.png'}"><a>Large</a></li>
+                <li role="menuitem" ng-click="menu_flat={display:'Extra Large',file:'logo-flat@3x.png'}"><a>Extra
+                    Large</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="btn download" ng-click="dowloadLogoNew(menu_flat.file)">
+            Download
+          </div>
+        </div>
+      </div>
+        <!--Logo Flat Simple-->
+        <div class="col-md-3 col-sm-6">
+          <div class="logo">
+            <div class="logo_title">
+              Flat Simple
+            </div>
+            <div class="image">
+              <img src="https://jfsapp.com/Open/API/Images/Brand/Logos/JFS_New/logo-flat-simp.png" />
+            </div>
+            <div class="sizes" ng-init="menu_flat_simp={display:'Select Size',file:'logo-flat-simp.png'}">
+              <div class="btn-group" uib-dropdown is-open="menu_flat_simp.Open">
+                <button type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                  {{menu_flat_simp.display}} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                  <li role="menuitem" ng-click="menu_flat_simp={display:'Small',file:'logo-flat-simp@0.5x.png'}"><a>Small</a></li>
+                  <li role="menuitem" ng-click="menu_flat_simp={display:'Medium',file:'logo-flat-simp.png'}"><a>Medium</a></li>
+                  <li role="menuitem" ng-click="menu_flat_simp={display:'Large',file:'logo-flat-simp@2x.png'}"><a>Large</a></li>
+                  <li role="menuitem" ng-click="menu_flat_simp={display:'Extra Large',file:'logo-flat-simp@3x.png'}"><a>Extra
+                      Large</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="btn download" ng-click="dowloadLogoNew(menu_flat_simp.file)">
+              Download
+            </div>
+          </div>
+        </div>
   </div>
-</div>
-<div class="col-md-3 col-sm-6">
-  <div class="logo">
-    <div class="logo_title">
-      Simple
-    </div>
-    <div class="image">
-      <img src="https://jfsapp.com/Images/Logos/JFS/Logo_Main_Simp@3x.png" />
-    </div>
-    <div class="sizes" ng-init="main_size={display:'Select Size',file:'Logo_Main_Simp.png'}">
-      <div class="btn-group" uib-dropdown is-open="status.isopen">
-     <button  type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-       {{main_size.display}} <span class="caret"></span>
-     </button>
-     <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-       <li role="menuitem" ng-click="main_size={display:'Small',file:'Logo_Main_Simp.png'}"><a>Small</a></li>
-       <li role="menuitem" ng-click="main_size={display:'Medium',file:'Logo_Main_Simp@1.5x.png'}"><a >Medium</a></li>
-       <li role="menuitem" ng-click="main_size={display:'Large',file:'Logo_Main_Simp@2x.png'}"><a>Large</a></li>
-       <li role="menuitem" ng-click="main_size={display:'Extra Large',file:'Logo_Main_Simp@3x.png'}"><a>Extra Large</a></li>
-     </ul>
-   </div>
-    </div>
-    <div class="btn download" ng-click="dowloadLogo(main_size.file)">
-      Download
-    </div>
-  </div>
-</div>
-<div class="col-md-3 col-sm-6">
-  <div class="logo">
-    <div class="logo_title">
-      White
-    </div>
-    <div class="image light">
-      <img src="https://jfsapp.com/Images/Logos/JFS/Logo_White.png" />
-    </div>
-    <div class="sizes" ng-init="main_size={display:'Select Size',file:'Logo_White.png'}">
-      <div class="btn-group" uib-dropdown is-open="status.isopen">
-     <button  type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-       {{main_size.display}} <span class="caret"></span>
-     </button>
-     <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-       <li role="menuitem" ng-click="main_size={display:'Small',file:'Logo_White.png'}"><a>Small</a></li>
-       <li role="menuitem" ng-click="main_size={display:'Medium',file:'Logo_White@1.5x.png'}"><a >Medium</a></li>
-       <li role="menuitem" ng-click="main_size={display:'Large',file:'Logo_White@2x.png'}"><a>Large</a></li>
-       <li role="menuitem" ng-click="main_size={display:'Extra Large',file:'Logo_White@3x.png'}"><a>Extra Large</a></li>
-     </ul>
-   </div>
-    </div>
-    <div class="btn download" ng-click="dowloadLogo(main_size.file)">
-      Download
-    </div>
-  </div>
-</div>
-<div class="col-md-3 col-sm-6">
-  <div class="logo">
-    <div class="logo_title">
-      White Simple
-    </div>
-    <div class="image light">
-      <img src="https://jfsapp.com/Images/Logos/JFS/Logo_White_Simp@2x.png" />
-    </div>
-    <div class="sizes" ng-init="main_size={display:'Select Size',file:'Logo_White_Simp.png'}">
-      <div class="btn-group" uib-dropdown is-open="status.isopen">
-     <button  type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-       {{main_size.display}} <span class="caret"></span>
-     </button>
-     <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-       <li role="menuitem" ng-click="main_size={display:'Small',file:'Logo_White_Simp.png'}"><a>Small</a></li>
-       <li role="menuitem" ng-click="main_size={display:'Medium',file:'Logo_White_Simp@1.5x.png'}"><a >Medium</a></li>
-       <li role="menuitem" ng-click="main_size={display:'Large',file:'Logo_White_Simp@2x.png'}"><a>Large</a></li>
-       <li role="menuitem" ng-click="main_size={display:'Extra Large',file:'Logo_White_Simp@3x.png'}"><a>Extra Large</a></li>
-     </ul>
-   </div>
-    </div>
-    <div class="btn download" ng-click="dowloadLogo(main_size.file)">
-      Download
-    </div>
-  </div>
-</div>
-</div>
 </div>

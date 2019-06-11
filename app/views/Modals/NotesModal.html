@@ -1,10 +1,10 @@
 <div  ng-controller="RecruitCtrl">
   <div class="modal-header">
-    Notes For {{Recruit.currentRecruit.FNAME}}
-      <button type="button" class="close" aria-hidden="true" ng-click="User.visibility.recruitSidebar=false" style="font-size:30pt;vertical-align:middle">&times;</button>
+    <div class="title">Notes For {{Recruit.currentRecruit.FNAME}}</div>
+      <button type="button" class="close" aria-hidden="true" ng-click="CloseModal()" style="font-size:30pt;vertical-align:middle">&times;</button>
   </div>
-  <div class="modal-body scrollbar" scroll-glue style="max-height:400px;background:grey">
-    <div ng-repeat="note in Recruit.currentRecruit.Info.Notes track by $index"  style="z-index:30px; border-radius:10px; min-width:200px;width:100%; margin-top:5px; margin-bottom:0;border-color:black; background-color:white;">
+  <div class="modal-body scrollbar" scroll-glue style="max-height:400px">
+    <div class="note-for-modal" ng-repeat="note in Recruit.currentRecruit.Info.Notes track by $index"  >
       <div class="panel-body" >
         {{note.text}}
       </div>
@@ -17,10 +17,9 @@
   <div class="modal-footer">
     <form id="todo-form" ng-submit="addNote(Text);Text=''">
       <div class="form-group">
-        <label for="exampleInputPassword1">Note</label>
         <textarea class="form-control" rows="3" ng-model="Text" required></textarea>
       </div>
-      <button style="width:100%;background-color:#BBD9EF" type="submit" class="btn btn-default">Add Note</button>
+      <button type="submit" class="btn btn-note" style="margin-left:auto;margin-right:auto;">Add Note</button>
     </form>
   </div>
 </div>

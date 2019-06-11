@@ -38,11 +38,12 @@
     </tr>
     <tr>
       <th></th>
-      <th>POP</th>
+      <th>CPA</th>
+      <th>Credit</th>
       <th>Color</th>
       <th>Status</th>
       <th>Email</th>
-      <th>Type</th>
+     
       <th>Source</th>
       <th>Phone</th>
       <th>Address</th>
@@ -54,14 +55,10 @@
     </tr>
     <tr ng-show="advancedSearch.Show">
       <td></td>
-      <td> <select class="form-control" ng-model="search2.POP" style="height:30px;width: 100%;font-size:10px;background-color:white">
-                <option></option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
+      <td> 
+        <div ng-show="recruit.CPA==1">
+          <i class="fa fa-check"></i>
+        </div>
       </td>
       <td></td>
       <td> <input type="text" class="form-control" ng-model="search2.NextStep" placeholder="&#xF002;" style="font-family:Arial, FontAwesome;height:30px;width: 100%"></td>
@@ -95,7 +92,20 @@
         </div>
       </td>
       <td ng-dblclick="rowform.$show()">
-        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.POP" e-name="POP" e-form="rowform">{{recruit.POP}}</span>
+          <div ng-show="recruit.CPA==1">
+              <i class="fa fa-check" style="color:green"></i>
+            </div>
+            <div ng-show="recruit.CPA==0">
+                <i class="fa fa-close" style="color:red"></i>
+              </div>
+      </td>
+      <td ng-dblclick="rowform.$show()">
+          <div ng-show="recruit.CreditCheck==1">
+              <i class="fa fa-check" style="color:green"></i>
+            </div>
+            <div ng-show="recruit.CreditCheck==0">
+                <i class="fa fa-close" style="color:red"></i>
+              </div>
       </td>
       <td ng-dblclick="rowform.$show()">
         <div ng-show="rowform.$visible">
@@ -115,11 +125,7 @@
       <td class="expand" ng-dblclick="rowform.$show()">
         <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.EMAIL" e-name="EMAIL" e-form="rowform">{{recruit.EMAIL}}</span>
       </td>
-      <td class="expand" ng-dblclick="rowform.$show()">
-        <span  editable-select="recruit.Type" e-value="Initial Contact" e-ng-options="s as s for s in TableDefaults.type" e-name="Type" e-form="rowform" style="text-align:middle">
-          {{recruit.Type}}
-        </span>
-      </td>
+
       <td class="expand" ng-dblclick="rowform.$show()">
         <span  editable-select="recruit.Source" e-value="recruit.Source" e-ng-options="s as s for s in TableDefaults.Source" e-name="Source" e-form="rowform" style="text-align:middle">
           {{recruit.Source}}

@@ -23,6 +23,9 @@
           <div class="button btn" ng-click="SendEmail()">
             Contact
           </div>
+          <a href="https://americannational.icims.com/icims2/servlet/icims2?module=Root&action=login&hashed=993263154" target="_blank" class="button btn" >
+            ICIMS
+          </a>
           <div class="social">
 
             <a class="account" ng-href="{{social.url}}" target="_blank" style="text-decoration:none" ng-repeat="social in Recruit.currentRecruit.Info.ContactDetails.socialProfiles">
@@ -37,18 +40,19 @@
             Contact Info
           </div>
           <div class="contact-item" >
-            <span class="contact-label" ng-click="mailTo(Recruit.currentRecruit.EMAIL)">Email</span>
-            <span class="detail clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" onaftersave="saveRecruit()" editable-text="Recruit.currentRecruit.EMAIL" e-form="Email" ng-dblclick="Email.$show()">{{Recruit.currentRecruit.EMAIL}}</span>
+            <span class="contact-label" ng-click="mailTo(Recruit.currentRecruit.EMAIL)">Email </span>
+            <span class="detail clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" onaftersave="saveRecruit()" editable-text="Recruit.currentRecruit.EMAIL" e-form="Email" ng-dblclick="Email.$show()">{{Recruit.currentRecruit.EMAIL}} <div class="btn btn-default copy-btn" ng-click="clipboard(Recruit.currentRecruit.EMAIL);$event.stopPropagation();"> <i class="fa fa-clipboard"></i></div></span>
           </div>
           <div class="contact-item">
             <span class="contact-label">Phone</span>
-            <span class="detail clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" onaftersave="saveRecruit()" editable-text="Recruit.currentRecruit.BUS_PH_NBR" e-form="Phone" ng-dblclick="Phone.$show()">{{Recruit.currentRecruit.BUS_PH_NBR}}</span>
+            <span class="detail clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" onaftersave="saveRecruit()" editable-text="Recruit.currentRecruit.BUS_PH_NBR" e-form="Phone" ng-dblclick="Phone.$show()">{{Recruit.currentRecruit.BUS_PH_NBR}}<div class="btn btn-default copy-btn" ng-click="clipboard(Recruit.currentRecruit.BUS_PH_NBR);$event.stopPropagation();"> <i class="fa fa-clipboard"></i></div></span>
           </div>
           <div class="contact-item">
             <span class="contact-label">Address</span>
             <form editable-form name="Address" onaftersave="saveRecruit()">
               <span class="detail clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" editable-text="Recruit.currentRecruit.LINE_ONE_ADDR" e-form="Address" ng-dblclick="Address.$show()">
               {{Recruit.currentRecruit.LINE_ONE_ADDR}} {{Recruit.currentRecruit.LINE_TWO_ADDR}}<br>{{Recruit.currentRecruit.CITY_NAME + ', ' +Recruit.currentRecruit.ST_CD+' ' +Recruit.currentRecruit.PSTL_CD}}
+              <div class="btn btn-default copy-btn" ng-click="clipboard(Recruit.currentRecruit.LINE_ONE_ADDR +' ' + Recruit.currentRecruit.LINE_TWO_ADDR+', '+Recruit.currentRecruit.CITY_NAME + ', ' +Recruit.currentRecruit.ST_CD+' ' +Recruit.currentRecruit.PSTL_CD);$event.stopPropagation();"> <i class="fa fa-clipboard"></i></div>
             </span>
               <span editable-text="Recruit.currentRecruit.LINE_TWO_ADDR" e-form="Address" ng-show="Address.$visible">
             </span>
@@ -99,15 +103,20 @@
               </div>
               <form editable-form name="pop" blur="submit" onaftersave="saveRecruit()">
               </form>
-              <div class="progress-item clickable" ng-dblclick="pop.$show()">
-                <span class="progress-label">POP Results</span>
-                <div ng-hide="pop.$visible || !Recruit.currentRecruit.POP" class="pop" ng-style="Recruit.currentRecruit.POP< 3 &&{'background-color':'#FF7C72'}||Recruit.currentRecruit.POP>= 3 &&{'background-color':'#72D9D2'}">{{Recruit.currentRecruit.POP}}</div>
-                <span class="clickable" e-style="width:60px;text-align:center;" e-name="pop" editable-text="Recruit.currentRecruit.POP" e-form="pop"></span>
+              <div class="progress-item clickable" >
+                <span class="progress-label">CPA</span>
+                <div class="btn-group success-toggle">
+                  <div class="btn btn-default" ng-class="{active:Recruit.currentRecruit.CPA==1}" ng-click="Recruit.currentRecruit.CPA=1;saveRecruit()"><i class="fa fa-check"></i></div>
+                  <div class="btn btn-default failure" ng-class="{active:Recruit.currentRecruit.CPA==0}" ng-click="Recruit.currentRecruit.CPA=0;saveRecruit()"><i class="fa fa-close"></i></div>
+                </div>
+               
               </div>
-              <div class="progress-item clickable" ng-dblclick="pop.$show()">
-                <span class="progress-label">Predictor</span>
-                <div ng-hide="pop.$visible || !Recruit.currentRecruit.POP || !Recruit.currentRecruit.Predictor_Score" class="pop" ng-style="Recruit.currentRecruit.Predictor_Score < 55 &&{'background-color':'#FFE372'}||Recruit.currentRecruit.Predictor_Score>= 55 &&{'background-color':'#72D9D2'}">{{Recruit.currentRecruit.Predictor_Score}}</div>
-                <span class="clickable" e-style="width:60px;text-align:center" e-name="predictor" editable-text="Recruit.currentRecruit.Predictor_Score" e-form="pop"></span>
+              <div class="progress-item clickable">
+                <span class="progress-label">Credit</span>
+                <div class="btn-group success-toggle">
+                    <div class="btn btn-default" ng-class="{active:Recruit.currentRecruit.CreditCheck==1}" ng-click="Recruit.currentRecruit.CreditCheck=1;saveRecruit()"><i class="fa fa-check"></i></div>
+                    <div class="btn btn-default failure" ng-class="{active:Recruit.currentRecruit.CreditCheck==0}" ng-click="Recruit.currentRecruit.CreditCheck=0;saveRecruit()"><i class="fa fa-close"></i></div>
+                  </div>
               </div>
           </div>
         </div>

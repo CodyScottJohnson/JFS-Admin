@@ -10,56 +10,54 @@
   </div>
   <div class="modal-body nopadding">
     <div class="row .full_height">
-      <div class="col-md-2 nopadding .full_height" ng-hide="HideMenu">
-        <div class="Client_SideNav" ng-click="FNAME='Ted'">
-          <div class="Client_Btn">
-            New Template
-          </div>
-          <span ng-click="templateFilter={Type:'Default'}" class="hvr-pulse" ng-class="{selected:templateFilter.Type=='Default'}"><i class="fa fa-circle"></i> Default</span>
-          <span ng-click="templateFilter={Type:'Custom'}" class="hvr-pulse" ng-class="{selected:templateFilter.Type=='Custom'}"><i class="fa fa-circle"></i>Custom</span>
-          <span ng-click="templateFilter={favorite:true}" class="hvr-pulse" ng-class="{selected:templateFilter.favorite}"><i class="fa fa-circle"></i>Favorites</span>
-        </div>
-      </div>
+
       <div ng-hide="HideMenu" class="col-md-3 nopadding .full_height">
         <div class="Client_Templates">
           <div class="Client_Search">
             <i class="fa fa-search"></i>
             <input ng-model="search" />
           </div>
-          <div ng-click="setCurrent(email)" ng-repeat="email in Email.Templates|filter:search|filter:templateFilter" class="Template_List" ng-class="{selected:email.selected}">
+          <div ng-click="setCurrent(email)" ng-repeat="email in Email.Templates|filter:search|filter:templateFilter"
+            class="Template_List" ng-class="{selected:email.selected}">
             <span class="title">{{email.Title}}</span>
             <span class="description">{{email.Description}}</span>
           </div>
 
         </div>
       </div>
-      <div class="nopadding .full_height" ng-class="{'col-md-12':HideMenu,'col-md-7':(!HideMenu)}">
+      <div class="nopadding .full_height" ng-class="{'col-md-12':HideMenu,'col-md-9':(!HideMenu)}">
         <div class="Client_Content">
           <div class="Client_Toolbar">
-            <i class="material-icons">save</i>
             <i ng-click="edit_mode = !edit_mode" ng-hide="edit_mode" class="material-icons">mode_edit</i>
-            <i ng-click="edit_mode = !edit_mode" ng-hide="!edit_mode" class="material-icons">remove_red_eye</i>
-            <i class="material-icons" ng-click="Preview(Email.CurrentEmail.Template)">refresh</i>
-            <i ng-click="setFavorite(CurrentEmail)" class="material-icons" ng-class="{favorite:CurrentEmail.favorite}">star_rate</i>
+            <i ng-click="edit_mode = !edit_mode" ng-hide="!edit_mode" class="material-icons">save</i>
+            <i class="material-icons" ng-click="Preview(Email.CurrentEmail.Template)">remove_red_eye</i>
+            <i ng-click="setFavorite(Email.CurrentEmail)" class="material-icons"
+              ng-class="{favorite:Email.CurrentEmail.favorite}">star_rate</i>
             <i ng-click="HideMenu=!HideMenu" class="material-icons" style="float:right">zoom_out_map</i>
           </div>
           <div class="Client_Address" ng-class="{expanded:expand_address}">
-            <i ng-click="expand_address=!expand_address" class="material-icons center vertical clickable hvr-sink" style="right:20px">keyboard_arrow_down</i>
+            <i ng-click="expand_address=!expand_address" class="material-icons center vertical clickable hvr-sink"
+              style="right:20px">keyboard_arrow_down</i>
             <form class="form-inline" autocomplete="off">
               <div class="form-group">
                 <label ng-show="expand_address" for="To">To</label>
-                <input ng-show="expand_address" ng-model="Email.currentRecipient" typeahead-input-formatter="$model.FNAME + ' ' + $model.LNAME" typeahead-template-url="customTemplate.html" type="text" class="form-control" id="To" uib-typeahead="recruit for recruit in RecipientList | filter:$viewValue | limitTo:8"><br ng-show="expand_address"/>
+                <input ng-show="expand_address" ng-model="Email.currentRecipient"
+                  typeahead-input-formatter="$model.FNAME + ' ' + $model.LNAME"
+                  typeahead-template-url="customTemplate.html" type="text" class="form-control" id="To"
+                  uib-typeahead="recruit for recruit in RecipientList | filter:$viewValue | limitTo:8"><br
+                  ng-show="expand_address" />
                 <label for="Subject">Subject</label>
-                <input autocomplete="off" ng-model="Email.CurrentEmail.Subject" type="text" class="form-control" id="Subject" placeholder="subject">
+                <input autocomplete="off" ng-model="Email.CurrentEmail.Subject" type="text" class="form-control"
+                  id="Subject" placeholder="subject">
               </div>
           </div>
           <div ng-show="expand_address" class="Client_Attachment">
             <i class="material-icons">attach_file</i>
           </div>
           <div ng-hide="edit_mode" style="width:100%;height:100%">
-          <iframe srcdoc="{{currentPreview}}" style="height:100%;width:100%;border:none">
-          </iframe>
-        </div>
+            <iframe srcdoc="{{currentPreview}}" style="height:100%;width:100%;border:none">
+            </iframe>
+          </div>
           <div ng-show="edit_mode" style="display:block;position:relative">
             <div summernote config="summernoteOptions" ng-model="Email.CurrentEmail.Template"></div>
 

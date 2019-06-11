@@ -19,6 +19,18 @@ angular.module('JFS_Admin')
       Agents.viewAgent(Agent_ID);
       $state.go('app.Agents.Agent', {AgentID:Agent_ID});
     };
+    $scope.newAgent = function(date){
+      if(moment(date).add(6,'months').isAfter(moment())){
+        return true;
+      }
+      return false;
+    };
+    $scope.isFollowUpSet = function(agent){
+      if(agent && agent.Next_Appointment && moment(agent.Next_Appointment).add(-1,'days').isBefore(moment())){
+        return true;
+      }
+      return false;
+    };
     $scope.agentListOptions = [
       ['Reset Password', function($itemScope){
       },false],
