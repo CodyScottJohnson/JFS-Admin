@@ -1,17 +1,27 @@
-# JFS Admin
+<h1 align="center">
+  <br>
+  <a href="https://codyscottjohnson.com"><img src="https://codyscottjohnson.com/images/Logo.png" alt="Markdownify" width="200"></a>
+  <br>
+  Management Portal
+  <br>
+</h1>
 
-This is the management portal for the Johnson Financial Service Website.
-## Built With
+<h4 align="center">Recruiting Management Tool</h4>
 
-HTML Not Working.
-<img style="height:50px;width:50px; display:inline-block" src='http://devicon.fr/devicon.git/icons/nodejs/nodejs-original.svg'>
-<img style="height:50px;width:50px; display:inline-block" src='http://devicon.fr/devicon.git/icons/bower/bower-line.svg'>
-<img style="height:50px;width:50px" src='http://devicon.fr/devicon.git/icons/grunt/grunt-line.svg'>
-<img style="height:50px;width:50px" src='http://devicon.fr/devicon.git/icons/html5/html5-plain.svg'>
-<img style="height:50px;width:50px" src='http://devicon.fr/devicon.git/icons/css3/css3-plain.svg'>
-<img style="height:50px;width:50px" src='http://devicon.fr/devicon.git/icons/angularjs/angularjs-plain.svg'>
-<img style="height:50px;width:50px" src='http://devicon.fr/devicon.git/icons/less/less-plain-wordmark.svg'>
-<img style="height:50px" src='https://upload.wikimedia.org/wikipedia/en/thumb/e/e3/Yeoman.svg/543px-Yeoman.svg.png'>
+
+
+<p align="center">
+  <a href="#key-features">Key Features</a> •
+  <a href="#how-to-use">How To Use</a> •
+  <a href="#download">Download</a> •
+  <a href="#credits">Credits</a> •
+  <a href="#related">Related</a> •
+  <a href="#license">License</a>
+</p>
+
+
+> This is the management portal for the Johnson Financial Service Website.
+
 
 
 ## Build & development
