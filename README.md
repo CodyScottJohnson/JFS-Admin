@@ -26,6 +26,12 @@
     <img src="https://raw.githubusercontent.com/codyscottjohnson/JFS-Admin/master/preview/Dashboard.png" />
 
 </p>
+<p align="center">
+    <img src="https://raw.githubusercontent.com/codyscottjohnson/JFS-Admin/master/preview/Recruiting.png" width="49%"/>
+    <img src="https://raw.githubusercontent.com/codyscottjohnson/JFS-Admin/master/preview/Task.png" width="49%"/>
+    <img src="https://raw.githubusercontent.com/codyscottjohnson/JFS-Admin/master/preview/Email.png" width="49%"/>
+
+</p>
 
 ## Build & development
 #### requirements
