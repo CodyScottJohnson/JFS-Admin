@@ -10,10 +10,16 @@
 angular.module('JFS_Admin')
   .controller('RecruitingCtrl', function($scope, recruit, Recruits, Task, Functions, Email,$location,$stateParams) {
     $scope.Archived = 0;
+    $scope.RecruitList = "Active";
     if(angular.isDefined($stateParams.Archived))
     {
       $scope.Archived = $stateParams.Archived;
+      if($stateParams.Archived == 1){
+        $scope.RecruitList = "Archived";
+      }
     }
+    
+
     $scope.TagSearch = [];
     // => true
     $scope.tags = Functions.loadTags;
@@ -21,10 +27,23 @@ angular.module('JFS_Admin')
     $scope.labels2 = ['', '', '', ''];
     Task.getUsersTasks(true);
     $scope.Task = Task.data;
+   
     $scope.removeFlag = function(task) {
       task.Status = 'Completed';
       Task.updateTask(task);
     };
+    $scope.myRecruitSearch = function(){
+      return function( item ){
+        if($scope.RecruitList != "MyRecruits"){
+          return true;
+        }
+        if(_.find($scope.Task.currentUsersTasks, {INDV_ID: item.INDV_ID})) {
+          return true
+        }
+        return false;
+      }
+      //console.log($scope.Task.currentUsersTasks)
+    }
     $scope.tagSearch = function( tags ) {
      return function( item ) {
        var tagsFound = true;
@@ -56,6 +75,20 @@ angular.module('JFS_Admin')
             return false;
           });
     };
+    $scope.selectRecruitList = function(list){
+      if(list =="active"){
+        $scope.Archived = 0;
+        $scope.RecruitList = "Active";
+      }
+      if(list =="archived"){
+        $scope.Archived = 1;
+        $scope.RecruitList = "Archived";
+      }
+      if(list =="myrecruits"){
+        $scope.Archived = 0;
+        $scope.RecruitList = "MyRecruits";
+      }
+    }
     $scope.tagAdded = function(tag, recruit) {
       if (angular.isDefined(tag.id)) {
         Recruits.addTag(recruit, tag.id)
@@ -95,7 +128,11 @@ angular.module('JFS_Admin')
 
     if($scope.Archived === 0){
     $scope.ArchiveRecruit = ['Archive', function($itemScope) {
+      if($itemScope.recruit.Archived == 1){
+        $itemScope.recruit.Archived = 0;
+      } else{
         $itemScope.recruit.Archived = 1;
+      }
         Recruits.save($itemScope.recruit);
       }
     ];
@@ -107,7 +144,14 @@ angular.module('JFS_Admin')
       }
     ];
   }
-
+  $scope.changeArchiveStatus = function(recruit){
+    if(recruit.Archived == 1){
+      recruit.Archived = 0;
+    } else{
+      recruit.Archived = 1;
+    }
+      Recruits.save(recruit);
+  }
     $scope.recruitListOptions = [
       ['New Task', function($itemScope) {
         //console.log($itemScope.recruit.INDV_ID);
@@ -186,4 +230,16 @@ angular.module('JFS_Admin')
       $scope.search2 = null;
       Recruits.updateRecruits();
     };
+    $scope.previewNotes =function(recruitPreview){
+
+      recruit.setRecruit(recruitPreview.INDV_ID).then(function(data) {
+        Functions.OpenModal('views/Modals/NotesModal.html', 'md');
+      });
+    }
+    $scope.previewTasks =function(recruitPreview){
+
+      recruit.setRecruit(recruitPreview.INDV_ID).then(function(data) {
+        Functions.OpenModal('views/Recruiting/modals/taskModal.html', 'md');
+      });
+    }
   });

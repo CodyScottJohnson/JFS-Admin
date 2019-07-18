@@ -1,0 +1,203 @@
+<div class="dashboard new">
+  <div class="table">
+    <div class="options">
+        <div ng-click="selectRecruitList('myrecruits')" class="btn btn-default" ng-class="{active: RecruitList =='MyRecruits'}">
+            My Recruits
+          </div>
+      <div ng-click="selectRecruitList('active')" class="btn btn-default" ng-class="{active: RecruitList =='Active'}">
+        Active Recruits
+      </div>
+      <div ng-click="selectRecruitList('archived')" class="btn btn-default" ng-class="{active: RecruitList =='Archived'}">
+          Archived Recruits
+        </div>
+  
+    </div>
+    
+        <div class="search">
+          <i class="fa fa-search"></i>
+        <input type="text" class=" form-control" placeholder="Search Prospects" ng-model="search" >
+        </div>
+        <i uib-popover-template="'tagSearchPopoverTemplate.html'" popover-trigger="outsideClick" popover-placement="bottom" class="fa fa-tags clickable tag-search"></i>
+        <script type="text/ng-template" id="tagSearchPopoverTemplate.html">
+          <div class="form-group">
+            <label>Tags</label>
+            <tags-input ng-model="TagSearch"
+                        display-property="Name"
+                        placeholder="Search by Tag"
+                        replace-spaces-with-dashes="false">
+                <auto-complete source="tags($query)"
+                               load-on-focus="true"
+                               min-length=0
+                               displayProperty="Name"></auto-complete>
+
+            </tags-input>
+
+
+
+          </div>
+        </script>
+  <table>
+
+    <tr>
+      <th style="border:none"></th>
+      <th>CPA</th>
+      <th>Credit</th>
+      <th>Color</th>
+      <th>Status</th>
+      <th>Email</th>
+     
+      <th>Source</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>Zip</th>
+      <th>State</th>
+      <th>Tag</th>
+      <th></th>
+    </tr>
+    <tr ng-show="advancedSearch.Show">
+      <td></td>
+      <td> 
+        <div ng-show="recruit.CPA==1">
+          <i class="fa fa-check"></i>
+        </div>
+      </td>
+      <td></td>
+      <td> <input type="text" class="form-control" ng-model="search2.NextStep" placeholder="&#xF002;" style="font-family:Arial, FontAwesome;height:30px;width: 100%"></td>
+      <td> <input type="text" class="form-control" ng-model="search2.Email" placeholder="&#xF002;" style="font-family:Arial, FontAwesome;height:30px;width: 100%"></td>
+      <td> <select class="form-control" ng-model="search2.Type" style="height:30px;width: 100%;font-size:10px;background-color:white">
+                <option></option>
+                <option>Initial Contact</option>
+                <option>Liscencing</option>
+                <option>ACP</option>
+                <option>Contract</option>
+            </select></td>
+      <td></td>
+      <td> <input type="text" class="form-control" ng-model="search2.phone" placeholder="&#xF002;" style="font-family:Arial, FontAwesome;height:30px;width: 100%"></td>
+      <td> <input type="text" class="form-control" ng-model="search2.Address1" placeholder="&#xF002;" style="font-family:Arial, FontAwesome;height:30px;width: 100%"></td>
+      <td> <input type="text" class="form-control" ng-model="search2.City" placeholder="&#xF002;" style="font-family:Arial, FontAwesome;height:30px;width: 100%"></td>
+      <td> <input type="text" class="form-control" ng-model="search2.Zip" placeholder="&#xF002;" style="font-family:Arial, FontAwesome;height:30px;width: 100%"></td>
+      <td> <input type="text" class="form-control" ng-model="search2.State" placeholder="&#xF002;" style="font-family:Arial, FontAwesome;height:30px;width: 100%"></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr context-menu="recruitListOptions" context-menu-class="context_menu" ng-repeat="recruit in (Recruits.List|filter:search|filter:search2|filter:{Archived:Archived}|filter:myRecruitSearch()|filter:tagSearch(TagSearch)).slice(((Recruits.currentPage-1)*itemsPerPage), ((Recruits.currentPage)*itemsPerPage))">
+      <td class="profile">
+        <div ng-click="viewRecruit(recruit.INDV_ID)" class="img_container clickable" >
+          <img ng-src="https://jfsapp.com/Images/Recruits/{{recruit.ProfilePic || 'blank.jpg'}}" style="heigth:100%;box-shadow:none">
+        </div>
+
+        <div ng-dblclick="rowform.$show()" class="info" style="display:inline-block">
+          <span><h3 class="expand" style="font-size:20px"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.FNAME" e-name="FNAME" e-form="rowform">{{recruit.FNAME}}</span><br> <span e-style="width:30px;padding-left:10px;padding-right:10px"
+              editable-text="recruit.LNAME" e-name="LNAME" e-form="rowform">{{recruit.LNAME}}</span></h3>
+          </span>
+        </div>
+      </td>
+      <td ng-dblclick="rowform.$show()">
+          <div ng-show="recruit.CPA==1">
+              <i class="fa fa-check" style="color:green"></i>
+            </div>
+            <div ng-show="recruit.CPA==0">
+                <i class="fa fa-close" style="color:red"></i>
+              </div>
+      </td>
+      <td ng-dblclick="rowform.$show()">
+          <div ng-show="recruit.CreditCheck==1">
+              <i class="fa fa-check" style="color:green"></i>
+            </div>
+            <div ng-show="recruit.CreditCheck==0">
+                <i class="fa fa-close" style="color:red"></i>
+              </div>
+      </td>
+      <td ng-dblclick="rowform.$show()">
+        <div ng-show="rowform.$visible">
+        							<span e-name="Color_Red" e-style="background-color:#F7464A;color:white;text-align:center" editable-text="recruit.Color_Red" e-name="contactType" e-form="rowform">{{recruit.Color_Red}}</span>
+        							<span e-name="Color_Blue" e-style="background-color:#97BBCD;color:white;text-align:center" editable-text="recruit.Color_Blue" e-name="contactType" e-form="rowform">{{recruit.Color_Blue}}</span>
+        							<span e-name="Color_Yellow" e-style="background-color:#FDB45C;color:white;text-align:center" editable-text="recruit.Color_Yellow" e-name="contactType" e-form="rowform">{{recruit.Color_Yellow}}</span>
+        							<span e-name="Color_White" e-style="background-color:#DCDCDC;color:white;text-align:center" editable-text="recruit.Color_White" e-name="contactType" e-form="rowform">{{recruit.Color_White}}</span>
+        						</div>
+        					<div style="width:60px;height:60px" ng-show="!rowform.$visible">
+                  <canvas id="doughnut" class="chart chart-doughnut"
+                      chart-data="[recruit.Color_Blue,recruit.Color_White,recruit.Color_Red,recruit.Color_Yellow]" chart-legend="false" chart-colours="colors2" chart-labels="labels2" chart-options="options2" width="10px" height="10px">
+        							</canvas></div>
+        </td>
+      <td class="expand clickable" ng-dblclick="rowform.$show()" uib-popover-template="'views/Recruiting/popovers/status.html'" popover-placement="right" popover-trigger="outsideClick">
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.NextStep" e-name="NextStep" e-form="rowform">{{recruit.NextStep}}</span>
+      </td>
+      <td class="expand" ng-dblclick="rowform.$show()">
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.EMAIL" e-name="EMAIL" e-form="rowform">{{recruit.EMAIL}}</span>
+      </td>
+
+      <td class="expand" ng-dblclick="rowform.$show()">
+        <span  editable-select="recruit.Source" e-value="recruit.Source" e-ng-options="s as s for s in TableDefaults.Source" e-name="Source" e-form="rowform" style="text-align:middle">
+          {{recruit.Source}}
+        </span>
+      </td>
+      <td class="expand" ng-dblclick="rowform.$show()">
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.BUS_PH_NBR" e-name="BUS_PH_NBR" e-form="rowform">{{recruit.BUS_PH_NBR}}</span>
+      </td>
+      <td class="expand" ng-dblclick="rowform.$show()">
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.LINE_ONE_ADDR" e-name="LINE_ONE_ADDR" e-form="rowform">{{recruit.LINE_ONE_ADDR}}</span>
+      </td>
+      <td class="expand" ng-dblclick="rowform.$show()">
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.CITY_NAME" e-name="CITY_NAME" e-form="rowform">{{recruit.CITY_NAME}}</span>
+      </td>
+      <td class="expand" ng-dblclick="rowform.$show()">
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.PSTL_CD" e-name="PSTL_CD" e-form="rowform">{{recruit.PSTL_CD}}</span>
+      </td>
+      <td class="expand" ng-dblclick="rowform.$show()">
+        <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.ST_CD" e-name="ST_CD" e-form="rowform">{{recruit.ST_CD}}</span>
+      </td>
+      <td>
+          <i uib-popover-template="'tagPopoverTemplate.html'" popover-trigger="outsideClick" popover-placement="left" class="fa fa-tags clickable"></i>
+          <script type="text/ng-template" id="tagPopoverTemplate.html">
+            <div class="form-group">
+              <label>Tags</label>
+              <tags-input ng-model="recruit.Tags"
+                          display-property="Name"
+                          placeholder="Add a Tag"
+                          on-tag-adding="tagAdded($tag,recruit)"
+                          on-tag-removing="tagRemoved($tag,recruit)"
+                          tag-class="'tag'"
+                          key-property="id"
+                          replace-spaces-with-dashes="false">
+                  <auto-complete source="tags($query)"
+                                 load-on-focus="true"
+                                 min-length=0
+                                 displayProperty="Name"></auto-complete>
+
+              </tags-input>
+
+            </div>
+          </script>
+      </td>
+      <td style="white-space: nowrap;vertical-align:middle">
+        <!-- form -->
+        <form editable-form name="rowform" onbeforesave="saveRecruit(recruit)" ng-show="rowform.$visible" class="form-buttons form-inline">
+          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+            save
+          </button>
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+            cancel
+          </button>
+        </form>
+   
+          <div class="actions" uib-dropdown is-open="isopen" uib-dropdown-toggle ng-show="!rowform.$visible">
+              <i class="fa fa-ellipsis-h" ></i>
+              <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+              <li role="menuitem" ng-click="rowform.$show()"><a>Edit</a></li>
+              <li role="menuitem" ng-click="previewNotes(recruit)"><a>Notes</a></li>
+              <li role="menuitem" ng-click="previewTasks(recruit)"><a>Tasks</a></li>
+              <li class="divider"></li>
+              <li role="menuitem" ng-click="changeArchiveStatus(recruit)"><a>Archive</a></li>
+              <li role="menuitem" ng-click="deleteRecruit(recruit.INDV_ID)"><a >Delete</a></li>
+            </ul>
+      </td>
+    </tr>
+  </table>
+  </div>
+  <div class="add_button" ng-click="addRecruit();rowform.$show()"><i class="fa fa-plus"></i></div>
+  <ul style="margin-left:30px" uib-pagination total-items="(Recruits.List|filter:search|filter:search2|filter:{Archived:Archived}|filter:tagSearch(TagSearch)).length" items-per-page="itemsPerPage" ng-model="Recruits.currentPage" max-size="3" class="pagination-sm" boundary-link-numbers="true" rotate="true"></ul>
+
+</div>
+

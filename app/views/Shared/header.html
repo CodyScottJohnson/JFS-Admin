@@ -277,6 +277,8 @@
 								class="text">Change Profile</span></a></li>
 					<li><a ui-sref="app.User.Settings"><i class="fa fa-gear"></i><span class="text">
 								Settings</span></a></li>
+								<li><a ng-click="User.logout()"><i class="fa fa-gear"></i><span class="text">
+									Logout</span></a></li>
 				</ul>
 			</div>
 			<div class="sidebar-menu">
@@ -340,7 +342,7 @@
 						includedByState) || ('app.Recruiting.Dashboard' | includedByState) || 
 						('app.Recruiting.Archived' | includedByState) ||
 						('app.Recruiting.Recruit' | includedByState)
-						}" class="top-level"><a href="" ng-model="collapsed5" ng-click="collapsed5=!collapsed5"><i
+						}" class="top-level"><a ui-sref="app.Recruiting.Dashboard2" ng-model="collapsed5" ng-click="collapsed5=!collapsed5"><i
 								class="main-icon fa fa-sitemap"></i><span class="text"> Recruiting</span><span
 								class="fa fa-angle-down pull-right"></span></a></li>
 					<ul class="subMenu" ng-show="collapsed5">
@@ -350,6 +352,7 @@
 									Reports</span></a></li>
 						<li><a ui-sref="app.Recruiting.Dashboard"><i style="color:#FAC559" class="fa fa-users"></i><span
 									class="text"> Recruiting Pool</span></a></li>
+						
 
 						<li><a ui-sref="app.Recruiting.Archived"><i class="fa fa-archive"></i><span class="text">
 									Archived</span>

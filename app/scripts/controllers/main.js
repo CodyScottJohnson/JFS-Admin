@@ -26,8 +26,10 @@ angular.module('JFS_Admin')
       Task.getTask(taskID);
       Functions.OpenModal('views/Modals/TaskModal.html', 'md');
     };
+    console.log($location.search())
     if(angular.isDefined($location.search().Task_ID))
     {
+      console.log('Here')
       if(angular.isDefined($location.search().Task_Completed) && $location.search().Task_Completed == 1){
         Task.getTask($location.search().Task_ID).then(function(data){
           data.Status = "Completed";
@@ -38,8 +40,8 @@ angular.module('JFS_Admin')
       else{
         $scope.ViewTask($location.search().Task_ID);
       }
-      $location.search('Task_ID', null);
-      $location.search('Task_Completed', null);
+      //$location.search('Task_ID', null);
+      //$location.search('Task_Completed', null);
     }
     $scope.Functions = Functions;
     //Functions.OpenModal('views/Modals/User/notes.html','md',null,{windowClass:'notification_modal'});
