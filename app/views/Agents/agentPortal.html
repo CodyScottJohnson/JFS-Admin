@@ -1,227 +1,203 @@
 <div class="AgentPortal view">
-    <div class="recruit-info">
-        <div class="card">
-          <div class="row is-flex">
-            <div class="col-md-4 col-sm-12 col-xs-12">
-              <div class="left-panel">
-                <div class="img-box">
-                  <div class="img-profile" ng-click="changepic()">
-                    <img ng-src="{{'https://jfsapp.com/Secure/API/Images/General/Agents/Profile/'+Agents.CurrentAgent.Info.profilepic+'?access_token='+currentUser.Token.access_token+'&client_id=testclient&client_secret=testpass'}}" />
-                  </div>
-                </div>
-                <div class="account-info">
-                  <span>{{Agents.CurrentAgent.Info.FirstName}}</span> <span>{{Agents.CurrentAgent.Info.LastName}}</span>
-                  <div class="agent-status active" ng-show="newAgent(Agents.CurrentAgent.Info.Hire_Date)">
-                      <span>New Agent</span>
-                    </div>
-                 </div>
-                 <div class="divider">
-                  </div>
-                 <div class="appointments" ng-show="newAgent(Agents.CurrentAgent.Info.Hire_Date)">
-                   <div class="title">
-                     Next Follow Up
-                   </div>
-                   <div class="appointment" ng-show="isFollowUpSet(Agents.CurrentAgent.Info)">
-                     <div class="date">
-                       <div class="header"></div>
-                       <div class="center both">
-                       <div class="month">{{Agents.CurrentAgent.Info.Next_Appointmen| momentdate:'MMM'}}</div>
-                       {{Agents.CurrentAgent.Info.Next_Appointmen| momentdate:'Do'}}
-                       </div>
-                     </div>
-                    
+  <div class="agent-info">
+    <div class="agent-type" ng-class="agentStatus(Agents.CurrentAgent.Info.Hire_Date)">
+      <span>{{agentStatus(Agents.CurrentAgent.Info.Hire_Date)}}</span>
+    </div>
+    <div class="agent-options-expand">
+      <i class="fa fa-expand"></i>
+    </div>
+    <div class="agent-options">
+      <i class="fa fa-ellipsis-h"></i>
+    </div>
+    <div class="img-box">
+      <div class="img-profile" ng-click="changepic()">
+        <img
+          ng-src="https://jfsapp.com/Open/API/Images/Agents/Profile/{{Agents.CurrentAgent.Info.profilepic||'blank.jpg'}}?access_token={{currentUser.Token.access_token}}&client_id=testclient&client_secret=testpass" />
+      </div>
+    </div>
+    <div class="agent-name">
+      <span>{{Agents.CurrentAgent.Info.FirstName}}</span> <span>{{Agents.CurrentAgent.Info.LastName}}</span>
+    </div>
+    <div class="agent-contact">
+      <div class="action">
+        <i class="fa fa-envelope-o"></i>
+      </div>
+      <div class="action">
+        <i class="fa fa-phone"></i>
+      </div>
+      <div class="action">
+        <i class="fa fa-comment-o"></i>
+      </div>
+    </div>
+    <div class="metrics">
+      <div class="metric">
+        {{Agents.CurrentAgent.SalesNumbers.Life_Paid_Premium_Ytd | moneyFmt: 0 }}
+        <span>Life</span>
+      </div>
+      <div class="v-divider"></div>
+      <div class="metric">
+          {{ Agents.CurrentAgent.SalesNumbers.PC_Premium_Ytd | moneyFmt: 0 }}
+          <span>P&C</span>
+        </div>
+        <div class="v-divider"></div>
+        <div class="metric">
+            {{([Agents.CurrentAgent.SalesNumbers.Persistency_15month || 0,Agents.CurrentAgent.SalesNumbers.Persistency_3yr||0,]| max) * 100 + '%' }}
+            <span>Persistency</span>
+          </div>
+    </div>
+    <div>
+     
+    </div>
+  </div>
+  <div class="agent-content">
+    <div class="tabs">
+      <div class="tab active">
+        Overview
+      </div>
+      <div class="tab">
+        History
+      </div>
+      <div class="tab">
+        Daily Numbers
+      </div>
+    </div>
+    <div class="content-row-title" ng-show="agentStatus(Agents.CurrentAgent.Info.Hire_Date) == 'Intern'">
+      Intern
+    </div>
+    <div class="content-row" ng-show="agentStatus(Agents.CurrentAgent.Info.Hire_Date) == 'Intern'">
+    </div>
+    <div class="content-row-title" ng-show="agentStatus(Agents.CurrentAgent.Info.Hire_Date) != 'Agent'">
+      NAPD Agent
+    </div>
+    <div class="content-row" ng-show="agentStatus(Agents.CurrentAgent.Info.Hire_Date) != 'Agent'">
+      <div class="progress-card">
+        <div class="summary_label behind">
+          Behind
+        </div>
+        <div class="deadline">
+          Next Cut Off
+          <div class="date">{{"2019-08-01"|momentdateRelative : 'MMM D Y @ h:mm a'}}</div>
+        </div>
+        <div class="title">Minimum Requirements</div>
+
+        <div class="body">
+          They are currently <span class="callout red">80%</span> of where they should be at this point in
+          time in order to achieve they target.
+        </div>
+        <br>
+        <br>
+        <div class="bar-title">
+          P&C
+        </div>
+        <uib-progressbar class="progress-striped  active" max="5000" value="3000" type="{{onTrack(1,2).type}}">
+          {{"$ " + (Agents.CurrentAgent.SalesNumbers.PC_Premium_Ytd | number)}}</uib-progressbar>
+        <div class="bar-title">
+          Life
+        </div>
+        <uib-progressbar class="progress-striped active" max="5000" value="3000" type="{{onTrack(1,2).type}}">
+          {{"$ " + (Agents.CurrentAgent.SalesNumbers.Life_Paid_Premium_Ytd | number)}}
+        </uib-progressbar>
+      </div>
+
+      <div class="progress-card">
+        <div class="summary_label behind">
+          Behind
+        </div>
+        <div class="deadline">
+          Next Cut Off
+          <div class="date">{{"2019-08-01"|momentdateRelative : 'MMM D Y @ h:mm a'}}</div>
+        </div>
+        <div class="title">Blue Vase Requirements</div>
+
+        <div class="body">
+          They are currently <span class="callout red">80%</span> of where they should be at this point in
+          time in order to achieve they target.
+        </div>
+        <br>
+        <br>
+        <div class="bar-title">
+          P&C
+        </div>
+        <uib-progressbar class="progress-striped  active" max="5000" value="3000" type="{{onTrack(1,2).type}}">
+          {{onTrack(1,2).ontrack}}</uib-progressbar>
+        <div class="bar-title">
+          Life
+        </div>
+        <uib-progressbar class="progress-striped active" max="5000" value="3000" type="{{type}}">12
+        </uib-progressbar>
+      </div>
+      <div class="progress-card">
+        <div class="summary_label behind">
+          Behind
+        </div>
+        <div class="deadline">
+          Next Cut Off
+          <div class="date">{{"2019-08-01"|momentdateRelative : 'MMM D Y @ h:mm a'}}</div>
+        </div>
+        <div class="title">New Agent Achievement</div>
+
+        <div class="body">
+          They are currently <span class="callout red">80%</span> of where they should be at this point in
+          time in order to achieve they target.
+        </div>
+        <br>
+        <br>
+        <div class="bar-title">
+          P&C
+        </div>
+        <uib-progressbar class="progress-striped  active" max="5000" value="3000" type="{{onTrack(1,2).type}}">
+          {{onTrack(1,2).ontrack}}</uib-progressbar>
+        <div class="bar-title">
+          Life
+        </div>
+        <uib-progressbar class="progress-striped active" max="5000" value="3000" type="{{type}}">12
+        </uib-progressbar>
+      </div>
+    </div>
+    <br>
+    <div class="content-row-title" >
+      Achievements
+    </div>
+    <div class="content-row" drag-scroll="true">
+       
+        <div class="achievement-card" ng-click="print('Here We Go')">
+            <div class="club-progress">
+                <div ng-show="!minimumStandardProgress(Agents.CurrentAgent.SalesNumbers).onTarget" class="warning"><i class="fa fa-exclamation-triangle"></i></div>
+                <div ng-show="minimumStandardProgress(Agents.CurrentAgent.SalesNumbers).completed" class="complete"><i class="fa fa-check"></i></div>
+              <round-progress max=1 current="minimumStandardProgress(Agents.CurrentAgent.SalesNumbers).progress" color="{{minimumStandardProgress(Agents.CurrentAgent.SalesNumbers).color}}" bgcolor="#eaeaea" radius="100" stroke="20" rounded="true" responsive="true"
+                duration="800" animation="easeInOutQuart" animation-delay="0"></round-progress>
+              
+            </div>
+            <div class="club-label">Minimum Standard </div>
+        </div>
+      <div class="achievement-card">
+          <div class="club-progress">
+              <div ng-show="!enhancedCommissionProgress(Agents.CurrentAgent.SalesNumbers).onTarget" class="warning"><i class="fa fa-exclamation-triangle"></i></div>
+                <div ng-show="enhancedCommissionProgress(Agents.CurrentAgent.SalesNumbers).completed" class="complete"><i class="fa fa-check"></i></div> 
+            <round-progress max=1 current="enhancedCommissionProgress(Agents.CurrentAgent.SalesNumbers).progress" color="{{enhancedCommissionProgress(Agents.CurrentAgent.SalesNumbers).color}}" bgcolor="#eaeaea" radius="100" stroke="20" rounded="true" responsive="true"
+              duration="800" animation="easeInOutQuart" animation-delay="0"></round-progress>
             
-                     <div class="detail">
-                       <div class="time">
-                         <i class="fa fa-clock-o"></i>
-                         3:00pm
-                       </div>
-                        <div class="btn" ng-click="SendEmail()">
-                            Start
-                          </div>
-                          <div class="btn" ng-click="SendEmail()">
-                              Reschedule
-                            </div>
-                     </div>
-                    
-                   </div>
-                   <div class="no-appointment"  ng-hide="isFollowUpSet(Agents.CurrentAgent.Info)"> 
-                     <i class="fa fa-exclamation center both" ng-hide="isFollowUpSet(Agents.CurrentAgent.Info)"></i>
-                     <div class="v-divide"></div>               
-                     No Appointment Set
-                    </div>
-                 </div>
-                <div class="button btn" ng-click="SendEmail()">
-                  Contact
-                </div>
-                <div class="social">
-      
-                  <a class="account" ng-href="{{social.url}}" target="_blank" style="text-decoration:none" ng-repeat="social in Recruit.currentRecruit.Info.ContactDetails.socialProfiles">
-                  <i class="fa fa-{{social.type}} fa-3x clickable" ></i>
-                </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-8 col-sm-12 nopadding">
-              <div class="contact">
-                <div class="title">
-                  Contact Info
-                </div>
-                <div class="contact-item" >
-                  <span class="contact-label" ng-click="mailTo(Recruit.currentRecruit.EMAIL)">Email</span>
-                  <span class="detail clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" onaftersave="saveRecruit()" editable-text="Agents.CurrentAgent.Info.Email" e-form="Email" ng-dblclick="Email.$show()">{{Agents.CurrentAgent.Info.Email}}</span>
-                </div>
-                <div class="contact-item">
-                  <span class="contact-label">Phone</span>
-                  <span class="detail clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" onaftersave="saveRecruit()" editable-text="Agents.CurrentAgent.Info.Phone" e-form="Phone" ng-dblclick="Phone.$show()">{{Agents.CurrentAgent.Info.Phone}}</span>
-                </div>
-                <div class="contact-item">
-                  <span class="contact-label">Address</span>
-                  <form editable-form name="Address" onaftersave="saveRecruit()">
-                    <span class="detail clickable" style="font-weight:bolder;text-decoration:none;color:black;border:none" editable-text="Agents.CurrentAgent.Info.Address" e-form="Address" ng-dblclick="Address.$show()">
-                    {{Agents.CurrentAgent.Info.Address}}<br>{{Agents.CurrentAgent.Info.City + ', ' +Agents.CurrentAgent.Info.State+' ' +Agents.CurrentAgent.Info.Zip}}
-                  </span>
-                   
-                    <span editable-text="Agents.CurrentAgent.Info.City" e-form="Address" ng-show="Address.$visible">
-                  </span>
-                    <span editable-text="Agents.CurrentAgent.Info.State" e-form="Address" ng-show="Address.$visible">
-                  </span>
-                    <span editable-text="Agents.CurrentAgent.Info.Zip" e-form="Address" ng-show="Address.$visible">
-                  </span>
-                    <span ng-show="Address.$visible">
-                     <button type="submit" class="btn btn-primary" ng-disabled="Address.$waiting">
-                       Save
-                     </button>
-                     <button type="button" class="btn btn-default" ng-disabled="Address.$waiting" ng-click="Address.$cancel()">
-                       Cancel
-                     </button>
-                   </span>
-                  </form>
-                </div>
-              </div>
-              <div class="row">
-                  <div class="progress-row">
-                    <div class="title">
-                      Details
-                    </div>
-                    <div class="progress-item">
-                      <span class="progress-label">Hired</span>
-                      <div>{{Agents.CurrentAgent.Info.Hire_Date| momentdateRelative:'MMM Do Y'}}</div>
-                      </div>
-                      
-                      </form>
-                      <div class="progress-item clickable" ng-dblclick="pop.$show()">
-                        <span class="progress-label">POP Results</span>
-                        <div ng-hide="pop.$visible || !Recruit.currentRecruit.POP" class="pop" ng-style="Recruit.currentRecruit.POP< 3 &&{'background-color':'#FF7C72'}||Recruit.currentRecruit.POP>= 3 &&{'background-color':'#72D9D2'}">{{Recruit.currentRecruit.POP}}</div>
-                        <span class="clickable" e-style="width:60px;text-align:center;" e-name="pop" editable-text="Recruit.currentRecruit.POP" e-form="pop"></span>
-                      </div>
-                      <div class="progress-item clickable" ng-dblclick="pop.$show()">
-                        <span class="progress-label">Predictor</span>
-                        <div ng-hide="pop.$visible || !Recruit.currentRecruit.POP || !Recruit.currentRecruit.Predictor_Score" class="pop" ng-style="Recruit.currentRecruit.Predictor_Score < 55 &&{'background-color':'#FFE372'}||Recruit.currentRecruit.Predictor_Score>= 55 &&{'background-color':'#72D9D2'}">{{Recruit.currentRecruit.Predictor_Score}}</div>
-                        <span class="clickable" e-style="width:60px;text-align:center" e-name="predictor" editable-text="Recruit.currentRecruit.Predictor_Score" e-form="pop"></span>
-                      </div>
-                  </div>
-                </div>
-                <div class="row" ng-show="newAgent(Agents.CurrentAgent.Info.Hire_Date)">
-                <div class="progress-row">
-                  <div class="title">
-                    New Agent
-                  </div>
-                  <div class="progress-item">
-                    
-                    </div>
-                    <div class="progress-item clickable" ng-dblclick="pop.$show()">
-                     </div>
-                    <div class="progress-item clickable" ng-dblclick="pop.$show()">
-                     </div>
-                </div>
-              </div>
-             
-      
-      
-      
-            </div>
           </div>
-        </div>
+          <div class="club-label">Enhanced Commission</div>
       </div>
-  <!--   
-  <div class="profile">
-    <div class="row">
-      <div class="col-md-3">
-        <div class="profile_img">
-          <div class="outerimage">
-
-          <img  ng-src="{{'https://jfsapp.com/Secure/API/Images/General/Agents/Profile/'+Agents.CurrentAgent.Info.profilepic+'?access_token='+currentUser.Token.access_token+'&client_id=testclient&client_secret=testpass'}}" />
-          <div class="img_mask">
-
+      <div class="achievement-card">
+          <div class="club-progress">
+              <div class="warning"><i class="fa fa-exclamation-triangle"></i></div>
+            <round-progress max=100 current=50 color="#791010" bgcolor="#eaeaea" radius="100" stroke="20" rounded="true" responsive="true"
+              duration="800" animation="easeInOutQuart" animation-delay="0"></round-progress>
+            
           </div>
-        </div>
-        </div>
+          <div class="club-label">Career Club</div>
       </div>
-      <div class="col-md-9" style="padding:0">
-        <div class="row">
-          <div class="col-md-6 input">
-            <div class="title">
-              First Name
-            </div>
-            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.FirstName" placeholder="What is Your First Name" />
+      <div class="achievement-card">
+          <div class="club-progress">
+              <div class="warning"><i class="fa fa-exclamation-triangle"></i></div>
+            <round-progress max=100 current=30 color="#791010" bgcolor="#eaeaea" radius="100" stroke="20" rounded="true" responsive="true"
+              duration="800" animation="easeInOutQuart" animation-delay="0"></round-progress>
+            
           </div>
-          <div class="col-md-6 input">
-            <div class="title">
-              Last Name
-            </div>
-            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.LastName" placeholder="What is Your Last Name" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-8 input">
-            <div class="title">
-              Phone
-            </div>
-            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.Phone" placeholder="What is Your First Name" />
-          </div>
-          <div class="col-md-4 input">
-            <div class="title">
-              Active
-            </div>
-            <div style="position:relative;display:block">
-            <div  ng-click="toggleAgent(Agents.CurrentAgent.Info)" style="height:100%;width:100%;position:absolute;display:block;z-index:99">
-
-            </div>
-            <switch  style="margin-top:5px;" id="enabled" name="enabled" ng-model="Agents.CurrentAgent.Info.Active" class="green"></switch>
-          </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 input">
-            <div class="title">
-              Email
-            </div>
-            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.Email" placeholder="What is Your First Name" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 input">
-            <div class="title">
-              Address
-            </div>
-            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.Address" placeholder="What is Your First Name" />
-          </div>
-          <div class="col-md-3 input">
-            <div class="title">
-              City
-            </div>
-            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.City" placeholder="What is Your First Name" />
-          </div>
-          <div class="col-md-3 input">
-            <div class="title">
-              State
-            </div>
-            <input ng-blur='updateAgent(Agents.CurrentAgent.Info)' ng-model="Agents.CurrentAgent.Info.State" placeholder="What is Your First Name" />
-          </div>
-        </div>
+          <div class="club-label">President's Club</div>
       </div>
     </div>
   </div>
-  
-  {{Agents.CurrentAgent.Info | json}}-->
+</div>

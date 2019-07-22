@@ -1,88 +1,121 @@
 <div class="view">
-<div class="dashboard">
-  <table>
-    <tr class="title">
-      <td colspan="7">
-        <div class="btn-group pull-left" role="group" aria-label="...">
-          <button class="btn btn-info red hvr-float-shadow" ng-click="newagentform.$show()"><i class="icon ion-person-add"></i></button>
-          </div>
-        Agents
-      </td>
-    </tr>
-    <tr>
-      <th></th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th>Address</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Active</th>
-    </tr>
-    <tr ng-show="newagentform.$visible">
-      <td class="profile expand" ng-click="open()"><img ng-src="{{'https://jfsapp.com/Secure/API/Images/General/Agents/Profile/blank.jpg'+'?access_token='+currentUser.Token.access_token+'&client_id=testclient&client_secret=testpass'}}" />
-        <div class="info">
-          <span><h3><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="newagent.FirstName" e-name="FirstName" e-form="newagentform">{{newagent.FirstName}}</span> <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="newagent.LastName" e-name="LastName" e-form="newagentform">{{newagent.LastName}}</span></h3></span><span class="market"><b>Area:</b></span><span>{{agent.City}}</span></div>
-      </td>
-      <td class="expand"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="newagent.Phone" e-name="Phone" e-form="newagentform">{{newagent.Phone}}</span></td>
-      <td class="expand"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="newagent.Email" e-name="EMAIL" e-form="newagentform">{{newagent.Email}}</span></td>
-      <td class="expand"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="newagent.Address" e-name="Address" e-form="newagentform">{{newagent.Address}}</span></td>
-      <td class="expand"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="newagent.City" e-name="City" e-form="newagentform">{{newagent.City}}</span></td>
-      <td class="expand"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="newagent.State" e-name="State" e-form="newagentform">{{newagent.State}}</span></td>
-      <td ng-show="newagentform.$visible">
-        <form editable-form name="newagentform" onaftersave="addNewAgent(newagent)"  class="form-buttons form-inline">
-          <button type="submit" ng-disabled="newagentform.$waiting" class="btn btn-primary">
-            save
-          </button>
-          <button type="button" ng-disabled="newagentform.$waiting" ng-click="newagentform.$cancel()" class="btn btn-default">
-            cancel
-          </button>
-        </form>
-      </td>
-
-    </tr>
-    <tr context-menu="agentListOptions" context-menu-class="context_menu" ng-repeat="agent in Agents.AgentList">
-      <td class="profile expand" ng-click="viewAgent(agent.Agent_ID)"><img ng-src="{{'https://jfsapp.com/Secure/API/Images/General/Agents/Profile/'+agent.profilepic+'?access_token='+currentUser.Token.access_token+'&client_id=testclient&client_secret=testpass'}}" />
-        <div class="info">
-          <span><h3 ng-dblclick="rowform.$show()"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.FirstName" e-name="FirstName" e-form="rowform">{{agent.FirstName}}</span> <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.LastName" e-name="LastName" e-form="rowform">{{agent.LastName}}</span></h3></span><span class="market"><b>Area:</b></span><span>{{agent.City}}</span></div>
-      </td>
-      <td class="expand" ng-dblclick="rowform.$show()"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.Phone" e-name="Phone" e-form="rowform">{{agent.Phone}}</span></td>
-      <td class="expand" ng-dblclick="rowform.$show()"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.Email" e-name="EMAIL" e-form="rowform">{{agent.Email}}</span></td>
-      <td class="expand" ng-dblclick="rowform.$show()"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.Address" e-name="Address" e-form="rowform">{{agent.Address}}</span></td>
-      <td class="expand" ng-dblclick="rowform.$show()"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.City" e-name="City" e-form="rowform">{{agent.City}}</span></td>
-      <td class="expand" ng-dblclick="rowform.$show()"><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.State" e-name="State" e-form="rowform">{{agent.State}}</span></td>
-      <td ng-hide="rowform.$visible" class="clickable">
-        <div style="position:relative;display:block">
-        <div  ng-click="toggleAgent(agent)" style="height:100%;width:100%;position:absolute;display:block;z-index:99">
-
+  <div class="dashboard new">
+    <div class="table">
+      <div class="options">
+        <div ng-click="selectRecruitList('myrecruits')" class="btn btn-default"
+          ng-class="{active: RecruitList =='MyRecruits'}">
+          Assigned To Me
         </div>
-        <switch  style="margin-top:10px;" id="enabled" name="enabled" ng-model="agent.Active" class="green"></switch>
-      </div>
-      </td>
-      <td ng-show="rowform.$visible">
-        <form editable-form name="rowform" onbeforesave="updateAgent(agent)"  class="form-buttons form-inline">
-          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
-            save
-          </button>
-          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
-            cancel
-          </button>
-        </form>
-      </td>
+        <div ng-click="selectRecruitList('active')" class="btn btn-default" ng-class="{active: true}">
+          All Agents
+        </div>
+        <div ng-click="selectRecruitList('archived')" class="btn btn-default"
+          ng-class="{active: RecruitList =='Archived'}">
+          New Agents
+        </div>
+        <table>
+          <tr>
+            <th></th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Active</th>
+          </tr>
+          <tr ng-show="newagentform.$visible">
+            <td class="profile expand" >
+                <div class="img_container clickable">
+                    <img
+                      ng-src="https://jfsapp.com/Secure/API/Images/General/Agents/Profile/{{agent.profilepic||'blank.jpg'}}?access_token={{currentUser.Token.access_token}}&client_id=testclient&client_secret=testpass" />
+                  </div>
+              <div class="info">
+                <span>
+                  <h3><span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="newagent.FirstName"
+                      e-name="FirstName" e-form="newagentform">{{newagent.FirstName}}</span> <span
+                      e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="newagent.LastName"
+                      e-name="LastName" e-form="newagentform">{{newagent.LastName}}</span></h3>
+                </span><span class="market"><b>Area:</b></span><span>{{agent.City}}</span></div>
+            </td>
+            <td class="expand"><span e-style="width:30px;padding-left:10px;padding-right:10px"
+                editable-text="newagent.Phone" e-name="Phone" e-form="newagentform">{{newagent.Phone}}</span></td>
+            <td class="expand"><span e-style="width:30px;padding-left:10px;padding-right:10px"
+                editable-text="newagent.Email" e-name="EMAIL" e-form="newagentform">{{newagent.Email}}</span></td>
+            <td class="expand"><span e-style="width:30px;padding-left:10px;padding-right:10px"
+                editable-text="newagent.Address" e-name="Address" e-form="newagentform">{{newagent.Address}}</span></td>
+            <td class="expand"><span e-style="width:30px;padding-left:10px;padding-right:10px"
+                editable-text="newagent.City" e-name="City" e-form="newagentform">{{newagent.City}}</span></td>
+            <td class="expand"><span e-style="width:30px;padding-left:10px;padding-right:10px"
+                editable-text="newagent.State" e-name="State" e-form="newagentform">{{newagent.State}}</span></td>
+            <td ng-show="newagentform.$visible">
+              <form editable-form name="newagentform" onaftersave="addNewAgent(newagent)"
+                class="form-buttons form-inline">
+                <button type="submit" ng-disabled="newagentform.$waiting" class="btn btn-primary">
+                  save
+                </button>
+                <button type="button" ng-disabled="newagentform.$waiting" ng-click="newagentform.$cancel()"
+                  class="btn btn-default">
+                  cancel
+                </button>
+              </form>
+            </td>
 
-    </tr>
-  </table>
-</div>
-</div>
+          </tr>
+          <tr context-menu="agentListOptions" context-menu-class="context_menu" ng-repeat="agent in Agents.AgentList">
+            <td class="profile" >
+              <div ng-click="viewAgent(agent.Agent_ID)" class="img_container clickable">
+                <img
+                  ng-src="https://jfsapp.com/Open/API/Images/Agents/Profile/{{agent.profilepic||'blank.jpg'}}?access_token={{currentUser.Token.access_token}}&client_id=testclient&client_secret=testpass" />
+              </div>
+              <div class="info">
+                <span>
+                  <h3 ng-dblclick="rowform.$show()"><span e-style="width:30px;padding-left:10px;padding-right:10px"
+                      editable-text="agent.FirstName" e-name="FirstName" e-form="rowform">{{agent.FirstName}}</span>
+                    <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.LastName"
+                      e-name="LastName" e-form="rowform">{{agent.LastName}}</span></h3>
+                </span><span class="market"><b>Area:</b></span><span>{{agent.City}}</span></div>
+            </td>
+            <td class="expand" ng-dblclick="rowform.$show()"><span
+                e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.Phone" e-name="Phone"
+                e-form="rowform">{{agent.Phone}}</span></td>
+            <td class="expand" ng-dblclick="rowform.$show()"><span
+                e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.Email" e-name="EMAIL"
+                e-form="rowform">{{agent.Email}}</span></td>
+            <td class="expand" ng-dblclick="rowform.$show()"><span
+                e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.Address" e-name="Address"
+                e-form="rowform">{{agent.Address}}</span></td>
+            <td class="expand" ng-dblclick="rowform.$show()"><span
+                e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.City" e-name="City"
+                e-form="rowform">{{agent.City}}</span></td>
+            <td class="expand" ng-dblclick="rowform.$show()"><span
+                e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.State" e-name="State"
+                e-form="rowform">{{agent.State}}</span></td>
+            <td ng-hide="rowform.$visible" class="clickable">
+              <div style="position:relative;display:block">
+                <div ng-click="toggleAgent(agent)"
+                  style="height:100%;width:100%;position:absolute;display:block;z-index:99">
 
-<div class="container agent_list">
-  <div class="agent_row" ng-repeat="agent in Agents.AgentList">
-    <div class="row">
-      <div class="col-md-3">
-        <img class="profile" ng-src="{{'https://jfsapp.com/Secure/API/Images/General/Agents/Profile/'+agent.profilepic+'?access_token='+currentUser.Token.access_token+'&client_id=testclient&client_secret=testpass'}}"/>
-      </div>
-      <div class="col-md-9">
-        <div class="name">{{agent.FirstName}} {{agent.LastName}}</div>
+                </div>
+                <switch style="margin-top:10px;" id="enabled" name="enabled" ng-model="agent.Active" class="green">
+                </switch>
+              </div>
+            </td>
+            <td ng-show="rowform.$visible">
+              <form editable-form name="rowform" onbeforesave="updateAgent(agent)" class="form-buttons form-inline">
+                <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                  save
+                </button>
+                <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()"
+                  class="btn btn-default">
+                  cancel
+                </button>
+              </form>
+            </td>
+
+          </tr>
+        </table>
       </div>
     </div>
- </div>
-</div>
+    <div class="add_button" style="top:105px;" ng-click="newagentform.$show()"><i class="fa fa-plus"></i></div>
+  </div>
+  

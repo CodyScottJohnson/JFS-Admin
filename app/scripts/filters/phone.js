@@ -8,6 +8,10 @@
  * # phone
  * Filter in the JFS_Admin.
  */
+
+function convertToDecimal(num, decimal){
+    return Math.round(num * Math.pow(10,decimal)) / (Math.pow(10, decimal));
+  }
 angular.module('JFS_Admin')
   .filter('phone', function () {
     return function (tel) {
@@ -52,4 +56,24 @@ angular.module('JFS_Admin')
 
        return (country + " (" + city + ") " + number).trim();
    };
+  })
+  .filter('moneyFmt', function () {
+    return function (number, decimal) {
+      number = Number(number);
+      if(angular.isNumber(decimal)  && decimal%1===0 && decimal >= 0 &&
+      angular.isNumber(number)){
+        if(number < 1e3) {
+          return '$ ' + number;  // Coerce to string
+        } else if(number < 1e6) {
+          return '$ '+convertToDecimal((number / 1e3), decimal) + ' K';
+        } else if(number < 1e9){
+          return '$ '+convertToDecimal((number / 1e6), decimal) + ' M';
+        } else {
+          return '$ '+ convertToDecimal((number / 1e9), decimal) + ' B';
+        }
+
+      }
+      return '$ 0';
+    };
   });
+ 

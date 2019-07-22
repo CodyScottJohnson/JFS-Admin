@@ -61,7 +61,7 @@
     height: 100%;
     background-color: @gray-lighter;
     padding: 0;
-    z-index: 3;
+    z-index: 4;
     .BoxShadowHelper(3);
 
     .main {
@@ -523,13 +523,20 @@ body {
 }
 .minimalist{
   &.sidebar{
+    .avatar{
+      margin-top:30px;
+      height:80px;
+      display: block;
+      position:relative;
+    }
     .user-avatar{
       .BoxShadowHelper(1);
+      .center.both;
       border-radius:100%;
       width:63px;
       height:63px;
       border: 2px solid @color-button;
-      margin:30px 8px 20px 8px;
+      
 
     }
     .top-level{

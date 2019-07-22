@@ -31,6 +31,27 @@
 
 						</div>
 					</div>
+					<div ng-click="viewAgent(agent.Agent_ID);clear()" class="result recruit"
+						ng-repeat="agent in Agents.AgentList|filter:newsearch.Global_Search">
+						<div class="type" style="background:#6699CC">
+							<i class="fa fa-user-secret"></i>
+						</div>
+						<img class="avatar"
+							ng-src="https://jfsapp.com/Secure/API/Images/General/Agents/Profile/{{agent.profilepic||'blank.jpg'}}?access_token={{currentUser.Token.access_token}}&client_id=testclient&client_secret=testpass">
+						<div class="text">
+							<div class="name">
+								{{agent.FirstName}} {{agent.LastName}}
+							</div>
+
+							<div ng-show="recruit.Archived == 0" class="status active">
+								 <span>Agent</span>
+							</div>
+							<div class="status archived">
+								<span>Agent</span>
+							</div>
+
+						</div>
+					</div>
 					<div ng-click="ViewTask(task.Task_ID);clear()" class="result task"
 						ng-repeat="task in Task.currentUsersTasks|filter:newsearch.Global_Search|orderBy:'-Created_Date'">
 						<div class="type">
@@ -323,16 +344,17 @@
 									People</span></a></li>
 					</ul>-->
 					<li ng-class="{active: ('app.Agents.Dashboard' | 
-						includedByState) }" class="top-level"><a ui-sref="app.Agents.Landing" ng-model="collapsed4"
+						includedByState) || ('app.Agents.EnterNumbers' | 
+						includedByState) }" class="top-level"><a  ng-model="collapsed4"
 							ng-click="collapsed4=!collapsed4"><i class="main-icon fa fa-group"></i><span class="text">
 								Manage Agents</span> <span class="fa fa-angle-down pull-right"></span></a></li>
 					<ul class="subMenu" ng-show="collapsed4">
-						<li><a ui-sref="app.Agents.Dashboard"><i class="fa fa-align-left"></i><span class="text">
+							<li><a ui-sref="app.Agents.Landing"><i class="fa fa-dashboard"></i><span class="text">
+									Dashboard</span></a></li>
+						<li><a ui-sref="app.Agents.Dashboard"><i class="fa fa-users"></i><span class="text">
 									Agent List</span></a></li>
-						<li><a href="ui-nestable-list.html"><i class="fa fa-outdent"></i><span class="text"> Add
-									Agent</span></a></li>
-						<li><a href="ui-elements.html"><i class="fa fa-list"></i><span class="text">
-									Reports</span></a></li>
+						<li><a ui-sref="app.Agents.EnterNumbers"><i class="fa fa-list"></i><span class="text">
+									Enter Numbers</span></a></li>
 					</ul>
 					<li class="top-level" ng-class="{active: ('app.Tasks' | 
 						includedByState) 

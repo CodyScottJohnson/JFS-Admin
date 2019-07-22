@@ -51,6 +51,12 @@ module.exports = function(config) {
       'bower_components/angular-local-storage/dist/angular-local-storage.js',
       'bower_components/ng-sortable/dist/ng-sortable.js',
       'bower_components/ng-cropper/dist/ngCropper.all.js',
+      'bower_components/numbro/numbro.js',
+      'bower_components/pikaday/pikaday.js',
+      'bower_components/zeroclipboard/dist/ZeroClipboard.js',
+      'bower_components/handsontable/dist/handsontable.js',
+      'bower_components/ngHandsontable/dist/ngHandsontable.js',
+      'bower_components/angular-svg-round-progressbar/build/roundProgress.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

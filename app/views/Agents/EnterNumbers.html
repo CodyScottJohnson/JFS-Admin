@@ -1,0 +1,28 @@
+<div class="agent-number-entry">
+    <div class="numbers-table">
+        <div>
+        <hot-table settings="{colHeaders: colHeaders, contextMenu: ['row_above', 'row_below', 'remove_row'], afterChange: afterChange, onAfterInit: afterInit}"
+                min-spare-rows="'300'"
+                stretch-h= '"all"'
+                datarows="AgentsData.SalesNumbers"
+                height="800"
+                hot-id="my-handsontable"
+                >
+            <hot-column data="id" title="'ID'"></hot-column>
+            <hot-column data="AgentName" title="'Agent'"></hot-column>
+            <hot-column data="As_Of" title="'Date'" class-name="'htCenter htMiddle'"></hot-column>
+            <hot-column data="Life_Paid_Premium_Ytd" title="'Life Paid Premium'" type="'numeric'" format="'$ 0,0.00'" class-name="'htCenter htMiddle'"></hot-column>
+            <hot-column data="Life_Paid_Cases_Ytd" title="'Life Paid Cases'" class-name="'htCenter htMiddle'"></hot-column>
+            <hot-column data="Life_Submitted_Premium_Ytd" title="'Life Submitted Premium'" type="'numeric'" format="'$ 0,0.00'" class-name="'htCenter htMiddle'"></hot-column>
+            <hot-column data="Life_Submitted_Cases_Ytd" title="'Life Submitted Cases'" class-name="'htCenter htMiddle'"></hot-column>
+            <hot-column data="PC_Premium_Ytd" title="'P&C Premium'" type="'numeric'" format="'$ 0,0.00'" class-name="'htCenter htMiddle'"></hot-column>
+            <hot-column data="PC_Units" title="'P&C Units'" class-name="'htCenter htMiddle'"></hot-column>
+            <hot-column data="Pir_Ytd" title="'PIR'" class-name="'htCenter htMiddle'"></hot-column>
+            <hot-column data="Persistency_3yr" title="'3yr Persistency'" class-name="'htCenter htMiddle'"></hot-column>
+            <hot-column data="Persistency_15month" title="'15 Month Persistency'" class-name="'htCenter htMiddle'"></hot-column>
+            <hot-column data="Career_Points" title="'Total Career Points'" class-name="'htCenter htMiddle'"></hot-column>
+            <hot-column data="Career_Points_Life" title="'Career Points from Life'" class-name="'htCenter htMiddle'"></hot-column>
+        </hot-table>
+        </div>
+    </div>
+</div>

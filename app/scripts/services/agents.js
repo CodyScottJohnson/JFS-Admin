@@ -50,7 +50,6 @@ angular.module('JFS_Admin')
 
              },
          }).then(function(data) {
-             //console.log(data.data);
              Agents.data.AgentList = data.data;
              deferred.resolve(data.data);
          }, function(error) {
@@ -90,6 +89,7 @@ angular.module('JFS_Admin')
         });
       }
       Agents.getAgent_DailyNumbers(Agent_ID);
+      Agents.getAgent_SalesNumbers(Agent_ID);
     };
     Agents.getAgent_DailyNumbers = function(Agent_ID){
       var deferred = $q.defer();
@@ -106,6 +106,27 @@ angular.module('JFS_Admin')
          }).then(function(data) {
              //console.log(data.data);
              Agents.data.CurrentAgent.DailyNumbers = data.data;
+             deferred.resolve(data.data);
+         }, function(error) {
+             deferred.reject(error);
+         });
+     return deferred.promise;
+    };
+    Agents.getAgent_SalesNumbers = function(Agent_ID){
+      var deferred = $q.defer();
+
+         $http({
+             method: 'GET',
+             url: 'https://jfsapp.com/Secure/API/Agents/Agent/'+Agent_ID+'/SalesNumbers',
+             params: {
+                 'access_token': $rootScope.currentUser.Token.access_token,
+                 client_id: 'testclient',
+                 client_secret: 'testpass'
+
+             },
+         }).then(function(data) {
+             //console.log(data.data);
+             Agents.data.CurrentAgent.SalesNumbers = data.data;
              deferred.resolve(data.data);
          }, function(error) {
              deferred.reject(error);
@@ -183,6 +204,30 @@ angular.module('JFS_Admin')
          });
      return deferred.promise;
      };
+     Agents.getAgents_SalesNumbers = function(Agent_ID){
+      var deferred = $q.defer();
+
+         $http({
+             method: 'GET',
+             url: 'https://jfsapp.com/Secure/API/Agents/SalesNumbers',
+             params: {
+                 'access_token': $rootScope.currentUser.Token.access_token,
+                 client_id: 'testclient',
+                 client_secret: 'testpass'
+
+             },
+         }).then(function(data) {
+             //console.log(data.data);
+             Agents.data.SalesNumbers = data.data;
+             deferred.resolve(data.data);
+             console.log(Agents.data.SalesNumbers);
+         }, function(error) {
+             deferred.reject(error);
+         });
+     return deferred.promise;
+    };
+  Agents.getAgents();
+  Agents.getAgents_SalesNumbers();
   return Agents;
 
   });

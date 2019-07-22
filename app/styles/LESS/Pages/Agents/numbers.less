@@ -1,0 +1,68 @@
+.handsontable {
+    z-index:2;
+    .Font_Body;
+    th {
+        background-color: white !important;
+        border: 0px solid white !important;
+        border-bottom: 1px solid #000F3C !important;
+        white-space: pre-line;
+        max-width: 150px;/* enter here your max header width */
+        vertical-align: middle;
+
+        // box-sizing: border-box;
+        div {
+            padding: 10px 30px 10px 30px !important;
+            font-size: 12px !important;
+        }
+
+        &:nth-child(1) {
+            color: white;
+            border-bottom: none !important;
+        }
+
+    }
+
+    td {
+        border: none !important;
+        border-bottom: 1px solid fade(#000F3C,20%)!important;
+        padding: 20px 10px;
+
+        &.htInvalid {
+            background: fade(#D03E3A, .8) !important;
+        }
+
+        &.listbox {
+            background: white !important;
+
+            &:hover {
+                background: #4297D6 !important;
+            }
+        }
+    }
+}
+
+table.htCore tbody tr:nth-child(even) td {
+    //background-color: @gray-pleasing;
+}
+
+table.htCore tbody tr:last-child td {
+    //border-bottom:1px solid #21344B!important;
+}
+
+.agent-number-entry {
+    padding: 30px;
+    height: 100%;
+
+    .numbers-table {
+        .BoxShadowHelper(2);
+        overflow: hidden;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 10px 15px;
+        
+        background: white;
+        border-radius: 10px;
+        height: 100%;
+    }
+}

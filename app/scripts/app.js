@@ -14,6 +14,7 @@ angular
     'angularFileUpload',
     'angularMoment',
     'angular-sortable-view',
+    'angular-svg-round-progressbar',
     'chart.js',
     'config',
     'FBAngular',
@@ -32,7 +33,8 @@ angular
     'ui.bootstrap.contextMenu',
     'ui.router',
     'xeditable',
-    'uiSwitch'
+    'uiSwitch',
+    'ngHandsontable'
   ]);
 angular.module('JFS_Admin').run(function($rootScope, $state, localStorageService, Idle, editableOptions,$http) {
   Idle.watch();
@@ -194,6 +196,12 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
     .state('app.Agents.Dashboard', {
       url: '/Agents',
       templateUrl: 'views/Agents/dashboard.html',
+
+    })
+    .state('app.Agents.EnterNumbers', {
+      url: '/EnterNumbers',
+      templateUrl: 'views/Agents/EnterNumbers.html',
+      controller: 'AgentsEnternumbersCtrl'
 
     })
     .state('app.Agents.Agent', {

@@ -22,7 +22,6 @@ angular.module('JFS_Admin')
   .controller('RecruitCtrl', function($scope, $http, $rootScope, Task, Recruits, recruit, Dropbox, Functions, FileUploader, File, User, $sce,$location, Email) {
     if(angular.isDefined($location.search().RecruitID))
     {
-      console.log("found")
       recruit.setRecruit($location.search().RecruitID);
     }
     $scope.changepic = function(){

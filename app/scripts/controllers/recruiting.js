@@ -38,12 +38,12 @@ angular.module('JFS_Admin')
           return true;
         }
         if(_.find($scope.Task.currentUsersTasks, {INDV_ID: item.INDV_ID})) {
-          return true
+          return true;
         }
         return false;
-      }
+      };
       //console.log($scope.Task.currentUsersTasks)
-    }
+    };
     $scope.tagSearch = function( tags ) {
      return function( item ) {
        var tagsFound = true;
@@ -88,7 +88,7 @@ angular.module('JFS_Admin')
         $scope.Archived = 0;
         $scope.RecruitList = "MyRecruits";
       }
-    }
+    };
     $scope.tagAdded = function(tag, recruit) {
       if (angular.isDefined(tag.id)) {
         Recruits.addTag(recruit, tag.id)
@@ -151,7 +151,7 @@ angular.module('JFS_Admin')
       recruit.Archived = 1;
     }
       Recruits.save(recruit);
-  }
+  };
     $scope.recruitListOptions = [
       ['New Task', function($itemScope) {
         //console.log($itemScope.recruit.INDV_ID);
@@ -235,11 +235,11 @@ angular.module('JFS_Admin')
       recruit.setRecruit(recruitPreview.INDV_ID).then(function(data) {
         Functions.OpenModal('views/Modals/NotesModal.html', 'md');
       });
-    }
+    };
     $scope.previewTasks =function(recruitPreview){
 
       recruit.setRecruit(recruitPreview.INDV_ID).then(function(data) {
         Functions.OpenModal('views/Recruiting/modals/taskModal.html', 'md');
       });
-    }
+    };
   });

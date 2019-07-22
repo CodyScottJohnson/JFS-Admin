@@ -8,11 +8,11 @@
  * Controller of the jfsApp
  */
 angular.module('JFS_Admin')
-  .controller('MainCtrl', function($rootScope,$scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications, Recruits, $sce, $location, $window) {
+  .controller('MainCtrl', function($rootScope,$scope, $state, User, recruit, Functions, Task, $filter, Socket,Dropbox,Notifications, Recruits, $sce, $location, $window,Agents) {
     //Functions.OpenModal('views/Modals/Email/Client.html','lg');
     //Functions.OpenModal('views/Modals/Agents/FollowUp.html','lg');
     //Functions.OpenModal('views/Modals/FileExplorer.html','lg');
-    $scope.newsearch = {Global_Search:""}
+    $scope.newsearch = {Global_Search:""};
     if($rootScope.currentUser.Info.password_reset == 1){
       Functions.OpenModal('views/Modals/User/PasswordReset.html','md');
     }
@@ -26,10 +26,9 @@ angular.module('JFS_Admin')
       Task.getTask(taskID);
       Functions.OpenModal('views/Modals/TaskModal.html', 'md');
     };
-    console.log($location.search())
+    console.log($location.search());
     if(angular.isDefined($location.search().Task_ID))
     {
-      console.log('Here')
       if(angular.isDefined($location.search().Task_Completed) && $location.search().Task_Completed == 1){
         Task.getTask($location.search().Task_ID).then(function(data){
           data.Status = "Completed";
@@ -46,6 +45,7 @@ angular.module('JFS_Admin')
     $scope.Functions = Functions;
     //Functions.OpenModal('views/Modals/User/notes.html','md',null,{windowClass:'notification_modal'});
     $scope.Recruits = Recruits.data;
+    $scope.Agents = Agents.data;
     $scope.to_trusted = function(html_code) {
         return $sce.trustAsHtml(html_code);
     };
@@ -53,7 +53,7 @@ angular.module('JFS_Admin')
 
       $scope.newsearch.Global_Search = "";
 
-    }
+    };
     $scope.viewRecruit =function(ID){
       Functions.toggleLoading();
       recruit.setRecruit(ID).then(function(result){
@@ -62,6 +62,10 @@ angular.module('JFS_Admin')
         Functions.toggleLoading();
       });
       $state.go('app.Recruiting.Recruit', {RecruitID:ID});
+    };
+    $scope.viewAgent=function(Agent_ID){
+      Agents.viewAgent(Agent_ID);
+      $state.go('app.Agents.Agent', {AgentID:Agent_ID});
     };
     $scope.newestText = function(arr) {
       return $filter('min')

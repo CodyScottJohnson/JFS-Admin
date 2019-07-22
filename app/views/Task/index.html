@@ -46,11 +46,11 @@
         <input  ng-model="taskSearch" type="text" class="form-control" aria-describedby="basic-addon2">
         </div>
         <div class="inner">
-      <div ng-show="TaskViewOptions.show_users" style="height:60px;width:100%;background-color:#bababa;z-index:0;display:block;position:relative;white-space:nowrap;width:100%" class="shadow-1 scrollbar">
-        <div ng-click="taskFilter.User_ID =user_item.id" ng-repeat="user_item in User.userList" class="clickable" style="display:inline-block;height:100%;background-color:#E0E0E0;padding:20px;border-right:1px solid #a1a1a1;transition-delay: {{$index * 500}}ms">
-          {{user_item.display_name}}
-        </div>
-      </div>
+            <div ng-show="TaskViewOptions.show_users"  class="user-list scrollbar">
+                <div ng-click="taskFilter.User_ID =user_item.id" ng-repeat="user_item in User.userList" class="user" ng-class="{active:taskFilter.User_ID ==user_item.id}" >
+                  {{user_item.display_name}}
+                </div>
+              </div>
       <div class="task-panel" ng-click="showTask(Task)" ng-repeat="Task in Tasks.allTasks|orderBy:sortKey:reverse|filter:taskFilter|filter:taskSearch|filter:{Status:'!'+'Completed'}">
         <div class="new" ng-show="Task.Status=='New'" ng-click="$event.stopPropagation();Task_Seen(Task)">
 
