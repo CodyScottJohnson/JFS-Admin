@@ -1,35 +1,50 @@
 <div class="Settings">
   <div class="menu_bar">
     <div class="row">
-      <div class="col-md-2 col-sm-0">
-
-      </div>
-      <div class="col-md-8 col-sm-12">
+      <div class="col-md-12 col-sm-12">
         <div class="row">
-
-          <div class="col-xs-3 option" ng-class="{selected:Settings.state=='account'}" ng-click="Settings.state='account'">
-            <i class="fa fa-user"></i>
-            <span>Account</span>
-          </div>
-          <div class="col-xs-3 option" ng-class="{selected:Settings.state=='notifications'}" ng-click="Settings.state='notifications'">
-            <i class="fa fa-bell"></i>
-            <span>Notifications</span>
-          </div>
-          <div class="col-xs-3 option" ng-class="{selected:Settings.state=='profile'}" ng-click="Settings.state='profile'">
-            <i class="fa fa-camera"></i>
-            <span>Profile</span>
-          </div>
-          <div class="col-xs-3 option" ng-class="{selected:Settings.state=='global'}" ng-click="Settings.state='global'">
+          <div
+            class="col-xs-3 col-md-1 option"
+            ng-class="{selected:Settings.state=='global'}"
+            ng-click="Settings.state='global'"
+          >
             <i class="fa fa-globe"></i>
             <span>Global</span>
           </div>
+          <div
+            class="col-xs-3  col-md-1 option"
+            ng-class="{selected:Settings.state=='account'}"
+            ng-click="Settings.state='account'"
+          >
+            <i class="fa fa-user"></i>
+            <span>Account</span>
+          </div>
+          <div
+            class="col-xs-3  col-md-1 option"
+            ng-class="{selected:Settings.state=='notifications'}"
+            ng-click="Settings.state='notifications'"
+          >
+            <i class="fa fa-bell"></i>
+            <span>Notifications</span>
+          </div>
+          <div
+            class="col-xs-3  col-md-1 option"
+            ng-class="{selected:Settings.state=='profile'}"
+            ng-click="Settings.state='profile'"
+          >
+            <i class="fa fa-camera"></i>
+            <span>Profile</span>
+          </div>
         </div>
       </div>
-      <div class="col-md-2 col-sm-0">
-
       </div>
-    </div>
   </div>
-  <div ng-show="Settings.state=='account'" ng-include="'views/User/Partials/settings_account.html'"></div>
-  <div ng-show="Settings.state=='global'" ng-include="'views/User/Partials/settings_global.html'"></div>
+  <div
+    ng-show="Settings.state=='account'"
+    ng-include="'views/User/Partials/settings_account.html'"
+  ></div>
+  <div
+    ng-show="Settings.state=='global'"
+    ng-include="'views/User/Partials/settings_global.html'"
+  ></div>
 </div>

@@ -10,6 +10,7 @@
  */
 angular
   .module('JFS_Admin', [
+    'angular-chartist',
     'angular.filter',
     'angularFileUpload',
     'angularMoment',
@@ -165,6 +166,12 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
       controller: 'UserCtrl',
 
     })
+    .state('app.User.Landing', {
+      url: '/Landing',
+      controller: 'MainCtrl',
+      templateUrl: 'views/User/Pages/landing.html',
+
+    })
     .state('app.User.Settings', {
       url: '/Settings',
       templateUrl: 'views/User/Pages/settings.html',
@@ -190,6 +197,31 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
     })
     .state('app.Agents.Landing', {
       url: '/Landing',
+      abstract: true,
+      templateUrl: 'views/Agents/Landing.html',
+
+    })
+    .state('app.Agents.Landing.Career', {
+      url: '',
+      templateUrl: 'views/Agents/Partials/CareerClub.html',
+
+    })
+    .state('app.Agents.Landing.NewHire', {
+      url: '/NewHire',
+      templateUrl: 'views/Agents/Partials/CareerClub.html',
+    })
+    .state('app.Agents.Landing.Life', {
+      url: '/Life',
+      templateUrl: 'views/Agents/Landing.html',
+
+    })
+    .state('app.Agents.Landing.PC', {
+      url: '/PC',
+      templateUrl: 'views/Agents/Landing.html',
+
+    })
+    .state('app.Agents.Landing.Profitability', {
+      url: '/Profitability',
       templateUrl: 'views/Agents/Landing.html',
 
     })
@@ -206,7 +238,19 @@ angular.module('JFS_Admin').config(function($stateProvider, $urlRouterProvider, 
     })
     .state('app.Agents.Agent', {
       url: '/Agents/Agent?AgentID',
+      abstract: true,
       templateUrl: 'views/Agents/agentPortal.html',
+      controller: 'AgentsCtrl',
+
+    })
+    .state('app.Agents.Agent.Overview', {
+      url: '',
+      templateUrl: 'views/Agents/Partials/PortalOverview.html'
+
+    })
+    .state('app.Agents.Agent.History', {
+      url: '/History',
+      templateUrl: 'views/Agents/Partials/PortalHistory.html',
       controller: 'AgentsCtrl',
 
     })

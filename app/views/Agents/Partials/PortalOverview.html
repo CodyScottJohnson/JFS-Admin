@@ -1,0 +1,456 @@
+<div
+  class="content-row-title"
+  ng-show="agentStatus(Agents.CurrentAgent.Info.Hire_Date) == 'Intern'"
+>
+  Intern
+</div>
+<div
+  class="content-row"
+  ng-show="agentStatus(Agents.CurrentAgent.Info.Hire_Date) == 'Intern'"
+></div>
+<div
+  class="content-row-title"
+  ng-show="agentStatus(Agents.CurrentAgent.Info.Hire_Date) != 'Agent'"
+>
+  NAPD Agent
+</div>
+<div
+  class="content-row"
+  ng-show="agentStatus(Agents.CurrentAgent.Info.Hire_Date) != 'Agent'"
+>
+  <div class="progress-card">
+    <div class="summary_label behind">
+      Behind
+    </div>
+    <div class="deadline">
+      Next Cut Off
+      <div class="date">
+        {{ "2019-08-01" | momentdateRelative: "MMM D Y @ h:mm a" }}
+      </div>
+    </div>
+    <div class="title">Minimum Requirements</div>
+
+    <div class="body">
+      They are currently <span class="callout red">80%</span> of where they
+      should be at this point in time in order to achieve they target.
+    </div>
+    <br />
+    <br />
+    <div class="bar-title">
+      P&C
+    </div>
+    <uib-progressbar
+      class="progress-striped  active"
+      max="5000"
+      value="3000"
+      type="{{ onTrack(1, 2).type }}"
+    >
+      {{
+        "$ " + (Agents.CurrentAgent.SalesNumbers.PC_Premium_Ytd | number)
+      }}</uib-progressbar
+    >
+    <div class="bar-title">
+      Life
+    </div>
+    <uib-progressbar
+      class="progress-striped active"
+      max="5000"
+      value="3000"
+      type="{{ onTrack(1, 2).type }}"
+    >
+      {{
+        "$ " + (Agents.CurrentAgent.SalesNumbers.Life_Paid_Premium_Ytd | number)
+      }}
+    </uib-progressbar>
+  </div>
+
+  <div class="progress-card">
+    <div class="summary_label behind">
+      Behind
+    </div>
+    <div class="deadline">
+      Next Cut Off
+      <div class="date">
+        {{ "2019-08-01" | momentdateRelative: "MMM D Y @ h:mm a" }}
+      </div>
+    </div>
+    <div class="title">Blue Vase Requirements</div>
+
+    <div class="body">
+      They are currently <span class="callout red">80%</span> of where they
+      should be at this point in time in order to achieve they target.
+    </div>
+    <br />
+    <br />
+    <div class="bar-title">
+      P&C
+    </div>
+    <uib-progressbar
+      class="progress-striped  active"
+      max="5000"
+      value="3000"
+      type="{{ onTrack(1, 2).type }}"
+    >
+      {{ onTrack(1, 2).ontrack }}</uib-progressbar
+    >
+    <div class="bar-title">
+      Life
+    </div>
+    <uib-progressbar
+      class="progress-striped active"
+      max="5000"
+      value="3000"
+      type="{{ type }}"
+      >12
+    </uib-progressbar>
+  </div>
+  <div class="progress-card">
+    <div class="summary_label behind">
+      Behind
+    </div>
+    <div class="deadline">
+      Next Cut Off
+      <div class="date">
+        {{ "2019-08-01" | momentdateRelative: "MMM D Y @ h:mm a" }}
+      </div>
+    </div>
+    <div class="title">New Agent Achievement</div>
+
+    <div class="body">
+      They are currently <span class="callout red">80%</span> of where they
+      should be at this point in time in order to achieve they target.
+    </div>
+    <br />
+    <br />
+    <div class="bar-title">
+      P&C
+    </div>
+    <uib-progressbar
+      class="progress-striped  active"
+      max="5000"
+      value="3000"
+      type="{{ onTrack(1, 2).type }}"
+    >
+      {{ onTrack(1, 2).ontrack }}</uib-progressbar
+    >
+    <div class="bar-title">
+      Life
+    </div>
+    <uib-progressbar
+      class="progress-striped active"
+      max="5000"
+      value="3000"
+      type="{{ type }}"
+      >12
+    </uib-progressbar>
+  </div>
+</div>
+<br />
+<div class="content-row-title">
+  Goals
+</div>
+<div class="content-row" drag-scroll="true">
+  <div class="goal-card">
+    <div class="header">
+      <div class="goal-progress">
+        <div class="center">
+          <i class="fa fa-male"></i>
+        </div>
+        <round-progress
+          max="Agents.CurrentAgent.Info.Life_Goal"
+          current="Agents.CurrentAgent.SalesNumbers.Life_Paid_Premium_Ytd"
+          color="#0037d5"
+          bgcolor="#FFFFFF"
+          radius="100"
+          stroke="15"
+          rounded="true"
+          responsive="true"
+          duration="800"
+          animation="easeInOutQuart"
+          animation-delay="0"
+        >
+        </round-progress>
+      </div>
+      <div class="goal-title">
+        Life
+      </div>
+    </div>
+    <div class="goal-body">
+      <div class="goal-value clickable">
+        <div
+          onaftersave="updateAgent(Agents.CurrentAgent.Info)"
+          editable-text="Agents.CurrentAgent.Info.Life_Goal"
+          e-form="LifeGoal"
+          ng-dblclick="LifeGoal.$show()"
+        >
+          Goal: ${{ Agents.CurrentAgent.Info.Life_Goal | number: 0 }}
+          <div
+            class="btn btn-default edit-btn"
+            ng-click="LifeGoal.$show();$event.stopPropagation();"
+          >
+            <i class="fa fa-pencil"></i>
+          </div>
+        </div>
+      </div>
+      <table>
+        <tr>
+          <td class="goal-label">
+            Current:
+          </td>
+          <td>
+            <b
+              >${{
+                Agents.CurrentAgent.SalesNumbers.Life_Paid_Premium_Ytd
+                  | number: 0
+              }}</b
+            >
+          </td>
+        </tr>
+        <tr>
+          <td class="goal-label">
+            Avg Weekly:
+          </td>
+          <td>
+            <b
+              >${{
+                AverageWeekly(
+                  Agents.CurrentAgent.SalesNumbers.Life_Paid_Premium_Ytd
+                ) | number: 0
+              }}
+            </b>
+          </td>
+        </tr>
+        <tr>
+          <td class="goal-label">
+            Weekly Needed To Meet Target:
+          </td>
+          <td>
+            <b
+              >${{
+                WeeklytoTarget(
+                  Agents.CurrentAgent.SalesNumbers.Life_Paid_Premium_Ytd,
+                  Agents.CurrentAgent.Info.Life_Goal
+                ) | number: 0
+              }}
+            </b>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="goal-card">
+    <div class="header">
+      <div class="goal-progress">
+        <div class="center">
+          <i class="fa fa-home"></i>
+        </div>
+        <round-progress
+          max="Agents.CurrentAgent.Info.PandC_Goal"
+          current="Agents.CurrentAgent.SalesNumbers.PC_Premium_Ytd"
+          color="#0037d5"
+          bgcolor="#FFFFFF"
+          radius="100"
+          stroke="15"
+          rounded="true"
+          responsive="true"
+          duration="800"
+          animation="easeInOutQuart"
+          animation-delay="0"
+        >
+        </round-progress>
+      </div>
+      <div class="goal-title">
+        P&C
+      </div>
+    </div>
+    <div class="goal-body">
+      <div
+        class="goal-value clickable"
+        onaftersave="updateAgent(Agents.CurrentAgent.Info)"
+        editable-text="Agents.CurrentAgent.Info.PandC_Goal"
+        e-form="PCGoal"
+        ng-dblclick="PCGoal.$show()"
+      >
+        Goal: ${{ Agents.CurrentAgent.Info.PandC_Goal | number: 0 }}
+        <div
+          class="btn btn-default edit-btn"
+          ng-click="PCGoal.$show();$event.stopPropagation();"
+        >
+          <i class="fa fa-pencil"></i>
+        </div>
+      </div>
+      <table>
+        <tr>
+          <td class="goal-label">
+            Current:
+          </td>
+          <td>
+            <b
+              >${{
+                Agents.CurrentAgent.SalesNumbers.PC_Premium_Ytd | number: 0
+              }}</b
+            >
+          </td>
+        </tr>
+        <tr>
+          <td class="goal-label">
+            Avg Weekly:
+          </td>
+          <td>
+            <b
+              >${{
+                AverageWeekly(Agents.CurrentAgent.SalesNumbers.PC_Premium_Ytd)
+                  | number: 0
+              }}
+            </b>
+          </td>
+        </tr>
+        <tr>
+          <td class="goal-label">
+            Weekly Needed To Meet Target:
+          </td>
+          <td>
+            <b
+              >${{
+                WeeklytoTarget(
+                  Agents.CurrentAgent.SalesNumbers.PC_Premium_Ytd,
+                  Agents.CurrentAgent.Info.PandC_Goal
+                ) | number: 0
+              }}
+            </b>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="content-row-title">
+  Achievements
+</div>
+<div class="content-row" drag-scroll="true">
+  <div class="achievement-card" ng-click="print('Here We Go')">
+    <div class="club-progress">
+      <div
+        ng-show="!minimumStandardProgress(Agents.CurrentAgent.SalesNumbers).onTarget"
+        class="warning"
+      >
+        <i class="fa fa-exclamation-triangle"></i>
+      </div>
+      <div
+        ng-show="minimumStandardProgress(Agents.CurrentAgent.SalesNumbers).completed"
+        class="complete"
+      >
+        <i class="fa fa-check"></i>
+      </div>
+      <round-progress
+        max="1"
+        current="minimumStandardProgress(Agents.CurrentAgent.SalesNumbers).progress"
+        color="{{
+          minimumStandardProgress(Agents.CurrentAgent.SalesNumbers).color
+        }}"
+        bgcolor="#eaeaea"
+        radius="100"
+        stroke="20"
+        rounded="true"
+        responsive="true"
+        duration="800"
+        animation="easeInOutQuart"
+        animation-delay="0"
+      >
+      </round-progress>
+    </div>
+    <div class="club-label">Minimum Standard</div>
+  </div>
+  <div class="achievement-card">
+    <div class="club-progress">
+      <div
+        ng-show="!enhancedCommissionProgress(Agents.CurrentAgent.SalesNumbers).onTarget"
+        class="warning"
+      >
+        <i class="fa fa-exclamation-triangle"></i>
+      </div>
+      <div
+        ng-show="enhancedCommissionProgress(Agents.CurrentAgent.SalesNumbers).completed"
+        class="complete"
+      >
+        <i class="fa fa-check"></i>
+      </div>
+      <round-progress
+        max="1"
+        current="enhancedCommissionProgress(Agents.CurrentAgent.SalesNumbers).progress"
+        color="{{
+          enhancedCommissionProgress(Agents.CurrentAgent.SalesNumbers).color
+        }}"
+        bgcolor="#eaeaea"
+        radius="100"
+        stroke="20"
+        rounded="true"
+        responsive="true"
+        duration="800"
+        animation="easeInOutQuart"
+        animation-delay="0"
+      ></round-progress>
+    </div>
+    <div class="club-label">Enhanced Commission</div>
+  </div>
+  <div class="achievement-card">
+    <div class="club-progress">
+      <div
+        ng-show="!careerClubProgress(Agents.CurrentAgent.SalesNumbers).onTarget"
+        class="warning"
+      >
+        <i class="fa fa-exclamation-triangle"></i>
+      </div>
+      <div
+        ng-show="careerClubProgress(Agents.CurrentAgent.SalesNumbers).completed"
+        class="complete"
+      >
+        <i class="fa fa-check"></i>
+      </div>
+      <round-progress
+        max="1"
+        current="careerClubProgress(Agents.CurrentAgent.SalesNumbers).progress"
+        color="{{ careerClubProgress(Agents.CurrentAgent.SalesNumbers).color }}"
+        bgcolor="#eaeaea"
+        radius="100"
+        stroke="20"
+        rounded="true"
+        responsive="true"
+        duration="800"
+        animation="easeInOutQuart"
+        animation-delay="0"
+      ></round-progress>
+    </div>
+    <div class="club-label">Career Club</div>
+  </div>
+  <div class="achievement-card">
+    <div class="club-progress">
+      <div
+        ng-show="!presidentsClubProgress(Agents.CurrentAgent.SalesNumbers).onTarget"
+        class="warning"
+      >
+        <i class="fa fa-exclamation-triangle"></i>
+      </div>
+      <div
+        ng-show="presidentsClubProgress(Agents.CurrentAgent.SalesNumbers).completed"
+        class="complete"
+      >
+        <i class="fa fa-check"></i>
+      </div>
+      <round-progress
+        max="1"
+        current="presidentsClubProgress(Agents.CurrentAgent.SalesNumbers).progress"
+        color="{{ presidentsClubProgress(Agents.CurrentAgent.SalesNumbers).color }}"
+        bgcolor="#eaeaea"
+        radius="100"
+        stroke="20"
+        rounded="true"
+        responsive="true"
+        duration="800"
+        animation="easeInOutQuart"
+        animation-delay="0"
+      ></round-progress>
+    </div>
+    <div class="club-label">President's Club</div>
+  </div>
+</div>

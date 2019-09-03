@@ -8,7 +8,7 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('Functions', function(toastr,$uibModal,$rootScope, $http, $q) {
+  .factory('Functions', function(toastr,$uibModal,$rootScope, $http, $q,ENV) {
     // Service logic
     // ...
     var Functions = {data:{Tags:[]}};
@@ -83,7 +83,7 @@ angular.module('JFS_Admin')
         var deferred = $q.defer();
             $http({
                 method: 'get',
-                url: 'https://jfsapp.com/Secure/API/Tags/',
+                url: ENV.API + 'Tags/',
                 params: {
                     'access_token': $rootScope.currentUser.Token.access_token,
                     client_id: 'testclient',
@@ -103,7 +103,7 @@ angular.module('JFS_Admin')
         var deferred = $q.defer();
             $http({
                 method: 'patch',
-                url: 'https://jfsapp.com/Secure/API/Tags/',
+                url: ENV.API + 'Tags/',
                 params: {
                     'access_token': $rootScope.currentUser.Token.access_token,
                     client_id: 'testclient',

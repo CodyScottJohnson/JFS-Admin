@@ -8,7 +8,7 @@
  * Controller of the JFS_Admin
  */
 angular.module('JFS_Admin')
-  .controller('ArchivedRecruitsCtrl', function($rootScope,$scope, $filter, $http, $state, $window, $stateParams,Recruits) {
+  .controller('ArchivedRecruitsCtrl', function($rootScope,$scope, $filter, $http, $state, $window, $stateParams,Recruits,ENV) {
     $scope.search3 = $stateParams.search;
     $scope.ArchivedRecruits = [];
     $scope.archivedRecruitOptions = [
@@ -60,7 +60,7 @@ angular.module('JFS_Admin')
     $scope.GetArchivedRecruits = function(id) {
         $http({
           method: 'GET',
-          url: 'https://jfsapp.com/Secure/API/Recruits/' + id,
+          url: ENV.API + 'Recruits/' + id,
           params: {
             'access_token': $rootScope.currentUser.Token.access_token,
             client_id: 'testclient',
@@ -74,7 +74,7 @@ angular.module('JFS_Admin')
     $scope.UpdateRecruit = function(id, recruit_data) {
       $http({
                   method: 'PATCH',
-                  url:  'https://jfsapp.com/Secure/API/Recruits/'+id,
+                  url:  ENV.API + 'Recruits/'+id,
                   data:recruit_data,
                   params: {
                       'access_token': $rootScope.currentUser.Token.access_token,

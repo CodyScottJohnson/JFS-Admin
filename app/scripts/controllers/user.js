@@ -10,12 +10,11 @@
 angular.module('JFS_Admin')
   .controller('UserCtrl', function ($scope,Functions, User, $sce) {
     $scope.UserData = User.data;
-    $scope.Settings = {state:'account'};
+    $scope.Settings = {state:'global'};
     $scope.to_trusted = function(html_code) {
         return $sce.trustAsHtml(html_code);
     };
     $scope.saveGlobalSettings = function() {
-      console.log('here');
       User.saveGlobalSettings();
     };
     $scope.OpenSettingsModal = function(setting){

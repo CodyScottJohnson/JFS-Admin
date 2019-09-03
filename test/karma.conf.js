@@ -35,7 +35,6 @@ module.exports = function(config) {
       'bower_components/angular-scroll-glue/src/scrollglue.js',
       'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
       'bower_components/angular-moment/angular-moment.js',
-      'bower_components/summernote/dist/summernote.js',
       'bower_components/angular-summernote/dist/angular-summernote.js',
       'bower_components/angular-xeditable/dist/js/xeditable.js',
       'bower_components/blob-polyfill/Blob.js',
@@ -49,7 +48,6 @@ module.exports = function(config) {
       'bower_components/ng-tags-input/ng-tags-input.js',
       'bower_components/angular-ui-switch/angular-ui-switch.js',
       'bower_components/angular-local-storage/dist/angular-local-storage.js',
-      'bower_components/ng-sortable/dist/ng-sortable.js',
       'bower_components/ng-cropper/dist/ngCropper.all.js',
       'bower_components/numbro/numbro.js',
       'bower_components/pikaday/pikaday.js',
@@ -57,6 +55,7 @@ module.exports = function(config) {
       'bower_components/handsontable/dist/handsontable.js',
       'bower_components/ngHandsontable/dist/ngHandsontable.js',
       'bower_components/angular-svg-round-progressbar/build/roundProgress.js',
+      'bower_components/chartist/dist/chartist.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

@@ -8,7 +8,7 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('Notifications', function (Functions,$q,$http,$rootScope) {
+  .factory('Notifications', function (Functions,$q,$http,$rootScope,ENV) {
     var Notifications = {
       data: {}
     };
@@ -16,7 +16,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/Notifications/Priority',
+        url: ENV.API + 'Notifications/Priority',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',

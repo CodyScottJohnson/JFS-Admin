@@ -1,7 +1,10 @@
 <div class="AgentPortal view">
   <div class="agent-info">
-    <div class="agent-type" ng-class="agentStatus(Agents.CurrentAgent.Info.Hire_Date)">
-      <span>{{agentStatus(Agents.CurrentAgent.Info.Hire_Date)}}</span>
+    <div
+      class="agent-type"
+      ng-class="agentStatus(Agents.CurrentAgent.Info.Hire_Date)"
+    >
+      <span>{{ agentStatus(Agents.CurrentAgent.Info.Hire_Date) }}</span>
     </div>
     <div class="agent-options-expand">
       <i class="fa fa-expand"></i>
@@ -12,11 +15,17 @@
     <div class="img-box">
       <div class="img-profile" ng-click="changepic()">
         <img
-          ng-src="https://jfsapp.com/Open/API/Images/Agents/Profile/{{Agents.CurrentAgent.Info.profilepic||'blank.jpg'}}?access_token={{currentUser.Token.access_token}}&client_id=testclient&client_secret=testpass" />
+          ng-src="https://jfsapp.com/Open/API/Images/Agents/Profile/{{
+            Agents.CurrentAgent.Info.profilepic || 'blank.jpg'
+          }}?access_token={{
+            currentUser.Token.access_token
+          }}&client_id=testclient&client_secret=testpass"
+        />
       </div>
     </div>
     <div class="agent-name">
-      <span>{{Agents.CurrentAgent.Info.FirstName}}</span> <span>{{Agents.CurrentAgent.Info.LastName}}</span>
+      <span>{{ Agents.CurrentAgent.Info.FirstName }}</span>
+      <span>{{ Agents.CurrentAgent.Info.LastName }}</span>
     </div>
     <div class="agent-contact">
       <div class="action">
@@ -31,173 +40,70 @@
     </div>
     <div class="metrics">
       <div class="metric">
-        {{Agents.CurrentAgent.SalesNumbers.Life_Paid_Premium_Ytd | moneyFmt: 0 }}
+        {{
+          Agents.CurrentAgent.SalesNumbers.Life_Paid_Premium_Ytd | moneyFmt: 0
+        }}
         <span>Life</span>
       </div>
       <div class="v-divider"></div>
       <div class="metric">
-          {{ Agents.CurrentAgent.SalesNumbers.PC_Premium_Ytd | moneyFmt: 0 }}
-          <span>P&C</span>
-        </div>
-        <div class="v-divider"></div>
-        <div class="metric">
-            {{([Agents.CurrentAgent.SalesNumbers.Persistency_15month || 0,Agents.CurrentAgent.SalesNumbers.Persistency_3yr||0,]| max) * 100 + '%' }}
-            <span>Persistency</span>
-          </div>
+        {{ Agents.CurrentAgent.SalesNumbers.PC_Premium_Ytd | moneyFmt: 0 }}
+        <span>P&C</span>
+      </div>
+      <div class="v-divider"></div>
+      <div class="metric">
+        {{([Agents.CurrentAgent.SalesNumbers.Persistency_15month || 0,Agents.CurrentAgent.SalesNumbers.Persistency_3yr||0,]| max) * 100 + '%' }}
+        <span>Persistency</span>
+      </div>
     </div>
-    <div>
+    <div class="weekly">
+      <div class="title">
+        Last Week
+      </div>
+      <div class="week-total" ng-class="WeeklyPerformance(Agents.CurrentAgent.SalesInfo.History[0].Life_Paid_Premium_Ytd,Agents.CurrentAgent.SalesInfo.History[1].Life_Paid_Premium_Ytd,AverageWeekly(Agents.CurrentAgent.SalesNumbers.Life_Paid_Premium_Ytd))">
+        <div class="change">
+          <i class="fa fa-arrow-up" ng-show="WeeklyPerformance(Agents.CurrentAgent.SalesInfo.History[0].Life_Paid_Premium_Ytd,Agents.CurrentAgent.SalesInfo.History[1].Life_Paid_Premium_Ytd,AverageWeekly(Agents.CurrentAgent.SalesNumbers.Life_Paid_Premium_Ytd)) == 'up'"></i>
+          <i class="fa fa-arrow-down" ng-show="WeeklyPerformance(Agents.CurrentAgent.SalesInfo.History[0].Life_Paid_Premium_Ytd,Agents.CurrentAgent.SalesInfo.History[1].Life_Paid_Premium_Ytd,AverageWeekly(Agents.CurrentAgent.SalesNumbers.Life_Paid_Premium_Ytd)) == 'down'"></i>
+        
+        </div>
+        <div class="name">
+          Life Paid
+        </div>
+        <div class="value">
+            $ {{
+              Agents.CurrentAgent.SalesInfo.History[0].Life_Paid_Premium_Ytd -  Agents.CurrentAgent.SalesInfo.History[1].Life_Paid_Premium_Ytd| number: 0
+            }}
+           
+        </div>
+      </div>
+      <div class="h-line"></div>
+      <div class="week-total" ng-class="WeeklyPerformance(Agents.CurrentAgent.SalesInfo.History[0].PC_Premium_Ytd,Agents.CurrentAgent.SalesInfo.History[1].PC_Premium_Ytd,AverageWeekly(Agents.CurrentAgent.SalesNumbers.PC_Premium_Ytd))">
+          <div class="change">
+            <i class="fa fa-arrow-up" ng-show="WeeklyPerformance(Agents.CurrentAgent.SalesInfo.History[0].PC_Premium_Ytd,Agents.CurrentAgent.SalesInfo.History[1].PC_Premium_Ytd,AverageWeekly(Agents.CurrentAgent.SalesNumbers.PC_Premium_Ytd)) == 'up'"></i>
+          </div>
+          <div class="name">
+            P&C Paid
+          </div>
+          <div class="value">
+              $ {{
+                Agents.CurrentAgent.SalesInfo.History[0].PC_Premium_Ytd -  Agents.CurrentAgent.SalesInfo.History[1].PC_Premium_Ytd | number: 0 }}
+          </div>
+        </div>
      
     </div>
   </div>
   <div class="agent-content">
     <div class="tabs">
-      <div class="tab active">
+      <div ui-sref=".Overview" class="tab" ui-sref-active="active">
         Overview
       </div>
-      <div class="tab">
+      <div ui-sref=".History" class="tab" ui-sref-active="active">
         History
       </div>
-      <div class="tab">
+      <div class="tab" ui-sref-active="active">
         Daily Numbers
       </div>
     </div>
-    <div class="content-row-title" ng-show="agentStatus(Agents.CurrentAgent.Info.Hire_Date) == 'Intern'">
-      Intern
-    </div>
-    <div class="content-row" ng-show="agentStatus(Agents.CurrentAgent.Info.Hire_Date) == 'Intern'">
-    </div>
-    <div class="content-row-title" ng-show="agentStatus(Agents.CurrentAgent.Info.Hire_Date) != 'Agent'">
-      NAPD Agent
-    </div>
-    <div class="content-row" ng-show="agentStatus(Agents.CurrentAgent.Info.Hire_Date) != 'Agent'">
-      <div class="progress-card">
-        <div class="summary_label behind">
-          Behind
-        </div>
-        <div class="deadline">
-          Next Cut Off
-          <div class="date">{{"2019-08-01"|momentdateRelative : 'MMM D Y @ h:mm a'}}</div>
-        </div>
-        <div class="title">Minimum Requirements</div>
-
-        <div class="body">
-          They are currently <span class="callout red">80%</span> of where they should be at this point in
-          time in order to achieve they target.
-        </div>
-        <br>
-        <br>
-        <div class="bar-title">
-          P&C
-        </div>
-        <uib-progressbar class="progress-striped  active" max="5000" value="3000" type="{{onTrack(1,2).type}}">
-          {{"$ " + (Agents.CurrentAgent.SalesNumbers.PC_Premium_Ytd | number)}}</uib-progressbar>
-        <div class="bar-title">
-          Life
-        </div>
-        <uib-progressbar class="progress-striped active" max="5000" value="3000" type="{{onTrack(1,2).type}}">
-          {{"$ " + (Agents.CurrentAgent.SalesNumbers.Life_Paid_Premium_Ytd | number)}}
-        </uib-progressbar>
-      </div>
-
-      <div class="progress-card">
-        <div class="summary_label behind">
-          Behind
-        </div>
-        <div class="deadline">
-          Next Cut Off
-          <div class="date">{{"2019-08-01"|momentdateRelative : 'MMM D Y @ h:mm a'}}</div>
-        </div>
-        <div class="title">Blue Vase Requirements</div>
-
-        <div class="body">
-          They are currently <span class="callout red">80%</span> of where they should be at this point in
-          time in order to achieve they target.
-        </div>
-        <br>
-        <br>
-        <div class="bar-title">
-          P&C
-        </div>
-        <uib-progressbar class="progress-striped  active" max="5000" value="3000" type="{{onTrack(1,2).type}}">
-          {{onTrack(1,2).ontrack}}</uib-progressbar>
-        <div class="bar-title">
-          Life
-        </div>
-        <uib-progressbar class="progress-striped active" max="5000" value="3000" type="{{type}}">12
-        </uib-progressbar>
-      </div>
-      <div class="progress-card">
-        <div class="summary_label behind">
-          Behind
-        </div>
-        <div class="deadline">
-          Next Cut Off
-          <div class="date">{{"2019-08-01"|momentdateRelative : 'MMM D Y @ h:mm a'}}</div>
-        </div>
-        <div class="title">New Agent Achievement</div>
-
-        <div class="body">
-          They are currently <span class="callout red">80%</span> of where they should be at this point in
-          time in order to achieve they target.
-        </div>
-        <br>
-        <br>
-        <div class="bar-title">
-          P&C
-        </div>
-        <uib-progressbar class="progress-striped  active" max="5000" value="3000" type="{{onTrack(1,2).type}}">
-          {{onTrack(1,2).ontrack}}</uib-progressbar>
-        <div class="bar-title">
-          Life
-        </div>
-        <uib-progressbar class="progress-striped active" max="5000" value="3000" type="{{type}}">12
-        </uib-progressbar>
-      </div>
-    </div>
-    <br>
-    <div class="content-row-title" >
-      Achievements
-    </div>
-    <div class="content-row" drag-scroll="true">
-       
-        <div class="achievement-card" ng-click="print('Here We Go')">
-            <div class="club-progress">
-                <div ng-show="!minimumStandardProgress(Agents.CurrentAgent.SalesNumbers).onTarget" class="warning"><i class="fa fa-exclamation-triangle"></i></div>
-                <div ng-show="minimumStandardProgress(Agents.CurrentAgent.SalesNumbers).completed" class="complete"><i class="fa fa-check"></i></div>
-              <round-progress max=1 current="minimumStandardProgress(Agents.CurrentAgent.SalesNumbers).progress" color="{{minimumStandardProgress(Agents.CurrentAgent.SalesNumbers).color}}" bgcolor="#eaeaea" radius="100" stroke="20" rounded="true" responsive="true"
-                duration="800" animation="easeInOutQuart" animation-delay="0"></round-progress>
-              
-            </div>
-            <div class="club-label">Minimum Standard </div>
-        </div>
-      <div class="achievement-card">
-          <div class="club-progress">
-              <div ng-show="!enhancedCommissionProgress(Agents.CurrentAgent.SalesNumbers).onTarget" class="warning"><i class="fa fa-exclamation-triangle"></i></div>
-                <div ng-show="enhancedCommissionProgress(Agents.CurrentAgent.SalesNumbers).completed" class="complete"><i class="fa fa-check"></i></div> 
-            <round-progress max=1 current="enhancedCommissionProgress(Agents.CurrentAgent.SalesNumbers).progress" color="{{enhancedCommissionProgress(Agents.CurrentAgent.SalesNumbers).color}}" bgcolor="#eaeaea" radius="100" stroke="20" rounded="true" responsive="true"
-              duration="800" animation="easeInOutQuart" animation-delay="0"></round-progress>
-            
-          </div>
-          <div class="club-label">Enhanced Commission</div>
-      </div>
-      <div class="achievement-card">
-          <div class="club-progress">
-              <div class="warning"><i class="fa fa-exclamation-triangle"></i></div>
-            <round-progress max=100 current=50 color="#791010" bgcolor="#eaeaea" radius="100" stroke="20" rounded="true" responsive="true"
-              duration="800" animation="easeInOutQuart" animation-delay="0"></round-progress>
-            
-          </div>
-          <div class="club-label">Career Club</div>
-      </div>
-      <div class="achievement-card">
-          <div class="club-progress">
-              <div class="warning"><i class="fa fa-exclamation-triangle"></i></div>
-            <round-progress max=100 current=30 color="#791010" bgcolor="#eaeaea" radius="100" stroke="20" rounded="true" responsive="true"
-              duration="800" animation="easeInOutQuart" animation-delay="0"></round-progress>
-            
-          </div>
-          <div class="club-label">President's Club</div>
-      </div>
-    </div>
+    <ui-view></ui-view>
   </div>
 </div>

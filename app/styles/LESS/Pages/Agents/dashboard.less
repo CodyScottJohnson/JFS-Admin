@@ -1,0 +1,155 @@
+.agent-dashboard {
+  height: 100%;
+  width: 100%;
+  .menu {
+    padding: 30px 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    white-space: nowrap;
+    .scrollbar;
+    .metric {
+      .Font_Body;
+      .BoxShadowHelper(1);
+      .clickable;
+
+      padding: 25px 40px;
+      border-radius: 20px;
+      text-align: left;
+      display: inline-block;
+      background: white;
+      margin: 5px;
+      width: calc(20% - 3px);
+      min-width: 220px;
+      .number {
+        font-size: 40px;
+      }
+      .title {
+        color: fade(@gray-pleasing, 40%);
+        font-size: 15px;
+        text-transform: uppercase;
+        font-weight: normal;
+        margin-bottom: 20px;
+      }
+      .points {
+        padding: 5px 20px;
+        background: fade(@gray-pleasing, 50%);
+        color: white;
+        border-radius: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        width: 80px;
+      }
+      &.active {
+        .BoxShadowHelper(4);
+        color: white;
+        background: @color-button;
+        .title {
+          color: fade(white, 80%);
+        }
+      }
+    }
+  }
+  .content {
+    padding: 20px 0px;
+  }
+  .content-row {
+    .scrollbar;
+    padding: 5px 20px;
+    white-space: nowrap;
+  }
+}
+.club-progress-widget {
+  .BoxShadowHelper(1);
+  margin:0px 20px;
+  border-radius: 20px;
+  background: white;
+  padding: 20px 30px;
+  vertical-align: middle;
+  display: inline-block;
+  .title {
+    .Font_Body;
+    font-weight: normal;
+    font-size: 18px;
+    padding: 10px 20px;
+    color: @gray-pleasing;
+    margin-bottom: 10px;
+  }
+  .agent {
+    .clickable;
+    .Font_Body;
+    font-weight: normal;
+    padding: 0px 20px;
+    .inner {
+      padding: 20px 0px;
+      border-bottom: 1px solid fade(@gray-pleasing, 10%);
+    }
+
+    &:last-child {
+      .inner {
+        border-bottom: none;
+      }
+    }
+    &:hover {
+      .BoxShadowHelper(2);
+      border-radius: 20px;
+    }
+    .agent-img{
+        box-sizing: content-box;
+        height:30px;
+        display: inline-block;
+        margin-right:10px;
+        border-radius:100%;
+        overflow: hidden;
+        vertical-align: middle;
+        border:2px solid @color-button;
+        img{
+            height:100%;
+        }
+    }
+    .name {
+      font-size: 14px;
+      display: inline-block;
+      vertical-align: middle;
+      width: 120px;
+    }
+    .percent {
+      font-weight: bolder;
+      font-size: 15px;
+      margin-left: 20px;
+      display: inline-block;
+      vertical-align: middle;
+      text-align: right;
+      width: 40px;
+      &.behind{
+          //color:darken(@color-error,20%);
+      }
+      &.on-target{
+          //color:darken(#379ce7,20%);
+      }
+      &.done{
+          //color:darken(@color-success,20%);
+      }
+    }
+    .bar {
+      display: inline-block;
+      vertical-align: middle;
+      height: 5px;
+      width: 120px;
+      .progress {
+        height: 8px;
+        box-shadow:none;
+        &.behind .progress-bar {
+          background-color: @color-error;
+        }
+        &.done .progress-bar {
+          background-color: fade(@color-success, 60%);
+        }
+        &.on-target .progress-bar {
+          background-color: fade(#379ce7,70%);
+        }
+      }
+    }
+  }
+}

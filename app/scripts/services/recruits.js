@@ -8,9 +8,13 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('Recruits', function($q, $http, $rootScope, recruit,Functions) {
+  .factory('Recruits', function($q, $http, $rootScope, recruit,Functions, ENV) {
     var Recruits = {
-      data: {}
+      data: {
+        settings:{
+          stages:[]
+        }
+      }
     };
     Recruits.Socket = function(data) {
       if (data.event === 'recruitupdated') {
@@ -30,7 +34,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/v2/Recruits/',
+        url: ENV.API + 'v2/Recruits/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -50,11 +54,30 @@ angular.module('JFS_Admin')
       });
       return deferred.promise;
     };
+    Recruits.getStages = function() {
+      var deferred = $q.defer();
+      $http({
+        method: 'Get',
+        url: ENV.API + 'v2/Recruits/Settings/Stages',
+        params: {
+          access_token: $rootScope.currentUser.Token.access_token,
+          client_id: 'testclient',
+          client_secret: 'testpass'
+        },
+      }).then(function(data) {
+        Recruits.data.settings.stages = data.data;
+        
+        deferred.resolve(data.data);
+      },function(){
+        deferred.reject("Couldn't Load Global Settings");
+      });
+      return deferred.promise;
+    };
     Recruits.addRecruit = function() {
       var deferred = $q.defer();
       $http({
         method: 'POST',
-        url: 'https://jfsapp.com/Secure/API/Recruits/',
+        url: ENV.API + 'Recruits/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -75,7 +98,7 @@ angular.module('JFS_Admin')
     Recruits.save = function(recruit) {
       $http({
         method: 'PATCH',
-        url: 'https://jfsapp.com/Secure/API/v2/Recruits/' + recruit.INDV_ID + '/',
+        url: ENV.API + 'v2/Recruits/' + recruit.INDV_ID + '/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -98,7 +121,7 @@ angular.module('JFS_Admin')
        var index =  _.findIndex(Recruits.data.List, function(o) { return o.INDV_ID == ID; });
        $http({
          method: 'DELETE',
-         url: 'https://jfsapp.com/Secure/API/v2/Recruits/' + ID + '/',
+         url: ENV.API + 'v2/Recruits/' + ID + '/',
          params: {
            'access_token': $rootScope.currentUser.Token.access_token,
            client_id: 'testclient',
@@ -112,7 +135,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'POST',
-        url: 'https://jfsapp.com/Secure/API/v2/Recruits/'+recruit.INDV_ID+'/Tag/'+tagID,
+        url: ENV.API + 'v2/Recruits/'+recruit.INDV_ID+'/Tag/'+tagID,
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -136,7 +159,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
        $http({
          method: 'DELETE',
-         url: 'https://jfsapp.com/Secure/API/v2/Recruits/'+recruit.INDV_ID+'/Tag/'+tagID,
+         url: ENV.API + 'v2/Recruits/'+recruit.INDV_ID+'/Tag/'+tagID,
          params: {
            'access_token': $rootScope.currentUser.Token.access_token,
            client_id: 'testclient',
@@ -150,6 +173,7 @@ angular.module('JFS_Admin')
        return deferred.promise;
     };
     Recruits.updateRecruits();
+    Recruits.getStages();
 
     return Recruits;
   });

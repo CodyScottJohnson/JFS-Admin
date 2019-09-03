@@ -8,7 +8,7 @@
  * Controller of the JFS_AgentPortal
  */
 angular.module('JFS_Admin')
-  .controller('LoginCtrl', function($scope, $http,$rootScope,$state,$cookies, $window, localStorageService, ENV) {
+  .controller('LoginCtrl', function($scope,toastr, $http,$rootScope,$state, $window, localStorageService, ENV) {
     $scope.User = {};
     $scope.login = function(username, password) {
       $http({
@@ -46,7 +46,7 @@ angular.module('JFS_Admin')
                   console.log($scope.User.Info.PermissionLevel);
                   localStorageService.cookie.set('user', $scope.User,1);
                   if($rootScope.currentUser.Info.title != 'Administrator'){
-                    $window.location.href ='https://jfsapp.com/Admin/Portal/Agent/#/';
+                    $window.location.href =ENV.Application_URL + 'Agent/#/';
                   }
                   else{
                     if(angular.isDefined($rootScope.LastLocation)){
@@ -59,11 +59,15 @@ angular.module('JFS_Admin')
                     }
                   }
             }, function(error) {
-
+              
             });
 
-      }, function(data, status, headers, config) {
-
+      }, function(error) {
+          if(error.status == 401){
+            toastr.error("Invalid Username or Password");
+          } else {
+            toastr.error("We're Experiencing Connection Issues");
+          }
       });
     };
 

@@ -8,7 +8,7 @@
  * Controller of the JFS_Admin
  */
 angular.module('JFS_Admin')
-  .controller('ManageUserCtrl', function ($scope, $http, User, $rootScope) {
+  .controller('ManageUserCtrl', function ($scope, $http, User, $rootScope,ENV) {
     $scope.keypress = function(e, form) {
           if (e.which === 13) {
               form.$submit();
@@ -24,6 +24,9 @@ angular.module('JFS_Admin')
   	$scope.AddUser =function(){
   		 User.AddUser($scope.newUser, 'admin');
     };
+    $scope.RemoveUser = function(user){
+        User.removeUser(user.id)
+    }
     $scope.checkvalue = function(data) {
   		 console.log(data);
       if (!angular.isDefined(data) || data === '') {
@@ -36,7 +39,7 @@ angular.module('JFS_Admin')
           //console.log(data);
           $http({
               method: 'post',
-              url: 'https://jfsapp.com/Secure/API/UserManagement/user/',
+              url: ENV.API + 'UserManagement/user/',
               params: {
                   'access_token': data.access_token,
                   client_id: 'testclient',
@@ -59,7 +62,7 @@ angular.module('JFS_Admin')
 
           $http({
               method: 'post',
-              url: 'https://jfsapp.com/Secure/API/UserManagement/'+username+'/user/resetpassword/',
+              url: ENV.API + 'UserManagement/'+username+'/user/resetpassword/',
               params: {
                   'access_token': $rootScope.currentUser.Token.access_token,
                   client_id: 'testclient',

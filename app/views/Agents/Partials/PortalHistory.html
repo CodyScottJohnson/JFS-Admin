@@ -1,0 +1,33 @@
+<div class="content-row-title">
+    History
+  </div>
+  <div class="content-row" drag-scroll="true">
+    <div class="chart-card">
+      <div class="chart-title">
+        Life Paid YTD
+      </div>
+      <div class="chart">
+        <chartist
+          class="ct-chart"
+          chartist-data="Agents.CurrentAgent.Plot"
+          chartist-chart-type="Line"
+          chartist-chart-options="Agents.CurrentAgent.lifeOptions"
+          chartist-events="events"
+        ></chartist>
+      </div>
+    </div>
+    <div class="chart-card">
+        <div class="chart-title">
+            P&C Paid YTD
+          </div>
+      <div class="chart">
+        <chartist
+          class="ct-chart"
+          chartist-data="Agents.CurrentAgent.PCPlot"
+          chartist-chart-type="Line"
+          chartist-chart-options="Agents.CurrentAgent.pcOptions"
+          chartist-events="events"
+        ></chartist>
+      </div>
+    </div>
+  </div>

@@ -34,7 +34,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/Email/Lists/People',
+        url: ENV.API + 'Email/Lists/People',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -56,7 +56,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/Email/Lists/',
+        url: ENV.API + 'Email/Lists/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -76,7 +76,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'POST',
-        url: 'https://jfsapp.com/Secure/API/Email/Lists/People',
+        url: ENV.API + 'Email/Lists/People',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -95,7 +95,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'DELETE',
-        url: 'https://jfsapp.com/Secure/API/Email/Lists/People/'+person.EmailPeople_ID,
+        url: ENV.API + 'Email/Lists/People/'+person.EmailPeople_ID,
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -113,7 +113,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'PATCH',
-        url: 'https://jfsapp.com/Secure/API/Email/Lists/People/'+person.EmailPeople_ID,
+        url: ENV.API + 'Email/Lists/People/'+person.EmailPeople_ID,
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -132,7 +132,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/Email/Lists/People/'+id,
+        url: ENV.API + 'Email/Lists/People/'+id,
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -150,7 +150,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'POST',
-        url: 'https://jfsapp.com/Secure/API/Email/Lists/People/List',
+        url: ENV.API + 'Email/Lists/People/List',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -169,7 +169,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'patch',
-        url: 'https://jfsapp.com/Secure/API/Email/Lists/People/List/Delete',
+        url: ENV.API + 'Email/Lists/People/List/Delete',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -188,7 +188,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'POST',
-        url: 'https://jfsapp.com/Secure/API/Email/Send/ContactCard',
+        url: ENV.API + 'Email/Send/ContactCard',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -209,7 +209,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'POST',
-        url: 'https://jfsapp.com/Secure/API/Email/Send/PreviewTemplate',
+        url: ENV.API + 'Email/Send/PreviewTemplate',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -232,7 +232,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'POST',
-        url: 'https://jfsapp.com/Secure/API/Email/Send/Template',
+        url: ENV.API + 'Email/Send/Template',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',

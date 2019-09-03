@@ -118,6 +118,12 @@
                     <div class="btn btn-default failure" ng-class="{active:Recruit.currentRecruit.CreditCheck==0}" ng-click="Recruit.currentRecruit.CreditCheck=0;saveRecruit()"><i class="fa fa-close"></i></div>
                   </div>
               </div>
+              <div class="progress-item" >
+                <span class="progress-label">Stage</span>
+                <div class="stage" onaftersave="saveRecruit()" e-form="Stage" ng-click="Stage.$show()"  editable-select="Recruit.currentRecruit.Stage"  e-ng-options="s.id as s.Name for s in Recruits.settings.stages" e-name="Stage">
+                  {{Recruit.currentRecruit.Stage_Name}}<i class="fa fa-caret-down"></i></div>
+                </div>
+
           </div>
         </div>
         <div class="row">

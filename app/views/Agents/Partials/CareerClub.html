@@ -1,0 +1,114 @@
+<div class="content-row" drag-scroll="true">
+  <div class="club-progress-widget">
+    <div class="title">Career Club Progress</div>
+    <div
+      class="agent"
+      ng-repeat="agent in Agents.AllAgents.SalesNumbers|orderBy: CareerClubOrder"
+      ng-click="viewAgent(agent.Agent_ID)"
+    >
+      <div class="inner">
+        <div class="agent-img">
+          <img
+            ng-src="https://jfsapp.com/Open/API/Images/Agents/Profile/{{
+              agent.profilepic || 'blank.jpg'
+            }}?access_token={{
+              currentUser.Token.access_token
+            }}&client_id=testclient&client_secret=testpass"
+          />
+        </div>
+        <div class="name">{{ agent.FirstName }} {{ agent.LastName }}</div>
+        <div class="bar">
+          <uib-progressbar
+            class="progress-striped active"
+            max="1"
+            value="careerClubProgress(agent).progress"
+            type="{{ type }}"
+            ng-class="careerClubProgress(agent).class"
+          >
+          </uib-progressbar>
+        </div>
+        <div class="percent" ng-class="careerClubProgress(agent).class">
+          {{
+            [careerClubProgress(agent).progress * 100, 100] | min | number: 0
+          }}%
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="club-progress-widget">
+    <div class="title">Minimum Standard</div>
+    <div
+      class="agent"
+      ng-repeat="agent in Agents.AllAgents.SalesNumbers|orderBy: minimumStandardOrder"
+      ng-click="viewAgent(agent.Agent_ID)"
+    >
+      <div class="inner">
+          <div class="agent-img">
+                <img
+                  ng-src="https://jfsapp.com/Open/API/Images/Agents/Profile/{{
+                    agent.profilepic || 'blank.jpg'
+                  }}?access_token={{
+                    currentUser.Token.access_token
+                  }}&client_id=testclient&client_secret=testpass"
+                />
+              </div>
+        <div class="name">{{ agent.FirstName }} {{ agent.LastName }}</div>
+        <div class="bar">
+          <uib-progressbar
+            class="progress-striped active"
+            max="1"
+            value="minimumStandardProgress(agent).progress"
+            type="{{ type }}"
+            ng-class="minimumStandardProgress(agent).class"
+          >
+          </uib-progressbar>
+        </div>
+        <div class="percent" ng-class="minimumStandardProgress(agent).class">
+          {{
+            [minimumStandardProgress(agent).progress * 100, 100]
+              | min
+              | number: 0
+          }}%
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="club-progress-widget">
+    <div class="title">Enhanced Commision</div>
+    <div
+      class="agent"
+      ng-repeat="agent in Agents.AllAgents.SalesNumbers|orderBy: enhancedCommissionOrder"
+      ng-click="viewAgent(agent.Agent_ID)"
+    >
+      <div class="inner">
+            <div class="agent-img">
+            <img
+              ng-src="https://jfsapp.com/Open/API/Images/Agents/Profile/{{
+                agent.profilepic || 'blank.jpg'
+              }}?access_token={{
+                currentUser.Token.access_token
+              }}&client_id=testclient&client_secret=testpass"
+            />
+          </div>
+        <div class="name">{{ agent.FirstName }} {{ agent.LastName }}</div>
+        <div class="bar">
+          <uib-progressbar
+            class="progress-striped active"
+            max="1"
+            value="enhancedCommissionProgress(agent).progress"
+            type="{{ type }}"
+            ng-class="enhancedCommissionProgress(agent).class"
+          >
+          </uib-progressbar>
+        </div>
+        <div class="percent" ng-class="enhancedCommissionProgress(agent).class">
+          {{
+            [enhancedCommissionProgress(agent).progress * 100, 100]
+              | min
+              | number: 0
+          }}%
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

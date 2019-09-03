@@ -31,13 +31,13 @@
 
 						</div>
 					</div>
-					<div ng-click="viewAgent(agent.Agent_ID);clear()" class="result recruit"
+					<div ng-click="viewAgent(agent.Agent_ID);clear()" class="result recruit agent"
 						ng-repeat="agent in Agents.AgentList|filter:newsearch.Global_Search">
-						<div class="type" style="background:#6699CC">
+						<div class="type" >
 							<i class="fa fa-user-secret"></i>
 						</div>
 						<img class="avatar"
-							ng-src="https://jfsapp.com/Secure/API/Images/General/Agents/Profile/{{agent.profilepic||'blank.jpg'}}?access_token={{currentUser.Token.access_token}}&client_id=testclient&client_secret=testpass">
+							ng-src="https://jfsapp.com/Open/API/Images/Agents/Profile/{{agent.profilepic||'blank.jpg'}}?access_token={{currentUser.Token.access_token}}&client_id=testclient&client_secret=testpass">
 						<div class="text">
 							<div class="name">
 								{{agent.FirstName}} {{agent.LastName}}
@@ -99,9 +99,9 @@
 				<ul class="dropdown-menu notifications" style="width:300px;">
 					<div class="NoNotifications" id="NoNotification"
 						ng-show="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0">
-						<i class="fa fa-bell"></i>
+						<i class="fa fa-check-square-o"></i>
 						<strong>Congratulations!</strong>
-						<div class="SubTitle">No New Notifactions</div>
+						<div class="SubTitle">No New Tasks</div>
 					</div>
 					<div id="NotificationList" ng-hide="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0">
 						<li ng-hide="(Task.currentUsersTasks|filter:{'Status':'new'}).length<=0"
@@ -285,22 +285,11 @@
 
 		<div class="sidebar-collapse scrollbar" style="padding-bottom:30px;height:100%;overflow-x:hidden">
 			<div class="t-center">
-				<div class="avatar">
+				<div class="avatar" ui-sref="app.User.Landing">
 					<img ng-click="collapsed1=!collapsed1" class="user-avatar"
 						ng-src="{{'https://jfsapp.com/Images/ProfilePhotos/' +currentUser.Info.display_photo}}"
-						alt="user-mail"> </div>
-				<ul class="subMenu" ng-show="collapsed1">
-					<li><a ui-sref="app.Messages"><i class="main-icon fa fa-envelope"></i><span class="text">Message
-								Center</span></a></li>
-					<li><a ui-sref="app.Tasks"><i class="fa fa-tasks" aria-hidden="true"></i><span
-								class="text">Tasks</span></a></li>
-					<li ng-click="changeProfile();"><a><i class="fa fa-pencil" aria-hidden="true"></i><span
-								class="text">Change Profile</span></a></li>
-					<li><a ui-sref="app.User.Settings"><i class="fa fa-gear"></i><span class="text">
-								Settings</span></a></li>
-								<li><a ng-click="User.logout()"><i class="fa fa-gear"></i><span class="text">
-									Logout</span></a></li>
-				</ul>
+						alt="user-mail" style="cursor: pointer;"> </div>
+				
 			</div>
 			<div class="sidebar-menu">
 				<ul class="nav nav-sidebar">
@@ -345,11 +334,12 @@
 					</ul>-->
 					<li ng-class="{active: ('app.Agents.Dashboard' | 
 						includedByState) || ('app.Agents.EnterNumbers' | 
+						includedByState)|| ('app.Agents.Landing' | 
 						includedByState) }" class="top-level"><a  ng-model="collapsed4"
 							ng-click="collapsed4=!collapsed4"><i class="main-icon fa fa-group"></i><span class="text">
 								Manage Agents</span> <span class="fa fa-angle-down pull-right"></span></a></li>
 					<ul class="subMenu" ng-show="collapsed4">
-							<li><a ui-sref="app.Agents.Landing"><i class="fa fa-dashboard"></i><span class="text">
+							<li><a ui-sref="app.Agents.Landing.Career"><i class="fa fa-dashboard"></i><span class="text">
 									Dashboard</span></a></li>
 						<li><a ui-sref="app.Agents.Dashboard"><i class="fa fa-users"></i><span class="text">
 									Agent List</span></a></li>

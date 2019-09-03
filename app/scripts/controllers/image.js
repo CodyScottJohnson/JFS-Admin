@@ -8,7 +8,7 @@
  * Controller of the JFS_Admin
  */
 angular.module('JFS_Admin')
-.controller('ImageCtrl', function (Cropper, $scope, $timeout,recruit, $http, $rootScope, User) {
+.controller('ImageCtrl', function (Cropper, $scope, $timeout,recruit, $http, $rootScope, User,ENV) {
   $scope.test ={t:1};
   $scope.options = {
        maximize: false, // very important otherwise it will overload the custom data
@@ -75,7 +75,7 @@ angular.module('JFS_Admin')
        var postData = 'datas=' + JSON.stringify(formData);
        $http({
            method: 'POST',
-           url: 'https://jfsapp.com/Secure/API/Images/Upload',
+           url: ENV.API + 'Images/Upload',
            params:{
            'access_token': $rootScope.currentUser.Token.access_token,
            client_id: 'testclient',

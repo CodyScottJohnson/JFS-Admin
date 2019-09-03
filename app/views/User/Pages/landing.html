@@ -1,0 +1,41 @@
+<div class="landing">
+  <div class="options">
+    <div class="row">
+      <div class="option" ui-sref="app.Messages">
+        <a >
+          <div class="icon-container">
+            <i class="main-icon fa fa-envelope"></i>
+          </div>
+          <span class="text">Message Center</span>
+        </a>
+      </div>
+
+      <div ng-click="changeProfile();" class="option">
+        <a>
+          <div class="icon-container">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </div>
+          <span class="text">Change Profile</span>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="option" ui-sref="app.User.Settings">
+        <a >
+          <div class="icon-container">
+            <i class="fa fa-gear"></i>
+          </div>
+          <span class="text"> Settings</span>
+        </a>
+      </div>
+      <div class="option" ng-click="User.logout()">
+        <a >
+          <div class="icon-container">
+            <i class="fa fa-sign-out"></i>
+          </div>
+          <span class="text"> Logout</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

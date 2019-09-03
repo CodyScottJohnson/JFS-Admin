@@ -47,6 +47,7 @@
       <th>Email</th>
      
       <th>Source</th>
+      <th>Stage</th>
       <th>Phone</th>
       <th>Address</th>
       <th>City</th>
@@ -134,6 +135,11 @@
         </span>
       </td>
       <td class="expand" ng-dblclick="rowform.$show()">
+        <span  editable-select="recruit.Stage"  e-ng-options="s.id as s.Name for s in Recruits.settings.stages" e-name="Stage" e-form="rowform" style="text-align:middle">
+          {{recruit.Stage_Name}}
+        </span>
+      </td>
+      <td class="expand" ng-dblclick="rowform.$show()">
         <span e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="recruit.BUS_PH_NBR" e-name="BUS_PH_NBR" e-form="rowform">{{recruit.BUS_PH_NBR}}</span>
       </td>
       <td class="expand" ng-dblclick="rowform.$show()">
@@ -173,7 +179,7 @@
       </td>
       <td style="white-space: nowrap;vertical-align:middle">
         <!-- form -->
-        <form editable-form name="rowform" onbeforesave="saveRecruit(recruit)" ng-show="rowform.$visible" class="form-buttons form-inline">
+        <form editable-form name="rowform" onbeforesave="saveRecruit(recruit)" onaftersave="postSaveRecruit(recruit)" ng-show="rowform.$visible" class="form-buttons form-inline">
           <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
             save
           </button>

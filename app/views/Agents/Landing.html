@@ -1,13 +1,61 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 col-lg-7">
-      
+<div class="agent-dashboard">
+  <div class="menu" drag-scroll="true">
+    <div class="metric" ui-sref=".Career" ui-sref-active="active">
+      <div class="number">{{ Agents.ScoreCard.Current.CareerClub }}</div>
+      <div class="title">Career Club</div>
+      <div class="points">
+        {{ Agents.ScoreCard.Current.Points_CareerClub || 0 }} Pts
+      </div>
     </div>
-    <div class="col-md-6 col-lg-5">
-
-      <div ng-include="'views/Agents/Partials/Upcoming.html'" style="height:700px;">
-
+    <div class="metric" ui-sref=".NewHire" ui-sref-active="active">
+      <div class="number">{{ Agents.ScoreCard.Current.NewHires || 0 }}</div>
+      <div class="title">New Hires</div>
+      <div class="points">
+        {{ Agents.ScoreCard.Current.Points_NewHires || 0 }} Pts
+      </div>
+    </div>
+    <div class="metric" ui-sref=".Life" ui-sref-active="active">
+      <div class="number">
+        ${{ Agents.ScoreCard.Current.AvgLife || 0 | number: 0 }}
+      </div>
+      <div class="title">Avg Life</div>
+      <div class="points">
+        {{ Agents.ScoreCard.Current.Points_AvgLife || 0 }} Pts
+      </div>
+    </div>
+    <div class="metric" ui-sref=".PC" ui-sref-active="active">
+      <div class="number">
+        ${{ Agents.ScoreCard.Current.AvgPC || 0 | number: 0 }}
+      </div>
+      <div class="title">avg P&C</div>
+      <div class="points">
+        {{ Agents.ScoreCard.Current.Points_AvgPC || 0 }} Pts
+      </div>
+    </div>
+    <div class="metric" ui-sref=".Profitability" ui-sref-active="active">
+      <div class="number">
+        {{ (Agents.ScoreCard.Current.Profitability || 0) * 100 | number: 0 }}%
+      </div>
+      <div class="title">Profitability</div>
+      <div class="points">
+        {{ Agents.ScoreCard.Current.Points_Profitability || 0 }} Pts
       </div>
     </div>
   </div>
+  <div class="content">
+    <ui-view></ui-view>
+  </div>
 </div>
+<!--
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-lg-7"></div>
+    <div class="col-md-6 col-lg-5">
+      <div
+        ng-include="'views/Agents/Partials/Upcoming.html'"
+        style="height:700px;"
+      ></div>
+    </div>
+  </div>
+</div>
+-->

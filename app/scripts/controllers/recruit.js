@@ -19,7 +19,7 @@ function ecopy(e) {
   }
 }
 angular.module('JFS_Admin')
-  .controller('RecruitCtrl', function($scope, $http, $rootScope, Task, Recruits, recruit, Dropbox, Functions, FileUploader, File, User, $sce,$location, Email) {
+  .controller('RecruitCtrl', function($scope, $http, $rootScope, Task, Recruits, recruit, Dropbox, Functions, FileUploader, File, User, $sce,$location, Email,ENV) {
     if(angular.isDefined($location.search().RecruitID))
     {
       recruit.setRecruit($location.search().RecruitID);
@@ -180,7 +180,10 @@ angular.module('JFS_Admin')
       Functions.OpenModal('views/Modals/NotesModal.html', 'lg');
     };
     $scope.saveRecruit = function(){
+
       recruit.save();
+      var selected = _.find(Recruits.data.settings.stages, { 'id': $scope.Recruit.currentRecruit.Stage })
+      $scope.Recruit.currentRecruit.Stage_Name = selected.Name;
     };
     $scope.saveRecruitStatus = function(recruit){
       $scope.Recruit.currentRecruit.NextStepUpdated = moment();
@@ -192,7 +195,7 @@ angular.module('JFS_Admin')
     $scope.test = function(){
       $http({
         method: 'POST',
-        url: 'https://jfsapp.com/Secure/API/Email/Send/ContactCard',
+        url: ENV.API + 'Email/Send/ContactCard',
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',

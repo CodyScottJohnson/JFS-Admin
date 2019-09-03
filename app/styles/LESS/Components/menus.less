@@ -38,14 +38,16 @@
   .clickable;
   .type{
     .center.vertical;
-    .BoxShadowHelper(1);
+    //.BoxShadowHelper(1);
+    border:5px solid white;
+    
     position:absolute;
-    height:35px;
-    width:35px;
+    height:45px;
+    width:45px;
     background: @color-button;
     border-radius:100%;
     //top:-8px;
-    right:-10px;
+    right:-55px;
     padding:0!important;
     i{
       .center.both!important;
@@ -60,6 +62,7 @@
    background:lighten(@gray-pleasing,60%);
   }
   &.recruit{
+    border-right:@color-button 35px solid;
     .avatar{
       .BoxShadowHelper(1);
       .center.vertical;
@@ -98,9 +101,16 @@
       }
     }
   }
+  &.agent{
+    border-color:@gray-pleasing;
+    .type{
+      background-color:@gray-pleasing
+    }
+  }
   &.task{
     display: block;
     position: relative;
+    border-right:@color-secondary-2-0 35px solid;
     .body{
       display: inline-block;
       line-height: 15px;

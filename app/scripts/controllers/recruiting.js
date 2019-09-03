@@ -8,7 +8,7 @@
  * Controller of the jfsApp
  */
 angular.module('JFS_Admin')
-  .controller('RecruitingCtrl', function($scope, recruit, Recruits, Task, Functions, Email,$location,$stateParams) {
+  .controller('RecruitingCtrl', function($scope, recruit, Recruits, Task, Functions, Email,$location,$stateParams,$filter) {
     $scope.Archived = 0;
     $scope.RecruitList = "Active";
     if(angular.isDefined($stateParams.Archived))
@@ -220,7 +220,14 @@ angular.module('JFS_Admin')
       $scope.saveRecruit(recruit);
     };
     $scope.saveRecruit = function(recruit) {
+    
       Recruits.save(recruit);
+    };
+    $scope.postSaveRecruit = function(recruit){
+      var selected = _.find(Recruits.data.settings.stages, { 'id': recruit.Stage });
+      
+      recruit.Stage_Name = selected.Name;
+      //console.log(recruit);
     };
     $scope.deleteRecruit = function(ID) {
       Recruits.deleteRecruit(ID);

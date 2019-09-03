@@ -52,14 +52,13 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'Get',
-        url: 'https://jfsapp.com/Secure/API/User/Settings/Global',
+        url: ENV.API + 'User/Settings/Global',
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
           client_secret: 'testpass'
         },
       }).then(function(data) {
-        console.log('here');
         $rootScope.GlobalSettings = data.data;
         currentUser.data.GlobalSettings = data.data;
         deferred.resolve(data.data);
@@ -71,7 +70,7 @@ angular.module('JFS_Admin')
     currentUser.saveGlobalSettings = function() {
       $http({
         method: 'Post',
-        url: 'https://jfsapp.com/Secure/API/User/Settings/Global',
+        url: ENV.API + 'User/Settings/Global',
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -125,7 +124,7 @@ angular.module('JFS_Admin')
       currentUser.data.currentTextConversation = ConversationID;
       $http({
         method: 'PATCH',
-        url: 'https://jfsapp.com/Secure/API/Messages/MarkConversation/' + ConversationID + '/',
+        url: ENV.API + 'Messages/MarkConversation/' + ConversationID + '/',
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -139,7 +138,7 @@ angular.module('JFS_Admin')
       currentUser.data.currentTextConversation = ConversationID;
       $http({
         method: 'delete',
-        url: 'https://jfsapp.com/Secure/API/Messages/DeleteConversation/' + ConversationID + '/',
+        url: ENV.API + 'Messages/DeleteConversation/' + ConversationID + '/',
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -153,7 +152,7 @@ angular.module('JFS_Admin')
     currentUser.getTexts = function() {
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/Texts/',
+        url: ENV.API + 'Texts/',
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -177,7 +176,7 @@ angular.module('JFS_Admin')
         };
         $http({
           method: 'post',
-          url: 'https://jfsapp.com/Secure/API/Text/',
+          url: ENV.API + 'Text/',
           params: {
             'access_token': $rootScope.currentUser.Token.access_token,
             client_id: 'testclient',
@@ -206,7 +205,7 @@ angular.module('JFS_Admin')
       } else {
         $http({
           method: 'GET',
-          url: 'https://jfsapp.com/Secure/API/Users/',
+          url: ENV.API + 'Users/',
           params: {
             'access_token': $rootScope.currentUser.Token.access_token,
             client_id: 'testclient',
@@ -225,7 +224,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/User/Info',
+        url: ENV.API + 'User/Info',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -244,7 +243,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'DELETE',
-        url: 'https://jfsapp.com/Secure/API/UserManagement/Remove/'+UserID+'/',
+        url: ENV.API + 'UserManagement/Remove/'+UserID+'/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -253,9 +252,9 @@ angular.module('JFS_Admin')
 
       }).then(function(user) {
         deferred.resolve(user.data);
-        //Functions.Toast('success', 'Removed User', user.data.display_name, {
+        Functions.Toast('success', 'Removed User', "", {
           //iconClass: 'jfsToast_success'
-        //});
+        });
         currentUser.getUserList();
       }, function(error) {
         deferred.reject(error);
@@ -271,7 +270,7 @@ angular.module('JFS_Admin')
       newUser.password = UUID.newuuid();
       $http({
         method: 'post',
-        url: 'https://jfsapp.com/Secure/API/UserManagement/user/?Type='+type,
+        url: ENV.API + 'UserManagement/user/?Type='+type,
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -298,7 +297,7 @@ angular.module('JFS_Admin')
         var deferred = $q.defer();
         $http({
                 method: 'GET',
-                url: 'https://jfsapp.com/Secure/API/User/Notes/',
+                url: ENV.API + 'User/Notes/',
                 params: {
                     'access_token': $rootScope.currentUser.Token.access_token,
                     client_id: 'testclient',
@@ -319,7 +318,7 @@ angular.module('JFS_Admin')
 
             $http({
                 method: 'post',
-                url: 'https://jfsapp.com/Secure/API/User/Notes/',
+                url: ENV.API + 'User/Notes/',
                 params: {
                     'access_token': $rootScope.currentUser.Token.access_token,
                     client_id: 'testclient',
@@ -364,7 +363,7 @@ angular.module('JFS_Admin')
     currentUser.saveUser = function() {
       $http({
         method: 'PATCH',
-        url: 'https://jfsapp.com/Secure/API/User/',
+        url: ENV.API + 'User/',
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -388,7 +387,7 @@ angular.module('JFS_Admin')
         $rootScope.currentUser.Info.display_photo = 'null.png';
         $http({
             method: 'POST',
-            url: 'https://jfsapp.com/Secure/API/Images/v2/Upload',
+            url: ENV.API + 'Images/v2/Upload',
             params:{
             'access_token': $rootScope.currentUser.Token.access_token,
             client_id: 'testclient',

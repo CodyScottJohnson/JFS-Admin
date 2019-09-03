@@ -16,6 +16,7 @@
         <table>
           <tr>
             <th></th>
+            <th>Hire Date</th>
             <th>Phone</th>
             <th>Email</th>
             <th>Address</th>
@@ -37,6 +38,8 @@
                       e-name="LastName" e-form="newagentform">{{newagent.LastName}}</span></h3>
                 </span><span class="market"><b>Area:</b></span><span>{{agent.City}}</span></div>
             </td>
+            <td class="expand"><span e-style="width:30px;padding-left:10px;padding-right:10px"
+                editable-text="newagent.Hire_Date" e-name="Hire_Date" e-form="newagentform">{{newagent.Hire_Date}}</span></td>
             <td class="expand"><span e-style="width:30px;padding-left:10px;padding-right:10px"
                 editable-text="newagent.Phone" e-name="Phone" e-form="newagentform">{{newagent.Phone}}</span></td>
             <td class="expand"><span e-style="width:30px;padding-left:10px;padding-right:10px"
@@ -75,6 +78,8 @@
                       e-name="LastName" e-form="rowform">{{agent.LastName}}</span></h3>
                 </span><span class="market"><b>Area:</b></span><span>{{agent.City}}</span></div>
             </td>
+                        <td class="expand" ng-dblclick="rowform.$show()"><span e-style="width:30px;padding-left:10px;padding-right:10px"
+                editable-bsdate="agent.Hire_Date" e-datepicker-popup="YYYY-MM-DD" e-style="width:400px" e-name="Hire_Date" e-form="rowform" e-ng-click="open($event,'$data')" e-is-open="opened.$data">{{agent.Hire_Date|momentdate:"YYYY-MM-DD"}}</span></td>
             <td class="expand" ng-dblclick="rowform.$show()"><span
                 e-style="width:30px;padding-left:10px;padding-right:10px" editable-text="agent.Phone" e-name="Phone"
                 e-form="rowform">{{agent.Phone}}</span></td>

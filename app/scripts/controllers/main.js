@@ -26,7 +26,6 @@ angular.module('JFS_Admin')
       Task.getTask(taskID);
       Functions.OpenModal('views/Modals/TaskModal.html', 'md');
     };
-    console.log($location.search());
     if(angular.isDefined($location.search().Task_ID))
     {
       if(angular.isDefined($location.search().Task_Completed) && $location.search().Task_Completed == 1){
@@ -65,7 +64,7 @@ angular.module('JFS_Admin')
     };
     $scope.viewAgent=function(Agent_ID){
       Agents.viewAgent(Agent_ID);
-      $state.go('app.Agents.Agent', {AgentID:Agent_ID});
+      $state.go('app.Agents.Agent.Overview', {AgentID:Agent_ID});
     };
     $scope.newestText = function(arr) {
       return $filter('min')

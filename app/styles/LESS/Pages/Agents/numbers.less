@@ -28,7 +28,8 @@
         padding: 20px 10px;
 
         &.htInvalid {
-            background: fade(#D03E3A, .8) !important;
+            background: fade(#D03E3A, 80) !important;
+            color:white;
         }
 
         &.listbox {
@@ -64,5 +65,19 @@ table.htCore tbody tr:last-child td {
         background: white;
         border-radius: 10px;
         height: 100%;
+        .save-button{
+            .Font_Body;
+            .center.horizontal;
+            .BoxShadowHelper(3);
+            .clickable;
+            border-radius:40px;
+            font-weight:normal;
+            font-size:20px;
+            bottom:50px;
+            padding:15px 30px;
+            color:white;
+            background: @color-button;
+            z-index: 4;
+        }
     }
 }

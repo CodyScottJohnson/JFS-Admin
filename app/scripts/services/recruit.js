@@ -8,7 +8,7 @@
  * Factory in the JFS_Admin.
  */
 angular.module('JFS_Admin')
-  .factory('recruit', function($rootScope, $q, $http, $filter, UUID, Functions, User,Task) {
+  .factory('recruit', function($rootScope, $q, $http, $filter, UUID, Functions, User,Task,ENV) {
     var currentRecruit = {
       data: {
         popInfo: {}
@@ -18,7 +18,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/v2/Recruits/' + id + '/',
+        url: ENV.API + 'v2/Recruits/' + id + '/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -94,7 +94,7 @@ angular.module('JFS_Admin')
     currentRecruit.getConversationHistory = function() {
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/v2/Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/messages/',
+        url: ENV.API + 'v2/Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/messages/',
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -107,7 +107,7 @@ angular.module('JFS_Admin')
     currentRecruit.save = function() {
       $http({
         method: 'PATCH',
-        url: 'https://jfsapp.com/Secure/API/v2/Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/',
+        url: ENV.API + 'v2/Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -161,7 +161,7 @@ angular.module('JFS_Admin')
       var postData = 'datas=' + JSON.stringify(formData);
       $http({
         method: 'post',
-        url: 'https://jfsapp.com/Secure/API/assignColorQuiz/',
+        url: ENV.API + 'assignColorQuiz/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -171,7 +171,7 @@ angular.module('JFS_Admin')
       }).then(function(data) {
         $http({
           method: 'post',
-          url: 'https://jfsapp.com/Secure/API/sendColorTestEmail/',
+          url: ENV.API + 'sendColorTestEmail/',
           params: {
             'access_token': $rootScope.currentUser.Token.access_token,
             client_id: 'testclient',
@@ -246,7 +246,7 @@ angular.module('JFS_Admin')
         var postData = JSON.stringify(formData);
         $http({
             method: 'PATCH',
-            url: 'https://jfsapp.com/Secure/API/Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/ProfilePic/',
+            url: ENV.API + 'Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/ProfilePic/',
             params: {
                 'access_token': '8c7ba91d562f5b566544e8bd94a518f71d4ad6b0',
                 client_id: 'testclient',
@@ -273,7 +273,7 @@ angular.module('JFS_Admin')
         var postData = JSON.stringify(formData);
         $http({
             method: 'PATCH',
-            url: 'https://jfsapp.com/Secure/API/Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/ProfilePic/',
+            url: ENV.API + 'Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/ProfilePic/',
             params: {
                 'access_token': '8c7ba91d562f5b566544e8bd94a518f71d4ad6b0',
                 client_id: 'testclient',

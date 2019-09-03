@@ -44,7 +44,8 @@ module.exports = function(grunt) {
           current_symlink: 'current',
           port: '4969',
           //privateKey: require('fs').readFileSync('F:/JFS.pem'),
-          privateKey: require('fs').readFileSync('/Users/Cody/devApps/Keys/JFS.pem'),
+          //privateKey: require('fs').readFileSync('/Users/Cody/devApps/Keys/JFS.pem'),
+          privateKey: require('fs').readFileSync('./JFS.pem'),
           //port: '<%= secret.production.port %>',
           releases_to_keep: '3'
           //release_subdir: 'myapp'
@@ -62,13 +63,13 @@ module.exports = function(grunt) {
         options: {
           dest: '<%= yeoman.app %>/scripts/services/config.js'
         },
-        constants: grunt.file.readJSON('database/config/config_dev.json')
+        constants: grunt.file.readJSON('config/config_dev.json')
       },
       prod: {
         options: {
           dest: '<%= yeoman.app %>/scripts/services/config.js'
         },
-        constants: grunt.file.readJSON('database/config/config_prod.json')
+        constants: grunt.file.readJSON('config/config_prod.json')
       }
     },
     // Project settings
@@ -116,7 +117,7 @@ module.exports = function(grunt) {
         files: ['Gruntfile.js']
       },
       config: {
-        files: ['database/config/*.json'],
+        files: ['config/*.json'],
         tasks: ['ngconstant:' + env]
       },
       livereload: {
@@ -512,6 +513,7 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function(target) {
+    console.log(env)
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }

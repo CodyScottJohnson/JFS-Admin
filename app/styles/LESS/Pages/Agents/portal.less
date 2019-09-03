@@ -1,432 +1,490 @@
 .AgentPortal {
-    .profile {
+  .profile {
+    width: 100%;
+    background-color: white;
+
+    .profile_img {
+      width: 100%;
+      height: 445px;
+      display: block;
+      position: relative;
+      background: @color-secondary-2-3;
+      padding: 10px;
+      -moz-box-shadow: inset 0 0 10px #000000;
+      -webkit-box-shadow: inset 0 0 10px #000000;
+      box-shadow: inset 0 0 10px #000000;
+
+      .outerimage {
+        .center.both;
         width: 100%;
-        background-color: white;
+        max-width: 300px;
 
-        .profile_img {
-            width: 100%;
-            height: 445px;
-            display: block;
-            position: relative;
-            background: @color-secondary-2-3;
-            padding: 10px;
-            -moz-box-shadow: inset 0 0 10px #000000;
-            -webkit-box-shadow: inset 0 0 10px #000000;
-            box-shadow: inset 0 0 10px #000000;
-
-            .outerimage {
-                .center.both;
-                width: 100%;
-                max-width: 300px;
-
-                .img_mask {
-                    border-radius: 8px;
-                    top: 0;
-                    position: absolute;
-                    height: 100%;
-                    width: 100%;
-                    border: 3px solid fade(@gray, 20%);
-                }
-            }
-
-            img {
-                width: 100%;
-                border-radius: 8px;
-
-                .BoxShadowHelper(2);
-
-            }
-
-
+        .img_mask {
+          border-radius: 8px;
+          top: 0;
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          border: 3px solid fade(@gray, 20%);
         }
+      }
 
-        .input {
-            min-height: 100px;
-            border: 1px solid #E4E4E4;
-            margin-right: -1px;
-            margin-bottom: -1px;
-            padding: 20px 20px 20px 25px;
-            font-family: Source Sans Pro, Arial, sans-serif;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 18px;
-            color: #939393;
+      img {
+        width: 100%;
+        border-radius: 8px;
 
-            &.fixed {
-                height: 112px;
-            }
-
-            .title {
-                font-size: 18px;
-            }
-
-            .description {
-                font-weight: 200;
-            }
-
-            input {
-                border: none;
-                margin-top: 5px;
-                font-weight: 200;
-                transition: opacity 0.3s, box-shadow 0.3s;
-                outline: none;
-                height: 40px;
-                width: 100%;
-
-                &:focus {
-                    .BoxShadowHelper(2);
-                    //box-shadow: 0 3px 4px rgba(0, 0, 0, .15);
-                    background-color: @gray-lighter;
-                    padding: 10px;
-                    z-index: 20;
-                    width: 100%;
-                }
-            }
-        }
-
+        .BoxShadowHelper(2);
+      }
     }
 
-    .appointments {
-        margin-top: 20px;
+    .input {
+      min-height: 100px;
+      border: 1px solid #e4e4e4;
+      margin-right: -1px;
+      margin-bottom: -1px;
+      padding: 20px 20px 20px 25px;
+      font-family: Source Sans Pro, Arial, sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 18px;
+      color: #939393;
 
-        .title {
-            font-size: 16px;
+      &.fixed {
+        height: 112px;
+      }
+
+      .title {
+        font-size: 18px;
+      }
+
+      .description {
+        font-weight: 200;
+      }
+
+      input {
+        border: none;
+        margin-top: 5px;
+        font-weight: 200;
+        transition: opacity 0.3s, box-shadow 0.3s;
+        outline: none;
+        height: 40px;
+        width: 100%;
+
+        &:focus {
+          .BoxShadowHelper(2);
+          //box-shadow: 0 3px 4px rgba(0, 0, 0, .15);
+          background-color: @gray-lighter;
+          padding: 10px;
+          z-index: 20;
+          width: 100%;
         }
+      }
+    }
+  }
 
-        .no-appointment {
-            .clickable;
-            .BoxShadowHelper(1);
-            display: inline-block;
-            background: fade(#FB5F57, 50);
-            padding: 10px 20px 10px 40px;
-            font-size: 14px;
-            line-height: 14px;
-            border-radius: 5px;
-            color: white;
-            position: relative;
+  .appointments {
+    margin-top: 20px;
 
-            i {
-                font-size: 14px;
-                left: 15px;
-            }
-
-            .v-divide {
-                .center.vertical;
-                display: inline-block;
-                height: 20px;
-                left: 30px;
-                width: 1px;
-                background: fade(white, 50);
-            }
-        }
-
-        .appointment {
-            padding: 0;
-            .clickable;
-            .BoxShadowHelper(1);
-            display: inline-block;
-            border-radius: 5px;
-            height: 80px;
-            overflow: hidden;
-            white-space: nowrap;
-            margin-top: 15px;
-            transition: all 2s ease;
-
-            .date {
-                .header {
-                    .overlay('Smile', 80);
-                    height: 15px;
-                    width: 100%;
-                    position: absolute;
-                    top: 0;
-                }
-
-                transition: all 1s ease;
-                padding-top:15px;
-                //color:white;
-                height:80px;
-                width:80px;
-                display: inline-block;
-                position: relative;
-                font-size:20px;
-                line-height: 18px;
-
-                .month {
-                    display: block;
-                    font-size: 14px;
-                }
-            }
-
-            .detail {
-                transition: all .5s ease;
-                display: inline-block;
-                display: none;
-                min-width: 100px;
-                vertical-align: top;
-                padding: 5px;
-
-                .time {
-                    font-size: 20px;
-                    margin-bottom: 5px;
-
-                    i {
-                        font-size: 20px;
-                    }
-                }
-
-                .btn {
-                    .clickable;
-                    .Font_Body;
-                    font-size: 12px;
-                    border: 1px solid #5ADEE9;
-                    margin: 3px 1px 3px 1px;
-                    border-radius: 15px;
-
-                    &:hover {
-                        .overlay('Smile', 20);
-                    }
-                }
-            }
-
-            &:hover {
-                .detail {
-                    display: inline-block;
-                }
-
-                .date {
-                    .header {
-                        display: none;
-                    }
-
-                    .overlay('Smile', 80);
-                    color:white;
-                }
-            }
-        }
+    .title {
+      font-size: 16px;
     }
 
-    .agent-status {
-        .Font_Body;
-        font-weight: bolder;
-        font-size: 16px;
+    .no-appointment {
+      .clickable;
+      .BoxShadowHelper(1);
+      display: inline-block;
+      background: fade(#fb5f57, 50);
+      padding: 10px 20px 10px 40px;
+      font-size: 14px;
+      line-height: 14px;
+      border-radius: 5px;
+      color: white;
+      position: relative;
+
+      i {
+        font-size: 14px;
+        left: 15px;
+      }
+
+      .v-divide {
+        .center.vertical;
+        display: inline-block;
+        height: 20px;
+        left: 30px;
+        width: 1px;
+        background: fade(white, 50);
+      }
+    }
+
+    .appointment {
+      padding: 0;
+      .clickable;
+      .BoxShadowHelper(1);
+      display: inline-block;
+      border-radius: 5px;
+      height: 80px;
+      overflow: hidden;
+      white-space: nowrap;
+      margin-top: 15px;
+      transition: all 2s ease;
+
+      .date {
+        .header {
+          .overlay("Smile", 80);
+          height: 15px;
+          width: 100%;
+          position: absolute;
+          top: 0;
+        }
+
+        transition: all 1s ease;
+        padding-top: 15px;
+        //color:white;
+        height: 80px;
+        width: 80px;
+        display: inline-block;
+        position: relative;
+        font-size: 20px;
+        line-height: 18px;
+
+        .month {
+          display: block;
+          font-size: 14px;
+        }
+      }
+
+      .detail {
+        transition: all 0.5s ease;
+        display: inline-block;
+        display: none;
+        min-width: 100px;
+        vertical-align: top;
         padding: 5px;
 
-        span {
-            font-size: 16px;
-            padding: 5px 10px 5px 10px;
-            border-radius: 5px;
-            color: white;
+        .time {
+          font-size: 20px;
+          margin-bottom: 5px;
+
+          i {
+            font-size: 20px;
+          }
         }
 
-        &.active {
-            span {
-                background-color: @tech;
-            }
+        .btn {
+          .clickable;
+          .Font_Body;
+          font-size: 12px;
+          border: 1px solid #5adee9;
+          margin: 3px 1px 3px 1px;
+          border-radius: 15px;
+
+          &:hover {
+            .overlay("Smile", 20);
+          }
+        }
+      }
+
+      &:hover {
+        .detail {
+          display: inline-block;
         }
 
-        &.archived {
-            span {
-                background-color: @gray-lighter;
-            }
+        .date {
+          .header {
+            display: none;
+          }
+
+          .overlay("Smile", 80);
+          color: white;
         }
+      }
     }
+  }
+
+  .agent-status {
+    .Font_Body;
+    font-weight: bolder;
+    font-size: 16px;
+    padding: 5px;
+
+    span {
+      font-size: 16px;
+      padding: 5px 10px 5px 10px;
+      border-radius: 5px;
+      color: white;
+    }
+
+    &.active {
+      span {
+        background-color: @tech;
+      }
+    }
+
+    &.archived {
+      span {
+        background-color: @gray-lighter;
+      }
+    }
+  }
 }
 
 .agent_list {
-    .agent_row {
-        padding: 20px;
-        background: #F6F8FA;
+  .agent_row {
+    padding: 20px;
+    background: #f6f8fa;
 
-        img.profile {
-            .BoxShadowHelper(2);
-            width: 100%;
-            max-width: 200px;
-            border-radius: 4px;
-        }
-
-        &:nth-child(2n) {
-            background: white;
-        }
+    img.profile {
+      .BoxShadowHelper(2);
+      width: 100%;
+      max-width: 200px;
+      border-radius: 4px;
     }
+
+    &:nth-child(2n) {
+      background: white;
+    }
+  }
 }
 
 .agent-info {
-    .BoxShadowHelper(1);
-    .scrollbar;
-    border-radius:20px;
-    top:10px;
-    left:10px;
-    bottom:10px;
-    height: calc(100% - 3px);
-    width: 400px;
-    background: fade(white,90%);
+  .BoxShadowHelper(1);
+  .scrollbar;
+  border-radius: 20px;
+  top: 10px;
+  left: 10px;
+  bottom: 10px;
+  height: calc(100% - 3px);
+  width: 400px;
+  background: fade(white, 90%);
+  display: block;
+  position: absolute;
+  z-index: 2;
+
+  .img-box {
+    .clickable;
+    margin-top: 70px;
+    width: 100%;
+    height: 150px;
     display: block;
-    position: absolute;
-    z-index:2;
+    position: relative;
+  }
 
+  .img-profile {
+    .center.both;
+    .background-new;
+    border-radius: 100%;
+    padding: 3px;
+    height: 110px;
+    width: 110px;
+    //background: fade(@color-primary-4,20%);
 
-    .img-box {
-        .clickable;
-        margin-top: 70px;
-        width: 100%;
-        height: 150px;
-        display: block;
-        position: relative;
-    }
-
-    .img-profile {
-        .center.both;
-        .background-new;
-        border-radius: 100%;
-        padding: 3px;
-        height: 110px;
-        width: 110px;
-        //background: fade(@color-primary-4,20%);
-
-        img {
-            height: 104px;
-            width: 104px;
-            border-radius: 100%;
-        }
-    }
-    .agent-type{
-      .Font_Body;
-      position: absolute;
-      top:20px;
-      left:30px;
-      padding:5px 20px;
-      border-radius:20px;
-      border:1px solid @gray-pleasing;
-      color:@gray-pleasing;
-      background:fade(@gray-pleasing,10%);
-      font-weight: normal;
-      &.NAPD{
-        color:darken(@color-button,20%);
-        border-color:darken(@color-button,20%);
-        background:fade(@color-button,10%);
-
-    }
-    &.Intern{
-      color:darken(@color-error,20%);
-      border-color:darken(@color-error,20%);
-      background:fade(@color-error,10%);
+    img {
+      height: 104px;
+      width: 104px;
+      border-radius: 100%;
     }
   }
-  .agent-options{
-    .clickable;
-    position: absolute;
-    top:20px;
-    right:30px;
-    color:darken(@color-button,10%);
-    font-size:20px;
-    padding:0px 5px;
-    border-radius:20px;
-    //border:1px solid @color-button;
-  }
-  .agent-options-expand{
-    .clickable;
-    position: absolute;
-    top:25px;
-    right:60px;
-    color:darken(@color-button,10%);
-    font-size:12px;
-    padding:0px 5px;
-    border-radius:20px;
-    //border:1px solid @color-button;
-  }
-  .agent-name{
+  .agent-type {
     .Font_Body;
-    font-size:18px;
-    width:100%;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    padding: 5px 20px;
+    border-radius: 20px;
+    border: 1px solid @gray-pleasing;
+    color: @gray-pleasing;
+    background: fade(@gray-pleasing, 10%);
+    font-weight: normal;
+    &.NAPD {
+      color: darken(@color-button, 20%);
+      border-color: darken(@color-button, 20%);
+      background: fade(@color-button, 10%);
+    }
+    &.Intern {
+      color: darken(@color-error, 20%);
+      border-color: darken(@color-error, 20%);
+      background: fade(@color-error, 10%);
+    }
+  }
+  .agent-options {
+    .clickable;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: darken(@color-button, 10%);
+    font-size: 20px;
+    padding: 0px 5px;
+    border-radius: 20px;
+    //border:1px solid @color-button;
+  }
+  .agent-options-expand {
+    .clickable;
+    position: absolute;
+    top: 25px;
+    right: 60px;
+    color: darken(@color-button, 10%);
+    font-size: 12px;
+    padding: 0px 5px;
+    border-radius: 20px;
+    //border:1px solid @color-button;
+  }
+  .agent-name {
+    .Font_Body;
+    font-size: 18px;
+    width: 100%;
     text-align: center;
   }
-  .agent-contact{
+  .agent-contact {
     .center.horizontal;
-    .action{
+    .action {
       .clickable;
       display: inline-block;
       position: relative;
-      margin:5px;
-      border-radius:100%;
-      border:1px solid @color-button;
+      margin: 5px;
+      border-radius: 100%;
+      border: 1px solid @color-button;
       color: @color-button;
-      height:30px;
-      width:30px;
-      &:hover{
-        background:fade(@color-button,10%);
+      height: 30px;
+      width: 30px;
+      &:hover {
+        background: fade(@color-button, 10%);
       }
-      i{
+      i {
         .center.both;
       }
     }
-
   }
-  .metrics{
+  .metrics {
     .Font_Body;
-    height:110px;
-    margin-top:35px;
-    padding:35px 29px;
-    .v-divider{
+    height: 110px;
+    margin-top: 35px;
+    padding: 35px 29px;
+    .v-divider {
       display: inline-block;
-      border-right:1px solid fade(@color-button,40%);
-      height:30px;
-      margin-bottom:5px;
+      border-right: 1px solid fade(@color-button, 40%);
+      height: 30px;
+      margin-bottom: 5px;
     }
-    .metric{
-      padding:0px;
-      width:110px;
-      display:inline-block;
+    .metric {
+      padding: 0px;
+      width: 110px;
+      display: inline-block;
       text-align: center;
-      font-size:25px;
-      span{
-        margin-top:-5px;
-        font-size:10px;
-        display:block;
-        font-weight:normal;
-
+      font-size: 25px;
+      span {
+        margin-top: -5px;
+        font-size: 10px;
+        display: block;
+        font-weight: normal;
       }
+    }
+  }
+  .weekly{
+    padding:20px;
+    vertical-align: middle;
+    
+    .week-total{
+      text-align: center;
+      padding:40px 0px;
+      display: block;
+      margin-left:auto;
+      margin-right:auto;
+      .change{
+        vertical-align: middle;
+        height:30px;
+        width:30px;
+        background: fade(@gray-pleasing,20%);
+        display: inline-block;
+        position: relative;
+        border-radius:100%;
+        i{
+          .center.both;
+          color:@gray-pleasing;
+        }
+      }
+      .name{
+        .Font_Body;
+        vertical-align: middle;
+        font-size:18px;
+        margin-left:20px;
+        font-weight:normal;
+        display:inline-block;
+      }
+      .value{
+        .Font_Body;
+        font-size:22px;
+        color:@gray-pleasing;
+        vertical-align: middle;
+        display:inline-block;
+        margin-left:20px;
+      }
+      &.up{
+        .change{
+          .BoxShadowHelper(1);
+          background: fade(@color-success,40%);
+          i{
+            color:@color-success;
+          }
+        }
+      }
+      &.down{
+        .change{
+          .BoxShadowHelper(1);
+          background: fade(@color-error,40%);
+          i{
+            color:darken(@color-error,30%);
+          }
+        }
+      }
+
+    }
+    .h-line{
+      height:1px;
+      width:calc(100% - 10px);
+      background: fade(@gray-pleasing,20%);
+      margin:0px 20px;
     }
   }
 }
 
-.agent-content{
+.agent-content {
   .scrollbar;
-  height:100%;
-  width:100%;
-  padding:20px 0px 20px 400px;
+  height: 100%;
+  width: 100%;
+  padding: 20px 0px 20px 400px;
   display: block;
   position: relative;
-  .tabs{
-    padding:5px 30px;
-    .tab{
+  .tabs {
+    padding: 5px 30px;
+    .tab {
       .clickable;
       .Font_Body;
-      font-weight:normal;
-      font-size:14px;
+      font-weight: normal;
+      font-size: 14px;
       display: inline-block;
-      padding:15px 5px;
-      margin-right:20px;
-      margin-bottom:30px;
-      &.active{
-        color:@color-button;
-        border-bottom:2px solid @color-button;
+      padding: 15px 5px;
+      margin-right: 20px;
+      margin-bottom: 30px;
+      &.active {
+        color: @color-button;
+        border-bottom: 2px solid @color-button;
       }
     }
   }
-  .content-row-title{
+  .content-row-title {
     .Font_Body;
-    font-size:15px;
+    font-size: 15px;
     font-weight: normal;
-    color:@gray-pleasing;
-    padding:5px 30px;
+    color: @gray-pleasing;
+    padding: 5px 30px;
   }
-  .content-row{
+  .content-row {
     .scrollbar;
     padding: 5px 20px;
     white-space: nowrap;
   }
 }
-.achievement-card{
+.achievement-card {
   .BoxShadowHelper(1);
   white-space: normal;
   display: inline-block;
@@ -434,119 +492,268 @@
   border-radius: 10px;
   padding: 15px;
   width: 100%;
-  max-width:350px;
-  margin:5px;
+  max-width: 350px;
+  margin: 5px;
   background: white;
-  .club-label{
+  .club-label {
     .Font_Body;
     .clickable;
-    font-weight:normal;
-    font-size:18px;
-    margin-left:auto;
-    margin-right:auto;
+    font-weight: normal;
+    font-size: 18px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
   }
-  .club-progress{
+  .club-progress {
     .clickable;
-    margin-left:auto;
-    margin-right:auto;
-    padding:20px;
-    max-width:200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    max-width: 200px;
     display: block;
     position: relative;
     background: none;
-    
-  
-    .warning{
-      position:absolute;
-      height:calc(100% - 20px);
-      width:calc(100% - 20px);
-      top:20px;
-      left:20px;
+
+    .warning {
+      position: absolute;
+      height: calc(100% - 20px);
+      width: calc(100% - 20px);
+      top: 20px;
+      left: 20px;
       background: @color-error;
-      border-radius:100%;
-      i{
+      border-radius: 100%;
+      i {
         .center.both;
-        font-size:40px;
-        color:darken(@color-error,50%);
+        font-size: 40px;
+        color: darken(@color-error, 50%);
       }
     }
-    .complete{
-      position:absolute;
-      height:calc(100% - 30px);
-      width:calc(100% - 30px);
-      top:30px;
-      left:30px;
-      background: fade(#25D366,60%);
-      border-radius:100%;
-      i{
+    .complete {
+      position: absolute;
+      height: calc(100% - 30px);
+      width: calc(100% - 30px);
+      top: 30px;
+      left: 30px;
+      background: fade(#25d366, 60%);
+      border-radius: 100%;
+      i {
         .center.both;
-        font-size:40px;
-        color:fade(@gray-pleasing,70%);
+        font-size: 40px;
+        color: fade(@gray-pleasing, 70%);
       }
     }
   }
 }
 .progress-card {
-    .BoxShadowHelper(1);
-    white-space: normal;
-    display: inline-block;
-    position: relative;
-    border-radius: 10px;
-    padding: 15px;
+  .BoxShadowHelper(1);
+  white-space: normal;
+  display: inline-block;
+  position: relative;
+  border-radius: 10px;
+  padding: 15px;
+  width: 100%;
+  max-width: 350px;
+  margin: 5px;
+  background: white;
+
+  .body {
+    margin-top: 20px;
+    font-size: 12px;
     width: 100%;
-    max-width:350px;
-    margin:5px;
-    background: white;
 
+    .callout {
+      box-shadow: none;
+      font-size: 14px;
 
-    .body {
-        margin-top: 20px;
-        font-size: 12px;
-        width:100%;
-
-        .callout {
-            box-shadow: none;
-            font-size: 14px;
-
-            &.red {
-                background: none;
-                color: darken(@color-error, 10%);
-            }
-        }
+      &.red {
+        background: none;
+        color: darken(@color-error, 10%);
+      }
     }
+  }
 
-    .progress .progress-bar.progress-bar-danger {
-        background-color: @color-error;
+  .progress .progress-bar.progress-bar-danger {
+    background-color: @color-error;
+  }
+
+  .deadline {
+    font-size: 10px;
+    margin: 0px 0px;
+    margin-bottom: 15px;
+    //padding:2px 10px;
+    border-radius: 5px;
+
+    // border-left:5px solid @color-button;
+    .date {
+      display: inline-block;
     }
+  }
 
-    .deadline {
-        font-size: 10px;
-        margin: 0px 0px;
-        margin-bottom: 15px;
-        //padding:2px 10px;
-        border-radius: 5px;
+  .summary_label {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    border: 1px solid @gray-pleasing;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 10px;
 
-        // border-left:5px solid @color-button;
-        .date {
-            display: inline-block;
-        }
+    &.behind {
+      border-color: @color-error;
+      color: darken(@color-error, 10%);
     }
-
-    .summary_label {
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        border: 1px solid @gray-pleasing;
-        border-radius: 20px;
-        padding: 5px 15px;
-        font-size: 10px;
-
-        &.behind {
-            border-color: @color-error;
-            color: darken(@color-error, 10%);
-        }
-
-
+  }
+}
+.goal-card{
+  .BoxShadowHelper(1);
+  white-space: normal;
+  background: white;
+  display: inline-block;
+  position: relative;
+  margin:10px;
+  border-radius: 10px;
+  padding: 15px;
+  vertical-align: top;
+  button.btn.btn-primary{
+    border:1px solid @color-button;
+    color:@color-button;
+    background: none;
+    border-radius:20px;
+  }
+  button.btn.btn-default{ 
+    border:1px solid @gray-pleasing;
+    color:@gray-pleasing;
+    background: none;
+    border-radius:20px;
+  }
+  .edit-btn{
+    background:none;
+    border-radius:100%;
+    padding:2px 7px;
+    margin-left:10px;
+    border:1px solid darken(@color-button,10%);
+    color: darken(@color-button,10%);
+    font-size:12px;
+  }
+  .goal-title{
+    .Font_Body;
+    font-weight: normal;
+    font-size:18px;
+    padding:10px 20px;
+    vertical-align: top;
+    display:inline-block;
+  }
+  .goal-body{
+    padding:60px 10px 10px 10px;
+    display: block;
+    position: relative;
+    td.goal-label{
+      padding-right:20px;
     }
+  }
+  .goal-progress{
+    position: relative;
+    display: inline-block;
+    height:40px;
+    width:40px;
+    .center{
+      .center.both;
+      background:fade(@color-button,40%);
+      height:calc(100% - 2px);
+      width:calc(100% - 2px);
+      border-radius:100%;
+      i{
+        .center.both;
+        color:darken(@color-button,30%);
+      }
+    }
+  }
+  .goal-value{
+    .Font_Body;
+    .center.horizontal;
+    white-space: nowrap;
+    top:5px;
+    color:@gray-pleasing;
+    font-size:14px;
+    border:1px solid @color-button;
+    padding:5px 10px;
+    border-radius:20px;
+    //width:200px;
+    text-align: center;
+  }
+}
+.chart-card {
+  .BoxShadowHelper(1);
+  white-space: normal;
+  background: white;
+  display: inline-block;
+  position: relative;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+  width: calc(50% - 3px);
+  min-width: 500px;
+  max-width: 650px;
+  .chart-title {
+    text-align: center;
+    margin: 5px 10px 20px 5px;
+  }
+  .chart {
+    height: 300px;
+    width: 100%;
+    .draw_line(@length) {
+      stroke-dasharray: @length;
+      stroke-dashoffset: @length;
+      animation-name: draw;
+      animation-duration: 5s;
+      animation-fill-mode: forwards; // Stay on the last frame
+      animation-iteration-count: 1; // Run only once
+      animation-timing-function: linear;
+    }
+    .ct-series-a .ct-line {
+      /* Rectangle 269: */
+      stroke: url(#gradient) !important;
+      stroke-linecap: round;
+      stroke-width: 3px;
+      stroke-dasharray: 1500px;
+      stroke-dashoffset: 1500px;
+      animation-name: draw;
+      animation-duration: 5s;
+      animation-fill-mode: forwards; // Stay on the last frame
+      animation-iteration-count: 1; // Run only once
+      animation-timing-function: linear;
+      //stroke-image:linear-gradient(-90deg, #70FABB 0%, #E1E85B 100%);
+    }
+    .ct-label.ct-horizontal {
+      position: relative;
+      transform: rotate(90deg);
+      transform-origin: left top;
+    }
+    .ct-series-a .ct-area {
+      background-image: linear-gradient(-90deg, #6F94FF 0%, #6fdcff 100%);
+      fill: #6fdcff;
+      opacity: 1;
+    }
+    .ct-series-c .ct-line {
+      /* Rectangle 269: */
+      stroke: @color-button;
+      stroke-width: 3px;
+      stroke-dasharray: 15px 5px;
+    }
+    .ct-series-b .ct-area {
+      /* Rectangle 269: */
+      fill: none;
+     
+    }
+    .ct-series-c .ct-area {
+      /* Rectangle 269: */
+      fill: none;
+     
+    }
+  }
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
 }

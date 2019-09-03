@@ -8,13 +8,13 @@
  * Controller of the JFS_Admin
  */
 angular.module('JFS_Admin')
-  .controller('ReportCtrl', function($scope, $rootScope, $http, $state, User, FileSaver, Blob) {
+  .controller('ReportCtrl', function($scope, $rootScope, $http, $state, User, FileSaver, Blob,ENV) {
     $scope.ColorTests = [];
     $scope.getColorStatus = function() {
 
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/Recruits/NextStep/color/',
+        url: ENV.API + 'Recruits/NextStep/color/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -33,7 +33,7 @@ angular.module('JFS_Admin')
     $scope.getColorStatus();
     $http({
       method: 'GET',
-      url: 'https://jfsapp.com/Secure/API/ColorQuiz/',
+      url: ENV.API + 'ColorQuiz/',
       params: {
         'access_token': $rootScope.currentUser.Token.access_token,
         client_id: 'testclient',
@@ -52,7 +52,7 @@ angular.module('JFS_Admin')
       $rootScope.showLoading = !$rootScope.showLoading;
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/ColorQuiz/Print/' + test.Test_Token + '/',
+        url: ENV.API + 'ColorQuiz/Print/' + test.Test_Token + '/',
         responseType: 'arraybuffer',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
@@ -75,7 +75,7 @@ angular.module('JFS_Admin')
 
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/PrintReport/' + test.url + '/',
+        url: ENV.API + 'PrintReport/' + test.url + '/',
         responseType: 'arraybuffer',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
@@ -96,7 +96,7 @@ angular.module('JFS_Admin')
     $scope.deleteColorTest = function(id) {
       $http({
         method: 'DELETE',
-        url: 'https://jfsapp.com/Secure/API/ColorQuiz/' + id + '/',
+        url: ENV.API + 'ColorQuiz/' + id + '/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -123,7 +123,7 @@ angular.module('JFS_Admin')
     $scope.getPopStatus = function() {
       $http({
         method: 'GET',
-        url: 'https://jfsapp.com/Secure/API/Recruits/NextStep/pop/',
+        url: ENV.API + 'Recruits/NextStep/pop/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -142,7 +142,7 @@ angular.module('JFS_Admin')
       color.Status = "Reviewed";
       $http({
         method: 'Patch',
-        url: 'https://jfsapp.com/Secure/API/ColorQuiz/',
+        url: ENV.API + 'ColorQuiz/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',

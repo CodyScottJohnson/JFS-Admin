@@ -1,34 +1,88 @@
 .User{
+  .landing{
+    height:100%;
+    width:100%;
+    .options{
+      .center.both;
+      //width:900px;
+      .row{
+        max-width:2000px;
+      }
+    }
+    .option{
+      .BoxShadowHelper(1);
+      .clickable;
+      background:white;
+      margin:20px;
+      padding:20px;
+      width:300px;
+      height:300px;
+      border-radius:10px;
+      display:inline-block;
+      text-align: center;
+      .icon-container{
+        border:1px solid @color-button;
+        margin-left:auto;
+        margin-right:auto;
+        height:150px;
+        width:150px;
+        border-radius:100%;
+        position: relative;
+        margin:40px auto 20px auto;
+        i{
+          .center.both;
+          color:@color-button;
+          font-size:60px;
+        }
+      }
+      span{
+        .Font_Body;
+        font-weight:normal;
+        font-size:18px;
+      }
+      &:hover{
+        .BoxShadowHelper(2);
+        .icon-container{
+          background:fade(@color-button,5%);
+        }
+
+      }
+    }
+  }
   .Settings{
+    padding:10px 40px;
     .settings_card{
       .Font_Body;
       .clickable;
       float:left;
-      padding:10px;
+      padding:40px;
       margin: 10px;
-      font-size:30px;
-      height:200px;
-      width: 150px;
+      font-size:25px;
+      min-height:235px;
+      min-width: 188px;
       background-color: white;
-      border-radius: 5px;
+      border-radius: 20px;
       text-align: center;
       vertical-align: middle;
-      .BoxShadowHelper(4);
+      .BoxShadowHelper(2);
       i{
         font-size: 70px;
+        margin-bottom:20px;
       }
     }
     .menu_bar{
       width:100%;
-      background-color: @color-secondary-2-1;
-      .BoxShadowHelper(2);
+      padding:10px 20px;
+      margin-bottom:20px;
       .option{
         .Font_Body;
         .clickable;
         padding: 10px;
         text-align: center;
+        font-weight:normal;
         i{
           font-size:20px;
+          margin-bottom:10px;
         }
         span{
           display: block;
@@ -36,7 +90,7 @@
         }
         &.selected{
           color:darken(@color-secondary-2-1,70%);
-          border-bottom: 4px solid darken(@color-secondary-2-1,70%);
+          border-bottom: 1px solid darken(@color-secondary-2-1,70%);
         }
       }
 
