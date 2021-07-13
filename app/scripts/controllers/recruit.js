@@ -36,6 +36,8 @@ angular.module('JFS_Admin')
       Task.getTask(taskID);
       Functions.OpenModal('views/Modals/TaskModal.html', 'md');
     };
+    $scope.bioEdited = false;
+    $scope.isBioFocussed = false;
     $scope.newTextMessage="";
     $scope.clipboard = function(string) {
       ecopy(string);
@@ -59,14 +61,34 @@ angular.module('JFS_Admin')
     $scope.colors2 = ['#97BBCD', '#DCDCDC', '#F7464A', '#FDB45C'];
     $scope.labels2 = ['', '', '', ''];
     $scope.previewFile = function(file) {
+      Functions.toggleLoading()
       Dropbox.PreviewFile(file).then(function(data) {
+        data.meta = file
+        Functions.toggleLoading()
         Functions.OpenModal('views/Modals/FilePreview.html', 'lg', data);
+      },function(error){
+        Functions.toggleLoading()
+        if(error.status == 409){
+          Functions.Toast('error','File Not Found',"Couldn't find file "+file.title+' on Dropbox')
+        }
       });
     };
+    $scope.updateFile = function(file){
+  
+      var index = _.findIndex($scope.Recruit.currentRecruit.Info, { 'fileName': file.fileName });
+      $scope.Recruit.currentRecruit.Info[index] = file
+      $scope.saveRecruit();
+    }
     $scope.getFile = function(file) {
+      Functions.toggleLoading()
       Dropbox.getFile(file).then(function(data) {
+        Functions.toggleLoading()
         console.log(data);
-      });
+      },function(error){
+        Functions.toggleLoading()
+        if(error.status == 409){
+          Functions.Toast('error','File Not Found',"Couldn't find file "+file.title+' on Dropbox')
+        }});
     };
     $scope.uploadFile = function() {
       Functions.OpenModal('views/Modals/FileUpload.html', 'lg');
@@ -132,6 +154,28 @@ angular.module('JFS_Admin')
       //task.Status = "Completed";
       Task.updateTask(task);
     };
+    $scope.bioChanged = function(content){
+      if($scope.isBioFocussed){
+      $scope.bioEdited = true;
+      }
+    }
+    $scope.bioInit = function(){
+      $scope.bioEdited = false
+    }
+    $scope.bioFocus = function(){
+      $scope.isBioFocussed = true;
+    }
+    $scope.initBio = function(){
+      $scope.Recruit.currentRecruit.bio = "Add Bio Here...";
+    }
+    $scope.bioBlur = function(){
+      $scope.isBioFocussed = false;
+    }
+    $scope.saveBio = function(){
+      $scope.saveRecruit();
+      $scope.bioEdited = false;
+
+    }
     $scope.updateToDo = function(){
       recruit.updateToDo();
     };
@@ -183,6 +227,7 @@ angular.module('JFS_Admin')
 
       recruit.save();
       var selected = _.find(Recruits.data.settings.stages, { 'id': $scope.Recruit.currentRecruit.Stage })
+      Recruits.data.List[ _.findIndex(Recruits.data.List, { 'INDV_ID': $scope.Recruit.currentRecruit.INDV_ID })] = $scope.Recruit.currentRecruit
       $scope.Recruit.currentRecruit.Stage_Name = selected.Name;
     };
     $scope.saveRecruitStatus = function(recruit){

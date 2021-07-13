@@ -16,7 +16,14 @@
             <div ng-show="Recruit.currentRecruit.Archived == 1" class="status archived">
               Status: <span>Archived</span>
             </div>
+            <div class="account-bio">
+              <div ng-hide="Recruit.currentRecruit.bio || isBioFocussed" style="text-align: center;"> <button ng-click="initBio()" class="save-btn">Add Bio</button></div>
+              <div summernote airMode on-init="bioInit()" on-focus="bioFocus()" on-blur="bioBlur()" on-change="bioChanged(content)" ng-model="Recruit.currentRecruit.bio"><span>Bio...</span></div>
+              <div style="text-align: center;">  <button ng-show="bioEdited && (isBioFocussed || Recruit.currentRecruit.bio)" ng-click="saveBio()" class="save-btn">Save Changes</button></div>
+            </div>
+            
           </div>
+          
           <div class="button btn" ng-click="getSocial(Recruit.currentRecruit.EMAIL)">
             Get Social
           </div>

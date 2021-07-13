@@ -1,3 +1,14 @@
-<div class="modal-body scrollbar" resize style="height:{{windowHeight-150}}px;">
-<preview ng-src="{{items.fileUrl}}" type="application/pdf" style="height:100%;width:100%px;display:block"></preview>
+<div ng-controller="RecruitCtrl" class="modal-body scrollbar preview-modal" resize style="height:{{windowHeight-150}}px;">
+    <div class="preview-header">
+    <div class="file" ng-class="fileIcon(items.meta.fileType)"></div><div class="title">{{items.meta.title}} </div>
+    </div>
+<preview ng-src="{{items.fileUrl}}" type="application/pdf" style="height:calc(100% - 120px);width:100%px;display:block;border-radius:10px"></preview>
+<div class="preview-footer">
+    <div class="button" style="text-align:center" ng-click="getFile(items.meta)">
+        Download
+      </div>
+      <div class="button" style="text-align:center;background-color:#e63729" ng-click="deleteFile(document)">
+        Delete
+      </div>
+</div>
 </div>

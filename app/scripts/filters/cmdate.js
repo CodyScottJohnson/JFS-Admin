@@ -32,9 +32,26 @@ angular.module('JFS_Admin')
 .filter('momentdateRelative', [
   '$filter',
   function($filter) {
-      return function(input, format) {
+      return function(input, offset) {
+          
+          if(!angular.isDefined(offset)){
+              offset=0;
+          }
           if (input === null) { return '';}
-          else { return moment(input).fromNow();}
+          else { return moment(input).add(offset,'hours').fromNow();}
       };
   }
-]);
+])
+.filter('momentdateRelativeShort', [
+    '$filter',
+    function($filter) {
+        return function(input, offset) {
+            
+            if(!angular.isDefined(offset)){
+                offset=0;
+            }
+            if (input === null) { return '';}
+            else { return moment(input).add(offset,'hours').fromNow(true);}
+        };
+    }
+  ]);

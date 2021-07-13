@@ -223,16 +223,21 @@ angular.module('JFS_Admin')
     currentRecruit.getSocial = function(email) {
       var deferred = $q.defer();
        $http({
-           method: 'GET',
-           url: 'https://api.fullcontact.com/v2/person.json?email=' + email + '&apiKey=18f2292b957c799'
+           method: 'post',
+           url: 'https://api.fullcontact.com/v3/person.enrich',
+           headers: {Authorization: "Bearer fylslOIuDaEdoyqPkEOd79dfTBRFTIuO"},
+           data: {
+             email:email
+           }
        }).then(function(data) {
            currentRecruit.data.currentRecruit.Info.ContactDetails = data.data;
            currentRecruit.save();
+           console.log(data.data)
            Functions.Toast('success','','Success');
            deferred.resolve(data.data);
        }, function(error) {
-         console.log(error.data.message);
-          Functions.Toast('error','',error.data.message);
+         //console.log(error.data.message);
+          Functions.Toast('error','',error.data);
        });
 
        return deferred.promise;
@@ -248,7 +253,7 @@ angular.module('JFS_Admin')
             method: 'PATCH',
             url: ENV.API + 'Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/ProfilePic/',
             params: {
-                'access_token': '8c7ba91d562f5b566544e8bd94a518f71d4ad6b0',
+                'access_token': $rootScope.currentUser.Token.access_token,
                 client_id: 'testclient',
                 client_secret: 'testpass'
             },
@@ -275,7 +280,7 @@ angular.module('JFS_Admin')
             method: 'PATCH',
             url: ENV.API + 'Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/ProfilePic/',
             params: {
-                'access_token': '8c7ba91d562f5b566544e8bd94a518f71d4ad6b0',
+                'access_token': $rootScope.currentUser.Token.access_token,
                 client_id: 'testclient',
                 client_secret: 'testpass'
             },

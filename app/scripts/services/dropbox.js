@@ -57,7 +57,7 @@ angular.module('JFS_Admin')
       thumbnails: fileServer + '/1/thumbnails/auto',
       chunkedUpload: fileServer + '/1/chunked_upload',
       commitChunkedUpload: fileServer + '/1/commit_chunked_upload/auto',
-
+      createShareLink: apiServer + '/2/sharing/create_shared_link_with_settings',
       // File operations.
       fileopsCopy: apiServer + '/1/fileops/copy',
       fileopsCreateFolder: apiServer + '/1/fileops/create_folder',
@@ -176,6 +176,9 @@ angular.module('JFS_Admin')
       },
       listFolder: function(data,options) {
         return GET(urls.listFolder, null,data,options);
+      },
+      share: function(data,options) {
+        return GET(urls.createShareLink, null,data,options);
       }
     };
 
@@ -222,6 +225,15 @@ angular.module('JFS_Admin')
       return deferred.promise;
     };
     Dropbox.listFolder = function(path,options) {
+      var deferred = $q.defer();
+      api.listFolder({
+        path: path
+      },options).then(function(data) {
+        deferred.resolve(data.data);
+      });
+      return deferred.promise;
+    };
+    Dropbox.shareFile = function(path,options) {
       var deferred = $q.defer();
       api.listFolder({
         path: path

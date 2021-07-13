@@ -1,0 +1,55 @@
+<div class="title">Pipeline</div>
+
+<div class="stage-view" >
+  <div
+    ng-repeat="stage in Recruits.settings.stages"
+    class="stage"
+    ng-show="populateStage(stage.Name)"
+  >
+    <div class="title">
+      {{ stage.Name }}
+      <span class="total">{{
+        Recruits.candidates.stages[stage.Name].length || 0
+      }}</span>
+    </div>
+    <div class="sort">
+    <div class="btn-group" uib-dropdown is-open="status.isopen">
+            <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                    <i class="fa fa-sort-amount-desc"></i> Sort By: Name A-Z <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+              <li role="menuitem"><a href="#">Name A-Z</a></li>
+              <li role="menuitem"><a href="#">Name Z-A</a></li>
+              <li role="menuitem"><a href="#">Time in Stage</a></li>
+              <li role="menuitem"><a href="#">Time in Stage</a></li>
+            </ul>
+          </div>
+    </div>
+    <div
+      dnd-list="Recruits.candidates.stages[stage.Name]"
+      dnd-inserted="moveStage(index, external, type,Recruits.candidates.stages[stage.Name][index],stage)"
+      class="stage-list"
+    >
+      <div
+        class="candidate no-drag"
+        dnd-moved="Recruits.candidates.stages[stage.Name].splice($index, 1)"
+        ng-repeat="candidate in Recruits.candidates.stages[stage.Name]"
+        dnd-draggable="candidate"
+        dnd-selected="models.selected = candidate"
+        ng-class="{'selected': models.selected === candidate}"
+        context-menu="stagesContextOptions" context-menu-class="context_menu-stage"
+      >
+        <div class="contents no-drag">
+                <div  class="profile-img no-drag" ng-click="previewCandidate(candidate)">
+                        <img ng-src="https://jfsapp.com/Images/Recruits/{{candidate.ProfilePic || 'blank.jpg'}}" >
+                      </div>
+          <div class="name no-drag">{{ candidate.FNAME }} {{ candidate.LNAME }}</div>
+          <div class="time no-drag">
+            Time In Stage: {{candidate.Entered_Stage_dt|momentdateRelativeShort:-9}}
+          </div>
+    
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

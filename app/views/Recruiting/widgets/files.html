@@ -1,0 +1,32 @@
+<div class="widget task-widget">
+  <div class="widget-header">
+    <span class="clickable">Files</span>
+    <div class="widget-sizes">
+
+     
+    </div>
+  </div>
+  <div class="widget-body">
+    <div class="NoTasks" id="NoNotification" ng-show="Recruit.currentRecruit.Info.Documents.length==0" >
+      <i class="fa fa-info-circle" style="margin-top:30px;"></i>
+      <div class="SubTitle">No Files Have Been Uploaded</div>
+    </div>
+    <div class="file-tile" ng-repeat="document in Recruit.currentRecruit.Info.Documents" ng-click="!textBtnForm.$visible && previewFile(document)">
+      <div class="file" ng-class="fileIcon(document.fileType)"></div>
+      <div class="meta"> <div  onaftersave="updateFile(document)" editable-text="document.title" e-form="textBtnForm"   class="title">{{document.title}} <i class="fa fa-edit" ng-click="textBtnForm.$show();$event.stopPropagation()" ng-hide="textBtnForm.$visible"></i></div>
+      <div class="date">{{document.fileUploaded | momentdate : 'MMM D Y' }} {{document.fileUploaded | momentdate :  'h:mm a'}}</div></div>
+     
+    
+   
+    </div>
+    <div style="height:100px;width:100%;"></div>
+  </div>
+  <div class="widget-footer">
+    <div class="button" style="text-align:center" ng-click="uploadFile()">
+      Upload
+    </div>
+    <div class="badge">
+      {{Recruit.currentRecruit.Info.Documents.length}}
+    </div>
+  </div>
+</div>

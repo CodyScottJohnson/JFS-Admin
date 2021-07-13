@@ -56,6 +56,7 @@ module.exports = function(config) {
       'bower_components/ngHandsontable/dist/ngHandsontable.js',
       'bower_components/angular-svg-round-progressbar/build/roundProgress.js',
       'bower_components/chartist/dist/chartist.js',
+      'bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

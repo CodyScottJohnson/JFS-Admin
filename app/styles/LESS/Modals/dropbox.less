@@ -1,103 +1,179 @@
-.Dropbox_Client{
-  .row{
-    padding:0 15px 0 15px;
+.Dropbox_Client {
+  .row {
+    padding: 0 15px 0 15px;
   }
-  .modal-body{
+  .modal-header {
+    .Font_Body;
+    background: white;
+    font-size: 20px;
+    img {
+      height: 30px;
+    }
+  }
+  .modal-body {
     max-height: 700px;
     overflow: hidden;
     border-radius: 0 0 5px 5px;
-  }
-  .Client_Content{
-    .scrollbar;
-    height:700px;
-    width:100%;
-    display: block;
-    position: relative;
-    border-left: 1px solid fade(@gray-pleasing,20%);
-    .DirectionalBoxShadowHelper('right',1);
-    .Client_Toolbar{
-      background: white;
-      width:100%;
-      height:55px;
-      position: absolute;
-      border-bottom: 1px solid fade(@gray-pleasing,20%);
-      padding:10px 25px 10px 25px;
-      display: block;
-      z-index: 1;
-      i{
-        color:fade(@gray-pleasing,60%);
-        font-size:30px!important;
+    .breadcrumb {
+      background: none;
+      padding: 0px 20px;
+      .breadcrumb-item {
         .clickable;
-        margin:0 10px 0 0;
-        &.favorite{
-          color:@color-secondary-1-4!important;
+        a {
+          .Font_Body;
+          font-size: 12px;
+          color: #61082b;
         }
       }
     }
-    .Client_Address{
+  }
+  .Client_Content {
+    .scrollbar;
+    height: 700px;
+    width: 100%;
+    display: block;
+    position: relative;
+    border-left: 1px solid fade(@gray-pleasing, 20%);
+    .DirectionalBoxShadowHelper("right", 1);
+    .Client_Toolbar {
+      background: white;
+      width: 100%;
+      height: 55px;
+      position: absolute;
+      border-bottom: 1px solid fade(@gray-pleasing, 20%);
+      padding: 10px 25px 10px 25px;
+      display: block;
+      z-index: 1;
+      i {
+        color: fade(@gray-pleasing, 60%);
+        font-size: 30px !important;
+        .clickable;
+        margin: 0 10px 0 0;
+        &.favorite {
+          color: @color-secondary-1-4!important;
+        }
+      }
+    }
+    .Client_Address {
       .Font_Body;
       font-weight: 900;
       font-size: 18px;
-      line-height:35px;
+      line-height: 35px;
       background: white;
-      width:100%;
-      height:45px;
+      width: 100%;
+      height: 45px;
       display: block;
       position: relative;
-      border-bottom: 1px solid fade(@gray-pleasing,20%);
-      padding:5px 10px 5px 10px;
-      top:55px;
+      border-bottom: 1px solid fade(@gray-pleasing, 20%);
+      padding: 5px 10px 5px 10px;
+      top: 55px;
       position: absolute;
       display: block;
       z-index: 1;
-      label{
+      label {
         .Font_Body;
-        color:darken(@tech,30%);
+        color: darken(@tech, 30%);
         font-size: 15px;
         text-transform: uppercase;
-        margin-right:20px;
+        margin-right: 20px;
       }
-      input{
+      input {
         .Font_Body;
         font-size: 13px;
-        border:none;
+        border: none;
         box-shadow: none;
-        &:focus{
+        &:focus {
           border-radius: 0;
-          background: fade(@gray-pleasing,10%);
+          background: fade(@gray-pleasing, 10%);
         }
       }
-      &.expanded{
-        height:80px;
+      &.expanded {
+        height: 80px;
       }
     }
-    .files{
+    .files {
       .scrollbar;
-      height:100%;
-      padding:120px 20px 20px 20px;
-      .item{
-        .folder,.file{
+      height: 100%;
+      padding: 120px 20px 20px 20px;
+      display: block;
+      position: relative;
+      .item {
+        .folder,
+        .file {
+
           display: inline-block;
+          vertical-align: middle;
+          margin: 5px;
+        }
+        .title {
+          .Font_Body;
+          font-size: 13px;
+          vertical-align: middle;
+          display: inline-block;
+          margin-left: 5px;
         }
       }
+     
     }
+    .file-view{
+      .BoxShadowHelper(5);
+      position:absolute;
+      display: block;
+      top:100px;
+      right:0;
+      height:100%;
+      width:75%;
+      background: white;
+      padding:30px;
 
+    }
   }
-  .Client_Footer{
+  .Client_Footer {
     position: absolute;
-    bottom:0;
-    width:100%;
-    .Send_Bar{
+    bottom: 0;
+    width: 100%;
+    .Send_Bar {
       .Font_Body;
-      width:100%;
-      height:50px;
+      width: 100%;
+      height: 50px;
       line-height: 50px;
       text-align: center;
       font-size: 25px;
       background: @tech;
-      color:darken(@tech,30%);
-      border-top: 1px solid fade(@gray-pleasing,20%);
+      color: darken(@tech, 30%);
+      border-top: 1px solid fade(@gray-pleasing, 20%);
       .BoxShadowHelperUp(1);
     }
+  }
+}
+.preview-modal{
+  border-radius:10px;
+  .preview-header{
+    vertical-align:middle;
+    font-size:16px;
+    padding:10px 0px;
+    .file{
+      display:inline-block;
+      margin-right:15px;
+      vertical-align:middle;
+    }
+    .title{
+      display:inline-block;
+      vertical-align:middle;
+    }
+  }
+  .button {
+    .Font_Body;
+    font-size: 15px;
+    .BoxShadowHelper(1);
+    margin-left: auto;
+    margin-right: auto;
+    background: @color-button;
+    color: @almost-white;
+    border-radius: 2px;
+    padding: 10px 15px 10px 15px;
+    display:inline-block;
+    margin:10px 0px;
+
   }
 }

@@ -295,7 +295,7 @@
 				<ul class="nav nav-sidebar">
 					<li class="top-level" ng-class="{active: ('app.Home' | 
 						includedByState) 
-						}"><a href="#Home"><i class="main-icon fa fa-home"></i><span class="text"> Dashboard</span></a></li>
+						}"><a href="#Home"><img class= "main-icon" src="https://jfsapp.com/Images/Icons/Menu/main-dash.svg"><span class="text"> Dashboard</span></a></li>
 						<!--
 					<li ng-class="{active: ('app.Style.Guide' | 
 						includedByState) 
@@ -336,38 +336,36 @@
 						includedByState) || ('app.Agents.EnterNumbers' | 
 						includedByState)|| ('app.Agents.Landing' | 
 						includedByState) }" class="top-level"><a  ng-model="collapsed4"
-							ng-click="collapsed4=!collapsed4"><i class="main-icon fa fa-group"></i><span class="text">
+							ng-click="collapsed4=!collapsed4"><img class= "main-icon" src="https://jfsapp.com/Images/Icons/Menu/agents.svg"><span class="text">
 								Manage Agents</span> <span class="fa fa-angle-down pull-right"></span></a></li>
 					<ul class="subMenu" ng-show="collapsed4">
-							<li><a ui-sref="app.Agents.Landing.Career"><i class="fa fa-dashboard"></i><span class="text">
-									Dashboard</span></a></li>
-						<li><a ui-sref="app.Agents.Dashboard"><i class="fa fa-users"></i><span class="text">
+							<li><a ui-sref="app.Agents.Landing.Career"><img src="https://jfsapp.com/Images/Icons/Menu/agent-dash.svg"><span class="text">
+									Agency Overview</span></a></li>
+						<li><a ui-sref="app.Agents.Dashboard"><img src="https://jfsapp.com/Images/Icons/Menu/agent-list.svg"><span class="text">
 									Agent List</span></a></li>
-						<li><a ui-sref="app.Agents.EnterNumbers"><i class="fa fa-list"></i><span class="text">
+						<li><a ui-sref="app.Agents.EnterNumbers"><img src="https://jfsapp.com/Images/Icons/Menu/worksheets.svg"><span class="text">
 									Enter Numbers</span></a></li>
 					</ul>
 					<li class="top-level" ng-class="{active: ('app.Tasks' | 
 						includedByState) 
-						}"><a ui-sref="app.Tasks"><i class="main-icon fa fa-check-circle"></i><span class="text"> Tasks</span></a></li>
+						}"><a ui-sref="app.Tasks"><img class= "main-icon" src="https://jfsapp.com/Images/Icons/Menu/tasks.svg"><span class="text"> Tasks</span></a></li>
 
 					<li ng-class="{active: ('app.Recruiting.Assigned' | 
 						includedByState) || ('app.Recruiting.Dashboard' | includedByState) || 
 						('app.Recruiting.Archived' | includedByState) ||
 						('app.Recruiting.Recruit' | includedByState)
-						}" class="top-level"><a ui-sref="app.Recruiting.Dashboard2" ng-model="collapsed5" ng-click="collapsed5=!collapsed5"><i
-								class="main-icon fa fa-sitemap"></i><span class="text"> Recruiting</span><span
+						}" class="top-level"><a  ng-model="collapsed5" ng-click="collapsed5=!collapsed5"><img class= "main-icon" src="https://jfsapp.com/Images/Icons/Menu/recruiting.svg"><span class="text"> Recruiting</span><span
 								class="fa fa-angle-down pull-right"></span></a></li>
 					<ul class="subMenu" ng-show="collapsed5">
-						<li><a ui-sref="app.Recruiting.Assigned"><i class="fa fa-child"></i><span class="text">
-									Assigned To Me</span></a></li>
-						<li><a ui-sref="app.Reporting.Dashboard"><i class="fa fa-bar-chart"></i><span class="text">
-									Reports</span></a></li>
-						<li><a ui-sref="app.Recruiting.Dashboard"><i style="color:#FAC559" class="fa fa-users"></i><span
-									class="text"> Recruiting Pool</span></a></li>
-						
+							<li><a ui-sref="app.Recruiting.Dashboard2"><img src="https://jfsapp.com/Images/Icons/Menu/candidate-pool.svg"><span
+								class="text"> Candidate Pool</span></a></li>
+					
+						<li><a ui-sref="app.Recruiting.Stages"><img src="https://jfsapp.com/Images/Icons/Menu/candidate-stages.svg"><span class="text">
+							Candidate Stages</span></a></li>
+						<li><a ui-sref="app.Reporting.Dashboard"><img src="https://jfsapp.com/Images/Icons/Menu/candidate-reports.svg"><span class="text">
+							Candidate Reports</span></a></li>
 
-						<li><a ui-sref="app.Recruiting.Archived"><i class="fa fa-archive"></i><span class="text">
-									Archived</span>
+					
 								<!--<span ng-model="collapsed7"  class="fa fa-angle-down pull-right"></span>--></a>
 						</li>
 						<!--<ul class="subMenu" ng-show="collapsed7">

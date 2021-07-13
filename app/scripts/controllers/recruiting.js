@@ -249,4 +249,56 @@ angular.module('JFS_Admin')
         Functions.OpenModal('views/Recruiting/modals/taskModal.html', 'md');
       });
     };
+    $scope.populateStage = function(stage){
+      if(!angular.isDefined(Recruits.data.candidates.stages[stage])){
+        Recruits.data.candidates.stages[stage] = [];
+
+      }
+      return true;
+    };
+    $scope.moveStage = function(index, external, type,candidate,stage){
+       candidate.Stage_Name = stage.Name;
+       candidate.Stage = stage.id;
+       Recruits.save(candidate).then(function(){
+        $scope.reload()
+       });
+       
+    }
+    $scope.previewCandidate =  function(candidate){
+      recruit.setRecruit(candidate.INDV_ID).then(function(data) {
+        Functions.OpenModal('views/Recruiting/candidatePreview.html', 'lg');
+      });
+    }
+    $scope.stagesContextOptions = [
+      ['New Task', function($itemScope) {
+        //console.log($itemScope.recruit.INDV_ID);
+        Task.newTask({
+          Recruit_ID: $itemScope.candidate.INDV_ID
+        });
+        Functions.OpenModal('views/Modals/TaskModal.html', 'md');
+      }, false],
+     
+          ['View Notes', function($itemScope) {
+            recruit.setRecruit($itemScope.candidate.INDV_ID).then(function(data) {
+              Functions.OpenModal('views/Modals/NotesModal.html', 'md');
+            });
+          }],
+          ['View Tasks', function($itemScope) {
+            recruit.setRecruit($itemScope.candidate.INDV_ID).then(function(data) {
+              Functions.OpenModal('views/Recruiting/modals/taskModal.html', 'md');
+            });
+          }],
+     
+     
+          ['Archive', function($itemScope) {
+            if($itemScope.candidate.Archived == 1){
+              $itemScope.candidate.Archived = 0;
+            } else{
+              $itemScope.candidate.Archived = 1;
+            }
+              Recruits.save($itemScope.candidate);
+            }
+          ]
+     
+    ];
   });
