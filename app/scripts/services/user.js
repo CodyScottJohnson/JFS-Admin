@@ -52,16 +52,16 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'Get',
-        url: ENV.API + 'User/Settings/Global',
+        url: ENV.API_v2 + 'User/Settings/Global/',
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
           client_secret: 'testpass'
         },
-      }).then(function(data) {
-        $rootScope.GlobalSettings = data.data;
-        currentUser.data.GlobalSettings = data.data;
-        deferred.resolve(data.data);
+      }).then(function(result) {
+        $rootScope.GlobalSettings = result.data.data;
+        currentUser.data.GlobalSettings = result.data.data;
+        deferred.resolve(result.data.data);
       },function(){
         deferred.reject("Couldn't Load Global Settings");
       });
@@ -94,7 +94,8 @@ angular.module('JFS_Admin')
         currentUser.getCurrent().then(function() {
           $http({
             method: 'POST',
-            url: '/Secure/OAUTH/getToken/',
+            url: ENV.Oauth + 'token/',
+          
             data: {
               grant_type: 'password',
               client_id: 'testclient',
@@ -150,7 +151,7 @@ angular.module('JFS_Admin')
     };
     currentUser.addText = function(text) {};
     currentUser.getTexts = function() {
-      $http({
+      /*$http({
         method: 'GET',
         url: ENV.API + 'Texts/',
         params: {
@@ -160,7 +161,7 @@ angular.module('JFS_Admin')
         },
       }).then(function(data) {
         currentUser.data.TextMessages = data.data;
-      }, function(error) {});
+      }, function(error) {});*/
     };
     currentUser.sendText = function(Message, To) {
       var deferred = $q.defer();
@@ -205,15 +206,15 @@ angular.module('JFS_Admin')
       } else {
         $http({
           method: 'GET',
-          url: ENV.API + 'Users/',
+          url: ENV.API_v2 + 'Users/',
           params: {
             'access_token': $rootScope.currentUser.Token.access_token,
             client_id: 'testclient',
             client_secret: 'testpass'
           },
-        }).then(function(data) {
-          deferred.resolve(data.data);
-          currentUser.data.userList = data.data;
+        }).then(function(result) {
+          deferred.resolve(result.data.data);
+          currentUser.data.userList = result.data.data;
         }, function(error) {
           deferred.reject(error);
         });
@@ -224,15 +225,15 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'GET',
-        url: ENV.API + 'User/Info',
+        url: ENV.API_v2 + 'User/Info/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
           client_secret: 'testpass'
         },
-      }).then(function(data) {
-        deferred.resolve(data.data);
-        currentUser.data.Info = data.data;
+      }).then(function(result) {
+        deferred.resolve(result.data.data);
+        currentUser.data.Info = result.data.data;
 
       }, function(error) {
         deferred.reject(error);

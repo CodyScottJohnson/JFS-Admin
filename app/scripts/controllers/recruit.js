@@ -36,6 +36,20 @@ angular.module('JFS_Admin')
       Task.getTask(taskID);
       Functions.OpenModal('views/Modals/TaskModal.html', 'md');
     };
+    $scope.tagRemoved = function(recruit, tag) {
+
+      Recruits.deleteTag(recruit, tag.id)
+        .then(
+          function() {
+            _.remove(recruit.Tags, {
+              id: tag.id
+          });
+            return true;
+          },
+          function() {
+            return false;
+          });
+    };
     $scope.bioEdited = false;
     $scope.isBioFocussed = false;
     $scope.newTextMessage="";
@@ -231,7 +245,7 @@ angular.module('JFS_Admin')
       $scope.Recruit.currentRecruit.Stage_Name = selected.Name;
     };
     $scope.saveRecruitStatus = function(recruit){
-      $scope.Recruit.currentRecruit.NextStepUpdated = moment();
+      $scope.Recruit.currentRecruit.NextStepUpdated = moment().format('YYYY-MM-DD HH:mm:ss');
       $scope.saveRecruit();
     };
     $scope.SetPhoto = function(photo){

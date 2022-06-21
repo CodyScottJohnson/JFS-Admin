@@ -83,17 +83,17 @@ angular.module('JFS_Admin')
         var deferred = $q.defer();
             $http({
                 method: 'get',
-                url: ENV.API + 'Tags/',
+                url: ENV.API_v2 + 'Settings/Tags/',
                 params: {
                     'access_token': $rootScope.currentUser.Token.access_token,
                     client_id: 'testclient',
                     client_secret: 'testpass'
 
                 },
-            }).then(function(data) {
+            }).then(function(result) {
                 //console.log(data.data);
-                Functions.data.Tags = data.data;
-                deferred.resolve(data.data);
+                Functions.data.Tags = result.data.data;
+                deferred.resolve(result.data.data);
             }, function(error) {
                 deferred.reject(error);
             });
@@ -103,7 +103,7 @@ angular.module('JFS_Admin')
         var deferred = $q.defer();
             $http({
                 method: 'patch',
-                url: ENV.API + 'Tags/',
+                url: ENV.API_v2 + 'Settings/Tags/',
                 params: {
                     'access_token': $rootScope.currentUser.Token.access_token,
                     client_id: 'testclient',
@@ -111,11 +111,11 @@ angular.module('JFS_Admin')
 
                 },
                 data:tag
-            }).then(function(data) {
-                console.log(data.data);
-                Functions.data.Tags.push(data.data);
+            }).then(function(result) {
+                console.log(result.data.data);
+                Functions.data.Tags.push(result.data.data);
                 //console.log()
-                deferred.resolve(data.data);
+                deferred.resolve(result.data.data);
             }, function(error) {
                 deferred.reject(error);
             });

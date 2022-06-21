@@ -216,7 +216,7 @@ angular.module('JFS_Admin')
       'show': true
     };
     $scope.saveRecruitStatus = function(recruit) {
-      recruit.NextStepUpdated = moment();
+      recruit.NextStepUpdated = moment().format('YYYY-MM-DD HH:mm:ss');
       $scope.saveRecruit(recruit);
     };
     $scope.saveRecruit = function(recruit) {

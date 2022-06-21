@@ -45,7 +45,7 @@ module.exports = function(grunt) {
           port: '4969',
           //privateKey: require('fs').readFileSync('F:/JFS.pem'),
           //privateKey: require('fs').readFileSync('/Users/Cody/devApps/Keys/JFS.pem'),
-          privateKey: require('fs').readFileSync('./JFS.pem'),
+          //privateKey: require('fs').readFileSync('./JFS.pem'),
           //port: '<%= secret.production.port %>',
           releases_to_keep: '3'
           //release_subdir: 'myapp'

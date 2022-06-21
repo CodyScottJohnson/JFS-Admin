@@ -26,21 +26,21 @@ angular.module('JFS_Admin')
         var deferred = $q.defer();
             $http({
                 method: 'GET',
-                url: ENV.API +'User/Assigned/',
+                url: ENV.API_v2 +'User/Assigned/',
                 params: {
                     'access_token': $rootScope.currentUser.Token.access_token,
                     client_id: 'testclient',
                     client_secret: 'testpass',
                     detail: detail
                 },
-            }).then(function(data) {
+            }).then(function(result) {
                 //console.log(data.data);
-                Task.data.currentUsersTasks = data.data;
+                Task.data.currentUsersTasks = result.data.data;
                 var array = _.countBy(Task.data.currentUsersTasks, function(t){
                     return t.Group;
                 });
                 Task.data.currentUsersTaskGroups = {GroupList:array};
-                deferred.resolve(data.data);
+                deferred.resolve(result.data.data);
             }, function(error) {
                 deferred.reject(error);
             });
@@ -51,17 +51,17 @@ angular.module('JFS_Admin')
         var deferred = $q.defer();
             $http({
                 method: 'GET',
-                url: ENV.API +'Tasks/',
+                url: ENV.API_v2 +'Tasks/',
                 params: {
                     'access_token': $rootScope.currentUser.Token.access_token,
                     client_id: 'testclient',
                     client_secret: 'testpass',
                     detail: detail
                 },
-            }).then(function(data) {
+            }).then(function(result) {
                 //console.log(data.data);
-                Task.data.allTasks = data.data;
-                deferred.resolve(data.data);
+                Task.data.allTasks = result.data.data;
+                deferred.resolve(result.data.data);
             }, function(error) {
                 deferred.reject(error);
             });
@@ -71,14 +71,14 @@ angular.module('JFS_Admin')
         var deferred = $q.defer();
             $http({
                 method: 'GET',
-                url: ENV.API +'Task/Recruit/'+RecruitID+'/',
+                url: ENV.API_v2 +'Tasks/Recruit/'+RecruitID+'/',
                 params: {
                     'access_token': $rootScope.currentUser.Token.access_token,
                     client_id: 'testclient',
                     client_secret: 'testpass'
                 },
-            }).then(function(data) {
-                deferred.resolve(data.data);
+            }).then(function(result) {
+                deferred.resolve(result.data.data);
             }, function(error) {
                 deferred.reject(error);
             });
@@ -88,23 +88,23 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
           $http({
               method: 'GET',
-              url: ENV.API +'Task/'+taskID+'/',
+              url: ENV.API_v2 +'Tasks/'+taskID+'/',
               params: {
                   'access_token': $rootScope.currentUser.Token.access_token,
                   client_id: 'testclient',
                   client_secret: 'testpass'
               },
-          }).then(function(data) {
-              console.log(data.data[0]);
-              data.data[0].Due_Date = Functions.SQLDate(data.data[0].Due_Date);
-              data.data[0].Created_Date = Functions.SQLDate(data.data[0].Created_Date);
-              data.data[0].Reminder_Date = Functions.SQLDate(data.data[0].Reminder_Date);
-              if(!angular.isDefined(data.data[0].More_Detail) || data.data[0].More_Detail===null){
-                data.data[0].More_Detail = {Comments:[]};
+          }).then(function(result) {
+   
+            result.data.data[0].Due_Date = Functions.SQLDate(result.data.data[0].Due_Date);
+            result.data.data[0].Created_Date = Functions.SQLDate(result.data.data[0].Created_Date);
+            result.data.data[0].Reminder_Date = Functions.SQLDate(result.data.data[0].Reminder_Date);
+              if(!angular.isDefined(result.data.data[0].More_Detail) || result.data.data[0].More_Detail===null){
+                result.data.data[0].More_Detail = {Comments:[]};
               }
-              console.log(data.data[0]);
-              Task.data.currentTask = data.data[0];
-              deferred.resolve(data.data[0]);
+
+              Task.data.currentTask = result.data.data[0];
+              deferred.resolve(result.data.data[0]);
           }, function(error) {
               deferred.reject(error);
           });

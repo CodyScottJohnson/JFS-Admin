@@ -18,22 +18,22 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'GET',
-        url: ENV.API + 'v2/Recruits/' + id + '/',
+        url: ENV.API_v2 + 'Recruits/' + id + '/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
           client_secret: 'testpass'
         },
-      }).then(function(data) {
+      }).then(function(result) {
         //console.log(data.data);
-        if (data.data.Info === null) {
-            data.data.Info = {
+        if (result.data.data.Info === null) {
+            result.data.data.Info = {
                 Notes: [],
                 Documents: []
             };
         }
-        if (angular.isUndefined(data.data.Info.Task)) {
-            data.data.Info.Task = [{
+        if (angular.isUndefined(result.data.data.Info.Task)) {
+            result.data.data.Info.Task = [{
                 'title': 'Initial Call',
                 'completed': false
             }, {
@@ -72,8 +72,8 @@ angular.module('JFS_Admin')
             }];
         }
 
-        currentRecruit.data.currentRecruit = data.data;
-        currentRecruit.data.currentRecruit.NextStepScheduled = moment(currentRecruit.data.currentRecruit.NextStepScheduled).toDate();
+        currentRecruit.data.currentRecruit = result.data.data;
+        currentRecruit.data.currentRecruit.NextStepScheduled = moment(currentRecruit.data.currentRecruit.NextStepScheduled).format('YYYY-MM-DD HH:mm:ss');
         currentRecruit.data.currentRecruit.NextStepUpdated = moment(currentRecruit.data.currentRecruit.NextStepUpdated).format('Y-MM-D');
         deferred.resolve(currentRecruit.data.currentRecruit);
         currentRecruit.getConversationHistory();
@@ -107,7 +107,7 @@ angular.module('JFS_Admin')
     currentRecruit.save = function() {
       $http({
         method: 'PATCH',
-        url: ENV.API + 'v2/Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/',
+        url: ENV.API_v2 + 'Recruits/' + currentRecruit.data.currentRecruit.INDV_ID + '/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',

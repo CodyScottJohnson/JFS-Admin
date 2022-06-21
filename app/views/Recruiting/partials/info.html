@@ -139,7 +139,7 @@
               Tags
             </div>
             <div class="tag" ng-repeat="tag in Recruit.currentRecruit.Tags">
-              {{tag.Name}}<span class="close"><i class="fa fa-close"></i></span>
+              {{tag.Name}}<span ng-click="tagRemoved(Recruit.currentRecruit,tag)" class="close"><i class="fa fa-close"></i></span>
             </div>
             <div class="tag-new" uib-popover-template="'tagPopoverTemplate.html'" popover-trigger="outsideClick" popover-placement="bottom-right" popover-append-to-body="true">
               <i class="fa fa-plus"></i>
@@ -151,7 +151,7 @@
                             display-property="Name"
                             placeholder="Add a Tag"
                             on-tag-adding="tagAdded($tag,Recruit.currentRecruit)"
-                            on-tag-removing="tagRemoved($tag,Recruit.currentRecruit)"
+                            on-tag-removing="tagRemoved(Recruit.currentRecruit,$tag)"
                             tag-class="'tag'"
                             key-property="id"
                             replace-spaces-with-dashes="false">

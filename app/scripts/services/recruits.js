@@ -48,29 +48,38 @@ angular
       var deferred = $q.defer();
       $http({
         method: "GET",
-        url: ENV.API + "v2/Recruits/",
+        url: ENV.API_v2 + "Recruits/",
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: "testclient",
           client_secret: "testpass"
         }
       }).then(
-        function(data) {
+        function(result) {
           //console.log(data.data);
-          Recruits.data.List = data.data;
+          Recruits.data.List = result.data.data;
           _.forEach(Recruits.data.List, function(recruit) {
             recruit.NextStepScheduled = moment(
               recruit.NextStepScheduled
-            ).toDate();
+            ).format('YYYY-MM-DD HH:mm:ss');
+            
+            if(recruit.NextStepUpdated==null){
+              console.log(recruit.NextStepUpdated);
+              recruit.NextStepUpdated = moment().format(
+                "Y-MM-D"
+              );
+            } else{
             recruit.NextStepUpdated = moment(recruit.NextStepUpdated).format(
               "Y-MM-D"
+            
             );
+            }
           });
           Recruits.data.candidates.stages = _.groupBy(
-                                                      _.filter(data.data,function(value){return value.Archived == 0}),
+                                                      _.filter(result.data.data,function(value){return value.Archived == 0}),
                                                       function(value){return value.Stage_Name});
           console.log( Recruits.data.candidates.stages)
-          deferred.resolve(data.data);
+          deferred.resolve(result.data.data);
         },
         function(error) {
           deferred.reject(error);
@@ -82,17 +91,17 @@ angular
       var deferred = $q.defer();
       $http({
         method: "Get",
-        url: ENV.API + "v2/Recruits/Settings/Stages",
+        url: ENV.API_v2 + "Recruits/Settings/Stages/",
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: "testclient",
           client_secret: "testpass"
         }
       }).then(
-        function(data) {
-          Recruits.data.settings.stages = data.data;
+        function(result) {
+          Recruits.data.settings.stages = result.data.data;
 
-          deferred.resolve(data.data);
+          deferred.resolve(result.data.data);
         },
         function() {
           deferred.reject("Couldn't Load Global Settings");
@@ -104,7 +113,7 @@ angular
       var deferred = $q.defer();
       $http({
         method: "POST",
-        url: ENV.API + "Recruits/",
+        url: ENV.API_v2 + "Recruits/",
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: "testclient",
@@ -112,8 +121,8 @@ angular
         },
         data: {}
       }).then(
-        function(data) {
-          Recruits.data.List.splice(0, 0, data.data);
+        function(result) {
+          Recruits.data.List.splice(0, 0, result.data.data);
           //console.log(data.data);
           //Recruits.data.List = data.data;
           //deferred.resolve(data.data);
@@ -128,7 +137,7 @@ angular
       var deferred = $q.defer();
       $http({
         method: "PATCH",
-        url: ENV.API + "v2/Recruits/" + recruit.INDV_ID + "/",
+        url: ENV.API_v2 + "Recruits/" + recruit.INDV_ID + "/",
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: "testclient",
@@ -164,7 +173,7 @@ angular
       });
       $http({
         method: "DELETE",
-        url: ENV.API + "v2/Recruits/" + ID + "/",
+        url: ENV.API_v2 + "Recruits/" + ID + "/",
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: "testclient",
@@ -178,14 +187,14 @@ angular
       var deferred = $q.defer();
       $http({
         method: "POST",
-        url: ENV.API + "v2/Recruits/" + recruit.INDV_ID + "/Tag/" + tagID,
+        url: ENV.API_v2 + "Recruits/" + recruit.INDV_ID + "/Tag/" + tagID,
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: "testclient",
           client_secret: "testpass"
         }
       }).then(
-        function(data) {
+        function(result) {
           var message = {
             type: "recruit",
             event: "recruitupdated",
@@ -210,15 +219,15 @@ angular
       var deferred = $q.defer();
       $http({
         method: "DELETE",
-        url: ENV.API + "v2/Recruits/" + recruit.INDV_ID + "/Tag/" + tagID,
+        url: ENV.API_v2 + "Recruits/" + recruit.INDV_ID + "/Tag/" + tagID,
         params: {
           access_token: $rootScope.currentUser.Token.access_token,
           client_id: "testclient",
           client_secret: "testpass"
         }
       }).then(
-        function(data) {
-          deferred.resolve(data.data);
+        function(result) {
+          deferred.resolve(result.data.data);
         },
         function(error) {
           deferred.reject(error);

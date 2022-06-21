@@ -16,15 +16,15 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'GET',
-        url: ENV.API+'Email/Templates/',
+        url: ENV.API_v2+'Messages/Email/Templates/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: ENV.APP_ID,
           client_secret: ENV.APP_Secret,
         },
-      }).then(function(data) {
-        deferred.resolve(data.data);
-        Email.data.Templates = data.data;
+      }).then(function(result) {
+        deferred.resolve(result.data.data);
+        Email.data.Templates = result.data.data;
       }, function(error) {
         deferred.reject(error);
       });
@@ -209,7 +209,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'POST',
-        url: ENV.API + 'Email/Send/PreviewTemplate',
+        url: ENV.API_v2 + 'Messages/Email/PreviewTemplate/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -220,8 +220,8 @@ angular.module('JFS_Admin')
           Template:template,
           EmailData:data
         }
-      }).then(function(data) {
-        deferred.resolve(data.data);
+      }).then(function(result) {
+        deferred.resolve(result.data.data);
       }, function(error) {
         deferred.reject(error);
       });
@@ -232,7 +232,7 @@ angular.module('JFS_Admin')
       var deferred = $q.defer();
       $http({
         method: 'POST',
-        url: ENV.API + 'Email/Send/Template',
+        url: ENV.API_v2 + 'Messages/Email/Send/CustomTemplate/',
         params: {
           'access_token': $rootScope.currentUser.Token.access_token,
           client_id: 'testclient',
@@ -246,10 +246,10 @@ angular.module('JFS_Admin')
           EmailData:email_data,
           RecruitID:recruit_id
         }
-      }).then(function(data) {
+      }).then(function(result) {
         Functions.toggleLoading();
         Functions.Toast('success','Email Sent');
-        deferred.resolve(data.data);
+        deferred.resolve(result.data.data);
       }, function(error) {
         deferred.reject(error);
       });

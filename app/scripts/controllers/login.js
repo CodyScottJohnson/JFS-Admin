@@ -13,7 +13,7 @@ angular.module('JFS_Admin')
     $scope.login = function(username, password) {
       $http({
         method: 'POST',
-        url: ENV.Oauth + 'getToken/',
+        url: ENV.Oauth + 'token/',
         data: {
           grant_type: 'password',
           client_id: ENV.APP_ID,
@@ -24,10 +24,11 @@ angular.module('JFS_Admin')
       }).then(function(data) {
         // Store your data or what ever....
         // Then resolve
+        console.log('here');
         var Token = data.data;
         $http({
                 method: 'GET',
-                url: ENV.API +'User/',
+                url: ENV.API_v2 +'User/',
                 params: {
                     'access_token': Token.access_token,
                     client_id: ENV.APP_ID,
@@ -39,7 +40,8 @@ angular.module('JFS_Admin')
                   if(state.name===""){
                     state = 'app.Home';
                   }
-                  $scope.User.Info= data.data;
+
+                  $scope.User.Info= data.data.data;
                   $scope.User.Token= Token;
                   $rootScope.currentUser =$scope.User;
                   //$cookies.putObject('user',$scope.User,{"expires":moment().add(24,'hours').format(),secure:false});

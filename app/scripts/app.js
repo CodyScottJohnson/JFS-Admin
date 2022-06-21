@@ -45,12 +45,13 @@ angular
     localStorageService,
     Idle,
     editableOptions,
-    $http
+    $http,
+    ENV
   ) {
     Idle.watch();
     var Ready = true;
     editableOptions.theme = "bs3";
-    $rootScope.conn = new WebSocket("wss://jfsapp.com/WebSocket");
+    $rootScope.conn = new WebSocket(ENV.Socket);
     $rootScope.conn.onopen = function(e) {
       console.log("Connection established!");
     };
@@ -68,6 +69,7 @@ angular
       if (typeof $rootScope.currentUser === "undefined") {
         $rootScope.currentUser = localStorageService.cookie.get("user");
       }
+      console.log($rootScope.currentUser)
       if (requireLogin && typeof $rootScope.currentUser === "undefined") {
         event.preventDefault();
         $rootScope.LastLocation = location.href;
